@@ -1,0 +1,30 @@
+﻿html,body { width: 100%; height: auto; padding: 0; margin: 0; font-family: "微软雅黑";}
+.wrap { width: 1200px; margin: 0 auto;}
+ul,li { list-style: none; padding: 0; margin: 0;}
+*,p,div { margin: 0; padding: 0;}
+a { text-decoration: none;} 
+.hide { display: none;} 
+
+.navBar { background-color: #FFF;}
+.nav { width: 1200px; height: 64px; margin: 0 auto; font-size: 0;}
+.nav .nav-list { display: inline-block; height: 100%; display: flex; display: -webkit-flex; display: -ms-flex; float: right; font-size: 0;}
+.nav .nav-list ul { display: inline-block; height: 100%; float: right;}
+.nav .nav-list li { height: 100%; font-size: 0; padding: 0 19px; float: left;}
+.nav .nav-list li a span { display: inline-block; font-size: 14px; line-height: 64px; color: #666666; text-align: center; cursor: pointer;}
+.nav .nav-list li:hover { background: #206BD1;}
+.nav .nav-list li.act { background: #206BD1;}
+.nav .nav-list li:hover span { color: #FFF;}
+.nav .nav-list li.act span { color: #FFF;}
+
+.nav .avatar { width: 22px; height: 22px; float: right; margin-right: 28px; margin-top: 20px; margin-left: 68px; text-align: center; line-height: 0;}
+.nav .avatar img { width: auto; height: 100%;}
+.nav .chinese { float: right; color: #666666; line-height: 64px; display: flex; display: -webkit-flex; display: -ms-flex; margin-right: 22px; float: right; cursor: pointer;}
+.nav .chinese span { margin-right: 10px; font-size: 14px;}
+.nav:after { content:""; clear: both; display: block;} 
+
+@font-face {
+  font-family: "SourceHanSansCN-Regulars";
+  src: url("../fonts/SourceHanSansCN-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
