@@ -31,13 +31,13 @@
 			<div class="header">
 				<div class="cont">
 				 	<div class="left">
-				 		<p class="name">水电基地为拉脱维亚里加项目</p>
+				 		<p class="name" v-text="detail.title"></p>
 				 		<div class="desp">
-				 			<span>国家</span>
-				 			<span>新能源/环保技术</span>
-				 			<span>核心技术</span>
+				 			<span v-if="detail.nationality_name" v-text="detail.nationality_name"></span>
+				 			<span v-if="detail.industry_name" v-text="detail.industry_name"></span>
+				 			<span v-if="detail.core_science" v-text="detail.core_science"></span>
 				 		</div>
-				 		<p class="time">2016-12-07发布</p>
+				 		<p class="time" v-text="detail.release_time+'发布'"></p>
 				 	</div>
 				 	<div class="applyCooperation">申请合作</div>
 				</div> 
@@ -58,7 +58,8 @@
 					</div>
 					<div class="projectIntro">
 						<div class="title">项目介绍</div>
-						<div class="content">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。</div>
+						<!-- <div class="content" v-html="detail.detail">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。</div> -->
+						<div class="content" v-html="detail.detail"></div>
 					</div>
 				</div>
 				<div class="right">
@@ -129,6 +130,7 @@
 
 		<script type="text/javascript" src="../../js/jquery.js"></script>
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			var vm = new Vue({
 				el: '#app',
@@ -136,9 +138,65 @@
 					indexText: "首页",
 					lang: "cn",
 					languageText: "English", 
+					detail:{},
+					list:[]
+				},
+				created() {
+					this.getDetail();
 				},
 				methods: { 
-
+					getDetail(){
+						let that = this;
+						$.ajax({
+							url: config.apiHost+'project/projectDetail',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: {
+								id: parseUrl().id
+							},
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								data = {
+									status: 'ok',
+									data: {
+										detail:{
+											id:1,
+											title: '标题标题',
+											nationality_name: '中国',
+											industry_name: '电子设备',
+											core_science: "医疗，设备",
+											release_time: '2019-22-29 29:88:99',
+											cooperation_status: '123合作方式',
+											detail:"dsandsabj的撒不会觉得撒不会的撒火箭大胜比较",
+										},
+										list:[{
+											id: 1,
+											jane_title: '标题',
+											industry_name: '电子标签体',
+											nationality_name: '中国',
+											info: '123',
+											release_time: '1029-29-20 77:99:99'
+										}]
+									}
+								}
+								console.log(data)
+								if(data.status == 'ok'){
+									data.data.detail.release_time = data.data.detail.release_time.substring(0,10);
+									that.detail = data.data.detail;
+									that.list = data.data.list;
+								}else{
+									alert(data.result);
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					}
 				}, 
 			});
 			$(function(){ 

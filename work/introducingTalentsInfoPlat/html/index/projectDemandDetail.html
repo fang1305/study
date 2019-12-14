@@ -31,13 +31,13 @@
 			<div class="header">
 				<div class="cont">
 				 	<div class="left">
-				 		<p class="name">水电基地为拉脱维亚里加项目</p>
+				 		<p class="name" v-text="detail.title"></p>
 				 		<div class="desp">
-				 			<span>国家</span>
-				 			<span>新能源/环保技术</span>
-				 			<span>核心技术</span>
+				 			<span v-if="detail.address" v-text="detail.address"></span>
+				 			<span v-if="detail.industry_name" v-text="detail.industry_name"></span>
+				 			<span v-if="detail.science" v-text="detail.science"></span>
 				 		</div>
-				 		<p class="time">2016-12-07发布</p>
+				 		<p class="time" v-text="getDateInit(detail.add_time)+'发布'">{{}}发布</p>
 				 	</div>
 				 	<div class="applyCooperation">申请合作</div>
 				</div> 
@@ -46,63 +46,37 @@
 				<div class="left">
 					<div class="target">
 						<div class="title">预期目标</div>
-						<div class="content">2021年10月15日--2021年10月20日</div>
+						<div class="content" v-text="detail.target"></div>
 					</div> 
 					<div class="projectIntro">
 						<div class="title">项目介绍</div>
-						<div class="content">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。</div>
+						<div class="content"  v-html="detail.detail">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为通用航空领域的“麦加”，是业内了解国际通用航空发展现状的最佳平台。每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商，同时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。</div>
 					</div>
 					<div class="projectIntro">
 						<div class="title">技术难题</div>
-						<div class="content">
-							<p>1、实现能耗数据的采集与管控实时对接；</p>
-							<p>2、以区链块技术实现工业园区、重点用能单位、集群规模产业群等的能耗数据的实时管控；</p>
-							<p>3、采集器以物联网方式连接云平台，根据数据模型实时反馈引导企业进行节能改造与安全生产；</p>
-							<p>4、工业类型采集器，实现多类型多端点接入。难题基本情况：1、物联网采集器的AI模块研发；</p>
+						<div class="content" v-html="detail.technical_problems">
 						</div>
 				    </div>
 					<div class="projectIntro">
 						<div class="title">解决方案</div>
-						<div class="content">
-							<p>1、实现能耗数据的采集与管控实时对接；</p>
-							<p>2、以区链块技术实现工业园区、重点用能单位、集群规模产业群等的能耗数据的实时管控；</p>
-							<p>3、采集器以物联网方式连接云平台，根据数据模型实时反馈引导企业进行节能改造与安全生产；</p>
-							<p>4、工业类型采集器，实现多类型多端点接入。难题基本情况：1、物联网采集器的AI模块研发；</p>
+						<div class="content" v-html="detail.solution">
 						</div>
 					</div>
 				</div>
 				<div class="right">
 				 	<div class="title">其他项目</div>
 				 	<div class="list">
-				 	 	<div class="item">
-				 	 	    <div class="name">水电基地为拉脱维亚里加项目</div>
-				 	 	    <div class="info">
-				 	 	    	<p class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航...</p>
-				 	 	    	<div class="time">
-				 	 	    		<div class="ileft">英国：2016-12-07</div>
-				 	 	    		<div class="iright">新能源/环保技术</div>
-				 	 	    	</div>
-				 	 	    </div>
-				 	 	</div>
-				 	 	<div class="item">
-				 	 	    <div class="name">水电基地为拉脱维亚里加项目</div>
-				 	 	    <div class="info">
-				 	 	    	<p class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航...</p>
-				 	 	    	<div class="time">
-				 	 	    		<div class="ileft">英国：2016-12-07</div>
-				 	 	    		<div class="iright">新能源/环保技术</div>
-				 	 	    	</div>
-				 	 	    </div>
-				 	 	</div>
-				 	 	<div class="item">
-				 	 	    <div class="name">水电基地为拉脱维亚里加项目</div>
-				 	 	    <div class="info">
-				 	 	    	<p class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航...</p>
-				 	 	    	<div class="time">
-				 	 	    		<div class="ileft">英国：2016-12-07</div>
-				 	 	    		<div class="iright">新能源/环保技术</div>
-				 	 	    	</div>
-				 	 	    </div>
+				 	 	<div class="item" v-for="list in otherList">
+							<a :href="'./projectDemandDetail.html?id='+list.id" >
+								<div class="name" v-text="list.jane_title"></div>
+								<div class="info">
+									<p class="desp" v-text="list.info"></p>
+									<div class="time">
+										<div class="ileft" v-text="list.address">：2016-12-07</div>
+										<div class="iright" v-text="list.industry_name+'/'+list.science">{{list.industry_name}}</div>
+									</div>
+								</div>
+							</a>
 				 	 	</div>
 				 	</div>
 				</div>
@@ -139,6 +113,7 @@
 
 		<script type="text/javascript" src="../../js/jquery.js"></script>    
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			var vm = new Vue({
 				el: '#app',
@@ -146,9 +121,41 @@
 					indexText: "首页",
 					lang: "cn",
 					languageText: "English", 
+					detail: {},
+					otherList:[]
+				},
+				created() {
+					this.getDetail();
 				},
 				methods: { 
-
+					getDetail(){
+						let that = this;
+						$.ajax({
+							url: config.apiHost+'project/projectDemandDetail',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: {
+								id: parseUrl().id
+							},
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+								console.log(data.data.list)
+									that.detail = data.data.detail;
+									that.otherList = data.data.list;
+								}else{
+									alert(data.result);
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					}
 				}, 
 			});
 			$(function(){ 

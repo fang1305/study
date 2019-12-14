@@ -7,7 +7,8 @@
 .main .top { padding-top: 50px; padding-bottom: 12px; border-bottom: 1px solid #EEEEEE;}
 .main .top ul { float: left; font-size: 0;}
 .main .top ul li { display: inline-block; font-size: 24px; line-height: 1; color: #999999; padding-right: 40px;}
-.main .top ul li:hover { color: #206BD1;} 
+.main .top ul li a{ color:#999; }
+.main .top ul li:hover a { color: #206BD1;} 
 .main .top ul li.act { color: #206BD1;}
 .main .top:after { content:""; clear: both; display: block;} 
 
