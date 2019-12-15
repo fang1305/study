@@ -50,7 +50,7 @@
 				 			</li>
 				 		</ul>
 				 	</div>
-				 	<p class="time">成立时间：{{detail.found_time.substring(0,10)}}</p>
+				 	<p class="time">成立时间：{{detail.found_time}}</p>
 				</div>
 				<ul class="navlist">
 					<li class="item act">公司主页</li>
@@ -376,6 +376,7 @@
 								// }
 								if(data.status == 'ok'){
 								console.log(data.data.info)
+									data.data.info.found_time = data.data.info.found_time.substring(0,10);
 									that.detail = data.data.info;
 									that.count = data.data.count;
 								}else{

@@ -35,10 +35,10 @@
 						<div class="small-title">意向职位</div>
 						<div class="jobInfo">
 							<div class="name-pxperience">
-								<p class="name">{{detail.intention_position}} {{detail.intention_nationality?'['+detail.intention_nationality+']':''}}</p>
+								<p class="name">{{detail.intention_position}} {{detail.intention_nationality+""?'['+detail.intention_nationality+']':''}}</p>
 								<p class="pxperience">{{detail.work_experience?detail.work_experience+'/':''}}{{detail.degree?detail.degree+'/':''}}{{detail.language?detail.language+'':''}}</p>
 							</div>
-							<p class="salary">{{detail.expected_salary}}</p>
+							<p class="salary" v-text="detail.expected_salary"></p>
 						</div>
 						<div class="small-title">意向行业</div>
 						<div class="intentionJob">
@@ -60,7 +60,7 @@
 				 	 	 	<p class="sex">{{detail.gender}}</p>
 				 	 	 	<div class="edu">{{detail.type}}</div>
 				 	 	</div>
-				 	 	<p class="country">{{detail.degree?detail.degree+'|':''}}{{detail.nationality?detail.nationality+'|':''}}{{detail.industry_name?detail.industry_name+'|':''}}{{detail.language?detail.language+'|':''}}{{detail.marriage?detail.marriage:''}}</p>
+				 	 	<p class="country">{{detail.degree?detail.degree+'|':''}}{{detail.nationality?detail.nationality+'|':''}}{{detail.industry_name?detail.industry_name+'|':''}}{{detail.language+''?detail.language+'|':''}}{{detail.marriage?detail.marriage:''}}</p>
 				 	 	<div class="other">
 				 	 		<p v-if="detail.national">宗教信仰/民族：{{detail.national}}</p>
 				 	 		<p v-if="detail.habits">饮食习惯：{{detail.habits}}</p>
