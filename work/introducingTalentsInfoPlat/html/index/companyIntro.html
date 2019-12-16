@@ -15,7 +15,7 @@
 		<div id="app">
 			<div class="navBar">
 			 	<div class="nav">
-					<div class="chinese">
+					<div class="chinese" @click="changeLang">
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
@@ -331,14 +331,34 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "English", 
+					languageText: "中文", 
 					detail:{},
 					count: {}
 				},
 				created() {
+                    if(localStorage.getItem('lang') == 'en'){
+                        this.lang = 'en';
+					    this.languageText = "English";
+					}
 					this.getDetail();
 				},
 				methods: { 
+                    // 中英文切换
+                    changeLang(){
+                        if(this.lang == 'cn'){
+                            this.lang = 'en';
+                            localStorage.setItem('lang','en');
+                            this.languageText = 'English';
+                            // 重新请求数据
+                            this.getDetail();
+                        }else{
+                            this.lang = 'cn';
+                            localStorage.setItem('lang','cn');
+                            this.languageText = '中文';
+                            // 重新请求数据
+                            this.getDetail();
+                        }
+                    },
 					getDetail(){
 						let that = this;
 						$.ajax({
@@ -346,6 +366,7 @@
 							type: 'POST', //GET
 							async: true, //或false,是否异步
 							data: {
+                                lang: that.lang,
 								id: parseUrl().id
 							},
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text

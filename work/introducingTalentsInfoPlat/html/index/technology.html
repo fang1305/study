@@ -16,7 +16,7 @@
 		<div id="app">
 			<div class="navBar">
 			 	<div class="nav">
-					<div class="chinese">
+					<div class="chinese" @click="changeLang">
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
@@ -151,7 +151,7 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "English", 
+					languageText: "中文", 
 					industrys: [],
 					countrys: [], 	// 国籍
 					projects: [],
@@ -174,11 +174,35 @@
 					}
 				},
 				created() {
+                    if(localStorage.getItem('lang') == 'en'){
+                        this.lang = 'en';
+                        this.languageText = "English";
+                    }
 					this.getList('industrys','home/industry');
 					this.getList('countrys','home/nationality');
 					this.getExperts();
 				},
 				methods: { 
+                    // 中英文切换
+                    changeLang(){
+                        if(this.lang == 'cn'){
+                            this.lang = 'en';
+                            localStorage.setItem('lang','en');
+                            this.languageText = 'English';
+                            // 重新请求数据
+                            this.getList('industrys','home/industry');
+                            this.getList('countrys','home/nationality');
+                            this.getExperts();
+                        }else{
+                            this.lang = 'cn';
+                            localStorage.setItem('lang','cn');
+                            this.languageText = '中文';
+                            // 重新请求数据
+                            this.getList('industrys','home/industry');
+                            this.getList('countrys','home/nationality');
+                            this.getExperts();
+                        }
+                    },
 					// 选择国籍
 					chooseCountry(name){
 						this.searchObj.nationality = name;
@@ -214,7 +238,10 @@
 						$.ajax({
 							url: config.apiHost+url,
 							type: 'POST', //GET
-							async: true, //或false,是否异步
+                            async: true, //或false,是否异步
+                            data:{
+                                lang: that.lang
+                            },
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
 								// 发送成功
@@ -233,7 +260,8 @@
 					getExperts(type){
 						let that = this;
 						type?that.searchObj.page = 1:'';
-						$.ajax({
+                        that.searchObj.lang = that.lang;
+                        $.ajax({
 							url: config.apiHost+'project/projectHomeList',
 							type: 'POST', //GET
 							async: true, //或false,是否异步

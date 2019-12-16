@@ -21,7 +21,7 @@
 		<div id="app">
 			<div class="navBar">
 			 	<div class="nav">
-					<div class="chinese">
+					<div class="chinese" @click="changeLang">
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
@@ -396,37 +396,54 @@
 		<script type="text/javascript" src="js/jquery.js"></script>    
 		<script type="text/javascript" src="js/swiper.min.js"></script>    
 		<script type="text/javascript" src="js/vue.min.js"></script>
-<<<<<<< HEAD
         <script type="text/javascript" src="js/common.js"></script>
         <script type="text/javascript" src="js/config.js"></script>
-        <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
-=======
-		<script type="text/javascript" src="js/config.js"></script>
-		<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
->>>>>>> 31ecbd93e7737376b17b2ebac79b350548c04599
 		<script>
 			var vm = new Vue({
 				el: '#app',
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "English", 
+					languageText: "中文", 
 					experts: [],
 					jobs:[],
 					projects:[],
 					demandProjects:[]
                 },
                 created() {
-					// 首页专家人才列表
-					this.getList('experts','experts/expertsHomeList');
-					// 工作
-					this.getList('jobs','experts/jobsHomeList');
-					// 项目
-					this.getList('projects','project/projectHomeList');
-					// 需求项目
-					this.getList('demandProjects','project/projectDemandHomeList');
+                    if(localStorage.getItem('lang') == 'en'){
+                        this.lang = 'en';
+					    this.languageText = "English";
+					}
+					this.requireData();
                 },
 				methods: { 
+                    requireData(){
+                        // 首页专家人才列表
+                        this.getList('experts','experts/expertsHomeList');
+                        // 工作
+                        this.getList('jobs','experts/jobsHomeList');
+                        // 项目
+                        this.getList('projects','project/projectHomeList');
+                        // 需求项目
+                        this.getList('demandProjects','project/projectDemandHomeList');
+                    },
+                    // 中英文切换
+                    changeLang(){
+                        if(this.lang == 'cn'){
+                            this.lang = 'en';
+                            localStorage.setItem('lang','en');
+                            this.languageText = 'English';
+                            // 重新请求数据
+                            this.requireData();
+                        }else{
+                            this.lang = 'cn';
+                            localStorage.setItem('lang','cn');
+                            this.languageText = '中文';
+                            // 重新请求数据
+                            this.requireData();
+                        }
+                    },
 					getTimeInit(time){
 						// var time = new Date().getTime();
 						var date = new Date(time);
@@ -439,7 +456,10 @@
 						$.ajax({
 							url: config.apiHost+url,
 							type: 'POST', //GET
-							async: true, //或false,是否异步
+                            async: true, //或false,是否异步
+                            data:{
+                                lang: that.lang
+                            },
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
 								// 发送成功
