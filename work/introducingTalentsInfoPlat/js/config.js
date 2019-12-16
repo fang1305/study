@@ -1,7 +1,7 @@
 (function(window) {
     config = {
-        
-        apiHost: 'http://www.hbafea.com/admin/home/',
+        // apiHost: 'http://www.hbafea.com/admin/home/',
+        apiHost: 'http://www.hbafea.com/',
         //  apiHost: '',
         restRoute: {
              //分类
