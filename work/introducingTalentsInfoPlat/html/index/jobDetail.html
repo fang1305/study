@@ -21,19 +21,19 @@
 					</div>
 					<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div> 
 					 <ul class="nav-list">
-						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
-						<li class="act"><a href=""><span>专家人才</span></a></li>
-						<li><a href=""><span>项目技术</span></a></li>
-						<li><a href=""><span>合作机构</span></a></li>
+                        <li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
+                        <li class="act"><a href="./expertTalents.html"><span>专家人才</span></a></li>
+                        <li><a href="./technology.html"><span>项目技术</span></a></li>
+                        <li><a href="./cooperativeAgency.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
 			<div class="header">
 				<div class="cont">
 				 	<div class="left">
-				 		<p class="name" v-text="detail.professional">水电基地为拉脱维亚里加项目</p>
+				 		<p class="name" v-text="detail.professional"></p>
 				 		<div class="desp">
-				 			<span class="item" v-text="detail.low_salary+'-'+detail.high_salary"><span>/</span>12K-14K</span>
+				 			<span class="item" v-text="detail.low_salary+'-'+detail.high_salary"><span>/</span></span>
 				 			<span class="item" v-if="detail.work_place" v-text="'/'+detail.work_place" ></span>
 				 			<span class="item" v-if="detail.work_years" v-text="'/'+detail.work_years" ></span>
 				 			<span class="item" v-if="detail.edu_back" v-text="'/'+detail.edu_back" ></span>
@@ -45,7 +45,7 @@
 				 		<div class="other">
 				 			<span v-for="capacity in detail.capacity" v-text="capacity"></span>
 				 		</div>
-				 		<p class="time" v-text="getDateInit(detail.add_time)+'发布'">2016-12-07发布</p>
+				 		<p class="time" v-text="getDateInit(detail.add_time)+'发布'"></p>
 				 	</div>
 				 	<div class="applyCooperation">投递简历</div>
 				</div> 
@@ -96,7 +96,20 @@
 							<hr class="line" />
 				 		</div>
 				 		<div class="list">
-				 			<div class="item">
+				 			<a :href="'./jobDetail.html?id='+job.id" v-for="job in recommends"><div class="item">
+				 				<img :src="job.logo" alt="" />
+				 				<div class="jobInfo">
+				 					<div class="name-salary">
+					 					<p class="name">{{job.professional}}</p>
+								        <p class="salary" v-text="job.low_salary+(job.low_salary&&job.high_salary?'-':'')+job.high_salary"></p>
+					 				</div>
+					 				<div class="country-time">
+								        <p class="country">{{job.countries+''?job.countries+'/':''}}{{job.edu_back}}{{job.language?'/'+job.language:''}}</p>
+                                        <p class="time">[{{getTimeInit(job.add_time)}}发布]</p>
+					 				</div>
+				 				</div>
+                             </div></a>
+				 			<!-- <div class="item">
 				 				<img src="../../img/index/co1.jpg" alt="" />
 				 				<div class="jobInfo">
 				 					<div class="name-salary">
@@ -108,33 +121,7 @@
 					 					<p class="time">[11-10发布]</p>
 					 				</div>
 				 				</div>
-				 			</div>
-				 			<div class="item">
-				 				<img src="../../img/index/co1.jpg" alt="" />
-				 				<div class="jobInfo">
-				 					<div class="name-salary">
-					 					<p class="name">高级测试工程师高级测试工程师</p>
-					 					<p class="salary">12K-14K</p>
-					 				</div>
-					 				<div class="country-time">
-					 					<p class="country">美国/本科/英语</p>
-					 					<p class="time">[11-10发布]</p>
-					 				</div>
-				 				</div>
-				 			</div>
-				 			<div class="item">
-				 				<img src="../../img/index/co1.jpg" alt="" />
-				 				<div class="jobInfo">
-				 					<div class="name-salary">
-					 					<p class="name">高级测试工程师高级测试工程师</p>
-					 					<p class="salary">12K-14K</p>
-					 				</div>
-					 				<div class="country-time">
-					 					<p class="country">美国/本科/英语</p>
-					 					<p class="time">[11-10发布]</p>
-					 				</div>
-				 				</div>
-				 			</div>
+				 			</div> -->
 				 		</div>
 				 	</div>
 				</div>
@@ -179,7 +166,8 @@
 					indexText: "首页",
 					lang: "cn",
 					languageText: "中文",
-					detail: {} 
+                    detail: {} ,
+                    recommends:[]
 				},
 				created() {
                     if(localStorage.getItem('lang') == 'en'){
@@ -205,6 +193,36 @@
                             this.getDetail();
                         }
                     },
+                    // 获取推荐职位
+                    getRecommend(id){
+                        let that = this;
+						$.ajax({
+							url: config.apiHost+'experts/jobsHomeList',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: {
+                                lang: that.lang,
+                                limit: 3,
+								works_id: id
+							},
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+								    console.log(data.data.list)
+                                    that.recommends = data.data;
+								}else{
+									alert(data.result);
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+                    },
 					getDetail(){
 						let that = this;
 						$.ajax({
@@ -219,8 +237,9 @@
 							success: function (data, textStatus, jqXHR){
 								// 发送成功
 								if(data.status == 'ok'){
-								console.log(data.data.list)
-									that.detail = data.data;
+								    console.log(data.data.list)
+                                    that.detail = data.data;
+                                    that.getRecommend(data.data.works_id);
 								}else{
 									alert(data.result);
 								}

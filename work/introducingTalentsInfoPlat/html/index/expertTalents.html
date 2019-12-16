@@ -22,10 +22,10 @@
 					</div>
 					<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div> 
 					 <ul class="nav-list">
-						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
+						<li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
 						<li class="act"><a href=""><span>专家人才</span></a></li>
-						<li><a href="./technology.html"><span>项目技术</span></a></li>
-						<li><a href="../../index.html"><span>合作机构</span></a></li>
+                        <li><a href="./technology.html"><span>项目技术</span></a></li>
+                        <li><a href="./cooperativeAgency.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -200,7 +200,8 @@
 					countrys: [], 	// 国籍
 					industrys: [],
 					degreeLists:[],
-					languages:[],
+                    languages:[],
+                    companyName: '',
 					searchObj:{
 						lang: 'cn',
 						limit: 12,
@@ -242,6 +243,13 @@
                         this.lang = 'en';
                         this.languageText = "English";
                     }
+                    console.log(parseUrl())
+                    if(parseUrl()){
+                        this.searchObj.works_id = parseUrl().id?parseUrl().id:'';
+                        this.companyName = localStorage.getItem('companyName')?localStorage.getItem('companyName'):'';
+                        this.searchObj.keywords = localStorage.getItem('companyName')?localStorage.getItem('companyName'):'';
+                        localStorage.removeItem('companyName')
+                    }
                     this.requireData();
 				},
 				methods: {
@@ -267,13 +275,12 @@
                         this.getList('degreeLists','home/degreeList');
                         this.getList('countrys','home/nationality');
                         this.getList('typelist','home/typelist');
-                        this.getExperts();
+                        this.getExperts(1);
                     },
 					// 选择国籍
 					chooseCountry(name){
 						this.searchObj.nationality = name;
-						this.searchObj.page = 1;
-						this.getExperts();
+						this.getExperts(1);
 					},
 					// 选择人才分类
 					chooseType(val,type,status){
@@ -294,8 +301,7 @@
 							}else{
 								this.choose[status].typeVal = '不限';
 							}
-							this.searchObj.page = 1;
-							that.getExperts();
+							that.getExperts(1);
 						}else{
 							// 选择完成
 							status == 'industry'?this.searchObj.industry_id = type:this.searchObj[status] = val;
@@ -303,8 +309,7 @@
 							this.choose[status].typeVal = val;
 							this.choose[status].errorHide = false;
 							this.choose[status].actHide = true;
-							this.searchObj.page = 1;
-							that.getExperts();
+							that.getExperts(1);
 						}
 					},
 					getList(type,url){
@@ -333,8 +338,11 @@
 					},
 					getExperts(type){
 						let that = this;
-                        type?that.searchObj.page = 1:'';
+                        type == 1?that.searchObj.page = 1:'';
                         that.searchObj.lang = that.lang;
+                        if(that.searchObj.keywords != that.companyName || that.companyName==''){
+                            that.searchObj.works_id = '';
+                        }
 						$.ajax({
 							url: config.apiHost+'experts/expertlist',
 							type: 'POST', //GET
@@ -344,7 +352,7 @@
 							success: function (data, textStatus, jqXHR){
 								// 发送成功
 								if(data.status == 'ok'){
-									that.createPagination(data.data.count);
+									that.searchObj.page == 1?that.createPagination(data.data.count):'';
 									var list = data.data.list;
 									that.experts = list;
 								}
@@ -377,9 +385,12 @@
 									dataHtml += '<li>' + item + '</li>';
 								});
 								dataHtml += '</ul>';
-								container.prev().html(dataHtml);
-								that.searchObj.page = pagination.pageNumber;
-		//						page = pagination.pageNumber; 
+                                container.prev().html(dataHtml);
+                                if(that.searchObj.page!=pagination.pageNumber){
+                                    that.searchObj.page = pagination.pageNumber;
+                                    that.getExperts();
+                                }
+								// page = pagination.pageNumber; 
 							}
 						};
 						container.addHook('beforeInit', function() {

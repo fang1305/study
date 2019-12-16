@@ -27,10 +27,11 @@
 					</div>
 					<div class="avatar"><img src="img/index/icon/avator.png" /> </div> 
 					 <ul class="nav-list">
-						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
+						<li class="act"><a href=""><span class="indexPage">{{indexText}}</span></a></li>
+						<!-- <li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li> -->
 						<li><a href="./html/index/expertTalents.html"><span>专家人才</span></a></li>
 						<li><a href="./html/index/technology.html"><span>项目技术</span></a></li>
-						<li class="act"><a href=""><span>合作机构</span></a></li>
+						<li><a href="./html/index/cooperativeAgency.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -246,54 +247,25 @@
 					<div class="cont">
 						<div class="swiper-container swiper-container2">
 						    <div class="swiper-wrapper">
-							    <div class="swiper-slide">
+                                
+							    <div class="swiper-slide" v-for="work in outWorks">
+                                    <a :href="'./html/index/companyIntro.html?id='+work.id">
+                                        <div class="item">
+                                            <div class="cologo">
+                                                <img :src="work.logo" />
+                                            </div>
+                                            <p class="name" v-text="work.works_name"></p>
+                                        </div>
+                                    </a>
+							    </div> 
+							    <!-- <div class="swiper-slide">
 							    	<div class="item">
 							    		<div class="cologo">
 								    		<img src="img/index/co1.jpg"/>
 								    	</div>
 								    	<p class="name">金驰投资</p>
 							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资金驰投资金驰投资金驰投资金驰投资</p>
-							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
+							    </div>  -->
 						    </div>
 						</div>
 					    <!-- Add Arrows -->
@@ -307,54 +279,22 @@
 					<div class="cont">
 						<div class="swiper-container swiper-container3">
 						    <div class="swiper-wrapper">
-							    <div class="swiper-slide">
-							    	<div class="item">
+							    <div class="swiper-slide" v-for="work in inWorks">
+							    	<a :href="'./html/index/companyIntro.html?id='+work.id"><div class="item">
 							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
+								    		<img :src="work.logo"/>
 								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
+								    	<p class="name" v-text="work.works_name"></p>
+                                    </div></a>
 							    </div> 
-							    <div class="swiper-slide">
+							    <!-- <div class="swiper-slide">
 							    	<div class="item">
 							    		<div class="cologo">
 								    		<img src="img/index/co1.jpg"/>
 								    	</div>
 								    	<p class="name">金驰投资金驰投资金驰投资金驰投资金驰投资</p>
 							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
-							    <div class="swiper-slide">
-							    	<div class="item">
-							    		<div class="cologo">
-								    		<img src="img/index/co1.jpg"/>
-								    	</div>
-								    	<p class="name">金驰投资</p>
-							    	</div>
-							    </div> 
+                                </div>  -->
 						    </div>
 						</div>
 					    <!-- Add Arrows -->
@@ -408,7 +348,9 @@
 					experts: [],
 					jobs:[],
 					projects:[],
-					demandProjects:[]
+                    demandProjects:[],
+                    outWorks: [],
+                    inWorks: []
                 },
                 created() {
                     if(localStorage.getItem('lang') == 'en'){
@@ -427,6 +369,10 @@
                         this.getList('projects','project/projectHomeList');
                         // 需求项目
                         this.getList('demandProjects','project/projectDemandHomeList');
+                        // 海外机构
+                        this.getList('inWorks','works/worksList','境内');
+                        // 境内机构
+                        this.getList('outWorks','works/worksList','境外');
                     },
                     // 中英文切换
                     changeLang(){
@@ -451,28 +397,44 @@
 						var day = date.getDate<10?'0'+date.getDate():date.getDate();
 						return month+'-'+day; 
 					},
-                    getList(type,url){
-						let that = this;
+                    getList(type,url,intro){
+                        var within = intro?intro:'';
+                        var limit = intro?12:4;
+                        let that = this;
 						$.ajax({
 							url: config.apiHost+url,
 							type: 'POST', //GET
                             async: true, //或false,是否异步
                             data:{
-                                lang: that.lang
+                                lang: that.lang,
+                                limit: limit,
+                                page: 1,
+                                within: within
                             },
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
 								// 发送成功
 								if(data.status == 'ok'){
 									var list = data.data;
-									if(type == 'projects'||type == "demandProjects"){
-										list = data.data.list;
-									}
-									if(type == 'experts'){
-										that[type] = list.length>4?list.slice(0,4):list;
+									if(type == 'experts'||type == "jobs"){
+										list = data.data;
 									}else{
-										that[type] = list;
-									}
+                                        list = data.data.list;
+                                    }
+                                    if(intro){
+                                        setTimeout(() => {
+                                            var swiper3 = new Swiper('.swiper-container3', {
+                            //					autoplay: true,
+                                                slidesPerView: 6,
+                                                spaceBetween: 30,
+                                                navigation: {
+                                                    nextEl: '.swiper-button-next3',
+                                                    prevEl: '.swiper-button-prev3',
+                                                },
+                                            });
+                                        }, 300);
+                                    }
+									that[type] = list;
 								}
 							},
 							error: function (xhr, textStatus){
@@ -502,15 +464,7 @@
 				        prevEl: '.swiper-button-prev2',
 				    },
 			    });
-			    var swiper3 = new Swiper('.swiper-container3', {
-//					autoplay: true,
-					slidesPerView: 6,
-			        spaceBetween: 30,
-				    navigation: {
-				        nextEl: '.swiper-button-next3',
-				        prevEl: '.swiper-button-prev3',
-				    },
-			    });
+			    
             }) ;
 
             // getList();

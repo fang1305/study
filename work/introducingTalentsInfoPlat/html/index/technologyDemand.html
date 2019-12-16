@@ -22,10 +22,11 @@
 					</div>
 					<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div> 
 					 <ul class="nav-list">
-						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
+						<!-- <li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li> -->
+						<li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
 						<li><a href="./expertTalents.html"><span>专家人才</span></a></li>
 						<li class="act"><a href=""><span>项目技术</span></a></li>
-						<li><a href="../../index.html"><span>合作机构</span></a></li>
+                        <li><a href="./cooperativeAgency.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -154,7 +155,8 @@
 					languageText: "中文", 
 					industrys: [],
 					countrys: [], 	// 国籍
-					projects: [],
+                    projects: [],
+                    companyName: '',
 					searchObj:{
 						lang: 'cn',
 						limit: 12,
@@ -178,6 +180,12 @@
                         this.lang = 'en';
                         this.languageText = "English";
                     }
+                    if(parseUrl()){
+                        this.searchObj.works_id = parseUrl().id?parseUrl().id:'';
+                        this.companyName = localStorage.getItem('companyName')?localStorage.getItem('companyName'):'';
+                        this.searchObj.keywords = localStorage.getItem('companyName')?localStorage.getItem('companyName'):'';
+                        localStorage.removeItem('companyName')
+                    }
 					this.getList('industrys','home/industry');
 					this.getList('countrys','home/nationality');
 					this.getExperts();
@@ -192,7 +200,7 @@
                             // 重新请求数据
                             this.getList('industrys','home/industry');
                             this.getList('countrys','home/nationality');
-                            this.getExperts();
+                            this.getExperts(1);
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
@@ -200,7 +208,7 @@
                             // 重新请求数据
                             this.getList('industrys','home/industry');
                             this.getList('countrys','home/nationality');
-                            this.getExperts();
+                            this.getExperts(1);
                         }
                     },
 					// 选择国籍
@@ -261,6 +269,9 @@
 						let that = this;
 						type?that.searchObj.page = 1:'';
                         that.searchObj.lang = that.lang;
+                        if(that.searchObj.keywords != that.companyName || that.companyName==''){
+                            that.searchObj.works_id = '';
+                        }
                         $.ajax({
 							url: config.apiHost+'project/projectDemandHomeList',
 							type: 'POST', //GET
@@ -271,7 +282,7 @@
 								// 发送成功
 								console.log(data)
 								if(data.status == 'ok'){
-									that.createPagination(data.data.count);
+									that.searchObj.page == 1?that.createPagination(data.data.count):'';
 									var list = data.data.list;
 									that.projects = list;
 								}
@@ -307,7 +318,10 @@
 								});
 								dataHtml += '</ul>';
 								container.prev().html(dataHtml);
-								that.searchObj.page = pagination.pageNumber;
+								if(that.searchObj.page!=pagination.pageNumber){
+                                    that.searchObj.page = pagination.pageNumber;
+                                    that.getExperts();
+                                }
 		//						page = pagination.pageNumber; 
 							}
 						};

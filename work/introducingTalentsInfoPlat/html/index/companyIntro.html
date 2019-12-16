@@ -9,6 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="../../css/public/footer.css" /> 
 		<link rel="stylesheet" type="text/css" href="../../css/public/iconfont.css" />  
 		<link rel="stylesheet" type="text/css" href="../../css/index/companyIntro.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/index/companyProject.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/index/companyRequirement.css" />
 	</head>
 
 	<body>
@@ -21,10 +23,10 @@
 					</div>
 					<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div> 
 					 <ul class="nav-list">
-						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
-						<li><a href=""><span>专家人才</span></a></li>
-						<li><a href=""><span>项目技术</span></a></li>
-						<li class="act"><a href=""><span>合作机构</span></a></li>
+                         <li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
+                         <li><a href="./expertTalents.html"><span>专家人才</span></a></li>
+                         <li><a href="./technology.html"><span>项目技术</span></a></li>
+                         <li class="act"><a href="./cooperativeAgency.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -41,11 +43,11 @@
 				 		</div>
 				 		<ul>
 				 			<li>
-				 				<p class="num">{{count.projectDemandCount}}个</p>
+				 				<p class="num" v-text="count.projectDemandCount?count.projectDemandCount:0+'个'">个</p>
 				 				<p class="text">发布项目</p>
 				 			</li>
 				 			<li>
-				 				<p class="num">{{count.jobsCount}}个</p>
+				 				<p class="num" v-text="count.jobsCount?count.jobsCount:0+'个'">个</p>
 				 				<p class="text">发布职位</p>
 				 			</li>
 				 		</ul>
@@ -53,12 +55,12 @@
 				 	<p class="time">成立时间：{{detail.found_time}}</p>
 				</div>
 				<ul class="navlist">
-					<li class="item act">公司主页</li>
-					<li class="item">需求发布（{{ count.needCount }}）</li>
-					<li class="item">资源共享（{{ count.supplyCount }}）</li>
+					<li :class="['item',activeNum==1?'act':'']"  @click="changeTab(1)">公司主页</li>
+					<li :class="['item',activeNum==2?'act':'']" @click="changeTab(2)">需求发布（{{ count.needCount?count.needCount:0 }}）</li>
+					<li :class="['item',activeNum==3?'act':'']" @click="changeTab(3)">资源共享（{{ count.supplyCount?count.supplyCount:0 }}）</li>
 				</ul>
 			</div>
-			<div class="main block1">
+			<div class="main block1" v-if="activeNum == 1">
 				<div class="left">
 					<div class="title">
 						<span>公司介绍</span>
@@ -98,14 +100,24 @@
 				 	</div>
 				</div>
 			</div>
-			<div class="main block2">
+			<div class="main block2" v-if="activeNum == 2">
 				<div class="left">
 					<div class="title">
 						<span>职位招聘</span>
 						<hr class="line" />
 					</div>
 					<div class="list">
-						<div class="item">
+						<a :href="'./jobDetail.html?id='+job.works_id"  v-for="job in jobs"><div class="item">
+							<div class="job-salary">
+								<div class="job" v-text="job.professional+(job.countries+''?' ['+job.countries+']':'')"></div>
+								<div class="salary" v-text="job.low_salary+(job.low_salary&&job.high_salary?'-':'')+job.high_salary">20K-40K</div>
+							</div>
+							<div class="need-time">
+								<div class="need">{{job.capacity+''?job.capacity+'/':''}}{{job.edu_back}}{{job.language?'/'+job.language:''}}</div>
+								<div class="time">{{getDateInit(job.add_time)}}</div>
+							</div>
+                        </div></a>
+						<!-- <div class="item">
 							<div class="job-salary">
 								<div class="job"> java开发工程师 [英国]</div>
 								<div class="salary">20K-40K</div>
@@ -114,39 +126,9 @@
 								<div class="need">经验3-5年/本科/英语</div>
 								<div class="time">2019-11-04</div>
 							</div>
-						</div>
-						<div class="item">
-							<div class="job-salary">
-								<div class="job"> java开发工程师 [英国]</div>
-								<div class="salary">20K-40K</div>
-							</div>
-							<div class="need-time">
-								<div class="need">经验3-5年/本科/英语</div>
-								<div class="time">2019-11-04</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="job-salary">
-								<div class="job"> java开发工程师 [英国]</div>
-								<div class="salary">20K-40K</div>
-							</div>
-							<div class="need-time">
-								<div class="need">经验3-5年/本科/英语</div>
-								<div class="time">2019-11-04</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="job-salary">
-								<div class="job"> java开发工程师 [英国]</div>
-								<div class="salary">20K-40K</div>
-							</div>
-							<div class="need-time">
-								<div class="need">经验3-5年/本科/英语</div>
-								<div class="time">2019-11-04</div>
-							</div>
-						</div>
+						</div> -->
 					</div>
-					<div class="more"><span>查看更多</span></div>
+					<div class="more"><a :href="'./jobRecommendation.html?id='+id"><span>查看更多</span></div>
 				</div>
 				<div class="right">
 						<div class="title">
@@ -154,101 +136,53 @@
 						<hr class="line" />
 					</div>
 					<div class="list">
-						<div class="item">
+						<a :href="'./projectDemandDetail.html?id='+project.id"  v-for="project in projectsDemand"><div class="item">
+							<div class="name" v-html="project.jane_title"></div>
+							<div class="desp" v-if="project.info" v-html="project.info"></div>
+							<div class="time">
+								<div class="tleft" v-if="project.address" v-text="project.address"></div>
+								<div class="tright" v-if="project.science" v-text="project.science"></div>
+							</div>
+						</div></a>
+						<!-- <div class="item">
 							<div class="name">水电基地为拉脱维亚里加项目</div>
 							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
 							<div class="time">
 								<div class="tleft">英国：2016-12-07</div>
 								<div class="tright">核心技术</div>
 							</div>
-						</div>
-						<div class="item">
-							<div class="name">水电基地为拉脱维亚里加项目</div>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
-							<div class="time">
-								<div class="tleft">英国：2016-12-07</div>
-								<div class="tright">核心技术</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="name">水电基地为拉脱维亚里加项目</div>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
-							<div class="time">
-								<div class="tleft">英国：2016-12-07</div>
-								<div class="tright">核心技术</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="name">水电基地为拉脱维亚里加项目</div>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
-							<div class="time">
-								<div class="tleft">英国：2016-12-07</div>
-								<div class="tright">核心技术</div>
-							</div>
-						</div>
+						</div> -->
 					</div>
-					<div class="more"><span>查看更多</span></div>
+					<div class="more"><a :href="'./technologyDemand.html?id='+id"><span>查看更多</span></a></div>
+					<!-- <div class="more" v-if="proDemandCount"><span>查看更多</span></div> -->
 				</div>
 			</div>
-			<div class="main">
+			<div class="main block3" v-if="activeNum == 3">
 				<div class="left">
 					<div class="title">
 						<span>公司人才</span>
 						<hr class="line" />
 					</div>
 					<div class="list">
-						<div class="item">
+						<div class="item" v-for="expert in experts">
 							<div class="avator">
-								<img src="../../img/index/co2.jpg"/>
+								<img :src="expert.photo"/>
 							</div>
 							<div class="info">
-								<p class="name">张泽宇(25岁)</p>
-								<p class="educationalbg">本科 | 英国 | 法律 | 汉语 | 未婚</p>
+								<p class="name" v-text="expert.surname+expert.name+(expert.age?'('+expert.age+')':'')">张泽宇(25岁)</p>
+                                <span v-if="expert.degree" class="ditem"></span>
+                                <span v-if="expert.nationality" class="ditem">{{expert.nationality}}</span>
+                                <span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}</span>
+                                <span v-if="expert.language+''" class="ditem">{{expert.language+''}}</span>
+                                <span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
+                                <p class="educationalbg">{{expert.degree?expert.degree+' | ':''}}{{expert.nationality?expert.nationality:''}}{{expert.industry_name?' | '+expert.industry_name:''}}
+                                   {{expert.language+''?' | '+expert.language:''}}{{expert.marriage?' | '+expert.marriage:''}}
+                                   </p>
 							</div>
-							<p class="specialist">专家</p>
-						</div>
-						<div class="item">
-							<div class="avator">
-								<img src="../../img/index/co2.jpg"/>
-							</div>
-							<div class="info">
-								<p class="name">张泽宇(25岁)</p>
-								<p class="educationalbg">本科 | 英国 | 法律 | 汉语 | 未婚</p>
-							</div>
-							<p class="specialist">专家</p>
-						</div>
-						<div class="item">
-							<div class="avator">
-								<img src="../../img/index/co2.jpg"/>
-							</div>
-							<div class="info">
-								<p class="name">张泽宇(25岁)</p>
-								<p class="educationalbg">本科 | 英国 | 法律 | 汉语 | 未婚</p>
-							</div>
-							<p class="specialist">专家</p>
-						</div>
-						<div class="item">
-							<div class="avator">
-								<img src="../../img/index/co2.jpg"/>
-							</div>
-							<div class="info">
-								<p class="name">张泽宇(25岁)</p>
-								<p class="educationalbg">本科 | 英国 | 法律 | 汉语 | 未婚</p>
-							</div>
-							<p class="specialist">专家</p>
-						</div>
-						<div class="item">
-							<div class="avator">
-								<img src="../../img/index/co2.jpg"/>
-							</div>
-							<div class="info">
-								<p class="name">张泽宇(25岁)</p>
-								<p class="educationalbg">本科 | 英国 | 法律 | 汉语 | 未婚</p>
-							</div>
-							<p class="specialist">专家</p>
+							<p class="specialist" v-if="expert.type" v-text="expert.type"></p>
 						</div>
 					</div>
-					<div class="more"><span>查看更多</span></div>
+					<div class="more"><a :href="'./expertTalents.html?id='+detail.id"><span>查看更多</span></div>
 				</div>
 				<div class="right">
 				 	<div class="title">
@@ -256,40 +190,24 @@
 						<hr class="line" />
 					</div>
 					<div class="list">
-						<div class="item">
+                        <a :href="'./projectDetail.html?id='+project.id"  v-for="project in projects"><div class="item">
+							<div class="name" v-html="project.jane_title"></div>
+							<div class="desp" v-if="project.info" v-html="project.info"></div>
+							<div class="time">
+								<div class="tleft" v-if="project.address||project.release_time" v-text="(project.nationality_name?project.nationality_name+'：':'')+project.release_time.substring(0,10)"></div>
+								<div class="tright" v-if="project.industry_name" v-text="project.industry_name"></div>
+							</div>
+						</div></a>
+						<!-- <div class="item">
 							<div class="name">水电基地为拉脱维亚里加项目</div>
 							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
 							<div class="time">
 								<div class="tleft">英国：2016-12-07</div>
 								<div class="tright">核心技术</div>
 							</div>
-						</div>
-						<div class="item">
-							<div class="name">水电基地为拉脱维亚里加项目</div>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
-							<div class="time">
-								<div class="tleft">英国：2016-12-07</div>
-								<div class="tright">核心技术</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="name">水电基地为拉脱维亚里加项目</div>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
-							<div class="time">
-								<div class="tleft">英国：2016-12-07</div>
-								<div class="tright">核心技术</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="name">水电基地为拉脱维亚里加项目</div>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
-							<div class="time">
-								<div class="tleft">英国：2016-12-07</div>
-								<div class="tright">核心技术</div>
-							</div>
-						</div>
+						</div> -->
 					</div>
-					<div class="more"><span>查看更多</span></div>
+					<div class="more"><a :href="'./technology.html?id='+id"><span>查看更多</span></a></div>
 				</div>
 			</div>
 			<div class="footer">
@@ -331,18 +249,49 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "中文", 
+                    languageText: "中文", 
+                    id: 0,
 					detail:{},
-					count: {}
+                    count: {},
+                    projectsDemand: [],
+                    projects: [],
+                    experts: [],
+                    jobs: [],
+                    expertCount: 0,
+                    proCount: 0,
+                    jobCount: 0,
+                    jobPage: 1,
+                    proDemandCount: 0,
+                    activeNum: 1,
 				},
 				created() {
+                    this.id = parseUrl().id;
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
 					    this.languageText = "English";
-					}
+                    }
 					this.getDetail();
 				},
 				methods: { 
+                    changeTab(num,type){
+                        this.activeNum = num;
+                        if(num == 2 && ((this.proDemandCount=='0' && this.jobCount == '0') || type)){
+                            // 查看需求发布
+                            this.getProject('project/projectDemandHomeList','projectsDemand','proDemandCount',1);
+                            // 职位列表
+                            this.getProject('experts/jobsList','jobs','jobCount',1);
+                        }else if(num == 3&& ((this.proCount =='0' && this.expertCount == '0') || type)){
+                            // 获取公司项目
+                            this.getProject('project/projectHomeList','projects','proCount',1);
+                            // 获取公司人才列表
+                            this.getProject('experts/expertlist','experts','expertCount',1)
+                        }
+                    },
+                    // 查看更多
+                    jobsMore(){
+                        this.jobPage = this.jobPage+1;
+                        this.getProject('experts/jobsList','jobs','jobCount',this.jobPage);
+                    },
                     // 中英文切换
                     changeLang(){
                         if(this.lang == 'cn'){
@@ -351,13 +300,46 @@
                             this.languageText = 'English';
                             // 重新请求数据
                             this.getDetail();
+                            this.changeTab(this.activeNum,1);
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
                             this.languageText = '中文';
                             // 重新请求数据
                             this.getDetail();
+                            this.changeTab(this.activeNum,1);
                         }
+                    },
+                    // 获取项目需求列表
+                    getProject(url,type,count,page){
+                        let that = this;
+                        $.ajax({
+							url: config.apiHost+url,
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: {
+                                lang: that.lang,
+                                limit: 4,
+                                page: page,
+								// works_id: parseUrl().id
+							},
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+                                    that[type] = page = 1?data.data.list:that[type].concat(data.data.list);
+                                    that[count] = data.data.count;
+								}else{
+									alert(data.result);
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
                     },
 					getDetail(){
 						let that = this;
@@ -396,7 +378,8 @@
 								// 	}
 								// }
 								if(data.status == 'ok'){
-								console.log(data.data.info)
+                                    console.log(data.data.info)
+                                    localStorage.setItem('companyName',data.data.info.works_name);
 									data.data.info.found_time = data.data.info.found_time.substring(0,10);
 									that.detail = data.data.info;
 									that.count = data.data.count;
@@ -413,7 +396,8 @@
 						})
 					}
 				}, 
-			});
+            });
+        
 			$(function(){ 
 			}) 
 		</script>
