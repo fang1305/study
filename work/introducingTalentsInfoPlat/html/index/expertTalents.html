@@ -24,8 +24,8 @@
 					 <ul class="nav-list">
 						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
 						<li class="act"><a href=""><span>专家人才</span></a></li>
-						<li><a href=""><span>项目技术</span></a></li>
-						<li><a href=""><span>合作机构</span></a></li>
+						<li><a href="./technology.html"><span>项目技术</span></a></li>
+						<li><a href="../../index.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -40,258 +40,113 @@
 				<div class="top">
 					<ul>
 						<li><span>专家人才</span></li>
-						<li><span>职位推荐</span></li>
+						<li><a href="./jobRecommendation.html"><span>职位推荐</span></a></li>
 					</ul>
 					<div class="search-group">
 						<div class="search">
-							<input type="text" name="" id="" value="" placeholder="搜索" />
+							<input @keydown.enter="getExperts(1)" type="text" name="" id="" v-model="searchObj.keywords" placeholder="搜索" />
 						</div>
-						<div class="search-btn"><img src="../../img/index/icon/search.png"/></div>
+						<div class="search-btn" @click="getExperts(1)"><img src="../../img/index/icon/search.png"/></div>
 					</div>
 				</div>
 				<div class="navigation">
 					<div class="nav-category J_filter_country">
 						<h4>国家</h4>
-						<span class="def act">不限</span>
+						<span @click="chooseCountry('')" :class="['def',searchObj.nationality==''?'act':'']">不限</span>
 						<div class="nc-contain">
 							<span class="nctit">地区：</span>
 							<div class="country">
-								<span class="item">中国 </span>
-								<span class="item">英国</span>
-								<span class="item">美国</span>
-								<span class="item">日本</span>
-								<span class="item">法国</span>
+								<span :class="['item',searchObj.nationality==country.nationality?'act':'']" @click="chooseCountry(country.nationality)" v-for="country in countrys">{{country.nationality}} </span>
 							</div>
 						</div>
 					</div>
 					<div class="nav-category J_filter_sel">
 						<div class="nav-tab expert">
-					        <div class="input"> 
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>专家</span>
+					        <div :class="['input',choose.type.actHide?'act':'']" @click="chooseType(1,'choose','type')"> 
+					        	<i @click.stop="chooseType('','error','type')" :class="['iconfont', choose.type.errorHide?'hide':'', 'icon-error']"></i>
+					            <span>{{choose.type.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
 					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>专家</span>
+					        <div :class="['slist', choose.type.chooseHide?'hide':'']">
+					        	<div class="sinput" @click.stop="chooseType('','choose','type')">
+						            <span>{{choose.type.typeVal}}</span>
 						            <img src="../../img/index/icon/icon_arrow.png" alt="">
 						        </div>
 						        <ul>
-						            <li>专家</li>
-						            <li>留学生</li>
+						            <li v-for="data in typelist" @click="chooseType(data.type,'','type')">{{data.type}}</li>
 						        </ul>
 					        </div>
 					    </div>
 					    <div class="nav-tab profession">
-					        <div class="input">
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>行业要求</span>
+					        <div :class="['input',choose.industry.actHide?'act':'']" @click="chooseType(1,'choose','industry')">
+					        	<i @click.stop="chooseType('','error','industry')" :class="['iconfont', choose.industry.errorHide?'hide':'', 'icon-error']"></i>
+					            <span>{{choose.industry.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
 					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>行业要求</span>
+					        <div :class="['slist', choose.industry.chooseHide?'hide':'']">
+					        	<div class="sinput" @click.stop="chooseType('','choose','industry')">
+						            <span>{{choose.industry.typeVal}}</span>
 						            <img src="../../img/index/icon/icon_arrow.png" alt="">
 						        </div>
 						        <ul>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
+						            <li v-for="data in industrys" @click="chooseType(data.industry_name,data.industry_id,'industry')">{{data.industry_name}}</li>
 						        </ul>
 					        </div>
 					    </div>
 						<div class="nav-tab educationalbg">
-					        <div class="input">
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>学历要求</span>
+							<div :class="['input',choose.degree.actHide?'act':'']" @click="chooseType(1,'choose','degree')">
+					        	<i @click.stop="chooseType('','error','degree')" :class="['iconfont', choose.degree.errorHide?'hide':'', 'icon-error']"></i>
+					            <span>{{choose.degree.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
 					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>学历要求</span>
+					        <div :class="['slist', choose.degree.chooseHide?'hide':'']">
+					        	<div class="sinput" @click.stop="chooseType('','choose','degree')">
+						            <span>{{choose.degree.typeVal}}</span>
 						            <img src="../../img/index/icon/icon_arrow.png" alt="">
 						        </div>
 						        <ul>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
+						            <li v-for="data in degreeLists" @click="chooseType(data.degree,'','degree')">{{data.degree}}</li>
 						        </ul>
 					        </div>
 					    </div> 
 					    <div class="nav-tab languagerequire">
-					        <div class="input">
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>语言要求</span>
-					            <img src="../../img/index/icon/icon_arrow.png" alt="">
-					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>语言要求</span>
-						            <img src="../../img/index/icon/icon_arrow.png" alt="">
-						        </div>
-						        <ul> 
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						        </ul>
-					        </div>
+							<div :class="['input',choose.language.actHide?'act':'']" @click="chooseType(1,'choose','language')">
+								<i @click.stop="chooseType('','error','language')" :class="['iconfont', choose.language.errorHide?'hide':'', 'icon-error']"></i>
+								<span>{{choose.language.typeVal}}</span>
+								<img src="../../img/index/icon/icon_arrow.png" alt="">
+							</div>
+							<div :class="['slist', choose.language.chooseHide?'hide':'']">
+								<div class="sinput" @click.stop="chooseType('','choose','language')">
+									<span>{{choose.language.typeVal}}</span>
+									<img src="../../img/index/icon/icon_arrow.png" alt="">
+								</div>
+								<ul>
+									<li v-for="data in languages" @click="chooseType(data.language,'','language')">{{data.language}}</li>
+								</ul>
+							</div>
 					    </div>  
 					</div>
 				</div>
 				<div class="list">
-					 <div class="item">
+					<div class="item" v-for="expert in experts">
 						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
+							<img :src="expert.photo"/>
 						</div>
 						<div class="info">
 							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
+								<div class="left">{{expert.surname+expert.name}}({{expert.age}}岁)</div>
+								<div class="right">{{expert.type}}</div>
 							</div> 
 							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
+								<span v-if="expert.degree" class="ditem">{{expert.degree}}</span>
+								<span v-if="expert.nationality" class="ditem">{{expert.nationality}}</span>
+								<span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}</span>
+								<span v-if="expert.language+''" class="ditem">{{expert.language+''}}</span>
+								<span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
 							</div>
 						</div>
-						<div class="look">查看</div>
-					</div>
-					<div class="item">
-						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
-						</div>
-						<div class="info">
-							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
-							</div> 
-							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
-							</div>
-						</div>
-						<div class="look">查看</div>
-					</div>
-					<div class="item">
-						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
-						</div>
-						<div class="info">
-							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
-							</div> 
-							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
-							</div>
-						</div>
-						<div class="look">查看</div>
-					</div>
-					<div class="item">
-						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
-						</div>
-						<div class="info">
-							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
-							</div> 
-							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
-							</div>
-						</div>
-						<div class="look">查看</div>
-					</div>
-					<div class="item">
-						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
-						</div>
-						<div class="info">
-							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
-							</div> 
-							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
-							</div>
-						</div>
-						<div class="look">查看</div>
-					</div>
-					<div class="item">
-						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
-						</div>
-						<div class="info">
-							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
-							</div> 
-							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
-							</div>
-						</div>
-						<div class="look">查看</div>
-					</div>
-					<div class="item">
-						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
-						</div>
-						<div class="info">
-							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
-							</div> 
-							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
-							</div>
-						</div>
-						<div class="look">查看</div>
-					</div>
-					<div class="item">
-						<div class="poster">
-							<img src="../../img/index/co3.jpg"/>
-						</div>
-						<div class="info">
-							<div class="name">
-								<div class="left">张泽宇(25岁)</div>
-								<div class="right">留学生</div>
-							</div> 
-							<div class="desp">
-								<span class="ditem">本科</span>
-								<span class="ditem">英国</span>
-								<span class="ditem">法律</span>
-								<span class="ditem">汉语</span>
-								<span class="ditem">未婚</span>
-							</div>
-						</div>
-						<div class="look">查看</div>
+
+						<a :href="'./talentDetail.html?id='+expert.id"><div class="look">查看</div></a>
 					</div>
 				</div>
 				<div class="pages">
@@ -331,37 +186,205 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>  
 		<script type="text/javascript" src="../../js/pagination.js"></script> 
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			var vm = new Vue({
 				el: '#app',
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "English", 
+					languageText: "English",
+					page: 1,
+					experts:[],
+					typelist: [],	// 人才分类
+					countrys: [], 	// 国籍
+					industrys: [],
+					degreeLists:[],
+					languages:[],
+					searchObj:{
+						lang: 'cn',
+						limit: 12,
+						page: 1,
+						nationality: '',
+						industry_id: '',
+						type: '',
+						degree: '',
+						language:'',
+						keywords: '',
+						works_id: ''
+					},
+					choose:{
+						type:{
+							typeVal: '不限',
+							chooseHide: true,
+							errorHide: true,
+						},
+						industry:{
+							typeVal: '行业要求',
+							chooseHide: true,
+							errorHide: true,
+							id: 0
+						},
+						degree:{
+							typeVal: '学历要求',
+							chooseHide: true,
+							errorHide: true
+						},
+						language:{
+							typeVal: '语言要求',
+							chooseHide: true,
+							errorHide: true
+						}
+					}
 				},
-				methods: { 
-
+				created(){
+					this.getList('industrys','home/industry');
+					this.getList('languages','home/language');
+					this.getList('degreeLists','home/degreeList');
+					this.getList('countrys','home/nationality');
+					this.getList('typelist','home/typelist');
+					this.getExperts();
+				},
+				methods: {
+					// 选择国籍
+					chooseCountry(name){
+						this.searchObj.nationality = name;
+						this.searchObj.page = 1;
+						this.getExperts();
+					},
+					// 选择人才分类
+					chooseType(val,type,status){
+						let that = this;
+						if(type == 'choose'){
+							// 展开选择类型
+							this.choose[status].chooseHide = !this.choose[status].chooseHide;
+						}else if(type == 'error'){
+							status =='industry'?this.searchObj.industry_id = '':this.searchObj[status] = '';
+							this.choose[status].actHide = false;
+							this.choose[status].errorHide = true;
+							if(status == 'degree'){
+								this.choose[status].typeVal = '学历要求';
+							}else if(status == 'language'){
+								this.choose[status].typeVal = '语言要求';
+							}else if(status == 'industry'){
+								this.choose[status].typeVal = '行业要求';
+							}else{
+								this.choose[status].typeVal = '不限';
+							}
+							this.searchObj.page = 1;
+							that.getExperts();
+						}else{
+							// 选择完成
+							status == 'industry'?this.searchObj.industry_id = type:this.searchObj[status] = val;
+							this.choose[status].chooseHide = true;
+							this.choose[status].typeVal = val;
+							this.choose[status].errorHide = false;
+							this.choose[status].actHide = true;
+							this.searchObj.page = 1;
+							that.getExperts();
+						}
+					},
+					getList(type,url){
+						let that = this;
+						$.ajax({
+							url: config.apiHost+url,
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+									that[type] = data.data;
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					},
+					getExperts(type){
+						let that = this;
+						type?that.searchObj.page = 1:'';
+						$.ajax({
+							url: config.apiHost+'experts/expertlist',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: that.searchObj,
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+									that.createPagination(data.data.count);
+									var list = data.data.list;
+									that.experts = list;
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					},
+					createPagination(num) {
+						let that = this;
+						var container = $('#pagination');
+						var sources = function() {
+							var result = [];
+							for(var i = 1; i < num; i++) {
+								result.push(i);
+							}
+							return result;
+						}();
+						var options = {
+							dataSource: sources,
+							className: 'paginationjs-theme-blue',
+							callback: function(response, pagination) {
+								//window.console && console.log(response, pagination);
+								var dataHtml = '<ul>';
+								$.each(response, function(index, item) {
+									dataHtml += '<li>' + item + '</li>';
+								});
+								dataHtml += '</ul>';
+								container.prev().html(dataHtml);
+								that.searchObj.page = pagination.pageNumber;
+		//						page = pagination.pageNumber; 
+							}
+						};
+						container.addHook('beforeInit', function() {
+							window.console && console.log('beforeInit...');
+						});
+						container.pagination(options);
+						container.addHook('beforePageOnClick', function(e) {
+							window.console && console.log('beforePageOnClick...');
+						});
+						return container;
+					}
 				}, 
 			});
 			$(function(){
-				createPagination(30);
-				$(".nav-tab .input").on("click",function(){ 
-					$(this).next(".slist").removeClass("hide");
-				})
-				$(".nav-tab .input .icon-error").on("click",function(e){ 
-					$(this).parents(".input").removeClass("act");
-					$(this).addClass("hide");
-					e.stopPropagation();
-					var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
-					$(this).next("span").html(val);
-				})
-				$(".slist ul li").on("click",function(){
-					var val = $(this).html();
-					$(".slist").addClass("hide");
-					$(this).parents(".nav-tab").children(".input").children("span").html(val);
-					$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
-					$(this).parents(".nav-tab").children(".input").addClass("act");
-				})
+				// createPagination(30);
+				// $(".nav-tab .input").on("click",function(){ 
+				// 	$(this).next(".slist").removeClass("hide");
+				// })
+				// $(".nav-tab .input .icon-error").on("click",function(e){ 
+				// 	$(this).parents(".input").removeClass("act");
+				// 	$(this).addClass("hide");
+				// 	e.stopPropagation();
+				// 	var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
+				// 	$(this).next("span").html(val);
+				// })
+				// $(".slist ul").on("click","li",function(){
+				// 	var val = $(this).html();
+				// 	$(".slist").addClass("hide");
+				// 	$(this).parents(".nav-tab").children(".input").children("span").html(val);
+				// 	$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
+				// 	$(this).parents(".nav-tab").children(".input").addClass("act");
+				// })
 			})
 			
 //			function selOpen(obj){
@@ -372,38 +395,38 @@
 //				$(obj).addClass("hide");
 //			}
 			
-			function createPagination(num) {
-				var container = $('#pagination');
-				var sources = function() {
-					var result = [];
-					for(var i = 1; i < num; i++) {
-						result.push(i);
-					}
-					return result;
-				}();
-				var options = {
-					dataSource: sources,
-					className: 'paginationjs-theme-blue',
-					callback: function(response, pagination) {
-						//window.console && console.log(response, pagination);
-						var dataHtml = '<ul>';
-						$.each(response, function(index, item) {
-							dataHtml += '<li>' + item + '</li>';
-						});
-						dataHtml += '</ul>';
-						container.prev().html(dataHtml);
-//						page = pagination.pageNumber; 
-					}
-				};
-				container.addHook('beforeInit', function() {
-					window.console && console.log('beforeInit...');
-				});
-				container.pagination(options);
-				container.addHook('beforePageOnClick', function() {
-					window.console && console.log('beforePageOnClick...');
-				});
-				return container;
-			}
+// 			function createPagination(num) {
+// 				var container = $('#pagination');
+// 				var sources = function() {
+// 					var result = [];
+// 					for(var i = 1; i < num; i++) {
+// 						result.push(i);
+// 					}
+// 					return result;
+// 				}();
+// 				var options = {
+// 					dataSource: sources,
+// 					className: 'paginationjs-theme-blue',
+// 					callback: function(response, pagination) {
+// 						//window.console && console.log(response, pagination);
+// 						var dataHtml = '<ul>';
+// 						$.each(response, function(index, item) {
+// 							dataHtml += '<li>' + item + '</li>';
+// 						});
+// 						dataHtml += '</ul>';
+// 						container.prev().html(dataHtml);
+// //						page = pagination.pageNumber; 
+// 					}
+// 				};
+// 				container.addHook('beforeInit', function() {
+// 					window.console && console.log('beforeInit...');
+// 				});
+// 				container.pagination(options);
+// 				container.addHook('beforePageOnClick', function() {
+// 					window.console && console.log('beforePageOnClick...');
+// 				});
+// 				return container;
+// 			}
 		</script>
 	</body>
 

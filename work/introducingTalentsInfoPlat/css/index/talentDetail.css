@@ -13,7 +13,7 @@
 .main .left .intentionDesp .intentionJob .item { display: inline-block; min-width: 70px; height: 35px; padding: 0 10px; border: 1px solid #206BD1; font-size: 14px; color: #206BD1; line-height: 35px; text-align: center; margin-top: 12px; margin-right: 15px;}
 .main .left .projectIntro {}
 .main .left .projectIntro .title { font-size: 24px; line-height: 1; color: #333333;}
-.main .left .projectIntro .content { font-size: 16px; line-height: 1.7; color: #666666; padding-top: 27px;}
+.main .left .projectIntro .content { width:778px;font-size: 16px; line-height: 1.7; color: #666666; padding-top: 27px;}
 
 .main .right .picture { width: 392px; height: 400px; line-height: 0; text-align: center; overflow: hidden;}
 .main .right .picture img { width: auto; height: 100%;}

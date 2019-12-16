@@ -23,9 +23,9 @@
 					<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div> 
 					 <ul class="nav-list">
 						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
-						<li><a href=""><span>专家人才</span></a></li>
+						<li><a href="./expertTalents.html"><span>专家人才</span></a></li>
 						<li class="act"><a href=""><span>项目技术</span></a></li>
-						<li><a href=""><span>合作机构</span></a></li>
+						<li><a href="../../index.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -39,55 +39,62 @@
 			<div class="main">
 				<div class="top">
 					<ul>
-						<li><span>项目技术库</span></li>
+						<li><a href="./technology.html"><span>项目技术库</span></a></li>
 						<li class="act"><span>项目技术需求</span></li>
 					</ul>
 					<div class="search-group">
 						<div class="search">
-							<input type="text" name="" id="" value="" placeholder="搜索" />
+							<input @keydown.enter="getExperts(1)" type="text" name="" id="" v-model="searchObj.keywords" placeholder="搜索" />
 						</div>
-						<div class="search-btn"><img src="../../img/index/icon/search.png"/></div>
+						<div class="search-btn" @click="getExperts(1)"><img src="../../img/index/icon/search.png"/></div>
 					</div>
 				</div>
 				<div class="navigation">
 					<div class="nav-category J_filter_country">
-						<h4>国家</h4>
-						<span class="def act">不限</span>
+						<h4>国家</h4> 
+						<span @click="chooseCountry('')" :class="['def',searchObj.address==''?'act':'']">不限</span>
 						<div class="nc-contain">
 							<span class="nctit">地区：</span>
 							<div class="country">
-								<span class="item">中国 </span>
-								<span class="item">英国</span>
-								<span class="item">美国</span>
-								<span class="item">日本</span>
-								<span class="item">法国</span>
+								<span :class="['item',searchObj.address==country.nationality?'act':'']" @click="chooseCountry(country.nationality)" v-for="country in countrys" v-text="country.nationality"> </span>
 							</div>
 						</div>
 					</div>
 					<div class="nav-category J_filter_sel"> 
 					    <div class="nav-tab profession">
-					        <div class="input">
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>行业要求</span>
+					        <div :class="['input',choose.industry.actHide?'act':'']" @click="chooseType(1,'choose','industry')">
+					        	<i @click.stop="chooseType('','error','industry')" :class="['iconfont', choose.industry.errorHide?'hide':'', 'icon-error']"></i>
+					            <span v-text="choose.industry.typeVal"></span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
 					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>行业要求</span>
+					        <div :class="['slist', choose.industry.chooseHide?'hide':'']">
+					        	<div class="sinput" @click.stop="chooseType('','choose','industry')">
+						            <span v-text="choose.industry.typeVal"></span>
 						            <img src="../../img/index/icon/icon_arrow.png" alt="">
 						        </div>
 						        <ul>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
+						            <li v-for="data in industrys" v-text="data.industry_name" @click="chooseType(data.industry_name,data.industry_id,'industry')"></li>
 						        </ul>
 					        </div>
 					    </div> 
 					</div>
 				</div>
 				<div class="list">
-					<div class="item">
+					<div class="item" v-for="project in projects">
+						<a :href="'./projectDemandDetail.html?id='+project.id" >
+							<div class="info">
+								<p class="name" v-text="project.jane_title"></p>
+								<p class="belong" v-text="project.industry_name"></p>
+								<div class="desp" v-text="project.info"></div>
+								<div class="time">
+									<div class="left" v-text="project.address"></div>
+									<div class="right" x-text="project.science"></div>
+								</div>
+							</div>
+							<div class="look">查看</div>
+						 </a>
+					</div>
+					<!-- <div class="item">
 						<div class="info">
 							<p class="name">水电基地为拉脱维亚里加项目</p>
 							<p class="belong">新能源/环保技术</p>
@@ -98,67 +105,7 @@
 							</div>
 						</div>
 					 	<div class="look">查看</div>
-					</div> 
-					<div class="item">
-						<div class="info">
-							<p class="name">水电基地为拉脱维亚里加项目</p>
-							<p class="belong">新能源/环保技术</p>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过 1万多架飞机、50多万观众、800多家航空制造商同 时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为EAA AirVenture已成为EAA AirVenture已成为</div>
-							<div class="time">
-								<div class="left">英国：2016-12-07</div>
-								<div class="right">核心技术</div>
-							</div>
-						</div>
-					 	<div class="look">查看</div>
-					</div> 
-					<div class="item">
-						<div class="info">
-							<p class="name">水电基地为拉脱维亚里加项目</p>
-							<p class="belong">新能源/环保技术</p>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过 1万多架飞机、50多万观众、800多家航空制造商同 时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为EAA AirVenture已成为EAA AirVenture已成为</div>
-							<div class="time">
-								<div class="left">英国：2016-12-07</div>
-								<div class="right">核心技术</div>
-							</div>
-						</div>
-					 	<div class="look">查看</div>
-					</div> 
-					<div class="item">
-						<div class="info">
-							<p class="name">水电基地为拉脱维亚里加项目</p>
-							<p class="belong">新能源/环保技术</p>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过 1万多架飞机、50多万观众、800多家航空制造商同 时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为EAA AirVenture已成为EAA AirVenture已成为</div>
-							<div class="time">
-								<div class="left">英国：2016-12-07</div>
-								<div class="right">核心技术</div>
-							</div>
-						</div>
-					 	<div class="look">查看</div>
-					</div> 
-					<div class="item">
-						<div class="info">
-							<p class="name">水电基地为拉脱维亚里加项目</p>
-							<p class="belong">新能源/环保技术</p>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过 1万多架飞机、50多万观众、800多家航空制造商同 时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为EAA AirVenture已成为EAA AirVenture已成为</div>
-							<div class="time">
-								<div class="left">英国：2016-12-07</div>
-								<div class="right">核心技术</div>
-							</div>
-						</div>
-					 	<div class="look">查看</div>
-					</div> 
-					<div class="item">
-						<div class="info">
-							<p class="name">水电基地为拉脱维亚里加项目</p>
-							<p class="belong">新能源/环保技术</p>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过 1万多架飞机、50多万观众、800多家航空制造商同 时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为EAA AirVenture已成为EAA AirVenture已成为</div>
-							<div class="time">
-								<div class="left">英国：2016-12-07</div>
-								<div class="right">核心技术</div>
-							</div>
-						</div>
-					 	<div class="look">查看</div>
-					</div> 
+					</div>  -->
 				</div>
 				<div class="pages">
 					<div id="pagination"></div>
@@ -197,6 +144,7 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>  
 		<script type="text/javascript" src="../../js/pagination.js"></script> 
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			var vm = new Vue({
 				el: '#app',
@@ -204,30 +152,167 @@
 					indexText: "首页",
 					lang: "cn",
 					languageText: "English", 
+					industrys: [],
+					countrys: [], 	// 国籍
+					projects: [],
+					searchObj:{
+						lang: 'cn',
+						limit: 12,
+						page: 1,
+						address: '',
+						industry_id: '',
+						keywords: '',
+						works_id: ''
+					},
+					choose:{
+						industry:{
+							typeVal: '行业要求',
+							chooseHide: true,
+							errorHide: true,
+							id: 0
+						},
+					}
+				},
+				created() {
+					this.getList('industrys','home/industry');
+					this.getList('countrys','home/nationality');
+					this.getExperts();
 				},
 				methods: { 
-
+					// 选择国籍
+					chooseCountry(name){
+						this.searchObj.address = name;
+						this.searchObj.page = 1;
+						this.getExperts();
+					},
+					// 选择人才分类
+					chooseType(val,type,status){
+						let that = this;
+						if(type == 'choose'){
+							// 展开选择类型
+							this.choose[status].chooseHide = !this.choose[status].chooseHide;
+						}else if(type == 'error'){
+							this.searchObj.industry_id = ''
+							this.choose[status].actHide = false;
+							this.choose[status].errorHide = true;
+								this.choose[status].typeVal = '行业要求';
+							this.searchObj.page = 1;
+							that.getExperts();
+						}else{
+							// 选择完成
+							this.searchObj.industry_id = type;
+							this.choose[status].chooseHide = true;
+							this.choose[status].typeVal = val;
+							this.choose[status].errorHide = false;
+							this.choose[status].actHide = true;
+							this.searchObj.page = 1;
+							that.getExperts();
+						}
+					},
+					getList(type,url){
+						let that = this;
+						$.ajax({
+							url: config.apiHost+url,
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+									that[type] = data.data;
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					},
+					getExperts(type){
+						let that = this;
+						type?that.searchObj.page = 1:'';
+						$.ajax({
+							url: config.apiHost+'project/projectDemandHomeList',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: that.searchObj,
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								console.log(data)
+								if(data.status == 'ok'){
+									that.createPagination(data.data.count);
+									var list = data.data.list;
+									that.projects = list;
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					},
+					createPagination(num) {
+						console.log(num)
+						num = parseInt(num);
+						let that = this;
+						var container = $('#pagination');
+						var sources = function() {
+							var result = [];
+							for(var i = 0; i < num; i++) {
+								result.push(i);
+							}
+							return result;
+						}();
+						var options = {
+							dataSource: sources,
+							className: 'paginationjs-theme-blue',
+							callback: function(response, pagination) {
+								//window.console && console.log(response, pagination);
+								var dataHtml = '<ul>';
+								$.each(response, function(index, item) {
+									dataHtml += '<li>' + item + '</li>';
+								});
+								dataHtml += '</ul>';
+								container.prev().html(dataHtml);
+								that.searchObj.page = pagination.pageNumber;
+		//						page = pagination.pageNumber; 
+							}
+						};
+						container.addHook('beforeInit', function() {
+							window.console && console.log('beforeInit...');
+						});
+						container.pagination(options);
+						container.addHook('beforePageOnClick', function(e) {
+							window.console && console.log('beforePageOnClick...');
+						});
+						return container;
+					}
 				}, 
 			});
 			$(function(){
-				createPagination(30);
-				$(".nav-tab .input").on("click",function(){ 
-					$(this).next(".slist").removeClass("hide");
-				})
-				$(".nav-tab .input .icon-error").on("click",function(e){ 
-					$(this).parents(".input").removeClass("act");
-					$(this).addClass("hide");
-					e.stopPropagation();
-					var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
-					$(this).next("span").html(val);
-				})
-				$(".slist ul li").on("click",function(){
-					var val = $(this).html();
-					$(".slist").addClass("hide");
-					$(this).parents(".nav-tab").children(".input").children("span").html(val);
-					$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
-					$(this).parents(".nav-tab").children(".input").addClass("act");
-				})
+				// createPagination(30);
+				// $(".nav-tab .input").on("click",function(){ 
+				// 	$(this).next(".slist").removeClass("hide");
+				// })
+				// $(".nav-tab .input .icon-error").on("click",function(e){ 
+				// 	$(this).parents(".input").removeClass("act");
+				// 	$(this).addClass("hide");
+				// 	e.stopPropagation();
+				// 	var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
+				// 	$(this).next("span").html(val);
+				// })
+				// $(".slist ul li").on("click",function(){
+				// 	var val = $(this).html();
+				// 	$(".slist").addClass("hide");
+				// 	$(this).parents(".nav-tab").children(".input").children("span").html(val);
+				// 	$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
+				// 	$(this).parents(".nav-tab").children(".input").addClass("act");
+				// })
 			})
 			
 //			function selOpen(obj){
@@ -238,38 +323,38 @@
 //				$(obj).addClass("hide");
 //			}
 			
-			function createPagination(num) {
-				var container = $('#pagination');
-				var sources = function() {
-					var result = [];
-					for(var i = 1; i < num; i++) {
-						result.push(i);
-					}
-					return result;
-				}();
-				var options = {
-					dataSource: sources,
-					className: 'paginationjs-theme-blue',
-					callback: function(response, pagination) {
-						//window.console && console.log(response, pagination);
-						var dataHtml = '<ul>';
-						$.each(response, function(index, item) {
-							dataHtml += '<li>' + item + '</li>';
-						});
-						dataHtml += '</ul>';
-						container.prev().html(dataHtml);
-//						page = pagination.pageNumber; 
-					}
-				};
-				container.addHook('beforeInit', function() {
-					window.console && console.log('beforeInit...');
-				});
-				container.pagination(options);
-				container.addHook('beforePageOnClick', function() {
-					window.console && console.log('beforePageOnClick...');
-				});
-				return container;
-			}
+// 			function createPagination(num) {
+// 				var container = $('#pagination');
+// 				var sources = function() {
+// 					var result = [];
+// 					for(var i = 1; i < num; i++) {
+// 						result.push(i);
+// 					}
+// 					return result;
+// 				}();
+// 				var options = {
+// 					dataSource: sources,
+// 					className: 'paginationjs-theme-blue',
+// 					callback: function(response, pagination) {
+// 						//window.console && console.log(response, pagination);
+// 						var dataHtml = '<ul>';
+// 						$.each(response, function(index, item) {
+// 							dataHtml += '<li>' + item + '</li>';
+// 						});
+// 						dataHtml += '</ul>';
+// 						container.prev().html(dataHtml);
+// //						page = pagination.pageNumber; 
+// 					}
+// 				};
+// 				container.addHook('beforeInit', function() {
+// 					window.console && console.log('beforeInit...');
+// 				});
+// 				container.pagination(options);
+// 				container.addHook('beforePageOnClick', function() {
+// 					window.console && console.log('beforePageOnClick...');
+// 				});
+// 				return container;
+// 			}
 		</script>
 	</body>
 

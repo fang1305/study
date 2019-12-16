@@ -31,22 +31,21 @@
 			<div class="header">
 				<div class="cont">
 				 	<div class="left">
-				 		<p class="name">水电基地为拉脱维亚里加项目</p>
+				 		<p class="name" v-text="detail.professional">水电基地为拉脱维亚里加项目</p>
 				 		<div class="desp">
-				 			<span class="item"><span>/</span>12K-14K</span>
-				 			<span class="item"><span>/</span>广州</span>
-				 			<span class="item"><span>/</span>经验3-5年</span>
+				 			<span class="item" v-text="detail.low_salary+'-'+detail.high_salary"><span>/</span>12K-14K</span>
+				 			<span class="item" v-if="detail.work_place" v-text="'/'+detail.work_place" ></span>
+				 			<span class="item" v-if="detail.work_years" v-text="'/'+detail.work_years" ></span>
+				 			<span class="item" v-if="detail.edu_back" v-text="'/'+detail.edu_back" ></span>
+				 			<span class="item" v-if="detail.language" v-text="'/'+detail.language" ></span>
+				 			<!-- <span class="item"><span>/</span>经验3-5年</span>
 				 			<span class="item"><span>/</span>本科及以上</span>
-				 			<span class="item"><span>/</span>汉语</span>
+				 			<span class="item"><span>/</span>汉语</span> -->
 				 		</div>
 				 		<div class="other">
-				 			<span>大数据</span>
-				 			<span>新零售</span>
-				 			<span>数据分析</span>
-				 			<span>数据仓库</span>
-				 			<span>数据挖掘</span>
+				 			<span v-for="capacity in detail.capacity" v-text="capacity"></span>
 				 		</div>
-				 		<p class="time">2016-12-07发布</p>
+				 		<p class="time" v-text="getDateInit(detail.add_time)+'发布'">2016-12-07发布</p>
 				 	</div>
 				 	<div class="applyCooperation">投递简历</div>
 				</div> 
@@ -55,12 +54,12 @@
 				<div class="left">
 					<div class="projectIntro">
 						<div class="title">公司福利</div>
-						<div class="content">五险一金,年终奖,双休</div>
+						<div class="content" v-text="detail.welfare+''"></div>
 					</div>
 					<div class="projectIntro">
 						<div class="title">职位描述</div>
-						<div class="content">
-							岗位职责：
+						<div class="content" v-html="detail.positom_detail">
+							<!-- 岗位职责：
 							1.负责数据的收集、处理、整合及数据建模；2、负责数据分析及挖掘；3、负责数据仓和多维数据构建；
 							4、负责平台搭建及数据开发；
 							<p>任职要求：
@@ -68,24 +67,26 @@
 2、有工作责任心，思维清晰，具备良好的团队合作精神，有一定的承压能力；
 3、熟悉分布式系统概念和架构；4、熟悉概率统计学和机器学习；
 5、熟悉Hadoop/Hive/HBase/Spark/Flink/Clickhouse/Kylin/Kafka/Flume等技术；
-6、熟悉Scala/Python/Java语言开发；</p>
+6、熟悉Scala/Python/Java语言开发；</p> -->
 						</div>
 					</div>
 				</div>
 				<div class="right">
 				 	<div class="company">
-				 	 	<div class="logo-name">
-				 	 	  	<img src="../../img/index/co1.jpg" alt="" />
-				 	 	  	<p class="name">公司名称</p>
-				 	 	</div>
+						<a :href="'./companyIntro.html?id='+detail.works_id">
+							<div class="logo-name">
+								<img :src="detail.logo" alt="" />
+								<p class="name" v-text="detail.works_name"></p>
+							</div>
+						</a>
 				 	 	<div class="list">
 				 	 		<div class="item">
 				 				<i class="iconfont icon-fenleishouye"></i>
-				 				<span>移动互联网</span>
+				 				<span v-text="detail.industry_name"></span>
 				 			</div>
 				 			<div class="item">
 				 				<i class="iconfont icon-ren"></i>
-				 				<span>50-80人</span>
+				 				<span v-text="(detail.number?detail.number:'0')+'人'"></span>
 				 			</div>
 				 	 	</div>
 				 	</div>
@@ -170,16 +171,47 @@
 
 		<script type="text/javascript" src="../../js/jquery.js"></script>    
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			var vm = new Vue({
 				el: '#app',
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "English", 
+					languageText: "English",
+					detail: {} 
+				},
+				created() {
+					this.getDetail();
 				},
 				methods: { 
-
+					getDetail(){
+						let that = this;
+						$.ajax({
+							url: config.apiHost+'experts/jobsDetail',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: {
+								id: parseUrl().id
+							},
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+								console.log(data.data.list)
+									that.detail = data.data;
+								}else{
+									alert(data.result);
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					}
 				}, 
 			});
 			$(function(){ 

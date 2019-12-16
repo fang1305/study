@@ -24,8 +24,8 @@
 					 <ul class="nav-list">
 						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
 						<li class="act"><a href=""><span>专家人才</span></a></li>
-						<li><a href=""><span>项目技术</span></a></li>
-						<li><a href=""><span>合作机构</span></a></li>
+						<li><a href="./technology.html"><span>项目技术</span></a></li>
+						<li><a href="../../index.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -39,93 +39,109 @@
 			<div class="main">
 				<div class="top">
 					<ul>
-						<li><span>专家人才</span></li>
+						<li><a href="./expertTalents.html"><span>专家人才</span></a></li>
 						<li class="act"><span>职位推荐</span></li>
 					</ul>
 					<div class="search-group">
 						<div class="search">
-							<input type="text" name="" id="" value="" placeholder="搜索" />
+							<input @keydown.enter="getJobs(1)" type="text" name="" id="" v-model="searchObj.keywords" placeholder="搜索" />
 						</div>
-						<div class="search-btn"><img src="../../img/index/icon/search.png"/></div>
+						<div class="search-btn" @click="getJobs(1)"><img src="../../img/index/icon/search.png"/></div>
 					</div>
 				</div>
 				<div class="navigation">
 					<div class="nav-category J_filter_country">
 						<h4>国家</h4>
-						<span class="def act">不限</span>
+						<span @click="chooseCountry('')" :class="['def',searchObj.nationality==''?'act':'']">不限</span>
 						<div class="nc-contain">
 							<span class="nctit">地区：</span>
 							<div class="country">
-								<span class="item">中国 </span>
-								<span class="item">英国</span>
-								<span class="item">美国</span>
-								<span class="item">日本</span>
-								<span class="item">法国</span>
+								<span :class="['item',searchObj.nationality==country.nationality?'act':'']" @click="chooseCountry(country.nationality)" v-for="country in countrys" v-text="country.nationality"></span>
 							</div>
 						</div>
 					</div>
 					<div class="nav-category J_filter_sel"> 
 					    <div class="nav-tab salaryrequire">
-					        <div class="input">
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>薪资要求</span>
+					         <div :class="['input',choose.salary.actHide?'act':'']" @click="chooseType(1,'choose','salary')">
+					        	<i @click.stop="chooseType('','error','salary')" :class="['iconfont', choose.salary.errorHide?'hide':'', 'icon-error']"></i>
+					            <span>{{choose.salary.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
 					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>薪资要求</span>
+					        <div :class="['slist', choose.salary.chooseHide?'hide':'']">
+					        	<div class="sinput" @click.stop="chooseType('','choose','salary')">
+						            <span>{{choose.salary.typeVal}}</span>
 						            <img src="../../img/index/icon/icon_arrow.png" alt="">
 						        </div>
 						        <ul>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
+						            <li v-for="data in salarys" @click="chooseType(data.salary,'','salary')">{{data.salary}}</li>
 						        </ul>
 					        </div>
 					    </div> 
 					    <div class="nav-tab professionrequire">
-					        <div class="input">
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>行业要求</span>
+					         <div :class="['input',choose.industry.actHide?'act':'']" @click="chooseType(1,'choose','industry')">
+					        	<i @click.stop="chooseType('','error','industry')" :class="['iconfont', choose.industry.errorHide?'hide':'', 'icon-error']"></i>
+					            <span>{{choose.industry.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
 					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>行业要求</span>
+					        <div :class="['slist', choose.industry.chooseHide?'hide':'']">
+					        	<div class="sinput" @click.stop="chooseType('','choose','industry')">
+						            <span>{{choose.industry.typeVal}}</span>
 						            <img src="../../img/index/icon/icon_arrow.png" alt="">
 						        </div>
 						        <ul>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
+						            <li v-for="data in industrys" @click="chooseType(data.industry_name,data.industry_id,'industry')">{{data.industry_name}}</li>
 						        </ul>
 					        </div>
 					    </div> 
 					    <div class="nav-tab languagerequire">
-					        <div class="input">
-					        	<i class="iconfont icon-error hide"></i>
-					            <span>语言要求</span>
-					            <img src="../../img/index/icon/icon_arrow.png" alt="">
-					        </div>
-					        <div class="slist hide">
-					        	<div class="sinput">
-						            <span>语言要求</span>
-						            <img src="../../img/index/icon/icon_arrow.png" alt="">
-						        </div>
-						        <ul>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						            <li>互联网</li>
-						        </ul>
-					        </div>
+					        <div :class="['input',choose.language.actHide?'act':'']" @click="chooseType(1,'choose','language')">
+								<i @click.stop="chooseType('','error','language')" :class="['iconfont', choose.language.errorHide?'hide':'', 'icon-error']"></i>
+								<span>{{choose.language.typeVal}}</span>
+								<img src="../../img/index/icon/icon_arrow.png" alt="">
+							</div>
+							<div :class="['slist', choose.language.chooseHide?'hide':'']">
+								<div class="sinput" @click.stop="chooseType('','choose','language')">
+									<span>{{choose.language.typeVal}}</span>
+									<img src="../../img/index/icon/icon_arrow.png" alt="">
+								</div>
+								<ul>
+									<li v-for="data in languages" @click="chooseType(data.language,'','language')">{{data.language}}</li>
+								</ul>
+							</div>
 					    </div> 
 					</div>
 				</div>
 				<div class="list">
-					<div class="item">
+					<div class="item" v-for="job in jobs">
+						<div class="company">
+							<a :href="'./companyIntro.html?id='+job.works_id"> 
+								<div class="poster">
+									<img :src="job.logo"/>
+								</div>
+								<div class="right">
+									<p class="cpname">{{job.works_name}}</p>
+									<p class="desp">{{job.industry_name}}</p>
+								</div>
+								</a>
+						</div>
+						<div class="info">
+							<a :href="'./jobDetail.html?id='+job.id"> 
+								<div class="job-time-salary">
+									<p class="jobname">{{job.professional}}</p>
+									<p class="time">[{{getTimeInit(job.add_time)}}发布]</p>
+									<p class="salary">{{job.low_salary+'-'+job.high_salary}}</p>
+								</div>
+								<p class="need">{{job.countries?job.countries+'/':''}}{{job.edu_back?job.edu_back+'/':''}}{{job.language?job.language+'':''}}</p>
+								<div class="position">
+									<div class="pot">
+										<span v-for="capacity in job.capacity">{{capacity}}</span>
+									</div>
+									<div class="look">查看</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<!-- <div class="item">
 						<div class="company">
 						 	<div class="poster">
 						 		<img src="../../img/index/co1.jpg"/>
@@ -151,143 +167,7 @@
 								<div class="look">查看</div>
 							</div>
 						</div>
-					</div>
-					<div class="item">
-						<div class="company">
-						 	<div class="poster">
-						 		<img src="../../img/index/co1.jpg"/>
-						 	</div>
-						 	<div class="right">
-						 		<p class="cpname">公司名称</p>
-						 		<p class="desp">电子信息 | 新能源</p>
-						 	</div>
-						</div>
-						<div class="info">
-							<div class="job-time-salary">
-								<p class="jobname">高级测试工程师</p>
-								<p class="time">[11-10发布]</p>
-								<p class="salary">12K-14K</p>
-							</div>
-							<p class="need">美国/本科/英语</p>
-							<div class="position">
-								<div class="pot">
-									<span>功能测试</span>
-									<span>性能测试</span>
-									<span>测试开发</span>
-								</div>
-								<div class="look">查看</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="company">
-						 	<div class="poster">
-						 		<img src="../../img/index/co1.jpg"/>
-						 	</div>
-						 	<div class="right">
-						 		<p class="cpname">公司名称</p>
-						 		<p class="desp">电子信息 | 新能源</p>
-						 	</div>
-						</div>
-						<div class="info">
-							<div class="job-time-salary">
-								<p class="jobname">高级测试工程师</p>
-								<p class="time">[11-10发布]</p>
-								<p class="salary">12K-14K</p>
-							</div>
-							<p class="need">美国/本科/英语</p>
-							<div class="position">
-								<div class="pot">
-									<span>功能测试</span>
-									<span>性能测试</span>
-									<span>测试开发</span>
-								</div>
-								<div class="look">查看</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="item">
-						<div class="company">
-						 	<div class="poster">
-						 		<img src="../../img/index/co1.jpg"/>
-						 	</div>
-						 	<div class="right">
-						 		<p class="cpname">公司名称</p>
-						 		<p class="desp">电子信息 | 新能源</p>
-						 	</div>
-						</div>
-						<div class="info">
-							<div class="job-time-salary">
-								<p class="jobname">高级测试工程师</p>
-								<p class="time">[11-10发布]</p>
-								<p class="salary">12K-14K</p>
-							</div>
-							<p class="need">美国/本科/英语</p>
-							<div class="position">
-								<div class="pot">
-									<span>ETL</span>
-									<span>SQLServer</span>
-									<span>数据仓库</span> 
-								</div>
-								<div class="look">查看</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="company">
-						 	<div class="poster">
-						 		<img src="../../img/index/co1.jpg"/>
-						 	</div>
-						 	<div class="right">
-						 		<p class="cpname">公司名称</p>
-						 		<p class="desp">电子信息 | 新能源</p>
-						 	</div>
-						</div>
-						<div class="info">
-							<div class="job-time-salary">
-								<p class="jobname">高级测试工程师</p>
-								<p class="time">[11-10发布]</p>
-								<p class="salary">12K-14K</p>
-							</div>
-							<p class="need">美国/本科/英语</p>
-							<div class="position">
-								<div class="pot">
-									<span>功能测试</span>
-									<span>性能测试</span>
-									<span>测试开发</span>
-								</div>
-								<div class="look">查看</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="company">
-						 	<div class="poster">
-						 		<img src="../../img/index/co1.jpg"/>
-						 	</div>
-						 	<div class="right">
-						 		<p class="cpname">公司名称</p>
-						 		<p class="desp">电子信息 | 新能源</p>
-						 	</div>
-						</div>
-						<div class="info">
-							<div class="job-time-salary">
-								<p class="jobname">高级测试工程师</p>
-								<p class="time">[11-10发布]</p>
-								<p class="salary">12K-14K</p>
-							</div>
-							<p class="need">美国/本科/英语</p>
-							<div class="position">
-								<div class="pot">
-									<span>功能测试</span>
-									<span>性能测试</span>
-									<span>测试开发</span>
-								</div>
-								<div class="look">查看</div>
-							</div>
-						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="pages">
 					<div id="pagination"></div>
@@ -326,6 +206,7 @@
 		<script type="text/javascript" src="../../js/jquery.js"></script>  
 		<script type="text/javascript" src="../../js/pagination.js"></script> 
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			var vm = new Vue({
 				el: '#app',
@@ -333,30 +214,186 @@
 					indexText: "首页",
 					lang: "cn",
 					languageText: "English", 
+					page:1,
+					countrys: [], 	// 国籍
+					industrys: [],
+					salarys:[],
+					jobs:[],
+					languages:[],
+					searchObj:{
+						lang: 'cn',
+						limit: 12,
+						page: 1,
+						nationality: '',
+						industry_id: '',
+						language: '',
+						salary: '',
+						keywords: ''
+					},
+					choose:{
+						industry:{
+							typeVal: '行业要求',
+							chooseHide: true,
+							errorHide: true,
+							id: 0
+						},
+						salary:{
+							typeVal: '薪资要求',
+							chooseHide: true,
+							errorHide: true
+						},
+						language:{
+							typeVal: '语言要求',
+							chooseHide: true,
+							errorHide: true
+						}
+					}
+				},
+				created() {
+					this.getJobs();
+					this.getList('industrys','home/industry');
+					this.getList('countrys','home/nationality');
+					this.getList('languages','home/language');
+					this.getList('salarys','home/salary');
 				},
 				methods: { 
-
+					// 选择国籍
+					chooseCountry(name){
+						this.searchObj.nationality = name;
+						this.searchObj.page = 1;
+						this.getJobs();
+					},
+					// 选择人才分类
+					chooseType(val,type,status){
+						let that = this;
+						if(type == 'choose'){
+							// 展开选择类型
+							this.choose[status].chooseHide = !this.choose[status].chooseHide;
+						}else if(type == 'error'){
+							status =='industry'?this.searchObj.industry_id = '':this.searchObj[status] = '';
+							this.choose[status].actHide = false;
+							this.choose[status].errorHide = true;
+							if(status == 'language'){
+								this.choose[status].typeVal = '语言要求';
+							}else if(status == 'industry'){
+								this.choose[status].typeVal = '行业要求';
+							}else{
+								this.choose[status].typeVal = '薪资要求';
+							}
+							this.searchObj.page = 1;
+							that.getJobs();
+						}else{
+							// 选择完成
+							status == 'industry'?this.searchObj.industry_id = type:this.searchObj[status] = val;
+							this.choose[status].chooseHide = true;
+							this.choose[status].typeVal = val;
+							this.choose[status].errorHide = false;
+							this.choose[status].actHide = true;
+							this.searchObj.page = 1;
+							that.getJobs();
+						}
+					},
+					getList(type,url){
+						let that = this;
+						$.ajax({
+							url: config.apiHost+url,
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+									that[type] = data.data;
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					},
+					getJobs(type){
+						let that = this;
+						type?that.searchObj.page = 1:'';
+						$.ajax({
+							url: config.apiHost+'experts/jobsList',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: that.searchObj,
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								if(data.status == 'ok'){
+									that.createPagination(data.data.count);
+									var list = data.data.list;
+									that.jobs = list;
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					},
+					createPagination(num) {
+						let that = this;
+						var container = $('#pagination');
+						var sources = function() {
+							var result = [];
+							for(var i = 1; i < num; i++) {
+								result.push(i);
+							}
+							return result;
+						}();
+						var options = {
+							dataSource: sources,
+							className: 'paginationjs-theme-blue',
+							callback: function(response, pagination) {
+								//window.console && console.log(response, pagination);
+								var dataHtml = '<ul>';
+								$.each(response, function(index, item) {
+									dataHtml += '<li>' + item + '</li>';
+								});
+								dataHtml += '</ul>';
+								container.prev().html(dataHtml);
+								that.searchObj.page = pagination.pageNumber;
+		//						page = pagination.pageNumber; 
+							}
+						};
+						container.addHook('beforeInit', function() {
+							window.console && console.log('beforeInit...');
+						});
+						container.pagination(options);
+						container.addHook('beforePageOnClick', function(e) {
+							window.console && console.log('beforePageOnClick...');
+						});
+						return container;
+					}
 				}, 
 			});
 			$(function(){
-				createPagination(30);
-				$(".nav-tab .input").on("click",function(){ 
-					$(this).next(".slist").removeClass("hide");
-				})
-				$(".nav-tab .input .icon-error").on("click",function(e){ 
-					$(this).parents(".input").removeClass("act");
-					$(this).addClass("hide");
-					e.stopPropagation();
-					var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
-					$(this).next("span").html(val);
-				})
-				$(".slist ul li").on("click",function(){
-					var val = $(this).html();
-					$(".slist").addClass("hide");
-					$(this).parents(".nav-tab").children(".input").children("span").html(val);
-					$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
-					$(this).parents(".nav-tab").children(".input").addClass("act");
-				})
+				// createPagination(30);
+				// $(".nav-tab .input").on("click",function(){ 
+				// 	$(this).next(".slist").removeClass("hide");
+				// })
+				// $(".nav-tab .input .icon-error").on("click",function(e){ 
+				// 	$(this).parents(".input").removeClass("act");
+				// 	$(this).addClass("hide");
+				// 	e.stopPropagation();
+				// 	var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
+				// 	$(this).next("span").html(val);
+				// })
+				// $(".slist ul li").on("click",function(){
+				// 	var val = $(this).html();
+				// 	$(".slist").addClass("hide");
+				// 	$(this).parents(".nav-tab").children(".input").children("span").html(val);
+				// 	$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
+				// 	$(this).parents(".nav-tab").children(".input").addClass("act");
+				// })
 			})
 			
 //			function selOpen(obj){
@@ -367,38 +404,38 @@
 //				$(obj).addClass("hide");
 //			}
 			
-			function createPagination(num) {
-				var container = $('#pagination');
-				var sources = function() {
-					var result = [];
-					for(var i = 1; i < num; i++) {
-						result.push(i);
-					}
-					return result;
-				}();
-				var options = {
-					dataSource: sources,
-					className: 'paginationjs-theme-blue',
-					callback: function(response, pagination) {
-						//window.console && console.log(response, pagination);
-						var dataHtml = '<ul>';
-						$.each(response, function(index, item) {
-							dataHtml += '<li>' + item + '</li>';
-						});
-						dataHtml += '</ul>';
-						container.prev().html(dataHtml);
-//						page = pagination.pageNumber; 
-					}
-				};
-				container.addHook('beforeInit', function() {
-					window.console && console.log('beforeInit...');
-				});
-				container.pagination(options);
-				container.addHook('beforePageOnClick', function() {
-					window.console && console.log('beforePageOnClick...');
-				});
-				return container;
-			}
+// 			function createPagination(num) {
+// 				var container = $('#pagination');
+// 				var sources = function() {
+// 					var result = [];
+// 					for(var i = 1; i < num; i++) {
+// 						result.push(i);
+// 					}
+// 					return result;
+// 				}();
+// 				var options = {
+// 					dataSource: sources,
+// 					className: 'paginationjs-theme-blue',
+// 					callback: function(response, pagination) {
+// 						//window.console && console.log(response, pagination);
+// 						var dataHtml = '<ul>';
+// 						$.each(response, function(index, item) {
+// 							dataHtml += '<li>' + item + '</li>';
+// 						});
+// 						dataHtml += '</ul>';
+// 						container.prev().html(dataHtml);
+// //						page = pagination.pageNumber; 
+// 					}
+// 				};
+// 				container.addHook('beforeInit', function() {
+// 					window.console && console.log('beforeInit...');
+// 				});
+// 				container.pagination(options);
+// 				container.addHook('beforePageOnClick', function() {
+// 					window.console && console.log('beforePageOnClick...');
+// 				});
+// 				return container;
+// 			}
 		</script>
 	</body>
 

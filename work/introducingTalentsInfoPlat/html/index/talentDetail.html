@@ -35,21 +35,19 @@
 						<div class="small-title">意向职位</div>
 						<div class="jobInfo">
 							<div class="name-pxperience">
-								<p class="name">java开发工程师 [英国]</p>
-								<p class="pxperience">经验3-5年/本科/英语</p>
+								<p class="name">{{detail.intention_position}} {{detail.intention_nationality+""?'['+detail.intention_nationality+']':''}}</p>
+								<p class="pxperience">{{detail.work_experience?detail.work_experience+'/':''}}{{detail.degree?detail.degree+'/':''}}{{detail.language?detail.language+'':''}}</p>
 							</div>
-							<p class="salary">20K-40K</p>
+							<p class="salary" v-text="detail.expected_salary"></p>
 						</div>
 						<div class="small-title">意向行业</div>
 						<div class="intentionJob">
-							<div class="item">电子信息</div>
-							<div class="item">法律</div>
-							<div class="item">新能源</div>
+							<div class="item" v-if="intention" v-for="intention in detail.intention_industry">{{intention}}</div>
 						</div>
 					</div>
 					<div class="projectIntro">
 						<div class="title">个人介绍</div>
-						<div class="content">律师起源于古罗马。共和制罗马（公元前510或509～前30）的诉讼，必须根据执政官或法务官的告示，按法定的手续进行。由于法律和告示不断增多，日趋复杂，当事人在诉讼中，特别是在法庭进行辩论时，资本主义国家律师多系私人开业，单独或合伙设立律师事务所，收取高额酬金。他们大都组成律师协会，维护本行业的利益。有些国家还把当过律师作为充任法官和检察官的一个条件。有的国家设有“公设辩护人”，一般附属于法院，领取固定薪金，为无力延请或不愿延请律师的被告人辩护。日本对无力延请律师的被告人，由法院指定律师为其辩护，称“国选辩护人”。</div>
+						<div class="content">{{detail.info?detail.info:'暂无个人介绍'}}</div>
 					</div>
 				</div>
 				<div class="right">
@@ -58,15 +56,15 @@
 				 	</div>
 				 	<div class="info">
 				 	 	<div class="name-edu">
-				 	 	 	<p class="name">张泽宇(25岁)</p>
-				 	 	 	<p class="sex">男</p>
-				 	 	 	<div class="edu">留学生</div>
+				 	 	 	<p class="name">{{detail.surname+detail.name}}({{detail.age}}岁)</p>
+				 	 	 	<p class="sex">{{detail.gender}}</p>
+				 	 	 	<div class="edu">{{detail.type}}</div>
 				 	 	</div>
-				 	 	<p class="country">本科|英国|法律|汉语|未婚</p>
+				 	 	<p class="country">{{detail.degree?detail.degree+'|':''}}{{detail.nationality?detail.nationality+'|':''}}{{detail.industry_name?detail.industry_name+'|':''}}{{detail.language+''?detail.language+'|':''}}{{detail.marriage?detail.marriage:''}}</p>
 				 	 	<div class="other">
-				 	 		<p>宗教信仰/民族：无宗教信仰/汉族</p>
-				 	 		<p>饮食习惯:无忌口</p>
-				 	 		<p>健康状况：健康</p>
+				 	 		<p v-if="detail.national">宗教信仰/民族：{{detail.national}}</p>
+				 	 		<p v-if="detail.habits">饮食习惯：{{detail.habits}}</p>
+				 	 		<p v-if="detail.health">健康状况：{{detail.health}}</p>
 				 	 	</div>
 				 	</div>
 				 	<div class="apply">申请</div>
@@ -104,6 +102,7 @@
 
 		<script type="text/javascript" src="../../js/jquery.js"></script>    
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			var vm = new Vue({
 				el: '#app',
@@ -111,12 +110,43 @@
 					indexText: "首页",
 					lang: "cn",
 					languageText: "English", 
+					detail: {}
+				},
+				created() {
+					this.getDetail();
 				},
 				methods: { 
-
+					getDetail(){
+						let that = this;
+						$.ajax({
+							url: config.apiHost+'experts/expertdetail',
+							type: 'POST', //GET
+							async: true, //或false,是否异步
+							data: {
+								id: parseUrl().id
+							},
+							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+							success: function (data, textStatus, jqXHR){
+								// 发送成功
+								console.log(data)
+								if(data.status == 'ok'){
+									that.detail = data.data;
+								}else{
+									alert(data.result);
+								}
+							},
+							error: function (xhr, textStatus){
+								// 发送失败
+								console.log('错误')
+								console.log(xhr)
+								console.log(textStatus)
+							},
+						})
+					}
 				}, 
 			});
 			$(function(){ 
+				
 			}) 
 		</script>
 	</body>
