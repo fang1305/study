@@ -283,6 +283,8 @@
 									that.searchObj.page == 1?that.createPagination(data.data.count):'';
 									var list = data.data.list;
 									that.projects = list;
+								}else{
+									alert(data.result);
 								}
 							},
 							error: function (xhr, textStatus){

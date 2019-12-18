@@ -24,6 +24,7 @@ import * as serviceWorker from './serviceWorker';
 // }
 const store = Store({
     user:{
+        loading: true,
         isLogin: false,
     },
     city: {

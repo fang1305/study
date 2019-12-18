@@ -13,7 +13,9 @@ class App extends Component {
             <div className="App">
                 redux - test
                 <div>
-                    {user.isLogin?"欢迎你":'未登录'}
+                    {user.isLogin?"欢迎你":'未登录'}<br/>
+                    {user.loding}
+                    {user.loading?"加载中":'加载完了'}
                 </div>
                 <button onClick={e=>this.login()}>登录</button>
                 <button onClick={e=>this.loginOut()}>不登录</button>
