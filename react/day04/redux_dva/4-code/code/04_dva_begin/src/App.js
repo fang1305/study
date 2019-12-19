@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
+          dsabdsa
         {this.props.num}
 
         <button onClick={e=> this.change()}>更改值</button>

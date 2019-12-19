@@ -24,10 +24,14 @@ class App extends Component {
     }
     login(){
         // 表明触发了一个修改state的操作， 且只能通过dispatch触发修改。 它的参数是一个action
-        this.props.dispatch(userActions.login({
-            account: 'test',
-            password: 'xx'
-        }))
+        if(this.props.user.loading){
+            console.log('别点了');
+        }else{
+            this.props.dispatch(userActions.login({
+                account: 'test',
+                password: 'xx'
+            }))
+        }
         console.log('login')
     }
     loginOut() {
