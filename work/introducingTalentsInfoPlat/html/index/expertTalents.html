@@ -62,7 +62,7 @@
 					</div>
 					<div class="nav-category J_filter_sel">
 						<div class="nav-tab expert">
-					        <div :class="['input',choose.type.actHide?'act':'']" @click="chooseType(1,'choose','type')"> 
+					        <div :class="['input',choose.type.actHide?'act':'']" @click.stop="chooseType(1,'choose','type')"> 
 					        	<i @click.stop="chooseType('','error','type')" :class="['iconfont', choose.type.errorHide?'hide':'', 'icon-error']"></i>
 					            <span>{{choose.type.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -78,7 +78,7 @@
 					        </div>
 					    </div>
 					    <div class="nav-tab profession">
-					        <div :class="['input',choose.industry.actHide?'act':'']" @click="chooseType(1,'choose','industry')">
+					        <div :class="['input',choose.industry.actHide?'act':'']" @click.stop="chooseType(1,'choose','industry')">
 					        	<i @click.stop="chooseType('','error','industry')" :class="['iconfont', choose.industry.errorHide?'hide':'', 'icon-error']"></i>
 					            <span>{{choose.industry.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -94,7 +94,7 @@
 					        </div>
 					    </div>
 						<div class="nav-tab educationalbg">
-							<div :class="['input',choose.degree.actHide?'act':'']" @click="chooseType(1,'choose','degree')">
+							<div :class="['input',choose.degree.actHide?'act':'']" @click.stop="chooseType(1,'choose','degree')">
 					        	<i @click.stop="chooseType('','error','degree')" :class="['iconfont', choose.degree.errorHide?'hide':'', 'icon-error']"></i>
 					            <span>{{choose.degree.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -110,7 +110,7 @@
 					        </div>
 					    </div> 
 					    <div class="nav-tab languagerequire">
-							<div :class="['input',choose.language.actHide?'act':'']" @click="chooseType(1,'choose','language')">
+							<div :class="['input',choose.language.actHide?'act':'']" @click.stop="chooseType(1,'choose','language')">
 								<i @click.stop="chooseType('','error','language')" :class="['iconfont', choose.language.errorHide?'hide':'', 'icon-error']"></i>
 								<span>{{choose.language.typeVal}}</span>
 								<img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -138,10 +138,10 @@
 								<div class="right">{{expert.type}}</div>
 							</div> 
 							<div class="desp">
-								<span v-if="expert.degree" class="ditem">{{expert.degree}}</span>
-								<span v-if="expert.nationality" class="ditem">{{expert.nationality}}</span>
-								<span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}</span>
-								<span v-if="expert.language+''" class="ditem">{{expert.language+''}}</span>
+								<span v-if="expert.degree" class="ditem">{{expert.degree}}<span>|</span></span>
+								<span v-if="expert.nationality" class="ditem">{{expert.nationality}}<span>|</span></span>
+								<span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}<span>|</span></span>
+								<span v-if="expert.language+''" class="ditem">{{expert.language+''}}<span>|</span></span>
 								<span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
 							</div>
 						</div>
@@ -193,7 +193,7 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "中文",
+					languageText: "English",
 					page: 1,
 					experts:[],
 					typelist: [],	// 人才分类
@@ -204,7 +204,7 @@
                     companyName: '',
 					searchObj:{
 						lang: 'cn',
-						limit: 12,
+						limit: 8,
 						page: 1,
 						nationality: '',
 						industry_id: '',
@@ -241,7 +241,7 @@
 				created(){
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-                        this.languageText = "English";
+                        this.languageText = "中文";
                     }
                     console.log(parseUrl())
                     if(parseUrl()){
@@ -258,13 +258,13 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
                             this.requireData();
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.requireData();
                         }
@@ -284,7 +284,28 @@
 					},
 					// 选择人才分类
 					chooseType(val,type,status){
-						let that = this;
+						let that = this; 
+						console.log(status);
+						if(status=="type"){ 
+							that.choose.industry.chooseHide = true;
+							that.choose.degree.chooseHide = true;
+							that.choose.language.chooseHide = true;
+						}
+						if(status=="industry"){ 
+							that.choose.type.chooseHide = true;
+							that.choose.degree.chooseHide = true;
+							that.choose.language.chooseHide = true;
+						}
+						if(status=="degree"){
+							that.choose.type.chooseHide = true;
+							that.choose.industry.chooseHide = true; 
+							that.choose.language.chooseHide = true;
+						}
+						if(status=="language"){
+							that.choose.type.chooseHide = true;
+							that.choose.industry.chooseHide = true;
+							that.choose.degree.chooseHide = true; 
+						}
 						if(type == 'choose'){
 							// 展开选择类型
 							this.choose[status].chooseHide = !this.choose[status].chooseHide;
@@ -323,6 +344,7 @@
                             },
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 									that[type] = data.data;
@@ -350,6 +372,7 @@
 							data: that.searchObj,
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 									that.searchObj.page == 1?that.createPagination(data.data.count):'';
@@ -372,13 +395,14 @@
 						var container = $('#pagination');
 						var sources = function() {
 							var result = [];
-							for(var i = 1; i < num; i++) {
+							for(var i = 1; i <= num; i++) {
 								result.push(i);
 							}
 							return result;
 						}();
 						var options = {
 							dataSource: sources,
+							pageSize:8,
 							className: 'paginationjs-theme-blue',
 							callback: function(response, pagination) {
 								//window.console && console.log(response, pagination);
@@ -405,68 +429,15 @@
 						return container;
 					}
 				}, 
-			});
-			$(function(){
-				// createPagination(30);
-				// $(".nav-tab .input").on("click",function(){ 
-				// 	$(this).next(".slist").removeClass("hide");
-				// })
-				// $(".nav-tab .input .icon-error").on("click",function(e){ 
-				// 	$(this).parents(".input").removeClass("act");
-				// 	$(this).addClass("hide");
-				// 	e.stopPropagation();
-				// 	var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
-				// 	$(this).next("span").html(val);
-				// })
-				// $(".slist ul").on("click","li",function(){
-				// 	var val = $(this).html();
-				// 	$(".slist").addClass("hide");
-				// 	$(this).parents(".nav-tab").children(".input").children("span").html(val);
-				// 	$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
-				// 	$(this).parents(".nav-tab").children(".input").addClass("act");
-				// })
+			}); 
+			$(function(){ 
+				$("body").on("click",function(){
+					vm.choose.type.chooseHide = true;
+					vm.choose.industry.chooseHide = true;
+					vm.choose.degree.chooseHide = true;
+					vm.choose.language.chooseHide = true;
+				})
 			})
-			
-//			function selOpen(obj){
-//				$(obj).next(".slist").removeClass("hide");
-//			}
-//			function selClose(obj){
-//				$(obj).parents(".input").addClass("act");
-//				$(obj).addClass("hide");
-//			}
-			
-// 			function createPagination(num) {
-// 				var container = $('#pagination');
-// 				var sources = function() {
-// 					var result = [];
-// 					for(var i = 1; i < num; i++) {
-// 						result.push(i);
-// 					}
-// 					return result;
-// 				}();
-// 				var options = {
-// 					dataSource: sources,
-// 					className: 'paginationjs-theme-blue',
-// 					callback: function(response, pagination) {
-// 						//window.console && console.log(response, pagination);
-// 						var dataHtml = '<ul>';
-// 						$.each(response, function(index, item) {
-// 							dataHtml += '<li>' + item + '</li>';
-// 						});
-// 						dataHtml += '</ul>';
-// 						container.prev().html(dataHtml);
-// //						page = pagination.pageNumber; 
-// 					}
-// 				};
-// 				container.addHook('beforeInit', function() {
-// 					window.console && console.log('beforeInit...');
-// 				});
-// 				container.pagination(options);
-// 				container.addHook('beforePageOnClick', function() {
-// 					window.console && console.log('beforePageOnClick...');
-// 				});
-// 				return container;
-// 			}
 		</script>
 	</body>
 

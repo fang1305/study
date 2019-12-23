@@ -21,7 +21,8 @@
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
-					<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div> 
+					<!--<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div>--> 
+					<div class="avatar"><a href="login.html"><img src="../../img/index/icon/avator.png" /></a> </div> 
 					 <ul class="nav-list">
                          <li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
                          <li><a href="./expertTalents.html"><span>专家人才</span></a></li>
@@ -85,7 +86,7 @@
 				 			</div>
 				 			<div class="item">
 				 				<i class="iconfont icon-ren"></i>
-				 				<span v-text="detail.nunmber?detail.number+'人':'0人'"></span>
+				 				<span v-text="detail.number?detail.number+'人':'0人'"></span>
 				 			</div>
 				 		</div>
 				 	</div>
@@ -95,7 +96,7 @@
 							<hr class="line" />
 				 		</div>
 				 		<div class="list">
-				 			<div class="item" v-if="welfare" v-for="welfare in detail.welfare">welfare</div>
+				 			<div class="item" v-if="welfare" v-for="welfare in detail.welfare">{{welfare}}</div>
 				 		</div>
 				 	</div>
 				</div>
@@ -143,15 +144,7 @@
 								<div class="tleft" v-if="project.address" v-text="project.address"></div>
 								<div class="tright" v-if="project.science" v-text="project.science"></div>
 							</div>
-						</div></a>
-						<!-- <div class="item">
-							<div class="name">水电基地为拉脱维亚里加项目</div>
-							<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过1万多架飞机、50多万观众、800多家航空制造商同时还会举行超过1000场丰富多彩的通用航空普及教育。</div>
-							<div class="time">
-								<div class="tleft">英国：2016-12-07</div>
-								<div class="tright">核心技术</div>
-							</div>
-						</div> -->
+						</div></a> 
 					</div>
 					<div class="more"><a :href="'./technologyDemand.html?id='+id"><span>查看更多</span></a></div>
 					<!-- <div class="more" v-if="proDemandCount"><span>查看更多</span></div> -->
@@ -165,21 +158,23 @@
 					</div>
 					<div class="list">
 						<div class="item" v-for="expert in experts">
+							<a :href="'talentDetail.html?id='+expert.id">
 							<div class="avator">
 								<img :src="expert.photo"/>
 							</div>
 							<div class="info">
-								<p class="name" v-text="expert.surname+expert.name+(expert.age?'('+expert.age+')':'')">张泽宇(25岁)</p>
-                                <span v-if="expert.degree" class="ditem"></span>
+								<p class="name" v-text="expert.surname+expert.name+(expert.age?'('+expert.age+')':'')"></p>
+                                <!--<span v-if="expert.degree" class="ditem"></span>
                                 <span v-if="expert.nationality" class="ditem">{{expert.nationality}}</span>
                                 <span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}</span>
                                 <span v-if="expert.language+''" class="ditem">{{expert.language+''}}</span>
-                                <span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
+                                <span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>-->
                                 <p class="educationalbg">{{expert.degree?expert.degree+' | ':''}}{{expert.nationality?expert.nationality:''}}{{expert.industry_name?' | '+expert.industry_name:''}}
                                    {{expert.language+''?' | '+expert.language:''}}{{expert.marriage?' | '+expert.marriage:''}}
                                    </p>
 							</div>
 							<p class="specialist" v-if="expert.type" v-text="expert.type"></p>
+							</a>
 						</div>
 					</div>
 					<div class="more"><a :href="'./expertTalents.html?id='+detail.id"><span>查看更多</span></div>
@@ -249,7 +244,7 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-                    languageText: "中文", 
+                    languageText: "English", 
                     id: 0,
 					detail:{},
                     count: {},
@@ -268,7 +263,7 @@
                     this.id = parseUrl().id;
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-					    this.languageText = "English";
+					    this.languageText = "中文";
                     }
 					this.getDetail();
 				},
@@ -297,14 +292,14 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
                             this.getDetail();
                             this.changeTab(this.activeNum,1);
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.getDetail();
                             this.changeTab(this.activeNum,1);
@@ -321,7 +316,7 @@
                                 lang: that.lang,
                                 limit: 4,
                                 page: page,
-								// works_id: parseUrl().id
+								works_id: parseUrl().id
 							},
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
@@ -351,30 +346,7 @@
 							},
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
-								// 发送成功
-								// data = {
-								// 	status: 'ok',
-								// 	result: '',
-								// 	data:{
-								// 		info:{
-								// 			id: 6,
-								// 			works_name: '河北工作站',
-								// 			logo:"",
-								// 			nationality: '国籍',
-								// 			industry_name: '电子信息',
-								// 			found_time: '2019-23-33 22:22:00',
-								// 			info: 'jianjie',
-								// 			welfare:['f福利多的是'],
-								// 			number: 0
-								// 		},
-								// 		count: {
-								// 			projectDemandCount: 0,
-								// 			jobsCount: 1,
-								// 			supplyCount: 0,
-								// 			needCount:2 
-								// 		}
-								// 	}
-								// }
+								typeof data == "object"?'':data=JSON.parse(data);
 								if(data.status == 'ok'){
                                     console.log(data.data.info)
                                     localStorage.setItem('companyName',data.data.info.works_name);

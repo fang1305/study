@@ -1,4 +1,5 @@
 .header { height: auto; min-height: 148px; font-size: 0; line-height: 0; position: relative;}
+.header img { width: 100%;}
 .header .title { width: 1200px; height: 148px; background: #FFF; border-bottom: 1px solid #CACACA; position: absolute; bottom: 0; left: 50%; margin-left: -600px;}
 .header .title .btitle { font-size: 34px; color: #333333; line-height: 1; margin-top: 41px; margin-left: 39px;}
 .header .title .stitle { font-size: 24px; color: #999999; line-height: 1; margin-top: 10px; margin-left: 39px;}

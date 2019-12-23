@@ -23,8 +23,8 @@
 					 <ul class="nav-list">
                          <li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
                          <li><a href="./expertTalents.html"><span>专家人才</span></a></li>
-                         <li><a href="./technology.html"><span>项目技术</span></a></li>
-                         <li class="act"><a href="./cooperativeAgency.html"><span>合作机构</span></a></li>
+                         <li class="act"><a href="./technology.html"><span>项目技术</span></a></li>
+                         <li><a href="./cooperativeAgency.html"><span>合作机构</span></a></li>
 					</ul> 
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 				 	<div class="title">其他项目</div>
 				 	<div class="list">
 				 	 	<div class="item" v-for="list in otherList">
-							<a :href="'./projectDemandDetail.html?id='+list.id" >
+							<a :href="'projectDemandDetail.html?id='+list.id" >
 								<div class="name" v-text="list.jane_title"></div>
 								<div class="info">
 									<p class="desp" v-text="list.info"></p>
@@ -120,14 +120,14 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "中文", 
+					languageText: "English", 
 					detail: {},
 					otherList:[]
 				},
 				created() {
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-                        this.languageText = "English";
+                        this.languageText = "中文";
                     }
 					this.getDetail();
 				},
@@ -144,6 +144,7 @@
 							},
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 								console.log(data.data.list)
@@ -166,21 +167,19 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
                             this.getDetail();
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.getDetail();
                         }
                     },
 				}, 
-			});
-			$(function(){ 
-			}) 
+			}); 
 		</script>
 	</body>
 

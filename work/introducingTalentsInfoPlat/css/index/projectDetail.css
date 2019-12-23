@@ -17,6 +17,8 @@
 .main .left .have .content span { display: inline-block; width: 213px; padding-right: 10px;}
 .main .left .projectIntro .title { font-size: 24px; line-height: 1; color: #333333; padding-top: 38px; padding-top: 38px;}
 .main .left .projectIntro .content { font-size: 18px; line-height: 1.7; color: #666666; padding-top: 25px;}
+.main .left .projectIntro .content p { font-size: 18px !important; color: #666666 !important;}
+.main .left .projectIntro .content span { font-size: 18px !important; color: #666666 !important;}
 
 .main .right { width: 350px;} 
 .main .right .title { font-size: 24px; line-height: 1; color: #333333; padding-top: 38px;} 

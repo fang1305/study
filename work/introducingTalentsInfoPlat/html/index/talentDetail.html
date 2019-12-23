@@ -33,7 +33,7 @@
 					<div class="intentionDesp">
 						<div class="title">意向说明</div>
 						<div class="small-title">意向职位</div>
-						<div class="jobInfo">
+						<div class="jobInfo" v-if="detail.intention_position">
 							<div class="name-pxperience">
 								<p class="name">{{detail.intention_position}} {{detail.intention_nationality+""?'['+detail.intention_nationality+']':''}}</p>
 								<p class="pxperience">{{detail.work_experience?detail.work_experience+'/':''}}{{detail.degree?detail.degree+'/':''}}{{detail.language?detail.language+'':''}}</p>
@@ -52,7 +52,7 @@
 				</div>
 				<div class="right">
 				 	<div class="picture">
-				 	 	<img src="../../img/index/co1.jpg" alt="" />
+				 	 	<img :src="detail.photo" alt="" />
 				 	</div>
 				 	<div class="info">
 				 	 	<div class="name-edu">
@@ -109,13 +109,13 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "中文", 
+					languageText: "English", 
 					detail: {}
 				},
 				created() {
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-                        this.languageText = "English";
+                        this.languageText = "中文";
                     }
 					this.getDetail();
 				},
@@ -125,13 +125,13 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
                             this.getDetail();
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.getDetail();
                         }
@@ -148,6 +148,7 @@
 							},
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								console.log(data)
 								if(data.status == 'ok'){

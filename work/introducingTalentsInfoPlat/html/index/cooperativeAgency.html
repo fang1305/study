@@ -20,7 +20,8 @@
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
-					<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div> 
+					<!--<div class="avatar"><img src="../../img/index/icon/avator.png" /> </div>--> 
+					<div class="avatar"><a href="login.html"><img src="../../img/index/icon/avator.png" /></a></div> 
 					 <ul class="nav-list">
                          <li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
                          <li><a href="./expertTalents.html"><span>专家人才</span></a></li>
@@ -80,18 +81,20 @@
 					</div>
 				</div>
 				<div class="list">
-					<a :href="'./companyIntro.html?id='+agent.id"  v-for="agent in agents"><div class="item">
+					<div class="item" v-for="agent in agents">
+						<a :href="'./companyIntro.html?id='+agent.id">
 						<div class="poster">
 							<img :src="agent.logo"/>
 						</div>
 						<div class="right">
 							<p class="name" v-if="agent.works_name" v-text="agent.works_name"></p>
 							<div class="desp">
-								<div class="ditem"><span v-if="agent.nationnality" v-text="agent.nationnality"></span></div>
+								<div class="ditem"><span v-if="agent.nationality" v-text="agent.nationality"></span></div>
 								<div class="ditem"><span v-if="agent.industry_name" v-text="agent.industry_name"></span></div>
 							</div>
 						</div>
-					</div></a>
+						</a>
+					</div>
 					<!-- <div class="item">
 						<div class="poster">
 							<img src="../../img/index/co2.jpg"/>
@@ -149,7 +152,7 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-                    languageText: "中文",
+                    languageText: "English",
                     industrys: [],
                     agents: [],
                     countrys: [], // 国籍
@@ -177,7 +180,7 @@
                 created() {
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-                        this.languageText = "English";
+                        this.languageText = "中文";
                     }
                     this.getList('industrys','home/industry');
                     this.getList('countrys','home/nationality');
@@ -193,7 +196,7 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
                             this.getList('industrys','home/industry');
                             this.getList('countrys','home/nationality');
@@ -201,7 +204,7 @@
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.getList('industrys','home/industry');
                             this.getList('countrys','home/nationality');
@@ -223,6 +226,7 @@
 							data: that.searchObj,
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 									// that.createPagination(20);
@@ -257,6 +261,7 @@
                             },
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 									that[type] = data.data;
@@ -299,7 +304,7 @@
 						var container = $('#pagination');
 						var sources = function() {
 							var result = [];
-							for(var i = 0; i < num; i++) {
+							for(var i = 0; i <= num; i++) {
 								result.push(i);
 							}
 							return result;
@@ -334,42 +339,7 @@
 						return container;
 					}
 				}, 
-			});
-			$(function(){
-				// createPagination(30);
-			})
-// 			function createPagination(num) {
-// 				var container = $('#pagination');
-// 				var sources = function() {
-// 					var result = [];
-// 					for(var i = 1; i < num; i++) {
-// 						result.push(i);
-// 					}
-// 					return result;
-// 				}();
-// 				var options = {
-// 					dataSource: sources,
-// 					className: 'paginationjs-theme-blue',
-// 					callback: function(response, pagination) {
-// 						//window.console && console.log(response, pagination);
-// 						var dataHtml = '<ul>';
-// 						$.each(response, function(index, item) {
-// 							dataHtml += '<li>' + item + '</li>';
-// 						});
-// 						dataHtml += '</ul>';
-// 						container.prev().html(dataHtml);
-// //						page = pagination.pageNumber; 
-// 					}
-// 				};
-// 				container.addHook('beforeInit', function() {
-// 					window.console && console.log('beforeInit...');
-// 				});
-// 				container.pagination(options);
-// 				container.addHook('beforePageOnClick', function() {
-// 					window.console && console.log('beforePageOnClick...');
-// 				});
-// 				return container;
-// 			}
+			}); 
 		</script>
 	</body>
 

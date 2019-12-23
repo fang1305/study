@@ -15,8 +15,7 @@
 				display: none;
 			}
 		</style>
-	</head>
-
+	</head> 
 	<body>
 		<div id="app">
 			<div class="navBar">
@@ -25,7 +24,7 @@
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
-					<div class="avatar"><img src="img/index/icon/avator.png" /> </div> 
+					<div class="avatar"><a href="html/index/login.html"><img src="img/index/icon/avator.png" /></a> </div> 
 					 <ul class="nav-list">
 						<li class="act"><a href=""><span class="indexPage">{{indexText}}</span></a></li>
 						<!-- <li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li> -->
@@ -91,7 +90,7 @@
 					<div class="title">专家人才库</div>
 					<div class="small-title">Expert talent pool</div>
 					<div class="list">
-						<div class="item" v-for="expert in experts">
+						<div class="item" v-for="(expert,index) in experts" v-if="index<4">
 							<div class="poster">
 								<img :src="expert.photo"/>
 							</div>
@@ -101,10 +100,10 @@
 									<div class="right">{{expert.type}}</div>
 								</div> 
 								<div class="desp">
-									<span v-if="expert.degree" class="ditem">{{expert.degree}}</span>
-									<span v-if="expert.nationality" class="ditem">{{expert.nationality}}</span>
-									<span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}</span>
-									<span v-if="expert.language+''" class="ditem">{{expert.language+''}}</span>
+									<span v-if="expert.degree" class="ditem">{{expert.degree}}<span>|</span></span>
+									<span v-if="expert.nationality" class="ditem">{{expert.nationality}}<span>|</span></span>
+									<span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}<span>|</span></span>
+									<span v-if="expert.language+''" class="ditem">{{expert.language+''}}<span>|</span></span>
 									<span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
 								</div>
 							</div>
@@ -335,10 +334,15 @@
 
 		<script type="text/javascript" src="js/jquery.js"></script>    
 		<script type="text/javascript" src="js/swiper.min.js"></script>    
-		<script type="text/javascript" src="js/vue.min.js"></script>
-        <script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script> 
         <script type="text/javascript" src="js/config.js"></script>
 		<script>
+			if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+				var url = window.location.protocol + "//" + document.domain + "/html/home/index.html";
+				window.location.href = url;
+			} else {
+
+			} 
 			var vm = new Vue({
 				el: '#app',
 				data: {
@@ -399,7 +403,7 @@
 					},
                     getList(type,url,intro){
                         var within = intro?intro:'';
-                        var limit = intro?12:4;
+                        var limit = intro?12:6;
                         let that = this;
 						$.ajax({
 							url: config.apiHost+url,
@@ -413,6 +417,7 @@
                             },
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 									var list = data.data;
@@ -422,7 +427,16 @@
                                         list = data.data.list;
                                     }
                                     if(intro){
-                                        setTimeout(() => {
+                                        setTimeout(() => { 
+										    var swiper2 = new Swiper('.swiper-container2', {
+							//					autoplay: true,
+												slidesPerView: 6,
+										        spaceBetween: 30,
+											    navigation: {
+											        nextEl: '.swiper-button-next2',
+											        prevEl: '.swiper-button-prev2',
+											    },
+										    });
                                             var swiper3 = new Swiper('.swiper-container3', {
                             //					autoplay: true,
                                                 slidesPerView: 6,
@@ -455,39 +469,9 @@
 				        prevEl: '.swiper-button-prev1',
 				    },
 			    });
-			    var swiper2 = new Swiper('.swiper-container2', {
-//					autoplay: true,
-					slidesPerView: 6,
-			        spaceBetween: 30,
-				    navigation: {
-				        nextEl: '.swiper-button-next2',
-				        prevEl: '.swiper-button-prev2',
-				    },
-			    });
 			    
             }) ;
-
-            // getList();
-            // function getList(params) {
-            //     $.ajax({
-            //         url: 'http://hbafea.com/admin/home/experts/expertdetail',
-            //         type: 'POST', //GET
-            //         async: true, //或false,是否异步
-            //         data: {
-            //             id: 5
-            //         },
-            //         dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
-            //         success: function (data, textStatus, jqXHR){
-            //             // 发送成功
-            //         },
-            //         error: function (xhr, textStatus){
-            //             // 发送失败
-            //            console.log('错误')
-            //            console.log(xhr)
-            //            console.log(textStatus)
-            //         },
-            //     })
-            // }
+ 
 		</script>
 	</body>
 

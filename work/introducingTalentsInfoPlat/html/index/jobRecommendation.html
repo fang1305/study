@@ -62,7 +62,7 @@
 					</div>
 					<div class="nav-category J_filter_sel"> 
 					    <div class="nav-tab salaryrequire">
-					         <div :class="['input',choose.salary.actHide?'act':'']" @click="chooseType(1,'choose','salary')">
+					         <div :class="['input',choose.salary.actHide?'act':'']" @click.stop="chooseType(1,'choose','salary')">
 					        	<i @click.stop="chooseType('','error','salary')" :class="['iconfont', choose.salary.errorHide?'hide':'', 'icon-error']"></i>
 					            <span>{{choose.salary.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -78,7 +78,7 @@
 					        </div>
 					    </div> 
 					    <div class="nav-tab professionrequire">
-					         <div :class="['input',choose.industry.actHide?'act':'']" @click="chooseType(1,'choose','industry')">
+					         <div :class="['input',choose.industry.actHide?'act':'']" @click.stop="chooseType(1,'choose','industry')">
 					        	<i @click.stop="chooseType('','error','industry')" :class="['iconfont', choose.industry.errorHide?'hide':'', 'icon-error']"></i>
 					            <span>{{choose.industry.typeVal}}</span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -94,7 +94,7 @@
 					        </div>
 					    </div> 
 					    <div class="nav-tab languagerequire">
-					        <div :class="['input',choose.language.actHide?'act':'']" @click="chooseType(1,'choose','language')">
+					        <div :class="['input',choose.language.actHide?'act':'']" @click.stop="chooseType(1,'choose','language')">
 								<i @click.stop="chooseType('','error','language')" :class="['iconfont', choose.language.errorHide?'hide':'', 'icon-error']"></i>
 								<span>{{choose.language.typeVal}}</span>
 								<img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -114,18 +114,18 @@
 				<div class="list">
 					<div class="item" v-for="job in jobs">
 						<div class="company">
-							<a :href="'./companyIntro.html?id='+job.works_id"> 
-								<div class="poster">
-									<img :src="job.logo"/>
-								</div>
-								<div class="right">
-									<p class="cpname">{{job.works_name}}</p>
-									<p class="desp">{{job.industry_name}}</p>
-								</div>
-								</a>
+							<a :href="'companyIntro.html?id='+job.works_id"> 
+							<div class="poster">
+								<img :src="job.logo"/>
+							</div>
+							<div class="right">
+								<p class="cpname">{{job.works_name}}</p>
+								<p class="desp">{{job.industry_name}}</p>
+							</div>
+							</a>
 						</div>
 						<div class="info">
-							<a :href="'./jobDetail.html?id='+job.id"> 
+							<a :href="'jobDetail.html?id='+job.id"> 
 								<div class="job-time-salary">
 									<p class="jobname">{{job.professional}}</p>
 									<p class="time">[{{getTimeInit(job.add_time)}}发布]</p>
@@ -140,34 +140,7 @@
 								</div>
 							</a>
 						</div>
-					</div>
-					<!-- <div class="item">
-						<div class="company">
-						 	<div class="poster">
-						 		<img src="../../img/index/co1.jpg"/>
-						 	</div>
-						 	<div class="right">
-						 		<p class="cpname">公司名称</p>
-						 		<p class="desp">电子信息 | 新能源</p>
-						 	</div>
-						</div>
-						<div class="info">
-							<div class="job-time-salary">
-								<p class="jobname">高级测试工程师</p>
-								<p class="time">[11-10发布]</p>
-								<p class="salary">12K-14K</p>
-							</div>
-							<p class="need">美国/本科/英语</p>
-							<div class="position">
-								<div class="pot">
-									<span>功能测试</span>
-									<span>性能测试</span>
-									<span>测试开发</span>
-								</div>
-								<div class="look">查看</div>
-							</div>
-						</div>
-					</div> -->
+					</div> 
 				</div>
 				<div class="pages">
 					<div id="pagination"></div>
@@ -213,7 +186,7 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "中文", 
+					languageText: "English", 
 					page:1,
 					countrys: [], 	// 国籍
 					industrys: [],
@@ -223,14 +196,14 @@
                     companyName: '',
 					searchObj:{
 						lang: 'cn',
-						limit: 12,
+						limit: 9,
 						page: 1,
 						nationality: '',
 						industry_id: '',
 						language: '',
 						salary: '',
 						keywords: ''
-					},
+					},        
 					choose:{
 						industry:{
 							typeVal: '行业要求',
@@ -253,7 +226,7 @@
 				created() {
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-                        this.languageText = "English";
+                        this.languageText = "中文";
                     }
                     if(parseUrl()){
                         this.searchObj.works_id = parseUrl().id?parseUrl().id:'';
@@ -277,13 +250,13 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
 						    this.requireData();
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.requireData();
                         }
@@ -296,6 +269,18 @@
 					// 选择人才分类
 					chooseType(val,type,status){
 						let that = this;
+						if(status=="salary"){ 
+							that.choose.industry.chooseHide = true; 
+							that.choose.language.chooseHide = true;
+						}
+						if(status=="industry"){ 
+							that.choose.salary.chooseHide = true;
+							that.choose.language.chooseHide = true; 
+						}
+						if(status=="language"){
+							that.choose.salary.chooseHide = true;
+							that.choose.industry.chooseHide = true; 
+						}
 						if(type == 'choose'){
 							// 展开选择类型
 							this.choose[status].chooseHide = !this.choose[status].chooseHide;
@@ -312,7 +297,7 @@
 							}
 							that.getJobs(1);
 						}else{
-							// 选择完成
+							// 选择完成 
 							status == 'industry'?this.searchObj.industry_id = type:this.searchObj[status] = val;
 							this.choose[status].chooseHide = true;
 							this.choose[status].typeVal = val;
@@ -332,6 +317,7 @@
 							async: true, //或false,是否异步
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 									that[type] = data.data;
@@ -351,7 +337,7 @@
                         that.searchObj.lang = that.lang;
                         if(that.searchObj.keywords != that.companyName || that.companyName==''){
                             that.searchObj.works_id = '';
-                        }
+                        } 
                         $.ajax({
 							url: config.apiHost+'experts/jobsList',
 							type: 'POST', //GET
@@ -359,7 +345,9 @@
 							data: that.searchObj,
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
+//								console.log(data);
 								if(data.status == 'ok'){
 									that.searchObj.page == 1?that.createPagination(data.data.count):'';
 									var list = data.data.list;
@@ -377,17 +365,18 @@
 						})
 					},
 					createPagination(num) {
-						let that = this;
+						let that = this; 
 						var container = $('#pagination');
 						var sources = function() {
 							var result = [];
-							for(var i = 1; i < num; i++) {
+							for(var i = 1; i <= num; i++) {
 								result.push(i);
 							}
 							return result;
 						}();
 						var options = {
 							dataSource: sources,
+							pageSize:9,
 							className: 'paginationjs-theme-blue',
 							callback: function(response, pagination) {
 								//window.console && console.log(response, pagination);
@@ -396,15 +385,15 @@
 									dataHtml += '<li>' + item + '</li>';
 								});
 								dataHtml += '</ul>';
-                                container.prev().html(dataHtml);
+                                container.prev().html(dataHtml); 
                                 if(that.searchObj.page!=pagination.pageNumber){
                                     that.searchObj.page = pagination.pageNumber;
                                     that.getJobs();
-                                }
+                                } 
 							}
 						};
 						container.addHook('beforeInit', function() {
-							window.console && console.log('beforeInit...');
+//							window.console && console.log('beforeInit...');
 						});
 						container.pagination(options);
 						container.addHook('beforePageOnClick', function(e) {
@@ -413,68 +402,14 @@
 						return container;
 					}
 				}, 
-			});
-			$(function(){
-				// createPagination(30);
-				// $(".nav-tab .input").on("click",function(){ 
-				// 	$(this).next(".slist").removeClass("hide");
-				// })
-				// $(".nav-tab .input .icon-error").on("click",function(e){ 
-				// 	$(this).parents(".input").removeClass("act");
-				// 	$(this).addClass("hide");
-				// 	e.stopPropagation();
-				// 	var val = $(this).parents(".input").next(".slist").children(".sinput").children("span").html();
-				// 	$(this).next("span").html(val);
-				// })
-				// $(".slist ul li").on("click",function(){
-				// 	var val = $(this).html();
-				// 	$(".slist").addClass("hide");
-				// 	$(this).parents(".nav-tab").children(".input").children("span").html(val);
-				// 	$(this).parents(".nav-tab").children(".input").children(".icon-error").removeClass("hide");
-				// 	$(this).parents(".nav-tab").children(".input").addClass("act");
-				// })
+			}); 
+			$(function(){ 
+				$("body").on("click",function(){
+					vm.choose.salary.chooseHide = true;
+					vm.choose.industry.chooseHide = true; 
+					vm.choose.language.chooseHide = true;
+				})
 			})
-			
-//			function selOpen(obj){
-//				$(obj).next(".slist").removeClass("hide");
-//			}
-//			function selClose(obj){
-//				$(obj).parents(".input").addClass("act");
-//				$(obj).addClass("hide");
-//			}
-			
-// 			function createPagination(num) {
-// 				var container = $('#pagination');
-// 				var sources = function() {
-// 					var result = [];
-// 					for(var i = 1; i < num; i++) {
-// 						result.push(i);
-// 					}
-// 					return result;
-// 				}();
-// 				var options = {
-// 					dataSource: sources,
-// 					className: 'paginationjs-theme-blue',
-// 					callback: function(response, pagination) {
-// 						//window.console && console.log(response, pagination);
-// 						var dataHtml = '<ul>';
-// 						$.each(response, function(index, item) {
-// 							dataHtml += '<li>' + item + '</li>';
-// 						});
-// 						dataHtml += '</ul>';
-// 						container.prev().html(dataHtml);
-// //						page = pagination.pageNumber; 
-// 					}
-// 				};
-// 				container.addHook('beforeInit', function() {
-// 					window.console && console.log('beforeInit...');
-// 				});
-// 				container.pagination(options);
-// 				container.addHook('beforePageOnClick', function() {
-// 					window.console && console.log('beforePageOnClick...');
-// 				});
-// 				return container;
-// 			}
 		</script>
 	</body>
 

@@ -17,6 +17,8 @@
 .main .left .projectIntro { padding-bottom: 33px;}
 .main .left .projectIntro .title { font-size: 24px; line-height: 1; color: #333333; padding-top: 4px;}
 .main .left .projectIntro .content { font-size: 18px; line-height: 1.7; color: #666666; padding-top: 15px;}
+.main .left .projectIntro .content p { font-size: 18px !important; color: #666666 !important;}
+.main .left .projectIntro .content span { font-size: 18px !important; color: #666666 !important;}
 
 .main .right { width: 350px;} 
 .main .right .company .logo-name { line-height: 0; display: flex; display: -webkit-flex; display: -ms-flexbox;} 

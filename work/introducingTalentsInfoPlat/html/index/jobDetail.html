@@ -58,16 +58,7 @@
 					</div>
 					<div class="projectIntro">
 						<div class="title">职位描述</div>
-						<div class="content" v-html="detail.positom_detail">
-							<!-- 岗位职责：
-							1.负责数据的收集、处理、整合及数据建模；2、负责数据分析及挖掘；3、负责数据仓和多维数据构建；
-							4、负责平台搭建及数据开发；
-							<p>任职要求：
-1、计算机专业本科毕业，3年以上数据开发工作经验； 
-2、有工作责任心，思维清晰，具备良好的团队合作精神，有一定的承压能力；
-3、熟悉分布式系统概念和架构；4、熟悉概率统计学和机器学习；
-5、熟悉Hadoop/Hive/HBase/Spark/Flink/Clickhouse/Kylin/Kafka/Flume等技术；
-6、熟悉Scala/Python/Java语言开发；</p> -->
+						<div class="content" v-html="detail.positom_detail"> 
 						</div>
 					</div>
 				</div>
@@ -96,7 +87,7 @@
 							<hr class="line" />
 				 		</div>
 				 		<div class="list">
-				 			<a :href="'./jobDetail.html?id='+job.id" v-for="job in recommends"><div class="item">
+				 			<a :href="'jobDetail.html?id='+job.id" v-for="job in recommends"><div class="item">
 				 				<img :src="job.logo" alt="" />
 				 				<div class="jobInfo">
 				 					<div class="name-salary">
@@ -165,14 +156,14 @@
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "中文",
+					languageText: "English",
                     detail: {} ,
                     recommends:[]
 				},
 				created() {
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-                        this.languageText = "English";
+                        this.languageText = "中文";
                     }
 					this.getDetail();
 				},
@@ -182,13 +173,13 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
                             this.getDetail();
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.getDetail();
                         }
@@ -207,6 +198,7 @@
 							},
 							dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 							success: function (data, textStatus, jqXHR){
+								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
 								    console.log(data.data.list)
@@ -251,9 +243,7 @@
 						})
 					}
 				}, 
-			});
-			$(function(){ 
-			}) 
+			}); 
 		</script>
 	</body>
 

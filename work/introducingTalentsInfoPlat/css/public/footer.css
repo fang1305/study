@@ -1,6 +1,6 @@
 /* footer CSS */
 .bottom { width: 100%; height: 42px; background-color: rgba(0,27,89,0.1); background: #e5e8ee; text-align: center;}
-.bottom .cont { width: 1366px; margin: 0 auto; border-top: 1px solid #999999; }
+.bottom .cont { width: 1200px; margin: 0 auto; border-top: 1px solid #999999; }
 .bottom span { font-size: 12px; line-height: 42px; color: #999999; text-align: center;}
 .footer { background-color: rgba(0,27,89,0.1); background: #e5e8ee; padding-bottom: 60px;}  
 .footer .left { width: 600px; padding-top: 40px; float: left;} 
