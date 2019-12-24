@@ -1,93 +1,161 @@
 var vm = new Vue({
 	el: '#app',
 	data: {
+		title: "",
 		indexText: "首页",
 		lang: "cn",
-		languageText: "中文",
-		newsList: "",
-		typeid: "",
-		parentid: "",
+		languageText: "English", 
+		newsList:"",  
 		navBar: "",
-		position: ""
+		smallNav: "",
+		position: "", 
+		parentid: "",
+		typeid: "",
+		searchObj: {
+			arctype_id:"",
+			lang: 'cn',
+			limit: 12,
+			typeid: "",
+			page: 1,
+			keywords: "",
+		}
 	},
-    created() {
+	created() {  
         if(sessionStorage.lang == 'en'){
-            this.lang = 'en';
-		    this.languageText = "中文";
-		    this.indexText = "Index";  
-		}else{ 
+            this.languageText = "中文";
+	 		this.indexText = "Index"; 
+	 		this.lang = "en";
+		}else{
 			sessionStorage.lang == 'cn';
 		} 
+		if(parseUrl()){
+            this.parentid = parseUrl().parentid?parseUrl().parentid:''; 
+            this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
+        } 
+		this.requireData();
     },
-	methods: {
-		language: function(lang) {
-			if(lang == "cn") {
-				vm.lang = "en";
-				vm.languageText = "English";
-				vm.indexText = "Index";
-				sessionStorage.lang = "en";
-			} else {
-				vm.lang = "cn";
-				vm.languageText = "中文";
-				vm.indexText = "首页";
-				sessionStorage.lang = "cn";
-			}
-			var param = {
-				lang: vm.lang,
-			}
-			apiAjax("home", param, "GET", home);
-			var param1 = {
-				lang: vm.lang,
-				arctype_id: vm.parentid
-			}
-			apiAjax("home", param1, "GET", smallNav);
-			var param2 = {
-				lang: vm.lang,
-				limit: 12,
-				typeid: vm.typeid,
-				page: 1,
-				keywords: "",
-			}
-			apiAjax("articleList", param2, "GET", articleList);
+	methods: {  
+		requireData(){
+			// 导航栏
+//			this.getList('navBar','home/arctypeList'); 
+			this.getList('smallNav','home/arctypeList'); 
+			// 文章列表
+			this.getList('newsList','home/articleList'); 
+        },
+		getList(type,url,typeid){ 
+            let that = this; 
+            if(type=="navBar"){  
+           		that.searchObj.arctype_id = "";
+           	} 
+           	if(type=="smallNav"){ 
+           		that.searchObj.arctype_id = parseUrl().parentid?parseUrl().parentid:''; 
+           	}    
+            that.searchObj.typeid = parseUrl().typeid?parseUrl().typeid:''; 
+            that.searchObj.lang = that.lang; 
+			$.ajax({
+				url: config.apiHost+url,
+				type: 'GET',  
+                async: true,  
+                data:that.searchObj,
+				dataType: 'json', 
+				success: function (ret){
+					typeof ret == "object"?'':ret=JSON.parse(ret);
+					// 发送成功 
+					if(ret.status == 'ok'){
+						var list = ret.data;
+						//console.log(ret);
+                        if(type=="smallNav"){
+                        	that[type] = list[0].childList;
+							for(var i = 0; i< that.smallNav.length; i++){
+								if(that.typeid == that.smallNav[i].id){ 
+									that.position = that.smallNav[i].typename;
+									return false;
+								}
+							}
+                        }else if(type=="newsList"){
+//                      	var count = ret.data.count; 
+//                      	console.log(ret);
+							that[type]  = ret.data.list; 
+							if(ret.data.seo_title){
+								document.title = ret.data.seo_title;
+							}
+							if(ret.data.seo_description){ 
+								$("meta[name='description']").attr('content',ret.data.seo_description); 
+							}
+							if(ret.data.seo_keywords){
+								$('meta[name="keywords"]').attr('content',ret.data.seo_keywords);
+							}
+                        }else{ 
+                        	that[type] = list;
+                        } 
+					}
+					else{
+						that[type] = "";
+					}
+				},
+				error: function (xhr, textStatus){
+					// 发送失败
+					console.log('错误')
+					console.log(xhr)
+					console.log(textStatus)
+				},
+			})
 		},
-		articleList: function(typeid, parentid) {
+		// 中英文切换
+        changeLang(){
+            this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
+			location.href = "../../index.html";
+        }, 
+		articleList(typeid, parentid,level) {
 			var typeid = typeid;
 			var parentid = parentid;
-			if( typeid==11 || typeid == 50){  
-			    var url = "http://ku.hbafea.com/html/home/expertTalents.html";
-			}else if( typeid==13 || typeid == 51){  
-			    var url = "http://ku.hbafea.com/html/home/technology.html";
-			}else if( typeid==15 || typeid == 52){  
-			    var url = "http://ku.hbafea.com/html/home/cooperativeAgency.html";
+			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
+			    var url = "http://ku.hbafea.com";
+			}else if( typeid==11 || typeid == 50){           //专家人才
+			    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
+			}else if( typeid==13 || typeid == 51){           //项目技术
+			    var url = "http://ku.hbafea.com/html/index/technology.html";
+			}else if( typeid==15 || typeid == 52){           //合作机构
+			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
+			}else if( typeid==21 || typeid == 22){           //国际交流培训
+			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==23 || typeid == 24){           //名师讲堂
+			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
-			} 
-			location.href = url;
-			//window.open(url);
+			}   
+		 	location.href = url;
+		 	//window.open(url);
 		},
-		articleDetail: function(aid, typeid, parentid) {
-			var aid = aid;
-			var typeid = typeid;
-			var parentid = parentid;
-			var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+		articleDetail: function(aid, typeid, parentid) { 
+			if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else{
+				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			} 
 			window.open(url);
-		}
+		},
 	},
 	filters: {
 		getDate: function(str) {
-			var oDate = new Date(str * 1000),
+			var oDate = new Date(str*1000),
 				oYear = oDate.getFullYear(),
 				oMonth = oDate.getMonth() + 1,
 				oDay = oDate.getDate(),
 				oHour = oDate.getHours(),
 				oMin = oDate.getMinutes(),
 				oSec = oDate.getSeconds(),
-				oTime = oYear + '-' + oMonth + '-' + oDay; //最后拼接时间
-			//						console.log(oTime);
+				oTime = oYear + '-' + oMonth + '-' + oDay; //最后拼接时间 
 			return oTime;
+		},
+		getDesp: function(cont) { 
+			if(cont){
+				cont.length > 26?cont = cont.slice(0,26) + '...':'';
+			} 
+			return cont;
 		}
 	},
-});
+}); 
 $(function() { 
 	var typeid = $.getUrlParam('typeid');
 	var parentid = $.getUrlParam('parentid');
@@ -96,35 +164,14 @@ $(function() {
 	var param = {
 		lang: vm.lang,
 	}
-	apiAjax("home", param, "GET", home);
-	var param1 = {
-		lang: vm.lang,
-		arctype_id: vm.parentid
-	}
-	apiAjax("home", param1, "GET", smallNav);
-	var param2 = {
-		lang: vm.lang,
-		limit: 12,
-		typeid: typeid,
-		page: 1,
-		keywords: "",
-	}
-	apiAjax("articleList", param2, "GET", articleList);
-})
-
-function smallNav(ret) {
-	if(ret.data) {
-		console.log(ret.data[0].childList);
-		vm.smallNav = ret.data[0].childList;
-	}
-}  
+	apiAjax("home", param, "GET", home); 
+}) 
 
 function home(ret) {
 	if(ret.data) {
-		console.log(ret);
+//		console.log(ret);
 		vm.navBar = ret.data;
-		var list = "";
-		console.log(vm.lang);
+		var list = ""; 
 		if(vm.lang == "en") {
 			list += '<li class="indexPage"><a href="index.html">Index</a></li>';
 		} else {
@@ -136,7 +183,7 @@ function home(ret) {
 				'<ul class="dl-submenu">' +
 				'<li class="dl-back"><a href="#">返回上一级</a></li> ';
 			for(var j = 0; j < ret.data[i].childList.length; j++) {
-				list += '<li onclick="articleList1(' + ret.data[i].childList[j].id + ',' + ret.data[i].id + ')"><a>' + ret.data[i].childList[j].typename + '</a></li>';
+				list += '<li onclick="articleList(' + ret.data[i].childList[j].id + ',' + ret.data[i].id + ')"><a>' + ret.data[i].childList[j].typename + '</a></li>';
 			}
 			list += '</ul>' +
 				'</li>';
@@ -146,24 +193,25 @@ function home(ret) {
 	}
 }
 
-function articleList1(typeid, parentid) {
-	var typeid = typeid;
-	var parentid = parentid;
-	var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid; 
-	location.href = url; 
+function articleList(typeid, parentid) {
+	if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
+	    var url = "http://ku.hbafea.com";
+	}else if( typeid==11 || typeid == 50){           //专家人才
+	    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
+	}else if( typeid==13 || typeid == 51){           //项目技术
+	    var url = "http://ku.hbafea.com/html/index/technology.html";
+	}else if( typeid==15 || typeid == 52){           //合作机构
+	    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
+	}else if( typeid==21 || typeid == 22){           //国际交流培训
+	    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+	}else if( typeid==23 || typeid == 24){           //名师讲堂
+	    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+	}else{
+		var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
+	}   
+ 	location.href = url;
 }
 
-function articleList(ret) {
-	if(ret.data) {
-		console.log(ret);
-		vm.count = ret.data.count;
-		vm.newsList = ret.data.list;
-		console.log(vm.newsList);
-		if(ret.data.count == 0) {
-			vm.newsList = "";
-		}
-	}
-}
  
 
 var bodyH = $("body").height();

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/public/footer.css" />
     <link rel="stylesheet" type="text/css" href="../../css/public/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="../../css/pagination.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/newsLine.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/index/search.css" />
 </head>
 
 <body>
@@ -35,15 +35,16 @@
 
             <div class="search-group">
                 <div class="search">
-                    <input type="text" name="keywords" id="keywords" value="" placeholder="搜索" />
+                    <input type="text" v-model="searchObj.keywords" name="keywords" id="keywords" value=""
+                        placeholder="搜索" />
                 </div>
-                <div class="search-btn" onclick="search()">搜索</div>
+                <div class="search-btn" @click="searchFun">搜索</div>
             </div>
         </div>
         <div class="navBar">
             <div class="nav">
                 <ul class="nav-list">
-                    <li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
+                    <li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
                     <li v-for="item in navBar"><span>{{item.typename}}</span>
                         <ul class="dropdown-menu">
                             <li v-on:click="articleList(item.childList[0].id,item.id,0)"></li>
@@ -53,45 +54,31 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="chinese">
+                <div class="chinese" @click="changeLang"> 
                     <span>{{languageText}}</span>
                     <i class="iconfont icon-sanjiao_xia"></i>
                 </div>
-                <img class="avatar" src="../../img/icon/icon_avatar.png" />
+                <img class="avatar" src="../../img/icon/icon_avatar.png" /> 
             </div>
-        </div>
+        </div> 
 
         <div class="main">
-            <!-- <div class="second-nav" v-if="smallNav && position">
-                <div class="list">
-                    <span v-for="item in smallNav" :class="[typeid == item.id?'act':'']"
-                        v-on:click="articleList(item.id,parentid)">{{item.typename}}</span>
-                </div>
-                <div class="position" v-if="position">{{yourposition}}><span>{{position}}</span></div>
-            </div> -->
             <div class=intro-box" v-if="typeid == 19">
                 <h3>检索出7条结果</h3>
             </div>
             <div class="mainList flex-def">
-                <div class="news-list"></div>
-                <div class="news-other"></div>
-            </div>
-            <div class="news-list">
-                <div class="news flex-def flex-zBetween" v-for="item in newsList" v-on:click="articleDetail(item.aid)">
-                    <div class="info">
-                        <p class="name">{{item.title}}</p>
-                        <div :class="['flex-def','desc_box',typeid==19?'':'active']">
-                            <div class="poster" v-if="typeid!=19">
-                                <img :src="item.litpic" />
-                            </div>
-                            <p class="desp">{{item.seo_description}}</p>
+                <div class="news-list">
+                    <div class="news" v-for="news in newsList">
+                        <div class="flex-def flex-cCenter flex-zBetween">
+                            <div class="tag">{{position}}</div>
+                            <span class="name">{{news.title}}</span>
+                            <span class="time">{{news.add_time | getDate}}</span>
                         </div>
+						<p class="desp">{{news.seo_description | getDesp}}</p>
                     </div>
-                    <div class="invite-btn">
-                        <p :class="['time',typeid==19?'':'active']">{{item.add_time | getDate}}</p>
-                        <p class="btn">{{typeBtn}}</p>
-                    </div>
+
                 </div>
+                <div class="news-other"></div>
             </div>
             <div class="pages">
                 <div id="pagination"></div>
@@ -140,7 +127,7 @@
     <script type="text/javascript" src="../../js/config.js"></script>
     <script type="text/javascript" src="../../js/rest.js"></script>
     <script type="text/javascript" src="../../js/vue.min.js"></script>
-    <script type="text/javascript" src="../../js/index/newsLine.js"></script>
+    <script type="text/javascript" src="../../js/index/search.js"></script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@ a { text-decoration: none;}
 .hide { display: none;}
 .header { padding-top: 20px; width: 1200px; margin: 0 auto;}
 .header .left { float: left;}
-.header .logo { height: 43px;}
+.header .logo { height: 55px;}
 .header .logo img { width: auto; height: 100%;}
 .header .left p { font-size: 12px; line-height: 1.3; color: #999999; margin-top: 5px;}
 .header .search-group { float: right; display: flex; display: -webkit-flex; display: -ms-flex;}

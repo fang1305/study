@@ -12,7 +12,7 @@
 .mcont .left .name { font-size: 26px; line-height: 1.1; color: #333333; padding-top: 19px; font-weight: bolder;}
 .mcont .left .time-view { font-size: 14px; line-height: 1; color: #666666; padding-top: 29px;}
 .mcont .left .time-view .time { padding-right: 15px;}
-.mcont .left .time-view .from { color: #333333; padding-right: 29px;}
+.mcont .left .time-view .from { color: #00468C; padding-right: 29px;}
 .mcont .left .time-view .view { float: right;}
 .mcont .left .time-view .view .iconfont { font-size: 16px;}
 .mcont .left .line { margin-top: 20px; width: 100%; height: 1px; background-color: #EEEEEE; border: 0;} 

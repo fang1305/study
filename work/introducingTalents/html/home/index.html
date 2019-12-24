@@ -229,5 +229,9 @@
 	<script type="text/javascript" src="../../js/config.js"></script>
 	<script type="text/javascript" src="../../js/rest.js"></script>
 	<script type="text/javascript" src="../../js/vue.min.js"></script> 
-    <script type="text/javascript" src="../../js/home/index.js"></script>  
+	<script type="text/javascript" src="../../js/home/index.js"></script>   
+	<script>
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+		} else { location.href = "../../index.html";} 
+	</script>
 </html>

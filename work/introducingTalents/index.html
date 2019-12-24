@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="css/public/footer.css" />
 		<link rel="stylesheet" type="text/css" href="css/public/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/index/index.css" />
 	</head>
 
 	<body>
@@ -34,18 +34,17 @@
 
 				<div class="search-group">
 					<div class="search">
-						<input type="text" name="keywords" id="keywords" value="" placeholder="搜索" />
+						<input type="text" v-model="keyword" name="keywords" id="keywords" value="" placeholder="搜索" />
 					</div>
-					<div class="search-btn" onclick="search()">搜索</div>
+					<div class="search-btn" @click="searchFun">搜索</div>
 				</div>
 			</div>
 			<div class="navBar">
 				<div class="nav">
 					<ul class="nav-list">
-						<li class="act"><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
+						<li class="act"><a href="index.html"><span class="indexPage">{{indexText}}</span></a></li>
 						<li v-for="item in navBar"><span>{{item.typename}}</span>
-							<ul class="dropdown-menu">
-								<!--<li v-on:click="articleList(item.id,0)"></li>-->
+							<ul class="dropdown-menu"> 
 								<li v-on:click="articleList(item.childList[0].id,item.id,0)"></li>
 								<li v-for="item1 in item.childList" v-on:click="articleList(item1.id,item.id)">
 									<a>{{item1.typename}}</a>
@@ -91,7 +90,7 @@
 								<span class="btitle">引智动态</span>
 								<span class="stitle">YinZhi dynamic</span>
 								<div class="t-right"> 
-									<div :class="[dynamicBarAct==index? 'item act' : 'item']" v-for="(item,index) in dynamicBar" v-on:click="dynamicBarSelect(item.id,index)" @mouseover="dynamicBarSelect(item.id,index)">{{item.typename}}</div>
+									<div :class="[dynamicBarAct==index? 'item act' : 'item']" v-for="(item,index) in dynamicBar" v-on:click="articleList(item.id,item.parent_id)" @mouseover="dynamicBarSelect(item.id,index)">{{item.typename}}</div>
 								</div>
 							</div>
 							<div class="cont">
@@ -109,7 +108,7 @@
 								<div :class="[teacherBarAct == 0? 'item act' : 'item']" @mouseover="teacherBannerSelect(this)">专家风采</div>
 								<div :class="[teacherBarAct == 1? 'item act' : 'item']"class="item" @mouseover="dynamicBannerSelect(this)">引智活动</div>
 							</div>
-							<a href="teacherBanner.links"><img v-if="teacherBanner" :src="teacherBanner.litpic" alt="" /></a>
+							<a :href="teacherBanner.links"><img v-if="teacherBanner" :src="teacherBanner.litpic" alt="" /></a>
 						</div>
 					</div>
 				</div>
@@ -143,7 +142,7 @@
 					<div class="right">
 						<div class="resource-demand">
 							<div class="list"> 
-								<div :class="[resourceBarAct==index? 'item act' : 'item']" v-for="(item,index) in resourceBar" v-on:click="resourceBarSelect(item.id,index)" @mouseover="resourceBarSelect(item.id,index)">{{item.typename}}</div>
+								<div :class="[resourceBarAct==index? 'item act' : 'item']" v-for="(item,index) in resourceBar" v-on:click="articleList(item.id,item.parent_id)" @mouseover="resourceBarSelect(item.id,index)">{{item.typename}}</div>
 							</div>
 							<div class="cont">
 								<div class="item" v-for="item in resource" v-on:click="articleDetail(item.item,item.type_id,item.parent_id)">{{item.title}}</div>
@@ -159,7 +158,7 @@
 								<span class="btitle">人才培训</span>
 								<span class="stitle">Talent training</span>
 								<div class="t-right">
-									<div :class="[trainingBarAct==index? 'item act' : 'item']" v-for="(item,index) in trainingBar" v-on:click="trainingBarSelect(item.id,index)" @mouseover="trainingBarSelect(item.id,index)">{{item.typename}}</div>
+									<div :class="[trainingBarAct==index? 'item act' : 'item']" v-for="(item,index) in trainingBar" v-on:click="articleList(item.id,item.parent_id)" @mouseover="trainingBarSelect(item.id,index)">{{item.typename}}</div>
 								</div>
 							</div>
 							<div :class="[trainingShow? 'tcont1' : 'tcont1 hide']">
@@ -192,8 +191,7 @@
 					</div>
 					<div class="right">
 						<div class="train">
-							<img class="bg" :src="trainbg.litpic" />
-							<a href=""><div class="btn">培训报道</div></a>
+							<a :href="trainbg.links"><img class="bg" :src="trainbg.litpic" /></a>
 						</div>
 					</div>
 				</div>
@@ -382,11 +380,9 @@
 		<script type="text/javascript" src="js/vue.min.js"></script>
 		<script type="text/javascript" src="js/index/index.js"></script>
 		<script>
-			if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-				var url = window.location.protocol + "//" + document.domain + "/html/home/index.html";
-				window.location.href = url;
-			} else {
-
+			if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) { 
+				location.href = "html/home/index.html";
+			} else { 
 			} 
 		</script>
 	</body>

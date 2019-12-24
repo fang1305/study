@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="../../css/public/header.css" />
     <link rel="stylesheet" type="text/css" href="../../css/public/footer.css" />
     <link rel="stylesheet" type="text/css" href="../../css/public/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/planDetail.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/index/planDetail.css" />
 </head>
 
 <body>
@@ -36,13 +36,13 @@
                 <div class="search">
                     <input type="text" name="keywords" id="keywords" value="" placeholder="搜索" />
                 </div>
-                <div class="search-btn" onclick="search()">搜索</div>
+				<div class="search-btn">搜索</div>
             </div>
         </div>
         <div class="navBar">
             <div class="nav">
                 <ul class="nav-list">
-                    <li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
+					<li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
                     <li v-for="item in navBar" :class="[parentid == item.id?'act':'']"><span>{{item.typename}}</span>
                         <ul class="dropdown-menu">
                             <li v-on:click="articleList(item.childList[0].id,item.id,0)"></li>
@@ -52,7 +52,7 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="chinese">
+				<div class="chinese" @click="changeLang"> 
                     <span>{{languageText}}</span>
                     <i class="iconfont icon-sanjiao_xia"></i>
                 </div>
@@ -70,18 +70,18 @@
             </div>
             <div class="mcont">
                 <div class="left">
-                    <div class="name" v-if="detail.title">{{detail.title}}</div>
-                    <div class="time-view" v-if="detail">
-                        <span class="time" v-if="detail.add_time">{{detail.add_time | getDate}}</span>
-                        <span class="from" v-if="detail.typename">{{detail.typename}}</span>
-                        <span class="writer" v-if="detail.author">作者：{{detail.author}}</span>
-                        <div class="view" v-if="detail.click">
+                    <div class="name" v-if="article.title">{{article.title}}</div>
+                    <div class="time-view" v-if="article">
+                        <span class="time" v-if="article.add_time">{{article.add_time | getDate}}</span>
+                        <span class="from" v-if="article.typename">{{article.typename}}</span>
+                        <span class="writer" v-if="article.author">作者：{{article.author}}</span>
+                        <div class="view" v-if="article.click">
                             <i class="iconfont icon-yanjing"></i>
-                            <span>{{detail.click}}次浏览</span>
+                            <span>{{article.click}}次浏览</span>
                         </div>
                     </div>
-                    <hr class="line" v-if="detail" />
-                    <div class="newsCont" v-html="detailCont"></div>
+                    <hr class="line" v-if="article" />
+                    <div class="newsCont" v-html="articleCont"></div>
                     <div class="page">
                         <div class="prev" v-if="front">
                             上一篇：<a :title="front.title"><span

@@ -29,12 +29,12 @@
 				</div>
 				<div class="news-list">
 					<div class="news" v-for="item in newsList" v-on:click="articleDetail(item.aid,item.typeid,item.parent_id)">
-						<div class="poster" v-if="item.litpic">
-							<img :src="item.litpic" />
+						<div class="poster">
+							<img v-if="item.litpic" :src="item.litpic" />
 						</div>
 						<div class="info">
 							<p class="name">{{item.title}}</p>
-							<p class="desp">{{item.seo_description}}</p>
+							<p class="desp">{{item.seo_description | getDesp}}</p>
 							<p class="time">{{item.add_time | getDate}}</p>
 						</div>
 					</div>  
@@ -61,7 +61,7 @@
 				</div>
 			</div>
 			<div class="bottom">
-				<span><a href="http://www.test3.com">备案号：冀ICP备19031285号-1</a></span>
+				<span><a href="http://www.beian.miit.gov.cn">备案号：冀ICP备19031285号-1</a></span>
 			</div>
 		</div>
 	</body>

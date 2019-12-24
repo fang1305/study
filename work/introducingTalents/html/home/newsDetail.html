@@ -29,18 +29,18 @@
 					<div v-for="item in smallNav" :class="[typeid == item.id?'act item':'item']" v-on:click="articleList(item.id,parentid)">{{item.typename}}</div>
 				</div>
 				<div class="neas-detail">
-					<div class="name" v-if="detail.title">{{detail.title}}</div>
+					<div class="name" v-if="article.title">{{article.title}}</div>
 					<div class="time-view">
-						<span class="time" v-if="detail.add_time">{{detail.add_time | getDate}}</span>
-							<span class="from" v-if="detail.typename">{{detail.typename}}</span>
-							<span class="writer" v-if="detail.author">作者：{{detail.author}}</span>
-							<div class="view" v-if="detail.click">
+						<span class="time" v-if="article.add_time">{{article.add_time | getDate}}</span>
+							<span class="from" v-if="article.typename">{{article.typename}}</span>
+							<span class="writer" v-if="article.author">作者：{{article.author}}</span>
+							<div class="view" v-if="article.click">
 								<i class="iconfont icon-yanjing"></i>
-								<span>{{detail.click}}次浏览</span>
+								<span>{{article.click}}次浏览</span>
 							</div>
 					</div>
-					<hr class="line" v-if="detail" /> 
-					<div class="newsCont" v-html="detailCont"></div>
+					<hr class="line" v-if="article" /> 
+					<div class="newsCont" v-html="articleCont"></div>
 					<div class="page">
 						<div class="prev" v-if="front">
 							上一篇：<a><span v-on:click="articleDetail(front.aid)">{{front.title}}</span></a>
@@ -87,7 +87,7 @@
 				</div>
 			</div>
 			<div class="bottom">
-				<span><a href="http://www.test3.com">备案号：冀ICP备19031285号-1</a></span>
+				<span><a href="http://www.beian.miit.gov.cn">备案号：冀ICP备19031285号-1</a></span>
 			</div>
 		</div>
 	</body>

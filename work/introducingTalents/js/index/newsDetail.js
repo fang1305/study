@@ -4,50 +4,137 @@ var vm = new Vue({
 		indexText: "首页",
 		lang: "cn",
 		languageText: "English",
-		yourposition: "您的位置",
-		navBar: "",  
+		yourposition: "您的位置", 
+		navBar: "",
+		smallNav: "",
+		position: "", 
+		parentid: "",
+		typeid: "",
+		article: "",  
+		articleCont: "", 
 		front: "",
-		after: "",
-		detail: "",
-		detailCont: "",
+		after: "", 
 		recomList: "",
 		specialList: "",
-		position : ""
-	},
+		searchObj: {
+			arctype_id:"",
+			lang: 'cn', 
+			aid: "",
+		}
+	}, 
 	created() {  
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";
 	 		this.yourposition = "Your position";
-	 		this.lang = "en"; 
+	 		this.lang = "en";
 		}else{
 			sessionStorage.lang == 'cn';
-		} 
+		}  
+        if(parseUrl()){
+            this.parentid = parseUrl().parentid?parseUrl().parentid:''; 
+            this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
+        } 
+		this.requireData();
     },
 	methods: {
-		articleList: function(typeid, parentid,level) {
-			var typeid = typeid;
-			var parentid = parentid;
-			if( parentid==9 && level==0 || parentid == 10 && level==0 ){ 
+		requireData(){
+			// 导航栏
+			this.getList('navBar','home/arctypeList'); 
+			this.getList('smallNav','home/arctypeList'); 
+			// 文章详情
+			this.getList('article','home/articleDetail'); 
+        },
+        getList(type,url,typeid){ 
+            let that = this;
+           	if(type=="navBar"){  
+           		that.searchObj.arctype_id = "";
+           	} 
+           	if(type=="smallNav"){ 
+           		that.searchObj.arctype_id = parseUrl().parentid?parseUrl().parentid:''; 
+           	}   
+           	that.searchObj.aid = parseUrl().aid?parseUrl().aid:''; 
+            that.searchObj.lang = that.lang; 
+			$.ajax({
+				url: config.apiHost+url,
+				type: 'GET',  
+                async: true,  
+                data:that.searchObj,
+				dataType: 'json', 
+				success: function (ret){
+					typeof ret == "object"?'':ret=JSON.parse(ret);
+					// 发送成功 
+					if(ret.status == 'ok'){
+						var list = ret.data;
+//			                        console.log(ret);
+                        if(type=="smallNav"){
+                        	that[type] = list[0].childList;
+							for(var i = 0; i< that.smallNav.length; i++){
+								if(that.typeid == that.smallNav[i].id){ 
+									that.position = that.smallNav[i].typename;
+									return false;
+								}
+							}
+                        }else if(type=="article"){ 
+                        	 	that[type] = ret.data.detail;
+                        	 	that.articleCont = ret.data.detail.content.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;nbsp;/g,' ').replace(/&quot;/g,'"').replace(/&amp;/g,'&');
+								that.after = ret.data.after;
+								that.front = ret.data.front; 
+								that.recomList = ret.data.recomList; 
+								that.specialList = ret.data.specialList;
+								if(ret.data.seo_title){
+									document.title = ret.data.seo_title;
+								}
+								if(ret.data.seo_description){ 
+									$("meta[name='description']").attr('content',ret.data.seo_description); 
+								}
+								if(ret.data.seo_keywords){
+									$('meta[name="keywords"]').attr('content',ret.data.seo_keywords);
+								}
+                        }else{ 
+                        	that[type] = list;
+                        } 
+					}
+					else{
+						that[type] = "";
+					}
+				},
+				error: function (xhr, textStatus){
+					// 发送失败
+					console.log('错误')
+					console.log(xhr)
+					console.log(textStatus)
+				},
+			})
+		},
+		// 中英文切换
+        changeLang(){
+            this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
+			location.href = "../../index.html";
+        },
+		articleList: function(typeid, parentid,level) { 
+			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
 			    var url = "http://ku.hbafea.com";
-			}else if( typeid==11 || typeid == 50){  
+			}else if( typeid==11 || typeid == 50){           //专家人才
 			    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
-			}else if( typeid==13 || typeid == 51){  
+			}else if( typeid==13 || typeid == 51){           //项目技术
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
-			}else if( typeid==15 || typeid == 52){  
+			}else if( typeid==15 || typeid == 52){           //合作机构
 			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-			}else if( typeid==19 || typeid==33 || typeid == 29||typeid == 35||typeid==31){
-                // 人才培训
-				var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
-            }else{
+			}else if( typeid == 19 || typeid == 33 || typeid == 29 || typeid == 35 ||typeid == 31 ){ // 人才培训
+                var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==21 || typeid == 22){           //国际交流培训
+			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==23 || typeid == 24){           //名师讲堂
+			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}   
 		 	location.href = url;
 //          window.open(url);
 		},
-        articleDetail: function(aid){
-		 	var aid = aid;  
-		 	var url = "newsDetail.html?aid="+ aid+ "&typeid="+ vm.typeid + "&parentid="+ vm.parentid;
+        articleDetail: function(aid){ 
+		 	var url = "newsDetail.html?aid="+ aid+ "&typeid="+ this.typeid + "&parentid="+ this.parentid;
 		 	window.open(url);
 		}
 	},
@@ -65,92 +152,9 @@ var vm = new Vue({
 			return oTime;
 		}, 
 	},
-  });
-$(function() { 
-	$(".chinese").on("click",function(){ 
-		vm.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en"; 
-		location.href = "../../index.html";
-	})
-	var typeid = $.getUrlParam('typeid');
-	var parentid = $.getUrlParam('parentid');
-	vm.typeid = typeid;
-	vm.parentid = parentid;
-	var param = {
-		lang: vm.lang,
-	}
-	apiAjax("home", param, "GET", home);
-	var param1 = {
-		lang: vm.lang,
-		arctype_id: vm.parentid
-	}
-	apiAjax("home", param1, "GET", smallNav);
-	var aid = $.getUrlParam('aid');
-	console.log(aid);
-	var param2 = {
-		  aid: aid, 
-	}
-	apiAjax("articleDetail", param2, "GET", articleDetail,articleDetailError);
- 
+});
+$(function() {   
 	$(".gtop").on("click", function() {
 		window.scrollTo(0, 0);
 	})
-})
-function home(ret) {
-	if(ret.data) {
-		console.log(ret);
-		vm.navBar = ret.data;
-	}
-} 
-function smallNav(ret) {
-	if(ret.data) {
-		console.log(ret.data[0].childList);
-		console.log(vm.typeid);
-		vm.smallNav = ret.data[0].childList;
-		for(var i = 0; i< vm.smallNav.length; i++){
-			if(vm.typeid == vm.smallNav[i].id){ 
-				vm.position = vm.smallNav[i].typename;
-				console.log(vm.smallNav[i].typename);
-				return false;
-			}
-		}
-	}
-} 
-function articleDetail(ret) {
-	if(ret.data) {
-		console.log(ret);
-		vm.detail = ret.data.detail;
-		vm.after = ret.data.after;
-		vm.front = ret.data.front; 
-		vm.recomList = ret.data.recomList; 
-//		vm.detailCont = ret.data.detail.content;  
-//		console.log(vm.detailCont); 
-		vm.detailCont = ret.data.detail.content.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;nbsp;/g,' ').replace(/&quot;/g,'"').replace(/&amp;/g,'&');
-		vm.specialList = ret.data.specialList; 
-		var seo_title = ret.data.seo_title;
-		var seo_description = ret.data.seo_description;
-		var seo_keywords = ret.data.seo_keywords;
-		if(seo_title){
-			document.title = seo_title;
-		}
-		if(seo_description){ 
-			$("meta[name='description']").attr('content',seo_description);
-			console.log($("meta[name='description']").attr('content')); 
-		}
-		if(seo_keywords){
-			$('meta[name="keywords"]').attr('content',seo_keywords);
-		}
-	}
-}
-function articleDetailError(err) {
-		console.log(err);
-}
-//搜索
-function search(){
-	var keywords = $("#keywords").val();
-    console.log(keywords);
-    var typeid = vm.typeid;  
- 	var parentid = vm.parentid; 
- 	var url = window.location.protocol + "//" +document.domain + "/html/index/newsList.html?typeid="+ typeid + "&parentid="+ parentid+ "&keywords="+ keywords; 
- 	console.log(url);
- 	location.href = url;
-}
+})  

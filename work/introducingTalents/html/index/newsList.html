@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/public/footer.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/public/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/pagination.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/newsList.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/index/newsList.css" />
 	</head>
 
 	<body>
@@ -42,7 +42,7 @@
 			<div class="navBar">
 				<div class="nav">
 					<ul class="nav-list">
-						<li><a href="http://www.hbafea.com/"><span class="indexPage">{{indexText}}</span></a></li>
+						<li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
 						<li v-for="item in navBar" :class="[parentid == item.id?'act':'']"><span>{{item.typename}}</span>
 							<ul class="dropdown-menu">
 								<li v-on:click="articleList(item.childList[0].id,item.id,0)"></li>
@@ -52,7 +52,7 @@
 							</ul>
 						</li>
 					</ul>
-					<div class="chinese"> 
+					<div class="chinese" @click="changeLang"> 
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
@@ -68,13 +68,13 @@
 					<div class="position" v-if="position">{{yourposition}}><span>{{position}}</span></div>
 				</div>
 				<div class="news-list">
-					<div class="news" v-for="item in newsList" v-on:click="articleDetail(item.aid)">
+					<div class="news" v-for="item in newsList" v-on:click="articleDetail(item.aid,item.typeid,item.parent_id)">
 						<div class="poster">
 							<img :src="item.litpic" />
 						</div>
 						<div class="info">
 							<p class="name">{{item.title}}</p>
-							<p class="desp">{{item.seo_description}}</p>
+							<p class="desp">{{item.seo_description | getDesp}}</p>
 							<p class="time">{{item.add_time | getDate}}</p>
 						</div>
 					</div> 
