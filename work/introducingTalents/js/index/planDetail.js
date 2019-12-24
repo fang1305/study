@@ -13,7 +13,10 @@ var vm = new Vue({
 		article: "",  
 		articleCont: "", 
 		front: "",
-		after: "", 
+        after: "", 
+        sex: '性别',
+        num: '人数',
+        status: 1,
 		recomList: "",
 		specialList: "",
 		searchObj: {
@@ -44,6 +47,10 @@ var vm = new Vue({
 			// 文章详情
 			this.getList('article','home/articleDetail'); 
         },
+        selectFun(type,value){
+            // 下拉框选择
+            this[type] = value;
+        },
         getList(type,url,typeid){ 
             let that = this;
            	if(type=="navBar"){  
@@ -65,7 +72,7 @@ var vm = new Vue({
 					// 发送成功 
 					if(ret.status == 'ok'){
 						var list = ret.data;
-//			                        console.log(ret);
+//			            console.log(ret);
                         if(type=="smallNav"){
                         	that[type] = list[0].childList;
 							for(var i = 0; i< that.smallNav.length; i++){

@@ -99,28 +99,36 @@
                         <div class="info_input">
                             <input :class="[typeid == 19?'name lineInput':'name lineInput active']" placeholder="姓名" type="text" />
                             <div class="select-box" v-if="typeid!=19">
-                                <div class="result">性别</div>
+                                <div class="result" v-text="sex">性别</div>
                                 <ul class="chooseList hide">
-                                    <li>男</li>
-                                    <li>女</li>
+                                    <li @click="selectFun('sex','男')">男</li>
+                                    <li @click="selectFun('sex','女')">女</li>
+                                    <ul :class="['chooseList',status?'hide':'']">
                                 </ul>
                             </div>
                             <input class="phone lineInput" placeholder="电话" type="text" />
                             <div class="flex-def flex-zBetween lineInput" v-if="typeid == 19">
-                                <div class="select-box">
-                                    <div class="result">性别</div>
+                                <select class="select-box">
+                                    <option value="">性别</option>
+                                </select>
+                                <select class="select-box">
+                                    <option value="">人数</option>
+                                </select>
+                                <!-- <div class="select-box">
+                                    <div class="result" v-text="sex">性别</div>
                                     <ul class="chooseList hide">
-                                        <li>男</li>
-                                        <li>女</li>
+                                        <li @click="selectFun('sex','男')">男</li>
+                                        <li @click="selectFun('sex','女')">女</li>
                                     </ul>
                                 </div>
                                 <div class="select-box">
-                                    <div class="result">性别</div>
+                                    <div class="result" v-text="num">人数</div>
                                     <ul class="chooseList hide">
-                                        <li>男</li>
-                                        <li>女</li>
+                                        <li @click="selectFun('num','1-20人')">1-20人</li>
+                                        <li @click="selectFun('num','20-50人')">20-50人</li>
+                                        <li @click="selectFun('num','50-100人')">50-100人</li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                             <input class="email lineInput" placeholder="邮箱" type="text" />
                             <input class="company lineInput" placeholder="企业" v-if="typeid == 19" type="text" />
@@ -188,7 +196,10 @@
 </body>
     <script>
         $('.select-box').click(function (params) {
-            $(this).find('ul').toggle();
-        })
+            $(this).find('ul').show();
+        });
+        $('.select-box li').click(function (params) {
+            $(this).parent('ul').hide();
+        });
     </script>
 </html>
