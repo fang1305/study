@@ -1,3 +1,4 @@
+var typeid = $.getUrlParam('typeid');
 var vm = new Vue({
 	el: '#app',
 	data: {
@@ -5,7 +6,8 @@ var vm = new Vue({
 		indexText: "首页",
 		lang: "cn",
 		languageText: "English",
-		yourposition: "您的位置",
+        yourposition: "您的位置",
+        typeBtn: '申请活动',
 		newsList:"",
 		typeid:"", 
 		parentid: "",
@@ -13,7 +15,11 @@ var vm = new Vue({
 		position: "",
 		keywords: "",       //关键词
 	},
-	created() {  
+	created() { 
+        this.typeid = typeid;
+        if(typeid == 19){
+            this.typeBtn = '申请计划';
+        }
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";
@@ -35,7 +41,7 @@ var vm = new Vue({
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
 			}else if( typeid==15 || typeid == 52){  
 			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-			}else if( typeid==19){
+			}else if( typeid==19 || typeid==33 || typeid == 29||typeid == 35||typeid==31){
                 // 人才培训
 				var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
             }else{
@@ -156,6 +162,7 @@ function articleListError(err) {
 }
 
 function createPagination(num) {
+    console.log(num)
 	var container = $('#pagination');
 	var sources = function() {
 		var result = [];

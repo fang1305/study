@@ -20,7 +20,6 @@
     }
     return config;
 }(window)) 
-
 $.getUrlParam = function(name) {
 	var url = window.location.search;
     // 正则筛选地址栏

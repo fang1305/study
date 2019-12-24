@@ -97,9 +97,16 @@
                     <div class="plan-entered">
                         <div class="title">计划报名</div>
                         <div class="info_input">
-                            <input class="name lineInput" placeholder="姓名" type="text" />
+                            <input :class="[typeid == 19?'name lineInput':'name lineInput active']" placeholder="姓名" type="text" />
+                            <div class="select-box" v-if="typeid!=19">
+                                <div class="result">性别</div>
+                                <ul class="chooseList hide">
+                                    <li>男</li>
+                                    <li>女</li>
+                                </ul>
+                            </div>
                             <input class="phone lineInput" placeholder="电话" type="text" />
-                            <div class="flex-def flex-zBetween lineInput">
+                            <div class="flex-def flex-zBetween lineInput" v-if="typeid == 19">
                                 <div class="select-box">
                                     <div class="result">性别</div>
                                     <ul class="chooseList hide">
@@ -116,7 +123,7 @@
                                 </div>
                             </div>
                             <input class="email lineInput" placeholder="邮箱" type="text" />
-                            <input class="company lineInput" placeholder="企业" type="text" />
+                            <input class="company lineInput" placeholder="企业" v-if="typeid == 19" type="text" />
                             <textarea id="more" cols="30" rows="10" placeholder="备注" class="lineInput moreInfo"></textarea>
                             <div class="submit-btn">提交</div>
                         </div>
