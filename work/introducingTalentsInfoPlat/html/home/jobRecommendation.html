@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-		<div class='container' id="app">
+		<div class='container' id="app" @click="chooseType(1,'close','')">
 			<div class="header"> 
 				<div id="dl-menu" class="dl-menuwrapper"> 
 					<button id="dl-menu-button">Open Menu</button> 
@@ -53,7 +53,7 @@
 					</div>
 					<div class="nav-category J_filter_sel"> 
 					    <div class="nav-tab profession">
-					        <div :class="['input',choose.industry.actHide?'act':'']" @click="chooseType(1,'choose','industry')">
+					        <div :class="['input',choose.industry.actHide?'act':'']" @click.stop="chooseType(1,'choose','industry')">
 					            <span>{{choose.industry.typeVal}}</span>
 					        	<i @click.stop="chooseType('','error','industry')" :class="['iconfont', choose.industry.errorHide?'hide':'', 'icon-error']"></i>
 					            <img :class="[choose.industry.errorHide?'':'hide']" src="../../img/index/icon/icon_arrow.png" alt="">
@@ -114,6 +114,8 @@
 	<script type="text/javascript" src="../../js/config.js"></script> 
 	<script type="text/javascript" src="../../js/vue.min.js"></script> 
 	<script> 
+		if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		} else { location.href = "../index/jobRecommendation.html";} 
 		var vm = new Vue({
 			el: '#app',
 			data: {
@@ -202,7 +204,10 @@
 				// 选择人才分类
 				chooseType(val,type,status){
 					let that = this;
-					if(type == 'choose'){
+					if(type == 'close'){
+						// 关闭选择框
+						this.choose.industry.chooseHide = true;
+					}else if(type == 'choose'){
 						// 展开选择类型
 						this.choose[status].chooseHide = !this.choose[status].chooseHide;
 					}else if(type == 'error'){

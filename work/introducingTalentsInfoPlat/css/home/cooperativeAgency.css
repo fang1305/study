@@ -35,7 +35,7 @@
 .navigation .nav-category .nav-tab .slist ul li{ height: .45rem; cursor: pointer; font-size: .22rem; line-height: .45rem; color: #999999; padding-left: .29rem; padding-right: .1rem; white-space: nowrap; }
 .navigation .nav-category .nav-tab .slist ul li:hover{ background-color: #EEEEEE;} 
 
-.pages { text-align: center; margin-top: .54rem;}
+.pages { text-align: center; margin-top: .4rem;}
 #pagination { display: inline-block;}
 .paginationjs.paginationjs-theme-blue .paginationjs-pages li.active>a { background-color: #206BD1;}
 .paginationjs .paginationjs-pages li>a { width: .54rem; height: .54rem; font-size: .27rem; line-height: .54rem;}
@@ -43,6 +43,8 @@
 .paginationjs-prev a { width: 1rem !important; padding: 0 .1rem;}
 .paginationjs-next a { width: 1rem !important; padding: 0 .1rem;}
 .paginationjs .paginationjs-pages li { margin-right: .27rem;}
+.paginationjs-page,.paginationjs-prev,.paginationjs-next,.paginationjs-ellipsis { margin-top: .14rem;}
+.paginationjs-next { margin-right: 0 !important;}
 
 .list { margin-top: -.18rem; font-size: 0;}
 .list .item { float: left; width: 3.48rem; height: 1.4rem; margin-top: .18rem; display: flex; display: -webkit-flex; display: -ms-flexbox;}

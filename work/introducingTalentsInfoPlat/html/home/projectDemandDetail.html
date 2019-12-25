@@ -98,6 +98,8 @@
 	<script type="text/javascript" src="../../js/config.js"></script> 
 	<script type="text/javascript" src="../../js/vue.min.js"></script> 
 	<script> 
+		if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		} else { location.href = "../index/projectDemandDetail.html";} 
 		var vm = new Vue({
 			el: '#app',
 			data: {

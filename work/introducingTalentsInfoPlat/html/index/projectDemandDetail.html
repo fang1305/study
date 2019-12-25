@@ -67,7 +67,7 @@
 				 	<div class="title">其他项目</div>
 				 	<div class="list">
 				 	 	<div class="item" v-for="list in otherList">
-							<a :href="'projectDemandDetail.html?id='+list.id" >
+							<a target="_blank" :href="'projectDemandDetail.html?id='+list.id">
 								<div class="name" v-text="list.jane_title"></div>
 								<div class="info">
 									<p class="desp" v-text="list.info"></p>
@@ -115,6 +115,9 @@
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
+			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				location.href = "../home/projectDemandDetail.html";
+			} else {} 
 			var vm = new Vue({
 				el: '#app',
 				data: {

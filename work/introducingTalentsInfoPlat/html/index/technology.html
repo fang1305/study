@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-		<div id="app">
+		<div id="app" @click="chooseType(1,'close','')">
 			<div class="navBar">
 			 	<div class="nav">
 					<div class="chinese" @click="changeLang">
@@ -62,7 +62,7 @@
 					</div>
 					<div class="nav-category J_filter_sel"> 
 					    <div class="nav-tab profession">
-							<div :class="['input',choose.industry.actHide?'act':'']" @click="chooseType(1,'choose','industry')">
+							<div :class="['input',choose.industry.actHide?'act':'']" @click.stop="chooseType(1,'choose','industry')">
 					        	<i @click.stop="chooseType('','error','industry')" :class="['iconfont', choose.industry.errorHide?'hide':'', 'icon-error']"></i>
 					            <span v-text="choose.industry.typeVal"></span>
 					            <img src="../../img/index/icon/icon_arrow.png" alt="">
@@ -82,7 +82,7 @@
 				<div class="list">
 					
 					<div class="item" v-for="project in projects">
-						<a :href="'./projectDetail.html?id='+project.id" >
+						<a target="_blank" :href="'./projectDetail.html?id='+project.id">
 							<div class="info">
 								<p class="name" v-text="project.jane_title"></p>
 								<div class="desp" v-text="project.info"></div>
@@ -146,6 +146,9 @@
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
+			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				location.href = "../home/technology.html";
+			} else {} 
 			var vm = new Vue({
 				el: '#app',
 				data: {
@@ -218,7 +221,10 @@
 					// 选择人才分类
 					chooseType(val,type,status){
 						let that = this;
-						if(type == 'choose'){
+						if(type == 'close'){
+							// 关闭选择框
+							this.choose.industry.chooseHide = true;
+						}else if(type == 'choose'){ 
 							// 展开选择类型
 							this.choose[status].chooseHide = !this.choose[status].chooseHide;
 						}else if(type == 'error'){

@@ -24,7 +24,7 @@
 
 .talentRecommend .title { font-size: .33rem; line-height: 1; color: #333333; font-weight: bold; padding-top: .45rem;}
 .talentRecommend .list { padding-top: .2rem; font-size: 0;}
-.talentRecommend .list .item { display: inline-block; width: 3.48rem; height: auto; margin-top: .29rem;} 
+.talentRecommend .list .item { display: inline-block; width: 3.48rem; height: auto; margin-top: .29rem; /*vertical-align: top;*/} 
 .talentRecommend .list .item .poster { width: 100%; height: 2.68rem; overflow: hidden; margin: 0 auto; line-height: 0; text-align: center;display: -webkit-box;display: -ms-flexbox; display: -webkit-flex; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; -webkit-justify-content: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; -webkit-align-items: center; align-items: center;}
 .talentRecommend .list .item .poster img { width: auto; height: 100%; } 
 .talentRecommend .list .item .info { padding: .22rem .27rem .22rem; border: 1px solid #EEEEEE;}
@@ -32,8 +32,7 @@
 .talentRecommend .list .item .info .name { width: 100%; display: flex; display: -webkit-flex; display: -ms-flexbox; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 .talentRecommend .list .item .info .name .left { font-size: .28rem; color: #333333; line-height: 1.3; padding-right: .17rem;}
 .talentRecommend .list .item .info .name .right { font-size: .22rem; color: #999999; line-height: 1.8;}
-.talentRecommend .list .item .info .name:after { content:""; clear: both; display: block;} 
-.talentRecommend .list .item .info .desp { margin-top: .13rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-.talentRecommend .list .item .info .desp .ditem { padding: 0 5px; border-right: 1px solid #666666; font-size: .24rem; color: #666666; line-height: 1.1;}
-.talentRecommend .list .item .info .desp .ditem:last-child { border-right: none;}
-.talentRecommend .list .item .info .desp .ditem:first-child { padding-left: 0;} 
+.talentRecommend .list .item .info .name:after { content:""; clear: both; display: block;}  
+.talentRecommend .list .item .info .desp { margin-top: .13rem;}
+.talentRecommend .list .item .info .desp .ditem { font-size: .24rem; color: #666666; line-height: 1.1; word-break: break-all;}
+.talentRecommend .list .item .info .desp .ditem span { padding: 0 .05rem;}

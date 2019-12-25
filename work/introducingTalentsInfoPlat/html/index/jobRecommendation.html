@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-		<div id="app">
+		<div id="app" @click="chooseType(1,'close','')">
 			<div class="navBar">
 			 	<div class="nav">
 					<div class="chinese" @click="changeLang">
@@ -114,7 +114,7 @@
 				<div class="list">
 					<div class="item" v-for="job in jobs">
 						<div class="company">
-							<a :href="'companyIntro.html?id='+job.works_id"> 
+							<a target="_blank" :href="'companyIntro.html?id='+job.works_id"> 
 							<div class="poster">
 								<img :src="job.logo"/>
 							</div>
@@ -125,7 +125,7 @@
 							</a>
 						</div>
 						<div class="info">
-							<a :href="'jobDetail.html?id='+job.id"> 
+							<a target="_blank" :href="'jobDetail.html?id='+job.id"> 
 								<div class="job-time-salary">
 									<p class="jobname">{{job.professional}}</p>
 									<p class="time">[{{getTimeInit(job.add_time)}}发布]</p>
@@ -181,6 +181,9 @@
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
+			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				location.href = "../home/jobRecommendation.html";
+			} else {} 
 			var vm = new Vue({
 				el: '#app',
 				data: {
@@ -281,7 +284,12 @@
 							that.choose.salary.chooseHide = true;
 							that.choose.industry.chooseHide = true; 
 						}
-						if(type == 'choose'){
+						if(type == 'close'){
+							// 关闭选择框
+							that.choose.salary.chooseHide = true; 
+							that.choose.industry.chooseHide = true; 
+							that.choose.language.chooseHide = true;
+						}else if(type == 'choose'){ 
 							// 展开选择类型
 							this.choose[status].chooseHide = !this.choose[status].chooseHide;
 						}else if(type == 'error'){
@@ -402,14 +410,7 @@
 						return container;
 					}
 				}, 
-			}); 
-			$(function(){ 
-				$("body").on("click",function(){
-					vm.choose.salary.chooseHide = true;
-					vm.choose.industry.chooseHide = true; 
-					vm.choose.language.chooseHide = true;
-				})
-			})
+			});  
 		</script>
 	</body>
 

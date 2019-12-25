@@ -19,7 +19,7 @@
 .block2 .title { font-size: 24px; line-height: 1; color: #333333;}                                                                                                                                         
 .block2 .small-title { font-size: 12px; line-height: 1; color: #999999; padding-top: 9px;}      
 .block2 .list { font-size: 0; padding-top: 17px; font-size: 0;}
-.block2 .list .item { display: inline-block; width: 270px; height: auto; margin-top: 40px; margin-right: 40px; cursor: pointer;}
+.block2 .list .item { display: inline-block; width: 270px; height: auto; margin-top: 40px; margin-right: 40px; cursor: pointer; vertical-align: top;}
 .block2 .list .item:nth-child(4n) { margin-right: 0;}
 .block2 .list .item .poster { width: 100%; height: 220px; line-height: 0; text-align: center;}
 .block2 .list .item .poster img { width: auto; height: 100%; } 
@@ -28,10 +28,10 @@
 .block2 .list .item .info .name .left { font-size: 16px; color: #333333; line-height: 1.3; width: 130px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; float: left;}
 .block2 .list .item .info .name .right { font-size: 14px; color: #666666; line-height: 1.5; width: 70px; text-align: right; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; float: right;}
 .block2 .list .item .info .name:after { content:""; clear: both; display: block;} 
-.block2 .list .item .info .desp { margin-top: 10px; font-size: 14px; color: #999999; line-height: 1.7; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; word-wrap:break-word;}
-.block2 .list .item:hover .info .desp { overflow: auto; white-space: normal; text-overflow: initial;}
+.block2 .list .item .info .desp { margin-top: 10px; font-size: 14px; color: #999999; line-height: 1.7; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+.block2 .list .item:hover .info .desp { overflow: auto; white-space: normal; text-overflow: initial; word-break: break-all;} 
 .block2 .list .item .info .desp .ditem { font-size: 14px; color: #999999; line-height: 1.7; }
-.block2 .list .item .info .desp .ditem span { padding-left: 2px;}
+.block2 .list .item .info .desp .ditem span { padding: 0 2px;}
 .block2 .list .item .info .desp .ditem:last-child { border-right: none;}
 .block2 .list .item .info .desp .ditem:first-child { padding-left: 0;}
 .block2 .list .item .look { width: 268px; height: 40px; font-size: 14px; line-height: 40px; color: #999999; text-align: center; border: 1px solid #E6E6E6;}
@@ -118,7 +118,7 @@
 .block6 .cont { height: 150px; box-shadow:0px 15px 30px 0px rgba(6,28,66,0.15); margin-top: 10px; position: relative;}         
 .swiper-container2 { height: 100%;}
 .swiper-container2 .swiper-slide { line-height: 0; text-align: center; background: #fff; display: -webkit-box; display: -ms-flexbox; display: -webkit-flex; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; -webkit-justify-content: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; -webkit-align-items: center; align-items: center;}
-.swiper-container2 .swiper-slide .item { width: 240px; text-align: center;}
+.swiper-container2 .swiper-slide .item { width: 200px; text-align: center;}
 .swiper-container2 .swiper-slide .cologo { display: inline-block; width: 60px; height: 60px; overflow: hidden; text-align: center; line-height: 0;}
 .swiper-container2 .swiper-slide .cologo img { width: 100%; height: 100%;}
 .swiper-container2 .swiper-slide .name { padding: 0 30px; height: 100%; font-size: 14px; line-height: 1.3; color: #999999; padding-top: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
@@ -132,10 +132,12 @@
 .block7 .cont { height: 150px; box-shadow:0px 15px 30px 0px rgba(6,28,66,0.15); margin-top: 10px; position: relative;}         
 .swiper-container3 { height: 100%;}
 .swiper-container3 .swiper-slide { line-height: 0; text-align: center; background: #fff; display: -webkit-box; display: -ms-flexbox; display: -webkit-flex; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; -webkit-justify-content: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; -webkit-align-items: center; align-items: center;}
-.swiper-container3 .swiper-slide .item { width: 240px; text-align: center;cursor: pointer;}
+.swiper-container3 .swiper-slide .item { width: 200px; text-align: center;cursor: pointer; position: relative; z-index: 3;;}
 .swiper-container3 .swiper-slide .cologo { display: inline-block; width: 65px; height: 58px; overflow: hidden; text-align: center; line-height: 0;}
 .swiper-container3 .swiper-slide .cologo img { width: auto; height: 100%;}
 .swiper-container3 .swiper-slide .name { padding: 0 30px; height: 100%; font-size: 14px; line-height: 1.3; color: #999999; padding-top: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .block7 .cont .swiper-button-next,.block7 .cont  .swiper-button-prev { width: 25px; height: 25px; background-size: 100% 100%;}
 .block7 .cont .swiper-button-prev { background-image:url(../../img/index/icon/icon_arrow_3.png); left: -10px;}
-.block7 .cont .swiper-button-next { background-image:url(../../img/index/icon/icon_arrow_4.png); right: -10px;}                                                                
+.block7 .cont .swiper-button-next { background-image:url(../../img/index/icon/icon_arrow_4.png); right: -10px;} 
+   
+.swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled { pointer-events: auto;}                                                         

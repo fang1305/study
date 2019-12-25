@@ -19,3 +19,6 @@
 .main .navlist li { flex: 1; font-size: .33rem; line-height: 1; color: #999999; font-weight: bold; padding-bottom: .25rem; text-align: center;}
 .main .navlist li.act { color: #206BD1;} 
 .main .cont { padding: 0 .28rem; font-size: .27rem; line-height: 1.7; color: #666666;}
+.main .cont p { font-size: .27rem !important;}
+.main .cont span { font-size: .27rem !important;}
+.main .cont img { width: 100%;}

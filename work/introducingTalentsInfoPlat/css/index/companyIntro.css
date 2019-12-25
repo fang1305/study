@@ -23,7 +23,8 @@
 .main .left .title { display: flex; display: -webkit-flex; display: -ms-flexbox;}
 .main .left .title span { font-size: 24px; line-height: 1; color: #333333; padding-right: 18px;}
 .main .left .title .line { flex: 1; height: 1px; background: #999999; border: 0; margin-top: 12px;}
-.main .left .cont { font-size: 18px; line-height: 1.7; color: #666666; padding-top: 22px;}
+.main .left .cont { font-size: 18px; line-height: 1.7; color: #666666; padding-top: 22px; word-break: break-all;}
+.main .left .cont img { width: 100% !important;}
 .main .right { width: 350px;}
 .main .right .coInfo .title { display: flex; display: -webkit-flex; display: -ms-flexbox;}
 .main .right .coInfo .title span { font-size: 24px; line-height: 1; color: #333333; padding-right: 18px;}

@@ -15,7 +15,8 @@
 .info .projectIntro .content p { font-size: .27rem !important; color: #666666 !important;}
 .info .projectIntro .content span { font-size: .27rem !important; color: #666666 !important;}
 .info .projectIntro .content1 p { font-size: .27rem !important; color: #666666 !important;}
-.info .projectIntro .content1 span { font-size: .27rem !important; color: #666666 !important;}
+.info .projectIntro .content1 span { font-size: .27rem !important; color: #666666 !important;} 
+.info .projectIntro .content1 img { width: 100%;}
 .info .projectIntro .content .zhan { font-size: .27rem; line-height: 1; color: #206BD1;}
 .info .projectIntro .content .zhan .iconfont { font-size: .27rem; line-height: 1; font-weight: bolder;}
 

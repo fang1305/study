@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-		<div id="app">
+		<div id="app" @click="chooseType(1,'close','')">
 			<div class="navBar">
 			 	<div class="nav">
 					<div class="chinese" @click="changeLang">
@@ -137,16 +137,10 @@
 								<div class="left">{{expert.surname+expert.name}}({{expert.age}}岁)</div>
 								<div class="right">{{expert.type}}</div>
 							</div> 
-							<div class="desp">
-								<span v-if="expert.degree" class="ditem">{{expert.degree}}<span>|</span></span>
-								<span v-if="expert.nationality" class="ditem">{{expert.nationality}}<span>|</span></span>
-								<span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}<span>|</span></span>
-								<span v-if="expert.language+''" class="ditem">{{expert.language+''}}<span>|</span></span>
-								<span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
-							</div>
+							<div class="desp"><span v-if="expert.degree" class="ditem">{{expert.degree}}<span>|</span></span><span v-if="expert.nationality" class="ditem">{{expert.nationality}}<span>|</span></span><span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}<span>|</span></span><span v-if="expert.language+''" class="ditem">{{expert.language+''}}<span>|</span></span><span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span></div>
 						</div>
 
-						<a :href="'./talentDetail.html?id='+expert.id"><div class="look">查看</div></a>
+						<a target="_blank" :href="'./talentDetail.html?id='+expert.id"><div class="look">查看</div></a>
 					</div>
 				</div>
 				<div class="pages">
@@ -188,6 +182,9 @@
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
+			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				location.href = "../home/expertTalents.html";
+			} else {} 
 			var vm = new Vue({
 				el: '#app',
 				data: {
@@ -248,7 +245,7 @@
                         this.searchObj.works_id = parseUrl().id?parseUrl().id:'';
                         this.companyName = localStorage.getItem('companyName')?localStorage.getItem('companyName'):'';
                         this.searchObj.keywords = localStorage.getItem('companyName')?localStorage.getItem('companyName'):'';
-                        localStorage.removeItem('companyName')
+                        localStorage.removeItem('companyName');
                     }
                     this.requireData();
 				},
@@ -285,7 +282,7 @@
 					// 选择人才分类
 					chooseType(val,type,status){
 						let that = this; 
-						console.log(status);
+//						console.log(status); 
 						if(status=="type"){ 
 							that.choose.industry.chooseHide = true;
 							that.choose.degree.chooseHide = true;
@@ -306,7 +303,13 @@
 							that.choose.industry.chooseHide = true;
 							that.choose.degree.chooseHide = true; 
 						}
-						if(type == 'choose'){
+						if(type == 'close'){
+							// 关闭选择框
+							that.choose.type.chooseHide = true;
+							that.choose.industry.chooseHide = true;
+							that.choose.degree.chooseHide = true; 
+							that.choose.language.chooseHide = true;
+						}else if(type == 'choose'){ 
 							// 展开选择类型
 							this.choose[status].chooseHide = !this.choose[status].chooseHide;
 						}else if(type == 'error'){
@@ -429,15 +432,7 @@
 						return container;
 					}
 				}, 
-			}); 
-			$(function(){ 
-				$("body").on("click",function(){
-					vm.choose.type.chooseHide = true;
-					vm.choose.industry.chooseHide = true;
-					vm.choose.degree.chooseHide = true;
-					vm.choose.language.chooseHide = true;
-				})
-			})
+			});  
 		</script>
 	</body>
 

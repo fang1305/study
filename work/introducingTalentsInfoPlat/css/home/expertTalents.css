@@ -45,12 +45,11 @@
 .list .item .info .name .left { font-size: .28rem; color: #333333; line-height: 1.3; padding-right: .17rem;}
 .list .item .info .name .right { font-size: .22rem; color: #999999; line-height: 1.8;}
 .list .item .info .name:after { content:""; clear: both; display: block;} 
-.list .item .info .desp { margin-top: .13rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-.list .item .info .desp .ditem { padding: 0 5px; border-right: 1px solid #666666; font-size: .24rem; color: #666666; line-height: 1.1;}
-.list .item .info .desp .ditem:last-child { border-right: none;}
-.list .item .info .desp .ditem:first-child { padding-left: 0;} 
+.list .item .info .desp { margin-top: .13rem;}
+.list .item .info .desp .ditem { font-size: .24rem; color: #666666; line-height: 1.1; word-break: break-all;}
+.list .item .info .desp .ditem span { padding: 0 .05rem;}
 
-.pages { text-align: center; margin-top: .54rem;}
+.pages { text-align: center; margin-top: .4rem;}
 #pagination { display: inline-block;}
 .paginationjs.paginationjs-theme-blue .paginationjs-pages li.active>a { background-color: #206BD1;}
 .paginationjs .paginationjs-pages li>a { width: .54rem; height: .54rem; font-size: .27rem; line-height: .54rem;}
@@ -58,3 +57,5 @@
 .paginationjs-prev a { width: 1rem !important; padding: 0 .1rem;}
 .paginationjs-next a { width: 1rem !important; padding: 0 .1rem;}
 .paginationjs .paginationjs-pages li { margin-right: .27rem;}
+.paginationjs-page,.paginationjs-prev,.paginationjs-next,.paginationjs-ellipsis { margin-top: .14rem;}
+.paginationjs-next { margin-right: 0 !important;}

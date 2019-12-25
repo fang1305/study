@@ -64,7 +64,7 @@
 				</div>
 				<div class="right">
 				 	<div class="company">
-						<a :href="'./companyIntro.html?id='+detail.works_id">
+						<a target="_blank" :href="'./companyIntro.html?id='+detail.works_id">
 							<div class="logo-name">
 								<img :src="detail.logo" alt="" />
 								<p class="name" v-text="detail.works_name"></p>
@@ -151,6 +151,9 @@
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
+			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				location.href = "../home/jobDetail.html";
+			} else {} 
 			var vm = new Vue({
 				el: '#app',
 				data: {

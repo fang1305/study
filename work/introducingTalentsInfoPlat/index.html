@@ -99,15 +99,10 @@
 									<div class="left">{{expert.surname+expert.name}}({{expert.age}}岁)</div>
 									<div class="right">{{expert.type}}</div>
 								</div> 
-								<div class="desp">
-									<span v-if="expert.degree" class="ditem">{{expert.degree}}<span>|</span></span>
-									<span v-if="expert.nationality" class="ditem">{{expert.nationality}}<span>|</span></span>
-									<span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}<span>|</span></span>
-									<span v-if="expert.language+''" class="ditem">{{expert.language+''}}<span>|</span></span>
-									<span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
+								<div class="desp"><span v-if="expert.degree" class="ditem">{{expert.degree}}<span>|</span></span><span v-if="expert.nationality" class="ditem">{{expert.nationality}}<span>|</span></span><span v-if="expert.industry_name" class="ditem">{{expert.industry_name}}<span>|</span></span><span v-if="expert.language+''" class="ditem">{{expert.language+''}}<span>|</span></span><span v-if="expert.marriage" class="ditem">{{expert.marriage}}</span>
 								</div>
 							</div>
-							<a :href="'./html/index/talentDetail.html?id='+expert.id"><div class="look">查看</div></a>
+							<a  target="_blank" :href="'./html/index/talentDetail.html?id='+expert.id"><div class="look">查看</div></a>
 						</div>
 					</div>
 				</div>
@@ -117,7 +112,7 @@
 					<div class="small-title">Project technology</div>
 					<div class="list">
 						<div class="item" v-for="project in projects">
-							<a :href="'./html/index/projectDetail.html?id='+project.id" >
+							<a  target="_blank" :href="'./html/index/projectDetail.html?id='+project.id" >
 								<div class="info">
 									<p class="name">{{project.jane_title}}</p>
 									<div class="desp">{{project.info}}</div>
@@ -129,18 +124,7 @@
 								</div>
 								<div class="look">查看</div>
 							</a>
-						</div>
-						<!-- <div class="item">
-							<div class="info">
-								<p class="name">水电基地为拉脱维亚里加项目</p>
-								<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过 1万多架飞机、50多万观众、800多家航空制造商同 时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为EAA AirVenture已成为EAA AirVenture已成为</div>
-								<div class="time">
-									<div class="left">英国：2016-12-07</div>
-									<div class="right">新能源/环保技术</div>
-								</div>
-							</div>
-						 	<div class="look">查看</div>
-						</div> -->
+						</div> 
 					</div>
 				</div>
 				<!-- block3 end -->
@@ -150,7 +134,7 @@
 					<div class="list">
 						<div class="item" v-for="job in jobs">
 							<div class="company">
-								<a :href="'./html/index/companyIntro.html?id='+job.works_id"> 
+								<a  target="_blank" :href="'./html/index/companyIntro.html?id='+job.works_id"> 
 									<div class="poster">
 										<img :src="job.logo"/>
 									</div>
@@ -161,7 +145,7 @@
 								 </a>
 							</div>
 							<div class="info">
-								<a :href="'./html/index/jobDetail.html?id='+job.id"> 
+								<a  target="_blank" :href="'./html/index/jobDetail.html?id='+job.id"> 
 									<div class="job-time-salary">
 										<p class="jobname">{{job.professional}}</p>
 										<p class="time">[{{getTimeInit(job.add_time)}}发布]</p>
@@ -176,34 +160,7 @@
 									</div>
 								</a>
 							</div>
-						</div>
-						<!-- <div class="item">
-							<div class="company">
-							 	<div class="poster">
-									<img src="img/index/co1.jpg"/>
-							 	</div>
-							 	<div class="right">
-							 		<p class="cpname">公司名称</p>
-							 		<p class="desp">电子信息 | 新能源</p>
-							 	</div>
-							</div>
-							<div class="info">
-								<div class="job-time-salary">
-									<p class="jobname">高级测试工程师</p>
-									<p class="time">[11-10发布]</p>
-									<p class="salary">12K-14K</p>
-								</div>
-								<p class="need">美国/本科/英语</p>
-								<div class="position">
-									<div class="pot">
-										<span>功能测试</span>
-										<span>性能测试</span>
-										<span>测试开发</span>
-									</div>
-									<div class="look">查看</div>
-								</div>
-							</div>
-						</div> -->
+						</div> 
 					</div>
 				</div>
 				<!-- block4 end -->
@@ -212,7 +169,7 @@
 					<div class="small-title">Technology demand</div>
 					<div class="list">
 						<div class="item" v-for="project in demandProjects">
-							<a :href="'./html/index/projectDemandDetail.html?id='+project.id" >
+							<a  target="_blank" :href="'./html/index/projectDemandDetail.html?id='+project.id" >
 								<div class="info">
 									<p class="name">{{project.jane_title}}</p>
 									<p class="belong">{{project.industry_name}}</p>
@@ -224,19 +181,7 @@
 								</div>
 								<div class="look">查看</div>
 							 </a>
-						</div> 
-						<!-- <div class="item">
-							<div class="info">
-								<p class="name">水电基地为拉脱维亚里加项目</p>
-								<p class="belong">新能源/环保技术</p>
-								<div class="desp">每年7月下旬，美丽的小城Oshkosh，都会迎来超过 1万多架飞机、50多万观众、800多家航空制造商同 时还会举行超过1000场丰富多彩的通用航空普及教育、论坛和商务交流活动。EAA AirVenture已成为EAA AirVenture已成为EAA AirVenture已成为</div>
-								<div class="time">
-									<div class="left">英国：2016-12-07</div>
-									<div class="right">核心技术</div>
-								</div>
-							</div>
-						 	<div class="look">查看</div>
-						</div>  -->
+						</div>  
 					</div>
 				</div>
 				<!-- block5 end -->
@@ -245,10 +190,9 @@
 					<div class="small-title">Overseas institutions</div>
 					<div class="cont">
 						<div class="swiper-container swiper-container2">
-						    <div class="swiper-wrapper">
-                                
+						    <div class="swiper-wrapper"> 
 							    <div class="swiper-slide" v-for="work in outWorks">
-                                    <a :href="'./html/index/companyIntro.html?id='+work.id">
+                                    <a  target="_blank" :href="'./html/index/companyIntro.html?id='+work.id">
                                         <div class="item">
                                             <div class="cologo">
                                                 <img :src="work.logo" />
@@ -269,7 +213,7 @@
 						</div>
 					    <!-- Add Arrows -->
 					    <div class="swiper-button-next swiper-button-next2"></div>
-					    <div class="swiper-button-prev swiper-button-next2"></div>
+					    <div class="swiper-button-prev swiper-button-prev2"></div>
 					</div>
 				</div>
 				<div class="block7">
@@ -279,7 +223,7 @@
 						<div class="swiper-container swiper-container3">
 						    <div class="swiper-wrapper">
 							    <div class="swiper-slide" v-for="work in inWorks">
-							    	<a :href="'./html/index/companyIntro.html?id='+work.id"><div class="item">
+							    	<a  target="_blank" :href="'./html/index/companyIntro.html?id='+work.id"><div class="item">
 							    		<div class="cologo">
 								    		<img :src="work.logo"/>
 								    	</div>
@@ -298,7 +242,7 @@
 						</div>
 					    <!-- Add Arrows -->
 					    <div class="swiper-button-next swiper-button-next3"></div>
-					    <div class="swiper-button-prev swiper-button-next3"></div>
+					    <div class="swiper-button-prev swiper-button-prev3"></div>
 					</div>
 				</div>
 			</div>
@@ -337,18 +281,16 @@
 		<script type="text/javascript" src="js/vue.min.js"></script> 
         <script type="text/javascript" src="js/config.js"></script>
 		<script>
-			if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-				var url = window.location.protocol + "//" + document.domain + "/html/home/index.html";
-				window.location.href = url;
-			} else {
-
+			if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) { 
+				window.location.href = "html/home/index.html";
+			} else { 
 			} 
 			var vm = new Vue({
 				el: '#app',
 				data: {
 					indexText: "首页",
 					lang: "cn",
-					languageText: "中文", 
+					languageText: "English", 
 					experts: [],
 					jobs:[],
 					projects:[],
@@ -359,7 +301,7 @@
                 created() {
                     if(localStorage.getItem('lang') == 'en'){
                         this.lang = 'en';
-					    this.languageText = "English";
+					    this.languageText = "中文";
 					}
 					this.requireData();
                 },
@@ -383,13 +325,13 @@
                         if(this.lang == 'cn'){
                             this.lang = 'en';
                             localStorage.setItem('lang','en');
-                            this.languageText = 'English';
+                            this.languageText = '中文';
                             // 重新请求数据
                             this.requireData();
                         }else{
                             this.lang = 'cn';
                             localStorage.setItem('lang','cn');
-                            this.languageText = '中文';
+                            this.languageText = 'English';
                             // 重新请求数据
                             this.requireData();
                         }
@@ -431,7 +373,7 @@
 										    var swiper2 = new Swiper('.swiper-container2', {
 							//					autoplay: true,
 												slidesPerView: 6,
-										        spaceBetween: 30,
+										        spaceBetween: 0,
 											    navigation: {
 											        nextEl: '.swiper-button-next2',
 											        prevEl: '.swiper-button-prev2',
@@ -440,7 +382,7 @@
                                             var swiper3 = new Swiper('.swiper-container3', {
                             //					autoplay: true,
                                                 slidesPerView: 6,
-                                                spaceBetween: 30,
+                                                spaceBetween: 0,
                                                 navigation: {
                                                     nextEl: '.swiper-button-next3',
                                                     prevEl: '.swiper-button-prev3',

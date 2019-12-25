@@ -108,7 +108,7 @@
 						<hr class="line" />
 					</div>
 					<div class="list">
-						<a :href="'./jobDetail.html?id='+job.works_id"  v-for="job in jobs"><div class="item">
+						<a target="_blank" :href="'./jobDetail.html?id='+job.works_id"  v-for="job in jobs"><div class="item">
 							<div class="job-salary">
 								<div class="job" v-text="job.professional+(job.countries+''?' ['+job.countries+']':'')"></div>
 								<div class="salary" v-text="job.low_salary+(job.low_salary&&job.high_salary?'-':'')+job.high_salary">20K-40K</div>
@@ -129,7 +129,7 @@
 							</div>
 						</div> -->
 					</div>
-					<div class="more"><a :href="'./jobRecommendation.html?id='+id"><span>查看更多</span></div>
+					<div class="more"><a target="_blank" :href="'./jobRecommendation.html?id='+id"><span>查看更多</span></a></div>
 				</div>
 				<div class="right">
 						<div class="title">
@@ -137,7 +137,7 @@
 						<hr class="line" />
 					</div>
 					<div class="list">
-						<a :href="'./projectDemandDetail.html?id='+project.id"  v-for="project in projectsDemand"><div class="item">
+						<a  target="_blank" :href="'./projectDemandDetail.html?id='+project.id"  v-for="project in projectsDemand"><div class="item">
 							<div class="name" v-html="project.jane_title"></div>
 							<div class="desp" v-if="project.info" v-html="project.info"></div>
 							<div class="time">
@@ -146,7 +146,7 @@
 							</div>
 						</div></a> 
 					</div>
-					<div class="more"><a :href="'./technologyDemand.html?id='+id"><span>查看更多</span></a></div>
+					<div class="more"><a target="_blank" :href="'./technologyDemand.html?id='+id"><span>查看更多</span></a></div>
 					<!-- <div class="more" v-if="proDemandCount"><span>查看更多</span></div> -->
 				</div>
 			</div>
@@ -158,7 +158,7 @@
 					</div>
 					<div class="list">
 						<div class="item" v-for="expert in experts">
-							<a :href="'talentDetail.html?id='+expert.id">
+							<a target="_blank" :href="'talentDetail.html?id='+expert.id">
 							<div class="avator">
 								<img :src="expert.photo"/>
 							</div>
@@ -177,7 +177,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="more"><a :href="'./expertTalents.html?id='+detail.id"><span>查看更多</span></div>
+					<div class="more"><a target="_blank" :href="'./expertTalents.html?id='+detail.id"><span>查看更多</span></a></div>
 				</div>
 				<div class="right">
 				 	<div class="title">
@@ -185,7 +185,7 @@
 						<hr class="line" />
 					</div>
 					<div class="list">
-                        <a :href="'./projectDetail.html?id='+project.id"  v-for="project in projects"><div class="item">
+                        <a  target="_blank" :href="'./projectDetail.html?id='+project.id"  v-for="project in projects"><div class="item">
 							<div class="name" v-html="project.jane_title"></div>
 							<div class="desp" v-if="project.info" v-html="project.info"></div>
 							<div class="time">
@@ -202,7 +202,7 @@
 							</div>
 						</div> -->
 					</div>
-					<div class="more"><a :href="'./technology.html?id='+id"><span>查看更多</span></a></div>
+					<div class="more"><a target="_blank" :href="'./technology.html?id='+id"><span>查看更多</span></a></div>
 				</div>
 			</div>
 			<div class="footer">
@@ -239,6 +239,9 @@
 		<script type="text/javascript" src="../../js/vue.min.js"></script>
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
+			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				location.href = "../home/companyIntro.html";
+			} else {} 
 			var vm = new Vue({
 				el: '#app',
 				data: {
