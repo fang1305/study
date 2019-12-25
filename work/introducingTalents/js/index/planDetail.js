@@ -18,12 +18,24 @@ var vm = new Vue({
         num: '人数',
         status: 1,
 		recomList: "",
-		specialList: "",
+        specialList: "",
+        keyword: '',
 		searchObj: {
 			arctype_id:"",
 			lang: 'cn', 
 			aid: "",
-		}
+        },
+        clickStatus: 1,
+        applyObj: {
+            aid: '',
+            name: '',
+            sex: '男',
+            phone: '',
+            email: '',
+            info: '',
+            enterprise_name: '',
+            number: ''
+        }
 	}, 
 	created() {  
         if(sessionStorage.lang == 'en'){
@@ -35,7 +47,8 @@ var vm = new Vue({
 			sessionStorage.lang == 'cn';
 		}  
         if(parseUrl()){
-            this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
+            this.parentid = parseUrl().parentid ? parseUrl().parentid : '';
+            this.typeid = parseUrl().typeid ? parseUrl().typeid : '';
         } 
 		this.requireData();
     },
@@ -47,9 +60,45 @@ var vm = new Vue({
 			// 文章详情
 			this.getList('article','home/articleDetail'); 
         },
-        selectFun(type,value){
-            // 下拉框选择
-            this[type] = value;
+        applyFun(){
+            // 提交申请
+            this.applyObj.aid = parseUrl().aid;
+            console.log(this.applyObj);
+            let that = this;
+            if(that.applyObj.name == ''&& that.clickStatus){
+                alert('请填写姓名')
+            }else if(that.applyObj.phone == ''&&that.clickStatus){
+                alert('请填写电话')
+            }else if(parseInt(that.applyObj.number)<1&&that.clickStatus){
+                alert('申请人数至少一人')
+            // }else if( !phoneTest(that.applyObj.phone) && that.clickStatus ){
+            //     alert('手机号格式错误')
+            }else if(that.clickStatus){
+                that.clickStatus = 0;
+                $.ajax({
+                    url: config.apiHost+'apply/applytrain',
+                    type: 'POST',  
+                    async: true,  
+                    data: that.applyObj,
+                    dataType: 'json', 
+                    success: function (ret){
+                        that.clickStatus = 1;
+                        typeof ret == "object"?'':ret=JSON.parse(ret);
+                        if(ret.status == 'ok'){
+                            alert(ret.result)
+                        }else{
+                            alert(ret.result)
+                        }
+                    },error: function (xhr, textStatus){
+                        // 发送失败
+                        that.clickStatus = 1;
+                        console.log('错误')
+                        console.log(xhr)
+                        console.log(textStatus)
+                    }
+                });
+            }
+            
         },
         getList(type,url,typeid){ 
             let that = this;
@@ -118,6 +167,10 @@ var vm = new Vue({
             this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
 			location.href = "../../index.html";
         },
+        searchFun() {
+            var url = "search.html?keywords=" + this.keyword + '&typeid=' + parseUrl().typeid + '&parentid=' + parseUrl().typeid;
+            window.open(url);
+        },
 		articleList: function(typeid, parentid,level) { 
 			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
 			    var url = "http://ku.hbafea.com";
@@ -127,7 +180,9 @@ var vm = new Vue({
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
 			}else if( typeid==15 || typeid == 52){           //合作机构
 			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-			}else if( typeid == 19 || typeid == 33 || typeid == 29 || typeid == 35 ||typeid == 31 ){ // 人才培训
+            }else if( typeid == 19 || typeid == 20){
+                var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+            }else if( typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ // 人才培训
                 var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==21 || typeid == 22){           //国际交流培训
 			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;

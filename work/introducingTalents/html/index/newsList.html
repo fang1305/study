@@ -34,9 +34,9 @@
 
 				<div class="search-group">
 					<div class="search">
-						<input type="text" name="keywords" id="keywords" value="" placeholder="搜索" />
+						<input type="text" v-model="keyword" name="keywords" id="keywords" value="" placeholder="搜索" />
 					</div>
-					<div class="search-btn" onclick="search()">搜索</div>
+					<div class="search-btn" @click="searchFun()">搜索</div>
 				</div>
 			</div>
 			<div class="navBar">

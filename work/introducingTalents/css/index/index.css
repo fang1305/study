@@ -47,7 +47,7 @@
 .teacher-demeanor .list .item { flex: 1; border: 1px solid #00468D; font-size: 16px; line-height: 40px; color: #00468D; text-align: center; cursor: pointer;}
 .teacher-demeanor .list .item:hover { color: #EEEEEE; background-color: #00468D;}
 .teacher-demeanor .list .item.act { color: #EEEEEE; background-color: #00468D;}
-.teacher-demeanor img { width: 100%; height: 167px;}
+.teacher-demeanor img { width: 100%; height: 207px;}
 
 /* expert-talents */
 .expert-talents .title .btitle { font-size: 24px; line-height: 1; color: #333333; padding-right: 3px;}

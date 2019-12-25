@@ -42,9 +42,9 @@
 
 				<div class="search-group">
 					<div class="search">
-						<input type="text" name="keywords" id="keywords" value="" placeholder="搜索" />
+						<input type="text" v-model="keyword" name="keywords" id="keywords" value="" placeholder="搜索" />
 					</div>
-					<div class="search-btn">搜索</div>
+					<div class="search-btn" @click="searchFun">搜索</div>
 				</div>
 			</div>
 			<div class="navBar">
@@ -160,7 +160,8 @@
 					yourposition: "您的位置",
 					navBar: "",
 					smallNav: "",
-					position: "", 
+		            keyword: "",
+		            position: "",
 					parentid: "",
 					typeid: "",
 					article: {  
@@ -261,7 +262,12 @@
 						    var url = "http://ku.hbafea.com/html/index/technology.html";
 						}else if( typeid==15 || typeid == 52){           //合作机构
 						    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-						}else if( typeid==21 || typeid == 22){           //国际交流培训
+                        }else if( typeid == 19 || typeid == 20){
+                            var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+                            // var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+                        }else if( typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){
+                            var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid; 
+						}else if( typeid==21 || typeid == 22){ //国际交流培训
 						    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
 						}else if( typeid==23 || typeid == 24){           //名师讲堂
 						    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
@@ -276,6 +282,10 @@
                         this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
 						location.href = "../../index.html";
                     }, 
+                    searchFun() {
+			            var url = "search.html?keywords=" + this.keyword + '&typeid=' + parseUrl().typeid + '&parentid=' + parseUrl().parentid;
+                        window.open(url);
+                    },
 				},
 				filters: {
 					getDate: function(str) {

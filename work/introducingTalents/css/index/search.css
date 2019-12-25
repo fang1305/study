@@ -12,12 +12,12 @@
 .news-list .intro-box p{ padding-top: 20px;color:#333;line-height: 30px;font-size: 18px; }
 
 .mainList {}
-.news-list {width: 874px;min-width: 874px;border-top: 1px solid #EEEEEE;margin-right: 40px;}
+.news-list { flex: 1;border-top: 1px solid #EEEEEE;margin-right: 40px;}
 .news-list .news { width: 100%;padding:0px; box-sizing: border-box; margin-top: 30px; line-height: 0; float: left; margin-right: 35px; cursor: pointer;}
 .news-list .news:nth-child(2n) { margin-right: 0;}
 .news-list .news .desc_box{ width: 891px; }
 .news-list .news .desc_box.active{ padding-top: 12px; }
-.news-list .news .tag { background: #00468D;min-width: 80px;padding: 5px 12px;font-size: 14px;color: #FFF;line-height: 14px;margin-right: 9px; }
+.news-list .news .tag { background: #00468D;min-width: 80px;box-sizing: border-box;padding: 5px 12px;font-size: 14px;color: #FFF;line-height: 14px;margin-right: 9px; }
 .news-list .news .name { flex:1;width: 580px;font-size: 20px; line-height: 20px; color: #333333; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 .news-list .news .desp { flex:1;font-size: 16px; line-height: 26px; color: #666666; padding-top: 20px; text-overflow: -o-ellipsis-lastline; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3;  line-clamp: 3; -webkit-box-orient: vertical;}
 .news-list .news .time { font-size: 14px; line-height: 1; color: #999999; text-align: right;padding-top: 4px;padding-left: 10px;}
@@ -25,6 +25,7 @@
 .news-list .news .time.active{ margin-bottom: 30px; }
 .news-list:after { content:""; clear: both; display: block;} 
 
+.news-other { width: 360px;}
 .news-other .title{ margin-top:30px;font-size: 24px;line-height: 24px;border-left: 2px solid #333;color: #333;padding-left: 10px; }
 .news-other .news .desc_box{ width: 100%; }
 .news-other .news-list{ min-width: 360px;max-width: 360px;margin-right: 0;border-top: none;margin-top: 0; }

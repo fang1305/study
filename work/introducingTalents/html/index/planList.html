@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/public/footer.css" />
     <link rel="stylesheet" type="text/css" href="../../css/public/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="../../css/pagination.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/index/search.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/index/newsLine.css" />
 </head>
 
 <body>
@@ -35,17 +35,16 @@
 
             <div class="search-group">
                 <div class="search">
-                    <input type="text" v-model="searchObj.keywords" name="keywords" id="keywords" value=""
-                        placeholder="搜索" />
+                    <input type="text" v-model="keyword" name="keywords" id="keywords" value="" placeholder="搜索" />
                 </div>
-                <div class="search-btn" @click="searchFun">搜索</div>
+                <div class="search-btn" @click="searchFun()">搜索</div>
             </div>
         </div>
         <div class="navBar">
             <div class="nav">
                 <ul class="nav-list">
-                    <li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
-                    <li v-for="item in navBar"><span>{{item.typename}}</span>
+					<li><a href="../../index.html"><span class="indexPage">{{indexText}}</span></a></li>
+                    <li v-for="item in navBar" :class="[parentid == item.id?'act':'']"><span>{{item.typename}}</span>
                         <ul class="dropdown-menu">
                             <li v-on:click="articleList(item.childList[0].id,item.id,0)"></li>
                             <li v-for="item1 in item.childList" v-on:click="articleList(item1.id,item.id)">
@@ -54,41 +53,41 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="chinese" @click="changeLang"> 
+				<div class="chinese" @click="changeLang"> 
                     <span>{{languageText}}</span>
                     <i class="iconfont icon-sanjiao_xia"></i>
                 </div>
-                <img class="avatar" src="../../img/icon/icon_avatar.png" /> 
+                <img class="avatar" src="../../img/icon/icon_avatar.png" />
             </div>
-        </div> 
+        </div>
 
         <div class="main">
-            <div class="mainList flex-def">
-                <div class="news-list">
-                    <div class="intro-box">
-                        <h3>检索出{{ newsList.length }}条结果</h3>
-                    </div>
-                    <div class="news" v-for="news in newsList" v-on:click="articleDetail(news.aid,news.typeid,news.parent_id)">
-                        <div class="flex-def flex-cCenter flex-zBetween">
-                            <div class="tag" v-if="position">{{position}}</div>
-                            <span class="name">{{news.title}}</span>
-                            <span class="time">{{news.add_time | getDate}}</span>
-                        </div>
-						<p class="desp">{{news.seo_description | getDesp}}</p>
-                    </div>
+            <div class="second-nav" v-if="smallNav && position">
+                <div class="list">
+                    <span v-for="item in smallNav" :class="[typeid == item.id?'act':'']"
+                        v-on:click="articleList(item.id,parentid)">{{item.typename}}</span>
                 </div>
-                <div class="news-other">
-                    <div class="title">其他新闻</div>
-                    <div class="news-list">
-                        <div class="news" v-for="news in headerNews" v-on:click="articleDetail(news.aid,news.typeid,news.parent_id)">
-                            <div class="flex-def flex-cCenter flex-zBetween">
-                                <span class="name">{{news.title}}</span>
-                                <span class="time">{{news.add_time | getDate}}</span>
-                            </div>
-                            <p class="desp">{{news.seo_description | getDesp}}</p>
-                        </div>
+                <div class="position" v-if="position">{{yourposition}}><span>{{position}}</span></div>
+            </div>
+            <div class="intro-box">
+                <h3>计划介绍</h3>
+                <p>卓学-卓识-卓越人才支持计划2011年9月正式启动 [1] ，简称“卓越人才计划”。这是根据师资队伍建设的客观要求和人才成长的内在规律特别
+                    构建的优秀中青年教师培养支持计划，旨在通过构建衔接紧密的三层次支持体系，激励我校中青年教师潜心学术，取得国内领先或国际一流的研究
+                    成果,实现学识卓越。</p>
+            </div>
+            <div class="news-list">
+				<div class="news flex-def flex-zBetween" v-for="item in newsList" v-on:click="articleDetail(item.aid,item.typeid,item.parent_id)">
+                    <div class="info">
+                        <p class="name">{{item.title}}</p>
+						<p class="desp">{{item.seo_description | getDesp}}</p>
                     </div>
-                </div>
+                    <div class="invite-btn">
+                        <p class="time">{{item.add_time | getDate}}</p>
+                        <p class="btn">申请计划</p>
+                    </div>
+				</div>
+                <!-- <div class="news" v-for="item in newsList" v-on:click="articleDetail(item.aid,item.typeid,item.parent_id)">
+                </div> -->
             </div>
             <div class="pages">
                 <div id="pagination"></div>
@@ -137,7 +136,7 @@
     <script type="text/javascript" src="../../js/config.js"></script>
     <script type="text/javascript" src="../../js/rest.js"></script>
     <script type="text/javascript" src="../../js/vue.min.js"></script>
-    <script type="text/javascript" src="../../js/index/search.js"></script>
+    <script type="text/javascript" src="../../js/index/newsLine.js"></script>
 </body>
 
 </html>

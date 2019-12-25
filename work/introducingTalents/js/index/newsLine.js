@@ -13,7 +13,9 @@ var vm = new Vue({
 		smallNav: "",
 		position: "", 
 		parentid: "",
-		typeid: "",
+        typeid: "",
+        typePic: '../../img/icon/index/policy.png',
+        keyword: '',
 		searchObj: {
 			arctype_id:"",
 			lang: 'cn',
@@ -28,8 +30,13 @@ var vm = new Vue({
             this.parentid = parseUrl().parentid ? parseUrl().parentid : '';
             this.typeid = parseUrl().typeid ? parseUrl().typeid : '';
         }
-        if (parseUrl().typeid == 19) {
-            this.typeBtn = '申请计划';
+        if(parseUrl().typeid == 33||parseUrl().typeid == 34){
+            // 行政许可
+            this.typePic = '../../img/icon/index/promise.png'
+        }else if( parseUrl().typeid == 29||parseUrl().typeid == 30){
+            this.typePic = '../../img/icon/index/together.png'
+        }else if( parseUrl().typeid == 31||parseUrl().typeid == 32){
+            this.typePic = '../../img/icon/index/crm.png'
         }
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
@@ -112,6 +119,10 @@ var vm = new Vue({
             this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
 			location.href = "../../index.html";
         },
+        searchFun() {
+			var url = "search.html?keywords=" + this.keyword + '&typeid=' + parseUrl().typeid + '&parentid=' + parseUrl().parentid;
+			window.open(url);
+        },
         createPagination(num) {
 			let that = this; 
 			var container = $('#pagination');
@@ -160,7 +171,9 @@ var vm = new Vue({
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
 			}else if( typeid==15 || typeid == 52){  
 			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-			}else if( typeid == 19 || typeid == 33 || typeid == 29 || typeid == 35 ||typeid == 31 ){ // 人才培训
+            }else if( typeid == 19 || typeid == 20){
+                var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+            }else if( typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ // 人才培训
                 var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==21 || typeid == 22){           //国际交流培训
 			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
@@ -343,20 +356,8 @@ function createPagination(num) {
 		window.console && console.log('beforePageOnClick...');
 	});
 	return container;
-}
-//搜索
-function search(){
-	var keywords = $("#keywords").val();
-	vm.keywords = keywords; 
-	var param = {
-		lang: vm.lang,
-		limit: "",
-		typeid: vm.typeid,
-		page: 1,
-		keywords: keywords,
-	} 
-	apiAjax("articleList", param, "GET", articleList);
-}
+} 
+
 var bodyH = $("body").height();
 var headerH = $(".header").height();
 var navBarH = $(".navBar").height();

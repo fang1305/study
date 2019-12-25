@@ -11,7 +11,9 @@ var vm = new Vue({
 		smallNav: "",
 		position: "", 
 		parentid: "",
-		typeid: "",
+        typeid: "",
+		keyword: "",
+        headerNews: '',
 		searchObj: {
 			arctype_id:"",
 			lang: 'cn',
@@ -42,13 +44,17 @@ var vm = new Vue({
 			// 导航栏
 			this.getList('navBar','home/arctypeList'); 
 			this.getList('smallNav','home/arctypeList'); 
-			// 文章列表
+            // 其他新闻, 引智头条的内容
+			this.getList('headerNews', 'home/articleList');
+            // 文章列表
 			this.getList('newsList','home/articleList'); 
         },
         searchFun(){
             // 搜索
-            this.searchObj.page = 1;
-			this.getList('newsList', 'home/articleList');
+            var url = "search.html?keywords=" + this.searchObj.keywords + '&typeid=' + parseUrl().typeid + '&parentid=' + parseUrl().typeid;
+            location.href=url;
+            // this.searchObj.page = 1;
+			// this.getList('newsList', 'home/articleList');
         },
 		getList(type,url,typeid){ 
             let that = this; 
@@ -57,22 +63,35 @@ var vm = new Vue({
            	} 
            	if(type=="smallNav"){ 
            		that.searchObj.arctype_id = parseUrl().parentid?parseUrl().parentid:''; 
-            }    
+            }   
             that.searchObj.typeid = parseUrl().typeid?parseUrl().typeid:''; 
             that.searchObj.lang = that.lang; 
-			$.ajax({
+            let headerObj = {};
+            if (type == 'headerNews') {
+                headerObj = {
+                    limit: 6,
+                    lang: that.lang,
+                    page: 1,
+                    typeid: that.lang == 'cn' ? 3 : 4,
+                    keywords: ''
+                }
+            }
+            let sendObj = type == 'headerNews' ? headerObj : that.searchObj;
+            $.ajax({
 				url: config.apiHost+url,
 				type: 'GET',  
                 async: true,  
-                data:that.searchObj,
+                data:sendObj,
+                // data:that.searchObj,
 				dataType: 'json', 
 				success: function (ret){
 					typeof ret == "object"?'':ret=JSON.parse(ret);
 					// 发送成功 
 					if(ret.status == 'ok'){
 						var list = ret.data;
-//			                        console.log(ret);
+//			            console.log(ret);
                         if(type=="smallNav"){
+                            that.position = list[0].typename;
                         	that[type] = list[0].childList;
 							for(var i = 0; i< that.smallNav.length; i++){
 								if(that.typeid == that.smallNav[i].id){ 
@@ -94,6 +113,8 @@ var vm = new Vue({
 							if(ret.data.seo_keywords){
 								$('meta[name="keywords"]').attr('content',ret.data.seo_keywords);
 							}
+                        }else if(type=="headerNews"){
+                            that.headerNews = list.list;
                         }else{ 
                         	that[type] = list;
                         } 
@@ -163,7 +184,9 @@ var vm = new Vue({
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
 			}else if( typeid==15 || typeid == 52){          //合作机构
                 var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-            }else if( typeid == 19 || typeid == 33 || typeid == 29 || typeid == 35 ||typeid == 31 ){ // 人才培训
+            }else if( typeid == 19 || typeid == 20){
+                var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+            }else if( typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ // 人才培训
                 var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==21 || typeid == 22){           //国际交流培训
 			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
@@ -178,6 +201,8 @@ var vm = new Vue({
 		articleDetail: function(aid, typeid, parentid) { 
 			if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==31 || typeid == 32){           //卓越人才计划、创业扶持
+			    var url = "planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			} 
@@ -187,13 +212,13 @@ var vm = new Vue({
 	filters: {
 		getDate: function(str) {
 			var oDate = new Date(str*1000),
-				oYear = oDate.getFullYear(),
-				oMonth = oDate.getMonth() + 1,
-				oDay = oDate.getDate(),
-				oHour = oDate.getHours(),
-				oMin = oDate.getMinutes(),
-				oSec = oDate.getSeconds(),
-				oTime = oYear + '-' + oMonth + '-' + oDay; //最后拼接时间 
+			oYear = oDate.getFullYear(),
+			oMonth = oDate.getMonth() + 1,
+			oDay = oDate.getDate(),
+			oHour = oDate.getHours(),
+			oMin = oDate.getMinutes(),
+			oSec = oDate.getSeconds(),
+			oTime = oYear + '-' + oMonth + '-' + oDay; //最后拼接时间 
 			return oTime;
 		},
 		getDesp: function(cont) { 

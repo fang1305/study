@@ -7,12 +7,13 @@
 .second-nav .position { font-size: 16px; line-height: 1; color: #999999; float: right;}
 .second-nav .position span { color: #00468C;}
 
-.intro-box { width: 100%;box-sizing: border-box;padding: 20px; }
+.intro-box { width: 100%;box-sizing: border-box;padding: 20px 20px 10px; }
 .intro-box h3{ color: #333;font-size: 24px;margin: 0;line-height: 23px; }
 .intro-box p{ padding-top: 20px;color:#333;line-height: 30px;font-size: 18px; }
 
 .news-list {}
 .news-list .news { width: 100%;padding: 28px 30px; box-sizing: border-box; margin-top: 30px; line-height: 0; float: left; margin-right: 35px; cursor: pointer;border: 1px solid #DADADA;}
+.news-list .news .info{ max-width: 900px; }
 .news-list .news:nth-child(2n) { margin-right: 0;}
 .news-list .news .desc_box{ width: 891px; }
 .news-list .news .desc_box.active{ padding-top: 12px; }

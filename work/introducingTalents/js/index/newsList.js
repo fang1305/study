@@ -12,6 +12,7 @@ var vm = new Vue({
 		position: "", 
 		parentid: "",
 		typeid: "",
+		keyword: "",
 		searchObj: {
 			arctype_id:"",
 			lang: 'cn',
@@ -109,6 +110,10 @@ var vm = new Vue({
             this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
 			location.href = "../../index.html";
         },
+        searchFun() {
+            var url = "search.html?keywords=" + this.keyword + '&typeid=' + parseUrl().typeid + '&parentid=' + parseUrl().typeid;
+            window.open(url);
+        },
         createPagination(num) {
 			let that = this; 
 			var container = $('#pagination');
@@ -157,7 +162,9 @@ var vm = new Vue({
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
 			}else if( typeid==15 || typeid == 52){          //合作机构
                 var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-            }else if( typeid == 19 || typeid == 33 || typeid == 29 || typeid == 35 ||typeid == 31 ){ // 人才培训
+            }else if( typeid == 19 || typeid == 20){
+                var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+            }else if( typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ // 人才培训
                 var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==21 || typeid == 22){           //国际交流培训
 			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
@@ -172,6 +179,8 @@ var vm = new Vue({
 		articleDetail: function(aid, typeid, parentid) { 
 			if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==19 || typeid == 20){           //卓越人才计划
+			    var url = "exchangeTrainingList.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			} 

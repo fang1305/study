@@ -35,9 +35,9 @@
 
             <div class="search-group">
                 <div class="search">
-                    <input type="text" name="keywords" id="keywords" value="" placeholder="搜索" />
+                    <input type="text" v-model="keyword" name="keywords" id="keywords" value="" placeholder="搜索" />
                 </div>
-                <div class="search-btn" onclick="search()">搜索</div>
+                <div class="search-btn" @click="searchFun()">搜索</div>
             </div>
         </div>
         <div class="navBar">
@@ -69,26 +69,20 @@
                 </div>
                 <div class="position" v-if="position">{{yourposition}}><span>{{position}}</span></div>
             </div>
-            <!-- <div class="intro-box" v-if="typeid == 19">
-                <h3>计划介绍</h3>
-                <p>卓学-卓识-卓越人才支持计划2011年9月正式启动 [1] ，简称“卓越人才计划”。这是根据师资队伍建设的客观要求和人才成长的内在规律特别
-                    构建的优秀中青年教师培养支持计划，旨在通过构建衔接紧密的三层次支持体系，激励我校中青年教师潜心学术，取得国内领先或国际一流的研究
-                    成果,实现学识卓越。</p>
-            </div> -->
             <div class="news-list">
 				<div class="news flex-def flex-zBetween" v-for="item in newsList" v-on:click="articleDetail(item.aid,item.typeid,item.parent_id)">
                     <div class="info">
-                        <p class="name">{{item.title}}</p>
-                        <div :class="['flex-def','desc_box',typeid==19?'':'active']">
-                            <div class="poster" v-if="typeid!=19">
-                                <img :src="item.litpic" />
+                        <p class="name" v-text="item.title"></p>
+                        <div class="flex-def desc_box active">
+                            <div class="poster">
+                                <img :src="typePic" />
                             </div>
 							<p class="desp">{{item.seo_description | getDesp}}</p>
                         </div>
                     </div>
                     <div class="invite-btn">
                         <p :class="['time',typeid==19?'':'active']">{{item.add_time | getDate}}</p>
-                        <p class="btn">{{typeBtn}}</p>
+                        <p class="btn" v-text="typeBtn"></p>
                     </div>
 				</div>
                 <!-- <div class="news" v-for="item in newsList" v-on:click="articleDetail(item.aid,item.typeid,item.parent_id)">
