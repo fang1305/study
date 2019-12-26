@@ -38,6 +38,9 @@ var vm = new Vue({
         }
 	}, 
 	created() {  
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			location.href = "../home/planDetail.html?aid="+ parseUrl().aid + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+		} else {}
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";
@@ -69,10 +72,8 @@ var vm = new Vue({
                 alert('请填写姓名')
             }else if(that.applyObj.phone == ''&&that.clickStatus){
                 alert('请填写电话')
-            }else if(parseInt(that.applyObj.number)<1&&that.clickStatus){
-                alert('申请人数至少一人')
-            // }else if( !phoneTest(that.applyObj.phone) && that.clickStatus ){
-            //     alert('手机号格式错误')
+            // }else if(parseInt(that.applyObj.number)<1&&that.clickStatus){
+            //     alert('申请人数至少一人')
             }else if(that.clickStatus){
                 that.clickStatus = 0;
                 $.ajax({

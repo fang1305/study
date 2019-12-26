@@ -4,6 +4,8 @@ var vm = new Vue({
 		indexText: "首页",
 		lang: "cn",
 		languageText: "English",
+		searchBox: false,
+		position: "引智头条",
 		navBar: "",
 		banner: "", //banner
 		teacherBanner: "",
@@ -23,6 +25,7 @@ var vm = new Vue({
 		dynamicBarAct: 0,
 		resourceBarAct: 0,
 		trainingBarAct: 0,  
+		keyword:'',
 		searchBannerObj:{
 			type:"",
 			lang: "cn",
@@ -215,14 +218,17 @@ var vm = new Vue({
 				},
 			})
 		}, 
-		articleDetail: function(aid, typeid, parentid) {
-			var aid = aid;
-			var typeid = typeid;
-			var parentid = parentid; 
-			var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			window.open(url);
+		articleDetail(aid, typeid, parentid) {
+			if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
+			    var url = "planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else{
+				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			} 
+			location.href = url; 
 		},
-		language: function() { 
+		language() { 
 			let that = this;
 			that.dynamicBarAct = 0;
 			that.resourceBarAct = 0;
@@ -259,12 +265,12 @@ var vm = new Vue({
 			}
 			apiAjax("home", param, "GET", home);
 		}, 
-		dynamicBarSelect: function(typeid, index) { 
+		dynamicBarSelect(typeid, index) { 
 			this.dynamicBarAct = index;
 			this.typeid = typeid;
 			this.getList('dynamic','home/articleHomeList',typeid);
 		},
-		trainingBarSelect: function(typeid, index) {
+		trainingBarSelect(typeid, index) {
 			this.trainingBarAct = index;
 			if(typeid == 23 || typeid == 24) {
 				var training = {
@@ -282,10 +288,21 @@ var vm = new Vue({
 				apiAjax("articleHomeList", training, "GET", trainingCallBack);
 			}
 		},
-		resourceBarSelect: function(typeid, index) {
+		resourceBarSelect(typeid, index) {
 			this.resourceBarAct = index; 
 			this.getList('resource','home/articleHomeList',typeid); 
 		},
+		searchBoxShow(){
+			this.searchBox = true;
+		},
+		searchFun() {
+            if(this.lang == 'en'){
+    			var url = "search.html?keywords=" + this.keyword+'&typeid=47&parentid=1';
+            }else{
+    			var url = "search.html?keywords=" + this.keyword+'&typeid=3&parentid=1';
+            }
+			location.href = url;
+        },
 	},
     filters:{
 		getDate: function(str) {
@@ -307,7 +324,7 @@ $(function(){
 	var param = {
 		lang: vm.lang,
 	}
-	apiAjax("home", param, "GET", home);
+	apiAjax("home", param, "GET", home); 
 })
 
 function home(ret) {
@@ -336,18 +353,23 @@ function home(ret) {
 	}
 } 
 function articleList(typeid,parentid){
- 	var typeid = typeid;  
- 	var parentid = parentid; 
- 	if( typeid==11 || typeid == 50){  
-	    var url = "http://ku.hbafea.com/html/home/expertTalents.html";
-	}else if( typeid==13 || typeid == 51){  
-	    var url = "http://ku.hbafea.com/html/home/technology.html";
-	}else if( typeid==15 || typeid == 52){  
-	    var url = "http://ku.hbafea.com/html/home/cooperativeAgency.html";
+ 	if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
+	    var url = "http://ku.hbafea.com";
+	}else if( typeid==11 || typeid == 50){           //专家人才
+	    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
+	}else if( typeid==13 || typeid == 51){           //项目技术
+	    var url = "http://ku.hbafea.com/html/index/technology.html";
+	}else if( typeid==15 || typeid == 52){           //合作机构
+	    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
+	}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
+		// 卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
+        var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
+	}else if( typeid==23 || typeid == 24){           //名师讲堂
+	    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
 	}else{
 		var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
-	} 
- 	window.open(url);
+	}   
+ 	location.href = url;
 } 
  
 function trainingCallBack(ret) {

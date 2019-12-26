@@ -24,6 +24,9 @@ var vm = new Vue({
 		}
 	},
 	created() {  
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			location.href = "../home/search.html?keywords="+ parseUrl().keywords + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+		} else {}
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";
@@ -47,7 +50,7 @@ var vm = new Vue({
             // 其他新闻, 引智头条的内容
 			this.getList('headerNews', 'home/articleList');
             // 文章列表
-			this.getList('newsList','home/articleList'); 
+			this.getList('newsList','home/searchList'); 
         },
         searchFun(){
             // 搜索
@@ -160,7 +163,7 @@ var vm = new Vue({
                     container.prev().html(dataHtml); 
                     if(that.searchObj.page!=pagination.pageNumber){
                         that.searchObj.page = pagination.pageNumber;
-                        that.getList('newsList','home/articleList'); 
+                        that.getList('newsList','home/searchList'); 
                     } 
 				}
 			};

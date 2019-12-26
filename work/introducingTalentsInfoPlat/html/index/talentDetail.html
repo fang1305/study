@@ -67,7 +67,7 @@
 				 	 		<p v-if="detail.health">健康状况：{{detail.health}}</p>
 				 	 	</div>
 				 	</div>
-				 	<div class="apply">申请</div>
+				 	<div class="apply" @click="applyPerson">申请</div>
 				</div>
 			</div>
 			<div class="footer">
@@ -138,6 +138,38 @@
                             // 重新请求数据
                             this.getDetail();
                         }
+                    },
+                    applyPerson(){
+                        // 申请
+                        let that = this;
+                        if(!localStorage.getItem('apply_id')){
+                            window.open('./login.html')
+                        }else if(confirm('您确定要申请该人才吗?')){
+                            $.ajax({
+                                url: config.apiHost+'apply/applyExperts',
+                                type: 'POST', //GET
+                                async: true, //或false,是否异步
+                                data: {
+                                    beapply_id: parseUrl().id,
+                                    apply_id: localStorage.getItem('apply_id'),
+                                    type: 1
+                                },
+                                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                success: function (data, textStatus, jqXHR){
+                                    typeof data == "object"?'':data=JSON.parse(data);
+                                    // 发送成功
+                                    // console.log(data)
+                                    alert(data.result);
+                                },
+                                error: function (xhr, textStatus){
+                                    // 发送失败
+                                    console.log('错误')
+                                    console.log(xhr)
+                                    console.log(textStatus)
+                                },
+                            })
+                        }
+
                     },
 					getDetail(){
 						let that = this;

@@ -5,10 +5,11 @@ var vm = new Vue({
 		lang: "cn",
 		languageText: "English", 
 		searchBox: false,
-		position: "引智头条", 
+		searchBoxTitle: "引智头条", 
 		keyword:'',
 		navBar: "",
-		smallNav: "", 
+		smallNav: "",
+		position: "", 
 		parentid: "",
 		typeid: "",
 		article: "",  
@@ -23,9 +24,9 @@ var vm = new Vue({
 			aid: "",
 		} 
 	}, 
-	created() { 
-		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {} else { 
-			location.href = "../index/newsDetail.html?aid="+ parseUrl().aid + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+	created() {  
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {} else {
+			location.href = "../index/expertsElegantDetail.html?aid="+ parseUrl().aid + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
 		}
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
@@ -36,7 +37,7 @@ var vm = new Vue({
 		}  
         if(parseUrl()){
             this.parentid = parseUrl().parentid?parseUrl().parentid:''; 
-            this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
+            this.typeid = parseUrl().typeid?parseUrl().typeid:'';   
         } 
 		this.requireData();
     },
@@ -71,8 +72,8 @@ var vm = new Vue({
 						var list = ret.data;
 						//console.log(ret);
                         if(type=="smallNav"){
-                        	that[type] = list[0].childList; 
-							for(var i = 0; i< that.smallNav.length; i++){
+                        	that[type] = list[0].childList;
+                        	for(var i = 0; i< that.smallNav.length; i++){
 								if(that.typeid == that.smallNav[i].id){ 
 									that.position = that.smallNav[i].typename;
 									return false;
@@ -115,7 +116,7 @@ var vm = new Vue({
             this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
 			location.href = "index.html";
         },
-		articleList(typeid, parentid,level) { 
+		articleList: function(typeid, parentid,level) { 
 			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
 			    var url = "http://ku.hbafea.com";
 			}else if( typeid==11 || typeid == 50){           //专家人才
@@ -124,26 +125,23 @@ var vm = new Vue({
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
 			}else if( typeid==15 || typeid == 52){           //合作机构
 			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-			}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
-				// 卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
-		        var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid == 19 || typeid == 20 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
+				// 卓越人才计划、温馨手拉手、创业扶持、行业许可、引智政策
+                var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==21 || typeid == 22){           //国际交流培训
+			    var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==23 || typeid == 24){           //名师讲堂
 			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}   
-		 	location.href = url; 
+		 	location.href = url;
+//          window.open(url);
 		},
-        articleDetail(aid){ 
-        	if( typeid==27 || typeid == 28){           //专家风采
-			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + this.typeid + "&parentid=" + this.parentid;
-			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
-			    var url = "planDetail.html?aid=" + aid + "&typeid=" + this.typeid + "&parentid=" + this.parentid;
-			}else{
-				var url = "newsDetail.html?aid=" + aid + "&typeid=" + this.typeid + "&parentid=" + this.parentid;
-			} 
-			location.href = url;  
-		},
+        articleDetail: function(aid){ 
+		 	var url = "expertsElegantDetail.html?aid="+ aid+ "&typeid="+ this.typeid + "&parentid="+ this.parentid;
+		 	window.open(url);
+		}, 
 		searchBoxShow(){
 			this.searchBox = true;
 		},
@@ -171,11 +169,9 @@ var vm = new Vue({
 		}, 
 	},
 }); 
-$(function() { 
-	var typeid = $.getUrlParam('typeid');
-	var parentid = $.getUrlParam('parentid');
-	vm.typeid = typeid;
-	vm.parentid = parentid;
+$(function() {  
+	vm.typeid = $.getUrlParam('typeid');
+	vm.parentid =  $.getUrlParam('parentid');
 	var param = {
 		lang: vm.lang,
 	}
@@ -214,9 +210,11 @@ function articleList(typeid, parentid) {
 	    var url = "http://ku.hbafea.com/html/index/technology.html";
 	}else if( typeid==15 || typeid == 52){           //合作机构
 	    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-	}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
-		// 卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
+	}else if( typeid == 19 || typeid == 20 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
+		// 卓越人才计划、温馨手拉手、创业扶持、行业许可、引智政策
         var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
+	}else if( typeid==21 || typeid == 22){           //国际交流培训
+	    var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 	}else if( typeid==23 || typeid == 24){           //名师讲堂
 	    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
 	}else{

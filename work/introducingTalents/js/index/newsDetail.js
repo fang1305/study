@@ -24,6 +24,9 @@ var vm = new Vue({
 		}
 	}, 
 	created() {  
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			location.href = "../home/newsDetail.html?aid="+ parseUrl().aid + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+		} else {}
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";

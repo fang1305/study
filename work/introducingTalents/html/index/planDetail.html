@@ -97,33 +97,24 @@
                     <div class="plan-entered">
                         <div class="title">计划报名</div>
                         <div class="info_input">
-                            <input v-model="applyObj.name" :class="[typeid == 19 || typeid == 20?'name lineInput':'name lineInput active']" placeholder="姓名" type="text" />
-                            <select class="select-box"  v-model="applyObj.sex" v-if="typeid!=19 && typeid!=20">
+                            <input v-model="applyObj.name" :class="[typeid == 19 || typeid == 20 || typeid == 21 || typeid == 22?'name lineInput':'name lineInput active']" placeholder="姓名" type="text" />
+                            <select class="select-box"  v-model="applyObj.sex" v-if="typeid!=19 && typeid!=20 && typeid!=21 && typeid!=22">
                                 <option value="男">男</option>
                                 <option value="女">女</option>
                             </select>
                             <input class="phone lineInput" v-model="applyObj.phone" placeholder="电话" type="text" />
-                            <div class="flex-def flex-zBetween lineInput" v-if="typeid == 19">
+                            <div class="flex-def flex-zBetween lineInput" v-if="typeid == 19 || typeid == 20 || typeid == 21 || typeid == 22">
                                 <select class="select-box" v-model="applyObj.sex">
                                     <option value="男">男</option>
                                     <option value="女">女</option>
                                 </select>
-                                <input  v-model="applyObj.number" :class="[typeid == 19 || typeid == 20?'name lineInput active':'name lineInput']" placeholder="人数" type="number" />
+                                <input  v-model="applyObj.number" class="name lineInput active" placeholder="人数" type="number" />
                             </div>
                             <input class="email lineInput" v-model="applyObj.email" placeholder="邮箱" type="text" />
-                            <input class="company lineInput" placeholder="企业"  v-model="applyObj.enterprise_name" v-if="typeid == 19" type="text" />
+                            <input class="company lineInput" placeholder="企业"  v-model="applyObj.enterprise_name" v-if="typeid == 19||typeid==20|| typeid == 21 || typeid == 22" type="text" />
                             <textarea id="more" cols="30" rows="10" placeholder="备注" v-model="applyObj.info" class="lineInput moreInfo"></textarea>
                             <div class="submit-btn" @click="applyFun">提交</div>
                         </div>
-                        <!-- <div class="cont">
-                            <div class="item" v-for="(item,index) in specialList" v-if="index<6"
-                                v-on:click="articleDetail(item.aid)">
-                                <div class="poster">
-                                    <img :src="item.litpic" alt="" />
-                                </div>
-                                <p class="name">{{item.title}}</p>
-                            </div>
-                        </div> -->
                     </div>
                     <!-- news-recommend end -->
                 </div>

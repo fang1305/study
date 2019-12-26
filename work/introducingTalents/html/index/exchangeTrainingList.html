@@ -72,7 +72,7 @@
 					<p class="desp">卓学-卓识-卓越人才支持计划2011年9月正式启动 [1]  ，简称“卓越人才计划”。这是根据师资队伍建设的客观要求和人才成长的内在规律特别构建的优秀中青年教师培养支持计划，旨在通过构建衔接紧密的三层次支持体系，激励我校中青年教师潜心学术，取得国内领先或国际一流的研究成果,实现学识卓越。</p>
 				</div>
 				<div class="news-list">
-					<div class="news" v-for="item in newsList" v-on:click="articleDetail(item.aid)"> 
+					<div class="news" v-for="item in newsList" v-on:click="articleDetail(item.aid,item.typeid,item.parent_id)"> 
 						<div class="info">
 							<p class="name">{{item.title}}</p>
 							<p class="desp">{{item.seo_description | getDesp}}</p>
@@ -152,6 +152,9 @@
 					}
 				},
 				created() {  
+					if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+						location.href = "../home/newsLine.html?typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+					} else {}
 			        if(sessionStorage.lang == 'en'){
 			            this.languageText = "中文";
 				 		this.indexText = "Index";
@@ -259,9 +262,15 @@
 					 	location.href = url;
 					 	//window.open(url);
 					},
-					articleDetail(aid){ 
-					 	var url = "newsDetail.html?aid="+ aid+ "&typeid="+ this.typeid + "&parentid="+ this.parentid;
-					 	window.open(url);
+					articleDetail(aid, typeid, parentid) { 
+						if( typeid==27 || typeid == 28){           //专家风采
+						    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+						}else if( typeid==19 || typeid == 20 || typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
+						    var url = "planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+						}else{
+							var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+						} 
+						window.open(url);
 					},
 					// 中英文切换
                     changeLang(){

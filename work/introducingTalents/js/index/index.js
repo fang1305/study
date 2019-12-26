@@ -266,12 +266,10 @@ var vm = new Vue({
             }
 			window.open(url);
         },
-		articleDetail: function(aid, typeid, parentid) { 
-            if(typeid==19 || typeid == 20){
-			    var url = "html/index/exchangeTrainingList.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-            }else if( typeid==27 || typeid == 28){           //专家风采
+		articleDetail(aid, typeid, parentid) { 
+			if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "html/index/expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			}else if(  typeid==31 || typeid == 32){           //卓越人才计划、创业扶持
+			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
 			    var url = "html/index/planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "html/index/newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;

@@ -14,39 +14,104 @@ var vm = new Vue({
 		article: "",  
 		articleCont: "", 
 		front: "",
-		after: "", 
-		recomList: "",
-		specialList: "",
+        after: "", 
+        sex: '性别',
+        num: '人数',
+        status: 1, 
 		searchObj: {
 			arctype_id:"",
 			lang: 'cn', 
 			aid: "",
-		} 
+        },
+        applyObj: {
+            aid: '',
+            name: '',
+            sex: '',
+            phone: '',
+            email: '',
+            info: '',
+            enterprise_name: '',
+            number: ''
+        },
+        tableData:[
+          {
+            'name':'男'
+          },
+          {
+            'name':'女'
+          },
+        ],
+        show:false,
+        value:''
 	}, 
-	created() { 
+	created() {  
 		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {} else { 
-			location.href = "../index/newsDetail.html?aid="+ parseUrl().aid + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+			location.href = "../index/planDetail.html?aid="+ parseUrl().aid + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
 		}
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
-	 		this.indexText = "Index"; 
+	 		this.indexText = "Index";
+	 		this.yourposition = "Your position";
 	 		this.lang = "en";
 		}else{
 			sessionStorage.lang == 'cn';
 		}  
         if(parseUrl()){
-            this.parentid = parseUrl().parentid?parseUrl().parentid:''; 
             this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
         } 
 		this.requireData();
     },
 	methods: {
+        applyFun(){
+            // 提交申请
+            this.applyObj.aid = parseUrl().aid;
+            console.log(this.applyObj);
+            let that = this;
+            if(that.applyObj.name == ''&& that.clickStatus){
+                alert('请填写姓名')
+            }else if(that.applyObj.phone == ''&&that.clickStatus){
+                alert('请填写电话')
+            // }else if(parseInt(that.applyObj.number)<1&&that.clickStatus){
+            //     alert('申请人数至少一人')
+            }else if(that.clickStatus){
+                that.clickStatus = 0;
+                $.ajax({
+                    url: config.apiHost+'apply/applytrain',
+                    type: 'POST',  
+                    async: true,  
+                    data: that.applyObj,
+                    dataType: 'json', 
+                    success: function (ret){
+                        that.clickStatus = 1;
+                        typeof ret == "object"?'':ret=JSON.parse(ret);
+                        alert(ret.result)
+                    },error: function (xhr, textStatus){
+                        // 发送失败
+                        that.clickStatus = 1;
+                        console.log('错误')
+                        console.log(xhr)
+                        console.log(textStatus)
+                    }
+                });
+            }
+        },
+        openValue(){
+            this.show=!this.show;
+        },
+        getvalue(index,item){
+            this.applyObj.sex=item.name;
+            this.show=false;
+        },
 		requireData(){
 			// 导航栏
 //			this.getList('navBar','home/arctypeList'); 
 			this.getList('smallNav','home/arctypeList'); 
 			// 文章详情
 			this.getList('article','home/articleDetail'); 
+        },
+        selectFun(type,value){
+            // 下拉框选择
+            this[type] = value;
         },
         getList(type,url,typeid){ 
             let that = this;
@@ -69,10 +134,10 @@ var vm = new Vue({
 					// 发送成功 
 					if(ret.status == 'ok'){
 						var list = ret.data;
-						//console.log(ret);
+//			            console.log(ret);
                         if(type=="smallNav"){
-                        	that[type] = list[0].childList; 
-							for(var i = 0; i< that.smallNav.length; i++){
+                        	that[type] = list[0].childList;
+                        	for(var i = 0; i< that.smallNav.length; i++){
 								if(that.typeid == that.smallNav[i].id){ 
 									that.position = that.smallNav[i].typename;
 									return false;
@@ -82,9 +147,7 @@ var vm = new Vue({
                         	 	that[type] = ret.data.detail;
                         	 	that.articleCont = ret.data.detail.content.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;nbsp;/g,' ').replace(/&quot;/g,'"').replace(/&amp;/g,'&');
 								that.after = ret.data.after;
-								that.front = ret.data.front; 
-								that.recomList = ret.data.recomList; 
-								that.specialList = ret.data.specialList;
+								that.front = ret.data.front;  
 								if(ret.data.seo_title){
 									document.title = ret.data.seo_title;
 								}
@@ -132,10 +195,10 @@ var vm = new Vue({
 			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}   
-		 	location.href = url; 
+		 	location.href = url;
 		},
         articleDetail(aid){ 
-        	if( typeid==27 || typeid == 28){           //专家风采
+		 	if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + this.typeid + "&parentid=" + this.parentid;
 			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
 			    var url = "planDetail.html?aid=" + aid + "&typeid=" + this.typeid + "&parentid=" + this.parentid;
@@ -171,18 +234,21 @@ var vm = new Vue({
 		}, 
 	},
 }); 
+
 $(function() { 
 	var typeid = $.getUrlParam('typeid');
 	var parentid = $.getUrlParam('parentid');
 	vm.typeid = typeid;
-	vm.parentid = parentid;
+	vm.parentid = parentid; 
 	var param = {
 		lang: vm.lang,
 	}
 	apiAjax("home", param, "GET", home); 
 }) 
+
 function home(ret) {
-	if(ret.data) { 
+	if(ret.data) {
+//		console.log(ret);
 		vm.navBar = ret.data;
 		var list = ""; 
 		if(vm.lang == "en") {
@@ -200,12 +266,13 @@ function home(ret) {
 			}
 			list += '</ul>' +
 				'</li>';
-		} 
+		}
 		$(".dl-menu").html(list);
 		$('#dl-menu').dlmenu();
 	}
-} 
-function articleList(typeid, parentid) { 
+}
+
+function articleList(typeid, parentid) {
 	if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
 	    var url = "http://ku.hbafea.com";
 	}else if( typeid==11 || typeid == 50){           //专家人才
@@ -224,6 +291,9 @@ function articleList(typeid, parentid) {
 	}   
  	location.href = url;
 }
+
+ 
+
 var bodyH = $("body").height();
 var headerH = $(".header").height(); 
 var footerH = $(".footer").height();

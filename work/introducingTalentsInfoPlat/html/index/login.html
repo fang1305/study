@@ -79,7 +79,8 @@
 								typeof data == "object"?'':data=JSON.parse(data);
 								// 发送成功
 								if(data.status == 'ok'){
-//									console.log(data); 
+									// console.log(data); 
+                                    localStorage.setItem('apply_id',data.data.id);
 									alert(data.result);
 									window.location.href = "../../index.html";
 								}else{

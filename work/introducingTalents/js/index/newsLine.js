@@ -26,6 +26,9 @@ var vm = new Vue({
 		}
 	},
 	created() { 
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			location.href = "../home/newsLine.html?typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+		} else {}
         if (parseUrl()) {
             this.parentid = parseUrl().parentid ? parseUrl().parentid : '';
             this.typeid = parseUrl().typeid ? parseUrl().typeid : '';

@@ -21,8 +21,14 @@
 					</ul> 
 				</div>
 				<div class="logo"><img src="../../img/icon/logo.png" /></div>
-				<div class="search">
+				<div class="search" @click="searchBoxShow">
 					<img src="../../img/icon/icon_search.png" alt="" />
+				</div>
+				<div class="search-group" v-if="searchBox">
+					<span>{{searchBoxTitle}}</span>
+					<hr class="line" />
+					<input v-model="keyword" type="text" name="" id="" value="" placeholder="" />
+					<img src="../../img/icon/icon_search_blue.png" @click="searchFun"/>
 				</div>
 			</div>
 			<div class="main">
@@ -168,7 +174,6 @@
 					location.href = "index.html";
 		        },
 				articleList: function(typeid, parentid,level) { 
-					console.log("qqq");
 					if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
 					    var url = "http://ku.hbafea.com";
 					}else if( typeid==11 || typeid == 50){           //专家人才
@@ -177,8 +182,11 @@
 					    var url = "http://ku.hbafea.com/html/index/technology.html";
 					}else if( typeid==15 || typeid == 52){           //合作机构
 					    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
+					}else if( typeid == 19 || typeid == 20 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
+						// 卓越人才计划、温馨手拉手、创业扶持、行业许可、引智政策
+		                var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
 					}else if( typeid==21 || typeid == 22){           //国际交流培训
-					    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+					    var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 					}else if( typeid==23 || typeid == 24){           //名师讲堂
 					    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
 					}else{

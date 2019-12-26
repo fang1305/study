@@ -11,8 +11,8 @@ var vm = new Vue({
 		smallNav: "",
 		position: "", 
 		parentid: "",
+        keyword: "",
 		typeid: "",
-		keyword: "",
 		searchObj: {
 			arctype_id:"",
 			lang: 'cn',
@@ -24,7 +24,7 @@ var vm = new Vue({
 	},
 	created() {  
 		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			location.href = "../home/newsList.html?typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+			location.href = "../home/planDetail.html?typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
 		} else {}
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
@@ -34,7 +34,8 @@ var vm = new Vue({
 		}else{
 			sessionStorage.lang == 'cn';
 		} 
-		if(parseUrl()){
+//					console.log(parseUrl());
+        if(parseUrl()){
             this.parentid = parseUrl().parentid?parseUrl().parentid:''; 
             this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
         } 
@@ -108,13 +109,42 @@ var vm = new Vue({
 				},
 			})
 		},
+		articleList(typeid, parentid,level) {
+			var typeid = typeid;
+			var parentid = parentid;
+			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
+			    var url = "http://ku.hbafea.com";
+			}else if( typeid==11 || typeid == 50){           //专家人才
+			    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
+			}else if( typeid==13 || typeid == 51){           //项目技术
+			    var url = "http://ku.hbafea.com/html/index/technology.html";
+			}else if( typeid==15 || typeid == 52){           //合作机构
+			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
+            }else if( typeid == 19 || typeid == 20){
+                var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+            }else if( typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){
+                var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
+            }else if( typeid==21 || typeid == 22){           //国际交流培训
+			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==23 || typeid == 24){           //名师讲堂
+			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else{
+				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}   
+		 	location.href = url;
+		 	//window.open(url);
+		},
+		articleDetail(aid){ 
+		 	var url = "newsDetail.html?aid="+ aid+ "&typeid="+ this.typeid + "&parentid="+ this.parentid;
+		 	window.open(url);
+		},
 		// 中英文切换
         changeLang(){
             this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
 			location.href = "../../index.html";
         },
         searchFun() {
-            var url = "search.html?keywords=" + this.keyword + '&typeid=' + parseUrl().typeid + '&parentid=' + parseUrl().typeid;
+            var url = "search.html?keywords=" + this.keyword + '&typeid=' + parseUrl().typeid + '&parentid=' + parseUrl().parentid;
             window.open(url);
         },
         createPagination(num) {
@@ -153,72 +183,38 @@ var vm = new Vue({
 				window.console && console.log('beforePageOnClick...');
 			});
 			return container;
-		},
-		articleList(typeid, parentid,level) {
-			var typeid = typeid;
-			var parentid = parentid;
-			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
-			    var url = "http://ku.hbafea.com";
-			}else if( typeid==11 || typeid == 50){           //专家人才
-			    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
-			}else if( typeid==13 || typeid == 51){           //项目技术
-			    var url = "http://ku.hbafea.com/html/index/technology.html";
-			}else if( typeid==15 || typeid == 52){          //合作机构
-                var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-            }else if( typeid == 19 || typeid == 20){
-                var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
-            }else if( typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ // 人才培训
-                var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
-			}else if( typeid==21 || typeid == 22){           //国际交流培训
-			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
-			}else if( typeid==23 || typeid == 24){           //名师讲堂
-			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
-			}else{
-				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
-			}   
-		 	location.href = url;
-		 	//window.open(url);
-		},
-		articleDetail: function(aid, typeid, parentid) { 
-			if( typeid==27 || typeid == 28){           //专家风采
-			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			}else if( typeid==19 || typeid == 20){           //卓越人才计划
-			    var url = "exchangeTrainingList.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			}else{
-				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			} 
-			window.open(url);
-		},
+		}
 	},
 	filters: {
 		getDate: function(str) {
 			var oDate = new Date(str*1000),
-				oYear = oDate.getFullYear(),
-				oMonth = oDate.getMonth() + 1,
-				oDay = oDate.getDate(),
-				oHour = oDate.getHours(),
-				oMin = oDate.getMinutes(),
-				oSec = oDate.getSeconds(),
-				oTime = oYear + '-' + oMonth + '-' + oDay; //最后拼接时间 
+			oYear = oDate.getFullYear(),
+			oMonth = oDate.getMonth() + 1,
+			oDay = oDate.getDate(),
+			oHour = oDate.getHours(),
+			oMin = oDate.getMinutes(),
+			oSec = oDate.getSeconds(),
+			oTime = oYear + '-' + oMonth + '-' + oDay; //最后拼接时间
+			//console.log(oTime);
 			return oTime;
 		},
 		getDesp: function(cont) { 
 			if(cont){
-				cont.length > 70?cont = cont.slice(0,70) + '...':'';
-			} 
+				cont.length > 35?cont = cont.slice(0,35) + '...':'';
+			}
 			return cont;
 		}
 	},
 });
-$(function() {  
+$(function() {      
 	$(".gtop").on("click", function() {
 		window.scrollTo(0, 0);
 	})
-}) 
+})  
 var bodyH = $("body").height();
 var headerH = $(".header").height();
 var navBarH = $(".navBar").height();
 var footerH = $(".footer").height();
 var bottomH = $(".bottom").height();
-var mainH = bodyH - headerH - navBarH -footerH - bottomH - 170;  
+var mainH = bodyH - headerH - navBarH -footerH - bottomH - 85;  
 $(".main").css({"min-height":mainH});

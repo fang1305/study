@@ -29,7 +29,8 @@
 	.main .welcome { font-size: 18px; padding-top: 50px;}
 	.main .title { font-size: 26px; padding-top: 20px; padding-bottom: 30px;}
 	.main .input-group { padding-top: 19px;}
-	.main .input-group input { width: 100px;}
+    .main .input-group input { width: 140px;}
+    .main .input-group input.account { width: 80%;}
 	.main .input-group label { font-size: 16px;}
 	.main .input-group input { font-size: 16px;}
 	.main .code-group label { line-height: 40px;}

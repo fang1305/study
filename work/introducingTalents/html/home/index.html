@@ -27,8 +27,14 @@
 					</ul> 
 				</div>
 				<div class="logo"><img src="../../img/icon/logo.png" /></div>
-				<div class="search">
+				<div class="search" @click="searchBoxShow">
 					<img src="../../img/icon/icon_search.png" alt="" />
+				</div>
+				<div class="search-group" v-if="searchBox">
+					<span>{{position}}</span>
+					<hr class="line" />
+					<input v-model="keyword" type="text" name="" id="" value="" placeholder="" />
+					<img src="../../img/icon/icon_search_blue.png" @click="searchFun"/>
 				</div>
 			</div>
 			<div class="main">

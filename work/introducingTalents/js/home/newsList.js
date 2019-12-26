@@ -5,12 +5,14 @@ var vm = new Vue({
 		indexText: "首页",
 		lang: "cn",
 		languageText: "English", 
+		searchBox: false,
+		position: "引智头条", 
+		keyword:'',
 		newsList:"",  
 		navBar: "",
-		smallNav: "",
-		position: "", 
+		smallNav: "", 
 		parentid: "",
-		typeid: "",
+		typeid: "", 
 		searchObj: {
 			arctype_id:"",
 			lang: 'cn',
@@ -21,6 +23,9 @@ var vm = new Vue({
 		}
 	},
 	created() {  
+		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {} else {
+			location.href = "../index/newsList.html?typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+		}
         if(sessionStorage.lang == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index"; 
@@ -106,9 +111,7 @@ var vm = new Vue({
             this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
 			location.href = "../../index.html";
         }, 
-		articleList(typeid, parentid,level) {
-			var typeid = typeid;
-			var parentid = parentid;
+		articleList(typeid, parentid,level) { 
 			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
 			    var url = "http://ku.hbafea.com";
 			}else if( typeid==11 || typeid == 50){           //专家人才
@@ -117,24 +120,37 @@ var vm = new Vue({
 			    var url = "http://ku.hbafea.com/html/index/technology.html";
 			}else if( typeid==15 || typeid == 52){           //合作机构
 			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-			}else if( typeid==21 || typeid == 22){           //国际交流培训
-			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
+				// 卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
+		        var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==23 || typeid == 24){           //名师讲堂
 			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}   
 		 	location.href = url;
-		 	//window.open(url);
 		},
 		articleDetail: function(aid, typeid, parentid) { 
 			if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
+			    var url = "planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			} 
-			window.open(url);
+			location.href = url;   
 		},
+		searchBoxShow(){
+			this.searchBox = true;
+		},
+		searchFun() {
+            if(this.lang == 'en'){
+    			var url = "search.html?keywords=" + this.keyword+"&typeid="+ this.typeid+"&parentid="+ this.parentid;
+            }else{
+    			var url = "search.html?keywords=" + this.keyword+"&typeid="+ this.typeid+"&parentid="+ this.parentid;
+            }
+			location.href = url;
+        },
 	},
 	filters: {
 		getDate: function(str) {
@@ -202,8 +218,9 @@ function articleList(typeid, parentid) {
 	    var url = "http://ku.hbafea.com/html/index/technology.html";
 	}else if( typeid==15 || typeid == 52){           //合作机构
 	    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-	}else if( typeid==21 || typeid == 22){           //国际交流培训
-	    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
+	}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
+		// 卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
+        var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
 	}else if( typeid==23 || typeid == 24){           //名师讲堂
 	    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
 	}else{
