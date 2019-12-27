@@ -101,7 +101,7 @@
 	<script type="text/javascript" src="../../js/vue.min.js"></script> 
 	<script>  
 		if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		} else { location.href = "../index/talentDetail.html";} 
+		} else { location.href = "../index/talentDetail.html?id="+parseUrl().id;} 
 		var vm = new Vue({
 			el: '#app',
 			data: {

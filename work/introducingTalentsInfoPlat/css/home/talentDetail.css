@@ -20,7 +20,7 @@
 .intentionProfession .list {}
 .intentionProfession .list .item { display: inline-block; min-width: .82rem; font-size: .22rem; line-height: 1; color: #206BD1; padding: .12rem .14rem; border: 1px solid #206BD1; text-align: center; margin-right: .18rem; margin-top: .26rem;}
 .intro .title { font-size: .33rem; line-height: 1; color: #333333; font-weight: bold; padding-top: .45rem;}
-.intro .content { font-size: .25rem; line-height: 1.7; color: #666666; padding-top: .17rem;}
+.intro .content { font-size: .25rem; line-height: 1.7; color: #666666; padding-top: .17rem; word-break: break-all;}
 
 .talentRecommend .title { font-size: .33rem; line-height: 1; color: #333333; font-weight: bold; padding-top: .45rem;}
 .talentRecommend .list { padding-top: .2rem; font-size: 0;}

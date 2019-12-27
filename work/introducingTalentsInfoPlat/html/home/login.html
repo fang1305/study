@@ -37,7 +37,7 @@
 	<script type="text/javascript" src="../../js/vue.min.js"></script>  
 	<script>  
 		if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		} else { location.href = "../index/login.html";} 
+		} else { location.href = "../index/login.html?loginType="+parseUrl().id;} 
 		var vm = new Vue({
 			el: '#app',
 			data: {
@@ -66,8 +66,13 @@
 								// 发送成功
 								if(data.status == 'ok'){
 //									console.log(data) 
-									alert(data.result); 
-									window.location.href = "index.html";
+									alert(data.result);  
+									if(parseUrl().loginType == 1){
+                                        // 一期
+    									window.location.href = "http://www.hbafea.com";
+                                    }else{
+    									window.location.href = "index.html";
+                                    }
 								}else{
 									alert(data.result);
 								}

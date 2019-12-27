@@ -152,7 +152,7 @@
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				location.href = "../home/jobDetail.html";
+				location.href = "../home/jobDetail.html?id="+parseUrl().id;
 			} else {} 
 			var vm = new Vue({
 				el: '#app',

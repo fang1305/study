@@ -39,7 +39,7 @@
 				 		</div>
 				 		<p class="time" v-if='detail.release_time' v-text="detail.release_time+'发布'"></p>
 				 	</div>
-				 	<div class="applyCooperation">申请合作</div>
+				 	<div class="applyCooperation" @click="applyPerson">申请合作</div>
 				</div> 
 			</div>
 			<div class="main">
@@ -107,7 +107,7 @@
 		<script type="text/javascript" src="../../js/config.js"></script>
 		<script>
 			if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				location.href = "../home/projectDetail.html";
+				location.href = "../home/projectDetail.html?id="+parseUrl().id;
 			} else {} 
 			var vm = new Vue({
 				el: '#app',
@@ -140,6 +140,37 @@
                             this.languageText = 'English';
                             // 重新请求数据
                             this.getDetail();
+                        }
+                    },
+                    // 申请合作
+                    applyPerson(){
+                        let that = this;
+                        if(!localStorage.getItem('apply_id')){
+                            window.open('./login.html')
+                        }else if(confirm('您确定要申请合作吗?')){
+                            $.ajax({
+                                url: config.apiHost+'apply/applyExperts',
+                                type: 'POST', //GET
+                                async: true, //或false,是否异步
+                                data: {
+                                    beapply_id: parseUrl().id,
+                                    apply_id: localStorage.getItem('apply_id'),
+                                    type: 4
+                                },
+                                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                success: function (data, textStatus, jqXHR){
+                                    typeof data == "object"?'':data=JSON.parse(data);
+                                    // 发送成功
+                                    // console.log(data)
+                                    alert(data.result);
+                                },
+                                error: function (xhr, textStatus){
+                                    // 发送失败
+                                    console.log('错误')
+                                    console.log(xhr)
+                                    console.log(textStatus)
+                                },
+                            })
                         }
                     },
 					getDetail(){
