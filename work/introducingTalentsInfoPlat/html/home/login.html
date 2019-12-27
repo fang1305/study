@@ -67,12 +67,15 @@
 								if(data.status == 'ok'){
 //									console.log(data) 
 									alert(data.result);  
-									if(parseUrl().loginType == 1){
-                                        // 一期
-    									window.location.href = "http://www.hbafea.com";
-                                    }else{
-    									window.location.href = "index.html";
-                                    }
+									if(parseUrl()){
+										if(parseUrl().loginType == 1){
+	                                        // 一期
+	    									window.location.href = "http://www.hbafea.com";
+	                                    }
+									}
+									else{
+										window.location.href = "index.html";
+									} 
 								}else{
 									alert(data.result);
 								}

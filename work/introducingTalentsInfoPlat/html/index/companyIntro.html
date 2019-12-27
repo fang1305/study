@@ -111,23 +111,13 @@
 						<a target="_blank" :href="'./jobDetail.html?id='+job.works_id"  v-for="job in jobs"><div class="item">
 							<div class="job-salary">
 								<div class="job" v-text="job.professional+(job.countries+''?' ['+job.countries+']':'')"></div>
-								<div class="salary" v-text="job.low_salary+(job.low_salary&&job.high_salary?'-':'')+job.high_salary">20K-40K</div>
+								<div class="salary" v-text="job.low_salary+(job.low_salary&&job.high_salary?'-':'')+job.high_salary"></div>
 							</div>
 							<div class="need-time">
 								<div class="need">{{job.capacity+''?job.capacity+'/':''}}{{job.edu_back}}{{job.language?'/'+job.language:''}}</div>
 								<div class="time">{{getDateInit(job.add_time)}}</div>
 							</div>
                         </div></a>
-						<!-- <div class="item">
-							<div class="job-salary">
-								<div class="job"> java开发工程师 [英国]</div>
-								<div class="salary">20K-40K</div>
-							</div>
-							<div class="need-time">
-								<div class="need">经验3-5年/本科/英语</div>
-								<div class="time">2019-11-04</div>
-							</div>
-						</div> -->
 					</div>
 					<div class="more"><a target="_blank" :href="'./jobRecommendation.html?id='+id"><span>查看更多</span></a></div>
 				</div>
