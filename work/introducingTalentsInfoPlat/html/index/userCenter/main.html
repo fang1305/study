@@ -79,10 +79,10 @@
                 </div>
                 <div class="left">
                     <div class="nav">
-                        <span class="active">基本信息</span>
-                        <span>其他</span>
+                        <span :class="[activeNum == 1?'active':'']"  @click="changeTab(1)">基本信息</span>
+                        <span :class="[activeNum == 2?'active':'']" @click="changeTab(2)">其他</span >
                     </div>
-                    <div class="content">
+                    <div :class="['content',activeNum == 1?'':'hide']">
                         <div class="editIntro editBtn">修改</div>
                         <ul>
                             <li>
@@ -160,7 +160,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="content other hide">
+                    <div :class="['content other',activeNum == 2?'':'hide']">
                         <ul>
                             <li>
                                 <span class="title">是否注销</span>
@@ -262,19 +262,8 @@
                 this.getDetail();
             },
             methods: {
-                changeTab(num, type) {
+                changeTab(num) {
                     this.activeNum = num;
-                    if (num == 2 && ((this.proDemandCount == '0' && this.jobCount == '0') || type)) {
-                        // 查看需求发布
-                        this.getProject('project/projectDemandHomeList', 'projectsDemand', 'proDemandCount', 1);
-                        // 职位列表
-                        this.getProject('experts/jobsList', 'jobs', 'jobCount', 1);
-                    } else if (num == 3 && ((this.proCount == '0' && this.expertCount == '0') || type)) {
-                        // 获取公司项目
-                        this.getProject('project/projectHomeList', 'projects', 'proCount', 1);
-                        // 获取公司人才列表
-                        this.getProject('experts/expertlist', 'experts', 'expertCount', 1)
-                    }
                 },
                 // 查看更多
                 jobsMore() {

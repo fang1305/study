@@ -1,0 +1,354 @@
+.wrap,.loginWrap{
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    color: #979797;
+    width:100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 66;
+    background:rgba(0,0,0,0.4);
+    display: none;
+}
+/*激活框*/
+.wrap_content,.wrap_success,.wrap_active,.warp_box,.wrap_edit,.wrap_login{
+    width:500px;
+    /*height:425px; */
+    height: 360px;
+    background: #fff;
+    z-index: 666;
+    position: relative;
+    top: 0;
+    margin-top: -215px;
+    left:50%;
+    margin-left:-225px;
+}
+.wrap_login{
+    height: 472px!important;top: 0
+}
+.wrap_edit .choose_type{
+    width: 160px;padding: 12px 0;float: left;background: #F4F4F4;border-radius: 4px;color: #979797;
+    cursor: pointer;
+}
+.wrap_edit .edit_list{
+    width: 100%;border-radius: 4px;border: 1px solid #F4F4F4;height: 40px;color:#333333;font-size: 12px;
+}
+.wrap_edit .edit_input,.wrap_edit .edit_score{
+    left: 128px;line-height: 40px;top: 0;right: 20px;
+}
+.wrap_edit .edit_list .edit_score{
+    left: 304px;
+}
+.wrap_edit .edit_input select,.wrap_edit .edit_input input{
+        height: 38px;
+        border: none;
+        box-shadow: none;
+}
+.wrap_edit .edit_title{
+    width: 108px;height: 40px;border-radius: 4px;background: #F4F4F4;line-height: 40px;
+}
+.wrap_edit .active{
+    border: 1px solid #3699FF;color: #3699FF;background: #fff;
+}
+.warp_box{
+    height: 300px;
+}
+.wrap_active{
+    height: 425px;
+}
+.wrap_success,.wrap_active{
+    display: none;
+    top: 50%!important;
+}
+.wrap_success{
+    height: 313px;
+    margin-top: -160px;
+}
+/*关闭按钮*/
+.wrap_close{
+    position: absolute;
+    top: 16px;right: 16px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+/*主要内容*/
+.wrap .container_box,.loginWrap .container_box{
+    position: absolute;
+    top: 40px;
+    width: 340px;
+    left: 80px;
+}
+.wrap .container_box a,.loginWrap .container_box a{
+    color: #fff;
+    padding-top: 10px;
+    text-decoration: none;
+}
+.wrap .title,.loginWrap .title{
+    text-align: center;
+    font-family: PingFangSC-Semibold;
+    font-size: 24px;
+    color: #333;
+}
+.wrap .info_more,.loginWrap .info_more{
+    padding: 12px 0 13px;
+}
+.input_box input,.input_box select,.submit_btn,.forecast_btn{
+    height: 40px;
+    display: block;
+    width: 100%;
+    background: #F4F4F4;
+    border-radius: 4px;
+    text-align: center;
+    outline: none;
+    border: 1px solid #F4F4F4;
+}
+.input_box input:first-child,.input_box select,.input_box .user_box{
+    margin: 40px auto 20px auto;
+}
+.warp_choose input:first-child{
+    margin: 40px auto 20px auto;
+}
+.warp_choose .input_box input{
+    margin: 30px auto 20px auto;
+}
+.loginTel .input_box input{
+    margin:0!important;
+}
+.input_box input{
+    color: #333;
+}
+.vip_buy a{
+    color: #3699FF!important;
+}
+.submit_btn,.forecast_btn{
+    font-size: 24px;
+    background: #3699FF;
+    height: 56px;
+    border:none;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.vip_buy{
+    margin-top: 10px;color:#656565;
+}
+.vip_buy a{
+    color: #507DAF;
+    text-decoration: none;
+    padding-left: 3px;
+}
+
+/*激活成功*/
+.success_vip{
+    position: absolute;
+    padding:0 40px;
+    text-align: left;
+    top: 40px;
+    font-size: 14px;
+}
+.success_vip img{
+    display: block;
+    margin: 0 auto;
+}
+.success_vip .title{
+    padding: 20px 0 30px; 
+}
+.success_vip .info_detail{
+    line-height: 20px;
+    color: #656565;
+}
+.fade.in{
+    display: block;
+}
+.loginBox{
+    display: none;
+}
+
+.title ul{
+    margin: 0;
+    padding: 0;
+}
+.title li{
+    display: inline-block;
+    padding-right: 40px;
+    font-weight: normal;
+    font-size: 16px;
+    cursor: pointer;
+}
+/*.title li:hover{
+    color: #337ab7;
+}*/
+.title .active{
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.main_content .choose_line{
+    min-height: 47px;
+    height: 47px;overflow: hidden;
+}
+.main_content .choose_line span{
+    display: inline-block;
+    width: 58px;
+}
+.main_content .choose_line span p{
+    top: 0;
+}
+.main_content .choose_line ul{
+    padding-left: 30px;
+}
+/*.choose_line ul{
+    margin-bottom: 0;
+    width: 720px;
+}*/
+.choose_line ul{
+    width: 90%;
+}
+.choose_line img{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+.choose_line img:nth-child(2){
+    display: none;
+}
+/*选择科目详情信息---菜单*/
+.science_line ul {
+    padding: 10px 0;
+    margin: 0;
+}
+.science_line ul li{
+    display: block;
+    float: left;
+    min-width: 80px;
+    padding: 0 10px;
+    height: 30px;
+    margin: 3px 0;
+    line-height: 30px;border: 1px solid #EEEEEE;
+}
+.science_line input{
+    width: 23px;
+}
+
+/*直播类型课程*/
+.product_img .class_type,.product_img .class_time{
+    display: block;top: 0;left: 0;    min-width: 40px;
+    padding: 0 10px;height: 20px;background: rgba(0,0,0,.4);
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+}
+.product_img .class_time{
+    width: 100%;
+    padding: 0 10px;
+    top: auto;
+    bottom: 0;
+}
+.type_one .content_detail p {
+    padding: 2px 5px;
+    color: #333;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+.type_one .product_title{
+    margin-bottom: 10px;
+}
+.type_one .product_price{
+    width: 60%;
+}
+/*登录注册部分修改*/
+.header a:hover{
+    color: #008CE7!important;
+}
+.userShow img{
+    margin-right: 5px;
+}
+.userShow ul{
+    top: 75px;min-width: 90px!important;
+    border-radius: 0;
+    padding: 0;
+    width:110px;            
+    left: 10px;
+}
+.userShow ul li{
+    width: 110px;height: 32px;line-height: 32px;padding: 7px 0;
+}
+.userShow ul li a:hover,.userShow ul li:hover{
+    background: none;
+}
+.loginWrap .tab_box{
+    width: 84%;height: 100px;margin: 0 auto;border-bottom: 1px solid #EEE;
+}
+.loginWrap .tab_type{
+    width: 50%;line-height: 24px;margin-top: 53px;float: left;color: #656565;cursor: pointer;
+}
+.loginWrap .tab_type:first-child{
+    border-right: 1px solid #EEE;
+}
+.loginWrap .tab_active{
+    color: #3699FF;
+}
+.loginWrap .input_box .img_title{
+    right: 10px;top: 14px;
+}
+.loginWrap .input_box .img_do{
+    top: 8px;left: 10px;
+}
+.forget{
+    padding-top: 10px;
+}
+.loginWrap .container_box{
+    top: 113px;
+}
+.loginWrap .er_box{
+    width: 176px;padding: 7px;height: 176px;border:1px solid #CCC;margin: 40px auto 8px;display: block;
+}
+.loginWrap .tab_erType:hover .er_box{
+    display: inline-block;
+}
+.loginWrap .tab_erType:hover .er_tel{
+    display: inline-block;
+}
+.loginWrap .er_tel{
+    display: none;margin-left: 10px;
+}
+.loginWrap .er_info{
+    margin-bottom: 30px!important;
+}
+.error{
+    color: #F76360;margin-left: 66px;display: none;
+}
+.img_title{
+    cursor: pointer;
+}
+
+/*选择专业*/
+.optionMajor{
+    z-index: 9999;
+    width: 100%;
+    border: 1px solid #EEE;
+    margin-top: -20px;
+    background: #fff;
+    max-height: 400px;
+    overflow-y:auto; 
+}
+.optionMajor ul{
+    margin: 0;    
+    padding-left: 0;
+}
+.optionMajor ul li{
+    font-size: 14px;
+    display: block;border-bottom: 1px solid #f0f0f0;
+    color: #333;
+    padding: 10px 20px;
+}
+.optionMajor ul li:hover{
+    background: #eee;
+}
+.addMajor{
+    width: 21px;top: 10px;right: 8px;
+}
+.text_left{
+    text-align: left;
+}

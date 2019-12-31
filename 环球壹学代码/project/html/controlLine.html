@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index/index.css">
+    <link rel="stylesheet" href="../css/index/wrap.css">
+    <title>省控线</title>
+    <style>
+    	/*修改*/
+    	.vip_box{
+    		margin-left: auto;
+		    min-height: 78px;
+		    padding-top: 20px;
+		    padding-bottom: 13px;
+		    top: 0;
+    	}
+    	.vip_box .btn_group{
+			float: right;
+    	}
+		
+		.main_content .choose_line{
+			min-height: 47px;
+			height: auto;
+		}
+		.main_content .choose_line span{
+			display: inline-block;
+			width: 58px;
+		}
+		ul{
+			margin-bottom: 0;
+			width: 720px;
+		}
+		.choose_line img{
+			position: absolute;
+			right: 20px;
+			top: 15px;
+		}
+		.choose_line img:nth-child(2){
+			display: none;
+		}
+		
+		table{
+			border: 1px solid #EEE;
+		}
+		table tr td{
+			border-top: 0px solid #eee!important;
+		}
+		table tr:nth-child(2n){
+			background: #F7F7F7;
+		}
+		table tr td{
+			height: 31px!important;
+			line-height: 31px!important;
+		}
+
+
+		.main_content .choose_line{
+		    min-height: 47px;
+		    height: 47px;overflow: hidden;
+		}
+		.main_content .choose_line span{
+		    display: inline-block;
+		    width: 58px;
+		}
+		.main_content .choose_line span p{
+		    top: 0;
+		}
+		.main_content .choose_line ul{
+		    padding-left: 30px;
+		}
+		.choose_line ul{
+		    width: 90%;
+		}
+		.choose_line img{
+		    position: absolute;
+		    right: 20px;
+		    top: 15px;
+		}
+		.choose_line img:nth-child(2){
+		    display: none;
+		}
+    </style>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li><a href="course.html">课程</a></li>
+    				<li class="active"><a href="index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+    	<div class="banner">
+    		<div class="vip_box">
+    			<div class="btn_group fs_23">
+    				<div class="days">距离高考30天</div>
+    				<div class="open_btn hand_enter">开通VIP</div>
+    			</div>
+    		</div>
+    	</div>
+		<!-- 主要内容列表 -->
+		<div class="main_content">
+			<div class="left_content">
+				<div class="title">省控线</div>
+				<div class="choose_part">
+					<div class="choose_line science_all pos_re">
+						<span><p class="pos_ab">所在省份:</p></span>
+						<ul class="less_place">
+							<!-- <li value='' label="location" class="active">全部</li> -->
+						</ul>
+						<a >
+				   			<img src="../img/index/icon_down.png" alt="" width="18px" >
+				   			<img src="../img/index/icon_up.png" alt="" width="18px" >
+						</a>
+					</div>
+				</div>
+				<!-- 详细介绍 -->
+				<div class="table_detail wenLine" style="margin-top: 41px;">
+					<p>文科省控线</p>
+					<table class="table text-center">
+					 
+					</table>
+				</div>
+				<div class="table_detail liLine" style="margin-top: 41px;">
+					<p>理科省控线</p>
+					<table class="table text-center">
+					  
+					</table>
+				</div>
+
+			</div>
+			<div class="right_content">
+				<div class="title"><i></i>热门推荐</div>
+				<div class="hotList"></div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../img/index/footer.png" alt="" width="100%">
+		</footer>
+
+		<!-- 弹框-激活VIP -->
+		<div class="wrap">
+			<!-- 选择激活或购买 -->
+			<div class="wrap_content wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">开通志愿大师VIP</div>
+    				 <input type="submit" class="submit_btn buy_vip mt_40" value="购买VIP" />
+    				 <input type="submit" class="submit_btn active_vip" value="激活VIP" />
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    			</div>
+    		</div>
+    		<!-- 去激活 -->
+    		<div class="wrap_active wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">激活志愿大师VIP</div>
+    				 <div class="input_box">
+    				 	<input type="text" placeholder="输入卡号">
+    				 	<input type="password" placeholder="输入卡密">
+    				 </div>
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    				 <input type="submit" class="submit_btn active_btn" value="激活VIP" />
+    				 <div class="vip_buy"><span>还没有志愿大师VIP?</span><a href="#####">立即购买</a></div>
+    			</div>
+    		</div>
+    		<!-- 激活成功 -->
+			<div class="wrap_success wrap_part">
+				<img src="../img/index/icon_close.png" class="wrap_close" />
+				<div class="success_vip">
+					<img src="../img/index/icon_success.png" alt="">
+					<div class="title">激活成功</div>
+					<div class="info_detail">您的志愿大师VIP有效期至xx年xx月xx日，现在您可以继续在电脑网页上使用，也可以登录高招APP上使用。</div>
+					<div class="vip_buy"><span>还没有下载高招APP ？</span><a href="#####">立即下载</a></div>
+				</div>
+			</div>
+    	</div>
+		<!-- 高考预测 -->
+    	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+		            </div>
+		            <div class="modal-body">点击关闭按钮检查事件功能。</div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary">提交更改</button>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal-dialog -->
+		</div>
+    </body> 
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+	//地址
+	var place = [{"id":"12","name":"安徽省"},{"id":"34","name":"澳门"},{"id":"1","name":"北京市"},{"id":"22","name":"重庆市"},{"id":"13","name":"福建省"},{"id":"28","name":"甘肃省"},{"id":"19","name":"广东省"},{"id":"20","name":"广西省"},{"id":"24","name":"贵州省"},{"id":"21","name":"海南省"},{"id":"3","name":"河北省"},{"id":"8","name":"黑龙江"},{"id":"16","name":"河南省"},{"id":"17","name":"湖北省"},{"id":"18","name":"湖南省"},{"id":"10","name":"江苏省"},{"id":"14","name":"江西省"},{"id":"7","name":"吉林省"},{"id":"6","name":"辽宁省"},{"id":"5","name":"内蒙古"},{"id":"30","name":"宁夏"},{"id":"29","name":"青海省"},{"id":"15","name":"山东省"},{"id":"9","name":"上海市"},{"id":"4","name":"山西省"},{"id":"27","name":"陕西省"},{"id":"23","name":"四川省"},{"id":"32","name":"台湾"},{"id":"2","name":"天津市"},{"id":"33","name":"香港"},{"id":"31","name":"新疆"},{"id":"26","name":"西藏"},{"id":"25","name":"云南省"},{"id":"11","name":"浙江省"}];
+	for(var i=0;i<place.length;i++){
+		if(i==0){
+			$('.less_place').append('<li class="active" value='+place[i].id+'>'+place[i].name+'</li>')
+		}else{
+			$('.less_place').append('<li value='+place[i].id+'>'+place[i].name+'</li>')
+		}
+		// $('.less_place').append("<li value="+place[i].id+" label='location'>"+place[i].name+"</div>");
+	}
+	$('.choose_part').on('click','.choose_line img',function(){
+		if($(this).index()==0){
+			$(this).parents('.choose_line').css('height','auto');
+			$(this).parents('.choose_line').siblings('.choose_line').css('height','47px');
+			$('.science_all img').eq(0).css('display','block').siblings('img').css('display',"none");
+		}else{
+			$(this).parents('.choose_line').css('height','47px');
+		}
+		$(this).css('display','none');
+		$(this).siblings().css('display','inline');
+	});
+	//热门推荐
+	popular();
+	//声控线数据
+	filterLine(12)
+	function filterLine(id){
+		console.log($('.less_place li.active').attr('value'));
+		$.ajax({
+			url:'http://dev-www.imgaozhao.com/index.php?r=api/forecast/line-search&id='+id,
+            type:"get",
+            dataType: "json",
+            success:function(dataA){
+            	var wenList = dataA.res.wen_list,liList=dataA.res.li_list;
+            	var wenHtml ='<tr><td>年度</td><td>本科一批</td><td>本科二批</td><td>本科三批</td></tr>' ,liHtml='<tr><td>年度</td><td>本科一批</td><td>本科二批</td><td>本科三批</td></tr>';
+            	if(dataA.errcode==0){
+            		if(wenList.length==0){
+            			wenHtml+="<tr><td class='color6' colspan='4'>暂无数据信息...</td></tr>"
+            		}
+            		if(liList.length==0){
+            			liHtml+="<tr><td class='color6' colspan='4'>暂无数据信息...</td></tr>"	
+            		}
+            		for(var i=0;i<wenList.length;i++){
+            			wenHtml+='<tr><td>'+wenList[i].year+'</td><td>'+wenList[i].batch1+'</td><td>'+wenList[i].batch2+'</td><td>'+wenList[i].batch3+'</td></tr>'
+            		}
+            		$('.wenLine table').html(wenHtml)
+            		for(var i=0;i<liList.length;i++){
+            			liHtml+='<tr><td>'+liList[i].year+'</td><td>'+liList[i].batch1+'</td><td>'+liList[i].batch2+'</td><td>'+liList[i].batch3+'</td></tr>';
+            		}
+            		$('.liLine table').html(liHtml)
+            	}
+            }
+        });
+	}
+	// 点击激活按钮-弹框
+	var wrap = function(obj1,obj2){
+		obj1.hide();
+		obj2.fadeIn(100);
+	}
+	$(".open_btn").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$('.wrap_close').click(function(){
+		$('.wrap_part').hide();
+		$('.wrap_content').show();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap').fadeOut(300);
+	})
+	$(".active_vip").click(function(){
+		wrap($('.wrap_part'),$('.wrap_active'));
+	});
+	$('.active_btn').click(function(){
+		wrap($('.wrap_part'),$('.wrap_success'));
+	})
+	//选择地址
+	$('.choose_line li').click(function(){
+		$(this).parents('.choose_line').find('li').removeClass('active');
+		$(this).addClass('active');
+		filterLine($(this).attr('value'))
+	})
+
+	//下拉图片
+	$('.choose_line img').click(function(){
+		$(this).css('display','none');
+		$(this).siblings().css('display','inline');
+	});
+
+	//表格数据填充
+</script>
+</html>

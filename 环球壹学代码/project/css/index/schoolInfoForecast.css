@@ -1,0 +1,218 @@
+.main_box{
+	width: 100%;height: 410px;background: #fff;margin-top: 20px
+}
+.main_content{
+	width: 69%;
+	min-width: 1000px;
+	max-width: 1300px;
+	padding-top: 20px;
+}
+.main_content .col-xs-6{
+	min-width: 500px;
+	padding:0;
+}
+.school_info{
+	left: 540px;
+	right: 0px;
+}
+.school_info img,.tab_info img{
+	border-radius: 70px;
+	margin-right: 20px;
+}
+.product_tag {
+    border: 1px solid #3699FF;
+    color: #3699FF;
+}
+.school_info .info_text{
+	text-align:justify;
+	  text-justify:distribute-all-lines;/*ie6-8/
+	  text-align-last:left;/* ie9*/
+	  -moz-text-align-last:left;/*ff*/
+	  -webkit-text-align-last:left;/*chrome 20+*/
+}
+.school_info .info_text p:first-child{
+	padding-bottom: 10px;
+}
+.school_box{
+	height: 320px;
+}
+.school_box .download,.school_box .download .downinfo{
+	right: 0;
+	bottom: 0;
+}
+.school_box .download .downinfo{
+	bottom: 5px;
+	width: 156px;font-size: 12px;color: #656565;
+}
+.school_box .download img{
+	bottom: 5px;
+	right: 165px;
+}
+
+/*详情信息_tab*/
+.tab_box{
+	background: #fff;margin-top: 20px;
+	padding: 0;
+}
+.tab_box li{
+	height: 54px;
+	/*line-height: 54px;*/
+	display: inline-block!important;
+}
+.tab_box li:hover a{
+	background: #fff;
+	color: #2099EE;
+}
+.tab_box li a{
+	padding: 17px 40px;
+}
+.tab_box .active a{
+	background: linear-gradient(0deg, #FFFFFF 0%, #F0F2F5 100%);
+	color: #2099EE;
+	border-top:4px solid #2099EE;
+	padding-top: 13px;
+}
+.tab_box .tab-pane{
+	padding: 20px;
+	/*本页面修改*/
+	padding-top:0; 
+}
+.tab_info{
+	width: 100%;
+	margin:20px 0;
+	/*height: 80px;*/
+	/*本页面修改*/
+	height: auto;
+}
+.tab_info .name{
+	padding-top: 5px;
+}
+.tab_info .name p{
+	margin-bottom: 20px;
+}
+.tab_box .article{
+	line-height: 26px;
+}
+.text_color{
+	/*color: #545452*/
+}
+table{
+	border: 1px solid #EEE;
+}
+table tr td{
+	border-top: 0px solid #eee!important;
+}
+table tr:nth-child(2n){
+	background: #F7F7F7;
+}
+table tr td{
+	height: 31px!important;
+	line-height: 31px!important;
+}
+/*本页面修改*/
+.tab_info {
+	height: 260px;
+	overflow: hidden;
+}
+.look_more{
+	width: 150px;padding: 8px 0px;border: 1px solid #3699FF;border-radius: 100px;color: #3699FF;margin: 0 auto;
+}
+.tab_home td{
+	border: 1px solid #EEE!important;
+}
+.condition_list{
+	padding: 5px 0;
+}
+.condition_list span{
+	padding-right: 40px;
+}
+/*修改*/
+.major_better .col-xs-5{
+	width: 42%;
+	margin-right: 7%;
+}
+.major_better .major_title{
+	height: 19px;width: 100%;margin: 10px 0;border-left: 4px solid #FF8300;
+}
+.major_better .major_title span{
+	padding-left: 10px;
+}
+.major_better .join{
+	width: 660px;
+}
+.major_better .join thead tr{
+	background: #B5DAFF;
+	border-top: 1px solid #3699FF;
+}
+.major_better .join tr td{
+	border:1px solid #3699FF;
+	height: 37px!important;
+}
+.tab_condition table tr{
+	background: #FFF;
+}
+.tab_condition table thead tr{
+	background: #FAFAFA;
+}
+.tab_condition .score_line thead tr td:first-child{
+	width: 350px;
+}
+.policy{
+	height: 104px;
+}
+.majorMore .major_intro{
+	width: 650px;
+}
+.majorMore .major_intro .col-xs-5,.majorMore .major_intro .col-xs-12{
+	padding: 5px 0;
+}
+.line_title{
+	width: 100%;
+	height: 34px;
+	background: #F7F7F7; 
+	padding-left: 12px;
+	line-height: 34px;
+}
+.line_title .line{
+	width: 4px;
+	height: 100%;
+	left: 0;
+	background: #2099EE;
+	border-radius: 100px;
+}
+.majorMore .icon_list{
+	margin-bottom: 8px;
+}
+.majorMore .icon_list span{
+	padding-left: 6px;
+}
+.school_first table,.major_better .col-xs-5 table{
+	border:none;
+}
+.school_first table tbody td,.major_better .col-xs-5 tbody td{
+	color: #FF8300;
+}
+.self_choose{
+	background: #FFF;position: absolute;top: 40px;z-index: 99;border: 1px solid #EEE;left: -20px;right: -20px;
+	box-sizing: border-box;
+}
+.self_choose ul{
+	padding: 0;
+	display: none;
+	margin: 0;
+}
+.self_choose ul li{
+	padding: 15px 20px;cursor: pointer;font-size: 13px;
+}
+.percent_more{
+	float:left;height: auto;width: 170px;text-align: center;padding-top: 50px;
+}
+.tab_choose{
+	height: 40px;padding: 9px 0;
+}
+.choose_li{
+	cursor: pointer;
+}
+.choose_li:hover,.tab_choose .active{
+	color: #3699FF;
+}

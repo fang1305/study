@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index/index.css">
+    <link rel="stylesheet" href="../css/index/wraps.css">
+    <title>首页</title>
+    <style>
+    	hr{
+    		margin: 0;
+    	}
+    	a{
+    		color: #333;
+    		text-decoration: none!important;
+    	}
+    	ul{
+    		padding: 0;
+    		margin: 0;
+    	}
+    	.pointer{
+    		cursor: pointer;
+    	}
+    	.borderR{
+    		border-radius: 4px;
+    	}
+    	/*搜索部分*/
+    	.mainBox,.courseBox{
+    		width: 70%;
+    		min-width: 1000px;
+    		margin: 0 auto;
+			padding: 22px 20px;
+    		height: 88px;
+    	}
+    	.mainBox{
+			margin-bottom: 60px;
+    	}
+    	.courseBox{
+			padding: 32px 20px 20px;
+    	}
+    	.mainBox .search{
+            width: 600px;
+            height: 48px;
+            background: #fff;
+            top: 20px;
+            border:0px;
+            border-radius: 4px;
+            left: 50%;
+    		margin-left: -300px;
+        }
+        .mainBox .search span,.mainBox .search input{
+            font-size: 20px;border: none;
+        }
+        .mainBox .search span{
+           background: #3699FF;
+           padding: 10px 20px;
+           color: #fff;
+           cursor: pointer;
+        }
+        .mainBox .search input{
+            height: 48px;
+        }
+        .courseBox .nav{
+        	top: -35px;
+        	left: 0px;
+        }
+        /*去加课*/
+        .addCourse{
+        	width: 114px;
+        	height: 48px;
+        	top: 20px;
+        	right: 0;
+        	background: #FFF;
+        	border: 1px solid #EEE;
+        	padding: 10px 0 10px 10px;
+        }
+        .addCourse img{
+        	margin: 0 5px 5px 0;
+        }
+        .addCourse span{
+			font-size: 19px;
+        }
+        /*课程列表*/
+    	.courseBox{
+    		height: auto;
+    		margin: 20px auto;
+    		background: #FFF;
+    	}
+		/*右侧导航栏*/
+		.right_silder{
+			cursor: pointer;
+			position: fixed;
+			right: 20px;width: 40px;
+			top: 75%;
+			margin-top: -20px;
+		}
+    </style>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li class="active"><a href="course.html">课程</a></li>
+    				<li><a href="index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+
+		<!-- 搜索栏 -->
+		<div class="mainBox pos_re">
+            <div class="input-group search pos_ab">
+              <input type="text" class="form-control searchInput" placeholder="搜索你想学的课程" aria-describedby="basic-addon2">
+              <span class="input-group-addon searchMajor" id="basic-addon2">搜索</span>
+            </div>
+            <div class="addCourse pos_ab borderR pointer">
+            	<img src="../img/course/icon_addC.png" alt="" width="24px">
+            	<span class="fs_20">去发课</span>
+            </div>
+		</div>
+		
+		<!-- 主要课程列表 -->
+		<div class="main_content courseBox pos_re">
+			<div class="nav pos_ab">
+                <ol class="breadcrumb">
+                  <li><a href="course.html">课程</a></li>
+                  <li class="active">更多课程</li>
+                </ol>           
+            </div>
+				<div class="title">
+					<ul>
+						<li class="active" label="3" value="live">直播</li>
+						<li value="video" label="2">视频课</li>
+						<li value="service" label="1">线下班课</li>
+						<li value="one" label="6">1对1</li>
+						<li value="file" label="4">资料</li>
+						<li value="multiple" label="7">综合服务</li>
+					</ul>
+				</div>
+				<div class="choose_part pos_re">
+					<div class="choose_line science_all pos_re">
+						<span><p class="pos_ab">科目:</p></span>
+						<ul class="less_place">
+							<li value='' label="product_type_id" class="active">全部</li>
+						</ul>
+						<a >
+				   			<img src="../img/index/icon_down.png" alt="" width="18px" >
+				   			<img src="../img/index/icon_up.png" alt="" width="18px" >
+						</a>
+					</div>
+
+					<div class="pos_ab science" >
+						<em></em>
+						<div class="scienceMain">
+							
+						</div>
+					</div>
+				</div>
+				<!-- 详细介绍 -->
+				<div class="type_one row">
+					<div class="content_detail">
+						<div class="product_img pos_re">
+							<a href="###" value='900'><img src="../img/index/banner.png" alt="" height="180px"></a>
+							<div class="text-center class_type pos_ab">直播</div>
+							<div class="class_time pos_ab">4月11日19:00-21:30</div>
+					</div>
+						<div class="product_info pos_re">
+							<div class="product_title fs_23"><a href="###" value='900'>西安科技大学自主招生面试解读章程指南</a></div>
+							<p>主讲:陈老师</p>
+							<p>机构:环球壹学北京教育科技有限公司</p>
+							<p>学校:北京大学</p>
+							<div class="product_price pos_ab">
+								<span class="price fs_23">￥5000</span>
+								<div class="classes_look">
+									<span>4.8分</span>
+								</div>
+								<div class="classes_look">
+									<span>1002购买</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<nav aria-label="Page navigation">
+						<span style="font-size:14px;"><ul class="pagination" id="pageUl"></ul></span> 
+					</nav>
+				</div>
+		</div>
+
+		<!-- silder -->
+		<div class="fs_12 right_silder">
+			<img src="../img/course/top.png" alt="" width="38px" onclick="toTop('body')">
+		</div>
+		<!-- footer -->
+		<footer style="width: 100%;">
+			<img src="../img/index/footer.png" alt="" width="100%">
+		</footer>
+    </body> 
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/type.js"></script>
+<script type="text/javascript" src="../js/searchparams1.js"></script>
+<script type="text/javascript" src="../js/bootstrap-paginator.js"></script>
+<script>
+	 console.log(searchList)
+	var pageNow=1;
+	var parObj={"type":'3',"product_type_id":'',"area":''}
+	var majorArr=[];
+	var majorNameArr=[];
+	//直播等类型选择
+	function typeClick(type,check){
+		parObj.area="";
+		parObj.type=type;
+		var listAll = searchList[check];
+		$('.science_all').nextAll('.choose_line').remove();
+		var html = "";
+		for(var i=0;i<listAll.length;i++){
+			html+='<div class="choose_line pos_re"><span><p class="pos_ab">'+listAll[i].name+'</p></span><ul>'
+			for(var j=0;j<listAll[i].list.length;j++){
+				html+='<li value='+listAll[i].list[j].id+' label='+listAll[i].field+'>'+listAll[i].list[j].name+'</li>'
+			}
+			if(listAll[i].list.length>8){
+				html+='</ul><a ><img src="../img/index/icon_down.png" alt="" width="18px" ><img src="../img/index/icon_up.png" alt="" width="18px" ></a></div>'
+			}else{
+				html+='</ul></div>'
+			}
+		}
+		$('.science_all').after(html);
+	}
+	$('.title ul li').click(function(){
+		$(this).addClass('active').siblings().removeClass('active');
+		typeClick($(this).attr('label'),$(this).attr('value'))
+		filterClass(1,'')
+	});
+	typeClick(3,'live');
+	for(var i=0;i<type.length;i++){
+		$('.less_place').append('<li id='+type[i].id+' value='+type[i].id+' label="product_type_id">'+type[i].name+'</li>')
+	}
+	
+	$('.choose_part').on('click','.choose_line img',function(){
+		if($(this).index()==0){
+			$(this).parents('.choose_line').css('height','auto');
+			$(this).parents('.choose_line').siblings('.choose_line').css('height','47px');
+			$('.science_all img').eq(0).css('display','block').siblings('img').css('display',"none");
+		}else{
+			$(this).parents('.choose_line').css('height','47px');
+		}
+		$(this).css('display','none');
+		$(this).siblings().css('display','inline');
+	});
+	// 选择科目的下拉栏
+	$('.science_all ul').on('click','li',function(){
+		if($(this).html()!='全部'){
+			if(!$(this).hasClass('active')){
+				$('.science').addClass('activeCheck');
+			}
+			if($(this).html().split('(').length==1){
+				console.log($(this).siblings('li'))
+				for(var i=0;i<$(this).siblings('li').length;i++){
+					$(this).siblings('li')[i].innerHTML = $(this).siblings('li')[i].innerHTML.split('(')[0]
+				}
+				parObj.product_type_id = $(this).attr('id');
+				filterClass(1,'')
+			}
+			parObj.product_type_id = $(this).attr('id');
+			var left = $(this).position().left;
+			$('.science em').css('left',left+20);
+			$('.science').css('top',$(this).position().top+47);
+			var html="";
+			for(var i=0;i<type.length;i++){
+				if($(this).attr('id')==type[i].id){
+					var arr=type[i].children;
+					for(var j=0;j<arr.length;j++){
+						html = html + '<div class="science_line">\
+								<input type="radio" name="science" label='+arr[j].id+' value='+arr[j].name+'><span class="fs_12 color9">'+arr[j].name+'</span>\
+								<ul class="color6 fs_12">';
+						for(var t=0;t<arr[j].children.length;t++){
+							html = html + '<li class="text-center" label='+arr[j].children[t].id+'>'+arr[j].children[t].name+'</li>';						
+						}
+						html = html + '<div class="clear"></div></ul></div>';
+					}
+				}
+			}
+			$('.scienceMain').html(html)
+		}else{
+			parObj.product_type_id = '';
+			filterClass(1,'')
+		}
+	})
+  
+	//预测模块
+	var placeA = [{"id":"12","name":"安徽省"},{"id":"34","name":"澳门"},{"id":"1","name":"北京市"},{"id":"22","name":"重庆市"},{"id":"13","name":"福建省"},{"id":"28","name":"甘肃省"},{"id":"19","name":"广东省"},{"id":"20","name":"广西省"},{"id":"24","name":"贵州省"},{"id":"21","name":"海南省"},{"id":"3","name":"河北省"},{"id":"8","name":"黑龙江"},{"id":"16","name":"河南省"},{"id":"17","name":"湖北省"},{"id":"18","name":"湖南省"},{"id":"10","name":"江苏省"},{"id":"14","name":"江西省"},{"id":"7","name":"吉林省"},{"id":"6","name":"辽宁省"},{"id":"5","name":"内蒙古"},{"id":"30","name":"宁夏"},{"id":"29","name":"青海省"},{"id":"15","name":"山东省"},{"id":"9","name":"上海市"},{"id":"4","name":"山西省"},{"id":"27","name":"陕西省"},{"id":"23","name":"四川省"},{"id":"32","name":"台湾"},{"id":"2","name":"天津市"},{"id":"33","name":"香港"},{"id":"31","name":"新疆"},{"id":"26","name":"西藏"},{"id":"25","name":"云南省"},{"id":"11","name":"浙江省"}];
+	for(var i=0;i<placeA.length;i++){
+		if(i ==0 ){
+			$('.place_all .tag').append("<div class='place_list active' value="+placeA[i].id+">"+placeA[i].name+"</div>");
+		}else{
+			$('.place_all .tag').append("<div class='place_list' value="+placeA[i].id+">"+placeA[i].name+"</div>");
+		}
+	}
+	//选择地址
+	var  place=function(num,obj){
+		console.log(obj)
+		if(num==0){
+			forecastArr.province = obj.attr('value');
+			forecastArr.provinceName = obj.html();
+		}else if(num == 1){
+			forecastArr.subject = obj.attr('value')
+			forecastArr.subjectName = obj.html()
+		}
+		obj.addClass('active');
+		obj.siblings().removeClass('active');
+		if(num!=2){
+			$('.place_choose').eq(num).find('input').val(obj.html());
+		}else{
+			filterClass(1,obj);  
+		}
+		if(obj.attr('label') == "area"&&num==2){
+			$('.choose_line').eq(0).css('height','47px');
+			obj.addClass('activeArea').siblings().removeClass('activeArea');
+			var left = obj.position().left;
+			$('.science em').css('left',left+20);
+			$('.science').css('top',obj.position().top+97);
+			var html="";
+			for(var i=0;i<searchList.service[0].list.length;i++){
+				if(obj.attr('value')==searchList.service[0].list[i].id){
+					$('.science').toggleClass('activeCheck')
+					console.log(searchList.service[0].list[i])
+					var arr=searchList.service[0].list[i].children;
+					html = html + '<div class="science_line">\
+							<ul class="color6 fs_12">';
+					for(var j=0;j<arr.length;j++){
+						html = html + '<li class="text-center" label="area" id='+arr[j].id+'>'+arr[j].name+'</li>';						
+					}
+					html = html + '<div class="clear"></div></ul></div>';
+				}
+			}
+			$('.scienceMain').html(html)
+		}
+
+	}
+	$('.place_all .tag').on('click','.place_list',function(){
+		place(0,$(this))
+	});
+	$('.class_list').click(function(){
+		place(1,$(this));
+	});
+
+	//课程筛选
+	$('.choose_part').on('click','.choose_line li',function(){
+		if($(this).attr('label')=="area"){
+			for(var i=0;i<$(this).siblings('li').length;i++){
+				$(this).siblings('li')[i].innerHTML=$(this).siblings('li')[i].innerHTML.split('(')[0]
+			}
+		}
+		place(2,$(this));	
+	})
+	// 切换选择科目的浮框
+	$('.science_all ul').on('click','li.active',function(){
+		$('.science').toggleClass('activeCheck');
+	})
+	$('.choose_part').siblings().click(function(){
+		$('.science').removeClass('activeCheck');
+	})
+	//选择科目详细信息---单选(早教/幼儿园/学前艺术)
+	$('.science').on('click','li',function(){
+		if($(this).attr('label')=="area"){
+			$('.science li').removeClass('active');
+			$(this).addClass('active');
+			var area = $('.choose_part ul .activeArea').html();
+			$('.choose_part ul .activeArea').html(area.split('(')[0]+'('+$(this).html()+')');
+			$('.science').removeClass('activeCheck');
+			parObj.area=$(this).attr('id');
+		}else{
+			for(var i=0;i<$('.science_all ul li').length;i++){
+				$('.science_all ul li').eq(i).html($('.science_all ul li').eq(i).html().split('(')[0]);
+			}
+			var active = $('.science_all ul .active').html()
+			for(var i=0;i<$('.science input[type=radio]').length;i++){
+				$('.science input[type=radio]')[i].checked = false;
+			}
+			$(this).parents('.science_line').find('input')[0].checked = true;
+			var activeVal = $('.scienceMain').find('input:checked').val();
+			$('.science_all ul .active').html(active.split('(')[0]+'('+activeVal+':'+$(this).html()+')')
+			$('.science li').removeClass('active');
+			$(this).addClass('active');
+			console.log($('.science input[type=radio]'))
+			parObj.product_type_id=$(this).attr('label');
+			$('.science').removeClass('activeCheck');
+		}
+		filterClass(1,'');
+	});
+	// 选择科目单选框
+	$('.scienceMain').on('click','input',function(){
+		$('.science_all ul .active').html($('.science_all ul .active').html().split('(')[0]+'('+$(this).val()+')')
+		parObj.product_type_id=$(this).attr('label');
+		filterClass(1,'');
+	})
+	// }
+	// 课程列表显示-----
+	var arrLabel=[];
+	var filterClass = function(page,obj){
+		pageNow = page;
+		console.log(parObj);
+		var skip = (pageNow-1)*10;
+		var url="http://dev-www.imgaozhao.com/index.php?r=api/course/list&skip="+skip;
+		if(obj!=""&&obj.attr('label')!="area"&&obj.attr('label')!="product_type_id"){
+			arrLabel[obj.attr('label')]=obj.attr('value');
+			if(arrLabel[obj.attr('label')]!=""){
+				url+="&"+obj.attr('label')+"="+arrLabel[obj.attr('label')]
+			}
+		}
+		parObj.product_type_id!=""?url+="&product_type_id="+parObj.product_type_id:'';
+		parObj.type!=""?url+="&type="+parObj.type:"";
+		parObj.area!=""?url+="&area="+parObj.area:"";
+		$.ajax({
+			url:url,
+            type:"get",
+            dataType: "json",
+            success:function(data){
+            	var list = data.res.list;
+            	var html="";
+            	for(var i=0;i<list.length;i++){
+            		html+='<div class="content_detail">\
+						<div class="product_img pos_re">\
+							<a href="###" value='+list[i].id+'><img src='+list[i].img+' alt="" height="180px"></a>\
+							<div class="text-center class_type pos_ab">'+list[i].tag+'</div>';
+					if(list[i].time!=''){
+						html+='<div class="class_time pos_ab">'+list[i].time+'</div>';
+					}
+					html+='</div>\
+						<div class="product_info pos_re">\
+							<div class="product_title fs_23"><a href="###" value='+list[i].id+'>'+list[i].title+'</a></div>\
+							<p>主讲:'+list[i].teacher_name+'</p>\
+							<p>机构:'+list[i].agent_name+'</p>\
+							<p>学校:'+list[i].school_name+'</p>\
+							<div class="product_price pos_ab">';
+					if(list[i].price!="免费"){
+						html+='<span class="price fs_23">'+list[i].price+'</span>';
+					}else{
+						html+='<span class="price_free fs_23">'+list[i].price+'</span>';
+					}
+								html+='<div class="classes_look">\
+									<span>'+list[i].score+'</span>\
+								</div>\
+								<div class="classes_look">\
+									<span>'+list[i].boughts+'</span>\
+								</div>\
+							</div>\
+						</div>\
+					</div>';
+            	}
+            	$('.type_one').html(html);
+            	var allPage = data.res.total_count;
+            	var element = $('#pageUl');
+            	var options = {  
+                    bootstrapMajorVersion:3,  
+                    currentPage: page,//当前页面  
+                    numberOfPages: 5,//一页显示几个按钮（在ul里面生成5个li）  
+                    totalPages:allPage/10+1, //总页数 
+                    itemTexts: function (type, page, current) {
+				     switch (type) {
+				      case "first": return "首页";
+				      case "prev": return "上一页";
+				      case "next": return "下一页";
+				      case "last": return "末页";
+				      case "page": return page;
+				     }
+				    },
+                    onPageChanged:function (event, originalEvent, typePage, currentPage) {
+		                console.log(typePage);
+		            }
+                }  
+                element.bootstrapPaginator(options);  
+            },
+            error:function(e){
+            }
+        });   
+	}
+
+	filterClass(1,'');
+
+
+	
+	
+	// window.onscroll = function(){
+	//     var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;   
+	//     var index=0;
+	//     console.log(scrollTop)
+	//     if(scrollTop-390>0){
+	//     	index=parseInt((scrollTop-390)/320);
+	//     }
+	//     console.log(index)
+	//     $('.right_silder li').eq(index).addClass('tab_active').siblings('li').removeClass('tab_active');
+	// };
+	function toTop(obj){
+		var topH = $(obj).offset().top;
+		if(topH!=0){
+			topH-=40;
+		}
+		$('html,body').animate({scrollTop:topH},500);
+	}
+</script>
+</html>

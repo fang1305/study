@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/index/wrap.css">
+    <link rel="stylesheet" href="../../css/index/findSchool.css">
+    <title>通过科目选专业</title>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li><a href="course.html">课程</a></li>
+    				<li class="active"><a href="index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+    	<div class="banner">
+    		<div class="vip_box">
+    			<div class="btn_group fs_23">
+    				<div class="days">距离高考30天</div>
+    				<div class="open_btn hand_enter">开通志愿大师</div>
+    			</div>
+    		</div>
+    	</div>
+		<!-- 主要内容列表 -->
+		<div class="main_content">
+			<div class="left_content">
+				<div class="title">找学校</div>
+				<div class="choose_part">
+					<div class="choose_line science_all pos_re">
+						<span><p class="pos_ab">所在省份:</p></span>
+						<ul class="less_place">
+							
+						</ul>
+						<a >
+				   			<img src="../../img/index/icon_down.png" alt="" width="18px" >
+				   			<img src="../../img/index/icon_up.png" alt="" width="18px" >
+						</a>
+					</div>
+					<div class="choose_line batch">
+						<span>批次:</span>
+						<ul></ul>
+					</div>
+					<div class="choose_line school_class">
+						<span>级别:</span>
+						<ul>
+						</ul>
+					</div>
+					<div class="choose_line school_type">
+						<span>招生类别:</span>
+						<ul>
+						</ul>
+					</div>
+				</div>
+				<!-- 详细介绍 -->
+				<div class="schoolRes"></div>
+				<div class="text-center">
+					<nav aria-label="Page navigation">
+						<span style="font-size:14px;"><ul class="pagination" id="pageUl"></ul></span> 
+					</nav>
+				</div>
+			</div>
+			<div class="right_content">
+				<div class="title"><i></i>热门推荐</div>
+				<div class="hotList"></div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../../img/index/footer.png" alt="" width="100%">
+		</footer>
+
+		<!-- 弹框-激活VIP -->
+		<div class="wrap">
+			<!-- 选择激活或购买 -->
+			<div class="wrap_content wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">开通志愿大师VIP</div>
+    				 <input type="submit" class="submit_btn buy_vip mt_40" value="购买VIP" />
+    				 <input type="submit" class="submit_btn active_vip" value="激活VIP" />
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    			</div>
+    		</div>
+    		<!-- 去激活 -->
+    		<div class="wrap_active wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">激活志愿大师VIP</div>
+    				 <div class="input_box">
+    				 	<input type="text" placeholder="输入卡号">
+    				 	<input type="password" placeholder="输入卡密">
+    				 </div>
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    				 <input type="submit" class="submit_btn active_btn" value="激活VIP" />
+    				 <div class="vip_buy"><span>还没有志愿大师VIP?</span><a href="#####">立即购买</a></div>
+    			</div>
+    		</div>
+    		<!-- 激活成功 -->
+			<div class="wrap_success wrap_part">
+				<img src="../img/index/icon_close.png" class="wrap_close" />
+				<div class="success_vip">
+					<img src="../img/index/icon_success.png" alt="">
+					<div class="title">激活成功</div>
+					<div class="info_detail">您的志愿大师VIP有效期至xx年xx月xx日，现在您可以继续在电脑网页上使用，也可以登录高招APP上使用。</div>
+					<div class="vip_buy"><span>还没有下载高招APP ？</span><a href="#####">立即下载</a></div>
+				</div>
+			</div>
+    	</div>
+
+		<!-- 底部提示栏 -->
+		<div class="foot_tip text-center">
+			<div class="foot">
+				<span  class="fs_23">开通<a href="###">志愿大师VIP</a>即可查看全部的推荐院校，还有更多VIP功能</span><div class="open pos_ab">立即开通</div>
+			</div>
+		</div>
+    </body> 
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/search-school-params.js"></script>
+<script type="text/javascript" src="../../js/bootstrap-paginator.js"></script>
+<script>
+	popular()
+	//选择省份
+	console.log(params)
+	for(var i=0;i<params.province.list.length;i++){
+        if(i==0){
+            $('.less_place').append('<li class="active" value='+params.province.list[i].id+'>'+params.province.list[i].name+'</li>')
+        }else{
+            $('.less_place').append('<li value='+params.province.list[i].id+'>'+params.province.list[i].name+'</li>')
+        }
+        // $('.less_place').append("<li value="+place[i].id+" label='location'>"+place[i].name+"</div>");
+    }
+    filter($('.choose_line.batch ul'),params.batch.list)
+    filter($('.choose_line.school_class ul'),params.school_class.list)
+    filter($('.choose_line.school_type ul'),params.school_type.list)
+    function filter(obj,data){
+    	var html=''
+    	// alert(data.length)
+    	for(var i=0;i<data.length;i++){
+    		if(i==0){
+    			html+="<li class='active' value="+data[i].id+">"+data[i].name+"</li>"
+    		}else{
+    			html+="<li value="+data[i].id+">"+data[i].name+"</li>"
+    		}
+    	}
+    	obj.html(html);
+    }
+    $('.choose_part').on('click','.choose_line img',function(){
+        if($(this).index()==0){
+            $(this).parents('.choose_line').css('height','auto');
+            $(this).parents('.choose_line').siblings('.choose_line').css('height','47px');
+            $('.science_all img').eq(0).css('display','block').siblings('img').css('display',"none");
+        }else{
+            $(this).parents('.choose_line').css('height','47px');
+        }
+        $(this).css('display','none');
+        $(this).siblings().css('display','inline');
+    });
+    var search=location.search;
+    var r=parse(search);
+    var sendObj={"skip":0,'id':r.id,'policy_area':r.place,'province':'0','school_type':'0',"batch":'0',"school_class":'0'};
+    filterClass(1,'')
+   	var pageNow=1;
+    function filterClass(page,data){
+    	pageNow = page;
+    	console.log(sendObj)
+    	sendObj.skip=10*(page-1);
+    	$.ajax({
+    		url:'http://dev-www.imgaozhao.com/index.php?r=api/major-group/select-school',
+            type:"get",
+            data:sendObj,
+            dataType: "json",
+            success:function(data){
+            	console.log(data)
+            	console.log(sendObj)
+            	if(data.errcode==0){
+ 					var html=''
+ 					var list=data.res.list;
+            		for(var i=0;i<data.res.list.length;i++){
+            			html+='<div class="content_detail">\
+							<div class="product_img">\
+								<a href="../schoolInfo.html?id='+list[i].id+'"><img src='+list[i].logo+' alt="" width="100px" height="100px"></a>\
+							</div>\
+							<div class="product_info pos_re">\
+								<div class="product_title fs_23"><a href="../schoolInfo.html?id='+list[i].id+'">'+list[i].name+'</a></div>'
+						for(var j=0;j<list[i].tag.length;j++){
+							html+='<span class="product_tag">'+list[i].tag[j]+'</span>'
+						}
+						html+='</div></div>'
+            		}
+            		$('.schoolRes').html(html);
+            		var allPage=data.res.total_count/10+1;
+            		var element = $('#pageUl');
+					var options = {  
+				        bootstrapMajorVersion:3,  
+				        currentPage: page,//当前页面  
+				        numberOfPages: 5,//一页显示几个按钮（在ul里面生成5个li）  
+				        totalPages:allPage/10+1, //总页数 
+				        itemTexts: function (type, page, current) {
+					     switch (type) {
+					      case "first": return "首页";
+					      case "prev": return "上一页";
+					      case "next": return "下一页";
+					      case "last": return "末页";
+					      case "page": return page;
+					     }
+					    },
+				        onPageChanged:function (event, originalEvent, typePage, currentPage) {
+				            // console.log(typePage);
+				        }
+				    }  
+				    element.bootstrapPaginator(options);  
+            	}
+            }
+        });
+    }
+    
+	// 点击激活按钮-弹框
+	var wrap = function(obj1,obj2){
+		obj1.hide();
+		obj2.fadeIn(100);
+	}
+	$(".open_btn").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$(".open").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$('.wrap_close').click(function(){
+		$('.wrap_part').hide();
+		$('.wrap_content').show();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap').fadeOut(300);
+	})
+	$(".active_vip").click(function(){
+		wrap($('.wrap_part'),$('.wrap_active'));
+	});
+	$('.active_btn').click(function(){
+		wrap($('.wrap_part'),$('.wrap_success'));
+	})
+	//选择地址
+	var  place=function(num,obj){
+		obj.addClass('active');
+		obj.siblings().removeClass('active');
+		sendObj.batch=$('.batch li.active').attr('value');
+		sendObj.school_class=$('.school_class li.active').attr('value');
+		sendObj.school_type=$('.school_type li.active').attr('value');
+		sendObj.province=$('.less_place li.active').attr('value');
+		filterClass(1,'');
+		if(num!=2){
+			$('.place_choose').eq(num).find('input').val(obj.html());
+		}
+	}
+	$('.choose_line li').click(function(){
+		place(2,$(this));
+	})
+</script>
+</html>

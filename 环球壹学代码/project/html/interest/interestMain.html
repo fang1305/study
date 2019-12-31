@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/index/wrap.css">
+    <title>兴趣测试</title>
+    <style>
+    	.main_content{
+    		width: 70%;min-width: 700px;
+    		min-width: 1000px;
+		    height: auto;
+		    margin: 80px auto 0;
+    		background: #fff;
+    		padding: 24px 20px;
+    	}
+        .main_content .title{
+            margin-bottom: 20px
+        }
+        .main_content p{
+            text-align: justify;
+            line-height: 28px;
+            margin-bottom: 19px;
+        }
+        .btnBox{
+            margin: 80px auto;
+        }
+    	.btnBox a{
+    		display: block;
+    		padding: 6px 0px;
+            width: 280px;
+			margin: 10px auto;  
+			color: #3699FF;
+			cursor: pointer;
+            background: #F1F8FF;
+            border: 1px solid #3699FF;
+            border-radius: 4px;
+    	}
+        .btnBox a.active:hover{
+            color: #fff;
+        }
+    	.btnBox .active{
+    		background: #3699FF;
+    		border: 1px solid #3699FF;
+    		color: #fff;
+    	}
+    </style>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li><a href="course.html">课程</a></li>
+    				<li class="active"><a href="../index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+    	<div class="banner">
+    		<div class="vip_box">
+    			<div class="btn_group fs_23">
+    				<div class="days">距离高考30天</div>
+    				<div class="open_btn hand_enter">开通VIP</div>
+    			</div>
+    		</div>
+    	</div>
+    	
+		<!-- 主要内容列表 -->
+		<div class="main_content">
+			<div class="title">兴趣测试 </div>
+            <p class="fs_16">霍兰德测试简介</p>
+            <p class="fs_16">霍兰德职业兴趣自测(Self-Directed Search)是由美国职业指导专家霍兰德(John Holland)根据他本人大量的职业咨询经验及其职业类型理论编制的测评工具。霍兰德认为，个人职业兴趣特性与职业之间应有一种内在的对应关系。根据兴趣的不同，人格可分为研究型（I）、艺术型（A）、社会型（S）、企业型（E）、传统型（C）、现实型（R）六个维度，每个人的性格都是这六个维度的不同程度组合。</p>
+            <p class="fs_16">本测评共有60道题目，没有对错，请认真阅读题目内容后选择你认为最符合的答案（仅供单选）</p>
+			<div class="btnBox text-center">
+				<a class="active" href = 'interestTest.html?id=2'>开始测试</a>
+				<a href = 'interestRes.html?id=1'>查看上次测试结果</a>
+			</div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../../img/index/footer.png" alt="" width="100%">
+		</footer>
+
+		<!-- 弹框-激活VIP -->
+		<div class="wrap">
+			<!-- 选择激活或购买 -->
+			<div class="wrap_content wrap_part">
+    			<img src="../../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">开通志愿大师VIP</div>
+    				 <input type="submit" class="submit_btn buy_vip mt_40" value="购买VIP" />
+    				 <input type="submit" class="submit_btn active_vip" value="激活VIP" />
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    			</div>
+    		</div>
+    		<!-- 去激活 -->
+    		<div class="wrap_active wrap_part">
+    			<img src="../../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">激活志愿大师VIP</div>
+    				 <div class="input_box">
+    				 	<input type="text" placeholder="输入卡号">
+    				 	<input type="password" placeholder="输入卡密">
+    				 </div>
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    				 <input type="submit" class="submit_btn active_btn" value="激活VIP" />
+    				 <div class="vip_buy"><span>还没有志愿大师VIP?</span><a href="#####">立即购买</a></div>
+    			</div>
+    		</div>
+    		<!-- 激活成功 -->
+			<div class="wrap_success wrap_part">
+				<img src="../../img/index/icon_close.png" class="wrap_close" />
+				<div class="success_vip">
+					<img src="../../img/index/icon_success.png" alt="">
+					<div class="title">激活成功</div>
+					<div class="info_detail">您的志愿大师VIP有效期至xx年xx月xx日，现在您可以继续在电脑网页上使用，也可以登录高招APP上使用。</div>
+					<div class="vip_buy"><span>还没有下载高招APP ？</span><a href="#####">立即下载</a></div>
+				</div>
+			</div>
+    	</div>
+    </body> 
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script>
+	// 点击激活按钮-弹框
+	var wrap = function(obj1,obj2){
+		obj1.hide();
+		obj2.fadeIn(100);
+	}
+	$(".open_btn").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$('.wrap_close').click(function(){
+		$('.wrap_part').hide();
+		$('.wrap_content').show();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap').fadeOut(300);
+	})
+	$(".active_vip").click(function(){
+		wrap($('.wrap_part'),$('.wrap_active'));
+	});
+	$('.active_btn').click(function(){
+		wrap($('.wrap_part'),$('.wrap_success'));
+	});
+
+	//判断是否是VIP
+
+</script>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/index/wrap.css">
+    <title>新高考</title>
+    <style>
+    	.main_content{
+    		width: 70%;min-width: 700px;
+    		min-width: 1000px;
+		    height: 520px;
+		    margin: 80px auto 0;
+    		background: #fff;
+    		padding: 24px 20px;
+    	}
+        .main_content .title{
+            margin-bottom: 20px
+        }
+        .editList{
+            padding: 26px 16px;
+        }
+        .edit_box{
+            width: 340px;margin: 0px auto;
+        }
+        .edit_box .edit_line{
+            width: 100%;height: 40px;line-height: 40px;border-radius: 4px;border: 1px solid #f4f4f4;margin: 20px auto;
+        }
+        .edit_box .edit_line select,.edit_box .edit_line input{
+            width: 198px;
+            height: 38px;
+            border: none;box-shadow: none;color: #999;
+            margin-left: 10px;
+            background: #FFF;
+        }
+        .edit_box .edit_line img{
+            position: absolute;
+            right: 20px;
+            top: 14px;
+        }
+        .edit_box .edit_title{
+            width: 108px;background: #f4f4f4;
+        }
+        .edit_box .submitBtn,.moreBtn .beginBtn{
+            width: 100%;height: 56px;line-height: 50px;border: 1px solid #3699FF;
+            background: #3699FF;
+            color: #FFF;border-radius: 4px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .place_all{
+            top: 10px;
+        }
+        .place_all .tag{
+            width: 368px;
+            max-width: 368px;
+        }
+        .tag .place_list, .tag .class_list{
+            width: 65px;
+        }
+        .place_all em,.choose_list em{
+            border-radius: 6px;
+            left: 164px;
+        }
+        .choose_list em{
+            left: 65px;
+        }
+        .choose_list{
+            left: 57px;
+        }
+
+        .edit_box{
+            margin-top: 80px;
+        }
+    </style>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li><a href="course.html">课程</a></li>
+    				<li class="active"><a href="../index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+    	<div class="banner">
+    		<div class="vip_box">
+    			<div class="btn_group fs_23">
+    				<div class="days">距离高考30天</div>
+    				<div class="open_btn hand_enter">开通VIP</div>
+    			</div>
+    		</div>
+    	</div>
+    	
+		<!-- 主要内容列表 -->
+		<div class="main_content">
+			<div class="title">成绩报告</div>
+            <div class="reportBox">
+                <div class="edit_box">
+                    <div class="edit_line">
+                        <div class="edit_title text-center fl_l">高考分数</div>
+                        <input class="form-control" type='number' placeholder="请输入高考分数" />
+                    </div>
+                    <div class="edit_line pos_re">
+                        <div class="edit_title text-center fl_l">文理科(必填)</div>
+                        <input class="form-control choose_down class_name" type='text' placeholder="理科" readonly="readonly" />
+                        <img src="../../img/index/icon_down.png" width="12px" alt="">
+                        <!-- 文理科 -->
+                        <div class="choose_list choose pos_re">
+                            <div class="tag text-center">
+                                <div class='class_list active' value="2">理科</div>
+                                <div class='class_list' value="1">文科</div>
+                            </div>
+                            <em></em>
+                        </div>
+                    </div>
+                    <div class="edit_line place_choose pos_re">
+                        <div class="edit_title text-center fl_l">生源地(必填)</div>
+                        <input class="form-control choose_down place_name" type='text' placeholder="安徽省" readonly="readonly" />
+                        <img src="../../img/index/icon_down.png" width="12px" alt="">
+                        <!-- 地址 -->
+                        <div class="place_all choose text-center pos_re">
+                            <div class="tag"></div><em></em>
+                        </div>
+                    </div>
+                    <div class="edit_btn">
+                        <input type="submit" class="text-center fs_23 submitBtn" onclick="submitSend()" value="查看报告">
+                    </div>
+                </div>
+            </div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../../img/index/footer.png" alt="" width="100%">
+		</footer>
+
+		<!-- 弹框-激活VIP -->
+		<div class="wrap">
+			<!-- 选择激活或购买 -->
+			<div class="wrap_content wrap_part">
+    			<img src="../../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">开通志愿大师</div>
+    				 <input type="submit" class="submit_btn buy_vip mt_40" value="购买" />
+    				 <input type="submit" class="submit_btn active_vip" value="激活" />
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    			</div>
+    		</div>
+    		<!-- 去激活 -->
+    		<div class="wrap_active wrap_part">
+    			<img src="../../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">激活志愿大师</div>
+    				 <div class="input_box">
+    				 	<input type="text" placeholder="输入卡号">
+    				 	<input type="password" placeholder="输入卡密">
+    				 </div>
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    				 <input type="submit" class="submit_btn active_btn" value="激活" />
+    				 <div class="vip_buy"><span>还没有志愿大师?</span><a href="#####">立即购买</a></div>
+    			</div>
+    		</div>
+    		<!-- 激活成功 -->
+			<div class="wrap_success wrap_part">
+				<img src="../../img/index/icon_close.png" class="wrap_close" />
+				<div class="success_vip">
+					<img src="../../img/index/icon_success.png" alt="">
+					<div class="title">激活成功</div>
+					<div class="info_detail">您的志愿大师有效期至xx年xx月xx日，现在您可以继续在电脑网页上使用，也可以登录高招APP上使用。</div>
+					<div class="vip_buy"><span>还没有下载高招APP ？</span><a href="#####">立即下载</a></div>
+				</div>
+			</div>
+    	</div>
+    </body> 
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script>
+	// 点击激活按钮-弹框
+	var wrap = function(obj1,obj2){
+		obj1.hide();
+		obj2.fadeIn(100);
+	}
+	$(".open_btn").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$('.wrap_close').click(function(){
+		$('.wrap_part').hide();
+		$('.wrap_content').show();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap').fadeOut(300);
+	})
+	$(".active_vip").click(function(){
+		wrap($('.wrap_part'),$('.wrap_active'));
+	});
+	$('.active_btn').click(function(){
+		wrap($('.wrap_part'),$('.wrap_success'));
+	});
+
+	//表格数据填充
+    //预测模块
+    var placeA = [{"id":"12","name":"安徽省"},{"id":"34","name":"澳门"},{"id":"1","name":"北京市"},{"id":"22","name":"重庆市"},{"id":"13","name":"福建省"},{"id":"28","name":"甘肃省"},{"id":"19","name":"广东省"},{"id":"20","name":"广西省"},{"id":"24","name":"贵州省"},{"id":"21","name":"海南省"},{"id":"3","name":"河北省"},{"id":"8","name":"黑龙江"},{"id":"16","name":"河南省"},{"id":"17","name":"湖北省"},{"id":"18","name":"湖南省"},{"id":"10","name":"江苏省"},{"id":"14","name":"江西省"},{"id":"7","name":"吉林省"},{"id":"6","name":"辽宁省"},{"id":"5","name":"内蒙古"},{"id":"30","name":"宁夏"},{"id":"29","name":"青海省"},{"id":"15","name":"山东省"},{"id":"9","name":"上海市"},{"id":"4","name":"山西省"},{"id":"27","name":"陕西省"},{"id":"23","name":"四川省"},{"id":"32","name":"台湾"},{"id":"2","name":"天津市"},{"id":"33","name":"香港"},{"id":"31","name":"新疆"},{"id":"26","name":"西藏"},{"id":"25","name":"云南省"},{"id":"11","name":"浙江省"}];
+    for(var i=0;i<placeA.length;i++){
+        if(i ==0 ){
+            $('.place_all .tag').append("<div class='place_list active' value="+placeA[i].id+">"+placeA[i].name+"</div>");
+        }else{
+            $('.place_all .tag').append("<div class='place_list' value="+placeA[i].id+">"+placeA[i].name+"</div>");
+        }
+    }
+    //选择
+    $('.place_all .tag').on('click','.place_list',function(){
+        place(0,$(this))
+    });
+    $('.class_list').click(function(){
+        place(1,$(this));
+    });
+    //课程筛选
+    $('.choose_part').on('click','.choose_line li',function(){
+        if($(this).attr('label')=="area"){
+            for(var i=0;i<$(this).siblings('li').length;i++){
+                $(this).siblings('li')[i].innerHTML=$(this).siblings('li')[i].innerHTML.split('(')[0]
+            }
+        }
+        place(2,$(this));   
+    })
+    function place(num,obj){
+        if(num == 1){
+            //文理科
+            $('.class_name').val(obj.html());
+        }else if(num == 0){
+            //生源地
+            $('.place_name').val(obj.html());
+        }
+        obj.addClass('active').siblings().removeClass('active');
+
+    }
+
+    // 文理科筛选及地址
+    $(document).bind('click',function(){
+        $('.edit_line').find('.choose').removeClass('choose_active'); 
+    }); 
+    $('.choose_down').bind('click',function(e){ 
+        e.stopPropagation();
+        $(this).parents('.edit_line').siblings().find('.choose').removeClass('choose_active'); 
+        $(this).parents('.edit_line').find('.choose').toggleClass('choose_active');
+    }); 
+    // $('.place_name').click(function(){
+    //     $('.edit_box').css('margin-top','60px')
+    // })
+    //查看报告----跳转页面
+    function submitSend(){
+        url = "scoreResult.html?score=600&type=1";//此处拼接内容
+        window.location.href = url;
+    }
+</script>
+</html>

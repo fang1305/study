@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/index/wrap.css">
+    <title>全部结果</title>
+    <style>
+        /*修改----VIP激活*/
+        .vip_box{
+            margin-left: auto;
+            min-height: 78px;
+            padding-top: 20px;
+            padding-bottom: 13px;
+            top: 0;
+        }
+        .vip_box .btn_group{
+            float: right;
+        }
+
+		.content_detail{
+			height: 140px;
+			border-top: 1px solid #EEE;
+		}
+		.content_detail img{
+			border-radius: 100px;
+		}
+		.content_detail a:hover{
+			color: #333;
+		}
+		.content_detail .product_info{
+			height: auto;
+		}
+		.content_detail .product_title{
+			padding: 15px 0 20px 0;
+		}
+		.product_vip{
+			line-height: 100px;
+		}
+		.content_detail .product_tag {
+		    border: 1px solid #3699FF;
+		    color: #3699FF;
+		}
+		.content_detail .product_img{
+			width: 100px;
+		}
+		.product_img img{
+			width: 100px;
+		}
+		.content_detail .schoolTag{
+			padding: 5px 22px;
+			color: #fff;
+			background: #3699FF;
+			top: 0;
+			right: 0;
+		}
+        .choose_line ul li img{
+            right: 0;
+            width: 15px;
+            top: 16px;
+        }
+        .main_content .choose_line span{
+            width: auto;
+        }
+        .choose_line ul{
+            position: absolute;
+        }
+    </style>
+    </head> 
+    <body>
+        <header>
+            <div class="header pos_re">
+                <img src="../../img/index/logo.png" alt="" height="50px">
+                <ul>
+                    <li><a href="course.html">课程</a></li>
+                    <li class="active"><a href="index.html">壹志愿＋</a></li>
+                    <li>关于我们</li>
+                    <li>下载APP</li>
+                    <li>登录|注册</li>
+                </ul>
+            </div>
+        </header>
+        <div class="banner">
+            <div class="vip_box">
+                <!-- <div class="search pos_ab"> -->
+                    <!-- <input type="text" class="form-control"> -->
+                    <!-- <div class="input-group search pos_ab">
+                      <input type="text" class="form-control searchInput" placeholder="搜索你想学的专业" aria-describedby="basic-addon2">
+                      <span class="input-group-addon searchMajor" id="basic-addon2">搜索</span>
+                    </div> -->
+                <!-- </div> -->
+                <div class="btn_group fs_23">
+                    <div class="days">距离高考30天</div>
+                    <div class="open_btn hand_enter">开通志愿大师</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要内容列表 -->
+        <div class="main_content">
+            <div class="left_content">
+				<div class="title">全部结果</div>
+				<div class="choose_part">
+					<div class="choose_line school_type">
+						<span>已选科目(可修改):</span>
+						<ul>
+                            <li class="place_choose active pos_re">
+                                <span>物理</span> <img src="../../img/index/icon_down.png" class="pos_ab" alt="">
+                            </li>
+                            <li class="active"><span>化学</span></li>
+                            <li class="active"><span>生物</span></li>
+						</ul>
+					</div>
+                    <div class="place_all choose pos_re">
+                            <div class="tag">
+                                <div class='place_list active text-center' value="物理">物理</div>
+                                <div class='place_list text-center' value="技术">技术</div>
+                                <div class='place_list text-center' value="技术">政治</div>
+                                <div class='place_list text-center' value="技术">历史</div>
+                            </div><em></em>
+                            
+                        </div>
+				</div>
+				<!-- 详细介绍 -->
+				<div class="schoolRes">
+					
+				</div>
+				<div class="text-center">
+					<nav aria-label="Page navigation">
+						<span style="font-size:14px;"><ul class="pagination" id="pageUl"></ul></span> 
+					</nav>
+				</div>
+            </div>
+            <div class="right_content">
+                <div class="title"><i></i>热门推荐</div>
+                <div class="hotList"></div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+		<footer style="width: 100%;">
+			<img src="../../img/index/footer.png" alt="" width="100%">
+		</footer>
+
+		<!-- 弹框-激活VIP -->
+		<div class="wrap">
+			<!-- 选择激活或购买 -->
+			<div class="wrap_content wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">开通志愿大师VIP</div>
+    				 <input type="submit" class="submit_btn buy_vip mt_40" value="购买VIP" />
+    				 <input type="submit" class="submit_btn active_vip" value="激活VIP" />
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    			</div>
+    		</div>
+    		<!-- 去激活 -->
+    		<div class="wrap_active wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">激活志愿大师VIP</div>
+    				 <div class="input_box">
+    				 	<input type="text" placeholder="输入卡号">
+    				 	<input type="password" placeholder="输入卡密">
+    				 </div>
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    				 <input type="submit" class="submit_btn active_btn" value="激活VIP" />
+    				 <div class="vip_buy"><span>还没有志愿大师VIP?</span><a href="#####">立即购买</a></div>
+    			</div>
+    		</div>
+    		<!-- 激活成功 -->
+			<div class="wrap_success wrap_part">
+				<img src="../img/index/icon_close.png" class="wrap_close" />
+				<div class="success_vip">
+					<img src="../img/index/icon_success.png" alt="">
+					<div class="title">激活成功</div>
+					<div class="info_detail">您的志愿大师VIP有效期至xx年xx月xx日，现在您可以继续在电脑网页上使用，也可以登录高招APP上使用。</div>
+					<div class="vip_buy"><span>还没有下载高招APP ？</span><a href="#####">立即下载</a></div>
+				</div>
+			</div>
+    	</div>
+		<!-- 高考预测 -->
+    	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+		            </div>
+		            <div class="modal-body">点击关闭按钮检查事件功能。</div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary">提交更改</button>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal-dialog -->
+		</div>
+    </body> 
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap-paginator.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script>
+	// 点击激活按钮-弹框
+	var wrap = function(obj1,obj2){
+		obj1.hide();
+		obj2.fadeIn(100);
+	}
+	$(".open_btn").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$('.wrap_close').click(function(){
+		$('.wrap_part').hide();
+		$('.wrap_content').show();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap').fadeOut(300);
+	})
+	$(".active_vip").click(function(){
+		wrap($('.wrap_part'),$('.wrap_active'));
+	});
+	$('.active_btn').click(function(){
+		wrap($('.wrap_part'),$('.wrap_success'));
+	})
+
+	//热门推荐---common
+    popular();
+
+    //通过专业选科目
+    var search=location.search;
+    var r=parse(search);
+    var id=r.id; //1上海;2浙江
+    r.place==1?$('.place').html('<a href="chooseMajor.html?id=1">上海</a>'):$('.place').html('<a href="chooseMajor.html?id=2">浙江</a>')
+    var obj={"subject":'物理,化学,生物'};
+    var arr=[];
+    console.log(obj)
+    //搜索
+    var index = 0,subArr=['物理','技术','政治','历史'],checkedArr=['物理','化学','生物'];
+    filterClass(1,checkedArr);
+    $('.choose_line ul li').click(function(){
+        var left = $(this).position().left
+        $('.place_all').css('left',left+105);
+        subArr[0]=$(this).find('span').html();
+        $('.place_all').fadeIn();
+        index = $(this).index()
+        sortSub();
+    });
+    $('.place_all').on('click','.place_list',function(){
+        $('.place_all').fadeOut();
+        $(this).addClass('active').siblings().removeClass('active');
+        for(var i=0;i<subArr.length;i++){
+            if(subArr[i] == $(this).html()){
+                subArr[i] =  $('.choose_line ul li:eq('+index+')').find('span').html();
+            }
+        }
+        $('.choose_line ul li:eq('+index+')').find('span').html($(this).html())
+        checkedArr[index] = $(this).html();
+        filterClass(1,checkedArr);
+    });
+    function sortSub(){
+        var html='';
+        for(var i=0;i<subArr.length;i++){
+            if(i==0){
+                html+='<div class="place_list text-center active" value='+subArr[i]+'>'+subArr[i]+'</div>'
+            }else{
+                html+='<div class="place_list text-center" value='+subArr[i]+'>'+subArr[i]+'</div>'
+            }
+        }
+        $('.place_all .tag').html(html)
+    }
+    function filterClass(page,objPa){
+        var skip = (page-1)*10;
+        var objSub = objPa+'';
+        console.log(objSub)
+        $.ajax({
+            url:'http://dev-www.imgaozhao.com/index.php?r=api/major-group/search-school&skip='+skip+'&id='+r.id+'&subject='+objSub,
+            type:'get',
+            // data:obj,
+            dataType: "json",
+            success:function(data){
+                console.log(data)
+               if(data.errcode == 0){
+                 var list = data.res.list;
+                 var html="";
+                 for(var i=0;i<list.length;i++){
+                    html+='<div class="content_detail pos_re">\
+                        <div class="product_img">\
+                            <a href="../schoolInfo.html?id='+list[i].id+'"><img src="'+list[i].logo+'" alt="" width="100px" height="100px"></a>\
+                        </div>\
+                        <div class="product_info pos_re">\
+                            <div class="product_title fs_23"><a href="../schoolInfo.html?id='+list[i].id+'">'+list[i].name+'</a></div>'
+                    for(var j=0;j<list[i].tag.length;j++){
+                        html+='<span class="product_tag">'+list[i].tag[j]+'</span>'
+                    }
+                    html+='</div>'
+                    if(list[i].is_zizhao == 1){
+                        html+='<span class="schoolTag pos_ab">自招</span>'
+                    }
+                    html+='</div>'
+                 }
+                 $('.schoolRes').html(html);
+                 var allPage = data.res.total_count;
+                var element = $('#pageUl');
+                var options = {  
+                    bootstrapMajorVersion:3,  
+                    currentPage: page,//当前页面  
+                    numberOfPages: 5,//一页显示几个按钮（在ul里面生成5个li）  
+                    totalPages:allPage/10+1, //总页数 
+                    itemTexts: function (type, page, current) {
+                     switch (type) {
+                      case "first": return "首页";
+                      case "prev": return "上一页";
+                      case "next": return "下一页";
+                      case "last": return "末页";
+                      case "page": return page;
+                     }
+                    },
+                    onPageChanged:function (event, originalEvent, typePage, currentPage) {
+                        console.log(typePage);
+                    }
+                }  
+                element.bootstrapPaginator(options);  
+               }
+            },
+            error:function(e){
+
+            }
+        });
+    }
+</script>
+</html>

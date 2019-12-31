@@ -1,0 +1,165 @@
+.wrap{
+	font-size: 12px;
+	font-family: PingFangSC-Regular;
+	color: #979797;
+	width:100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	z-index: 66;
+	background:rgba(0,0,0,0.4);
+	display: none;
+}
+/*激活框*/
+.wrap_content,.wrap_success,.wrap_active,.warp_box,.wrap_edit{
+	width:500px;
+	/*height:425px; */
+	height: 360px;
+	background: #fff;
+	z-index: 666;
+	position: relative;
+	top: 0;
+	margin-top: -215px;
+	left:50%;
+	margin-left:-225px;
+}
+.wrap_edit .choose_type{
+	width: 160px;padding: 12px 0;float: left;background: #F4F4F4;border-radius: 4px;color: #979797;
+	cursor: pointer;
+}
+.wrap_edit .edit_list{
+	width: 100%;border-radius: 4px;border: 1px solid #F4F4F4;height: 40px;color:#333333;font-size: 12px;
+}
+.wrap_edit .edit_input,.wrap_edit .edit_score{
+	left: 128px;line-height: 40px;top: 0;right: 20px;
+}
+.wrap_edit .edit_list .edit_score{
+	left: 304px;
+}
+.wrap_edit .edit_input select,.wrap_edit .edit_input input{
+	    height: 38px;
+	    border: none;
+	    box-shadow: none;
+}
+.wrap_edit .edit_title{
+	width: 108px;height: 40px;border-radius: 4px;background: #F4F4F4;line-height: 40px;
+}
+.wrap_edit .active{
+	border: 1px solid #3699FF;color: #3699FF;background: #fff;
+}
+.warp_box{
+	height: 300px;
+}
+.wrap_active{
+	height: 425px;
+}
+.wrap_success,.wrap_active{
+	display: none;
+	top: 50%!important;
+}
+.wrap_success{
+	height: 313px;
+	margin-top: -160px;
+}
+/*关闭按钮*/
+.wrap_close{
+	position: absolute;
+	top: 16px;right: 16px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+/*主要内容*/
+.wrap .container_box{
+	position: absolute;
+	top: 40px;
+	width: 340px;
+	left: 80px;
+}
+.wrap .title{
+	text-align: center;
+	font-family: PingFangSC-Semibold;
+	font-size: 24px;
+	color: #333;
+}
+.wrap .info_more{
+	padding: 12px 0 13px;
+}
+.input_box input,.submit_btn{
+	height: 40px;
+	display: block;
+	width: 100%;
+	background: #F4F4F4;
+	border-radius: 4px;
+	text-align: center;
+	outline: none;
+	border: 1px solid #F4F4F4;
+}
+.input_box input:first-child{
+	margin: 40px auto 20px auto;
+}
+.submit_btn{
+	font-size: 24px;
+	background: #3699FF;
+	height: 56px;
+	border:none;
+	color: #fff;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+.vip_buy{
+	margin-top: 10px;color:#656565;
+}
+.vip_buy a{
+	color: #507DAF;
+	text-decoration: none;
+	padding-left: 3px;
+}
+
+/*激活成功*/
+.success_vip{
+	position: absolute;
+	padding:0 40px;
+	text-align: left;
+	top: 40px;
+	font-size: 14px;
+}
+.success_vip img{
+	display: block;
+	margin: 0 auto;
+}
+.success_vip .title{
+	padding: 20px 0 30px; 
+}
+.success_vip .info_detail{
+	line-height: 20px;
+	color: #656565;
+}
+
+
+/*地址等内容较多*/
+.main_content .choose_line{
+    min-height: 47px;
+    height: 47px;overflow: hidden;
+}
+.main_content .choose_line span{
+    display: inline-block;
+    width: 58px;
+}
+.main_content .choose_line span p{
+    top: 0;
+}
+.main_content .choose_line ul{
+    padding-left: 30px;
+}
+.choose_line ul{
+    width: 90%;
+}
+.choose_line img{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+.choose_line img:nth-child(2){
+    display: none;
+}

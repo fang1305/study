@@ -1,0 +1,65 @@
+.vip_box{
+    		margin-left: auto;
+		    min-height: 78px;
+		    padding-top: 20px;
+		    padding-bottom: 13px;
+		    top: 0;
+    	}
+    	.vip_box .btn_group{
+			float: right;
+    	}
+		.main_content .choose_line span{
+			min-width: 57px;
+		}
+		.content_detail{
+			height: 140px;
+			border-top: 1px solid #EEE;
+		}
+		.content_detail img{
+			border-radius: 100px;
+		}
+		.content_detail .product_info{
+			height: auto;
+		}
+		.content_detail .product_title{
+			padding: 15px 0 20px 0;
+		}
+		.product_vip{
+			line-height: 100px;
+		}
+		.content_detail .product_tag {
+		    border: 1px solid #3699FF;
+		    color: #3699FF;
+		}
+		/*底部提示栏*/
+		.foot_tip{
+			position: fixed;
+			bottom: 0;
+			height: 80px;
+			background: rgba(0,0,0,0.7);
+			width:100%;
+			color: #fff;
+		}
+		.foot_tip .foot{
+			position: absolute;
+			top: 22px;
+			width: 100%;
+			left: -58px;
+		}
+		.foot_tip .open{
+			display: inline-block;
+			width: 116px;
+			height: 32px;
+			background: #3699FF;
+			border-radius: 4px;
+			font-size: 14px;
+			margin-left: 10px;
+			line-height: 33px;
+			cursor: pointer;
+		}
+		.content_detail .product_img{
+			width: 100px;
+		}
+		.product_img img{
+			width: 100px;
+		}

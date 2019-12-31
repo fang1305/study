@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index/index.css">
+    <link rel="stylesheet" href="../css/index/wrap.css">
+    <title>专业就业</title>
+    <style>
+    	/*修改*/
+    	.vip_box{
+    		margin-left: auto;
+		    min-height: 78px;
+		    padding-top: 20px;
+		    padding-bottom: 13px;
+		    top: 0;
+    	}
+    	.vip_box .btn_group{
+			float: right;
+    	}
+		
+		.tab_box{
+			margin-top: 20px;
+			padding: 0;
+		}
+		.tab_box li{
+			height: 54px;
+			display: inline-block!important;
+		}
+		.tab_box li:hover a{
+			background: #fff;
+			color: #2099EE;
+		}
+		.tab_box li a{
+			padding: 17px 40px;
+		}
+		.tab_box ul .active a{
+			background: linear-gradient(0deg, #FFFFFF 0%, #F0F2F5 100%);
+			color: #2099EE;
+			border-top:4px solid #2099EE;
+			padding-top: 13px;
+		}
+		.tab_box .tab-pane{
+			padding: 20px;
+		}
+		.tab_box .article{
+			line-height: 26px;
+		}
+		.search_work{
+			margin: 95px auto 40px auto;width: 280px;height: 34px;
+			background: #F1F8FF;border: 1px solid #3699FF;border-radius: 4px;
+			line-height: 32px;
+		}
+		.search_work a{
+			color: #3699FF;
+		}
+		.tab-pane{
+			min-height: 500px;
+		}
+		.tab-pane em{
+			width: 8px;height: 8px;border-radius: 8px;background: #2da0f1;display: inline-block;
+		}
+		.tab-pane .work_info{
+			padding-top: 10px;
+			line-height: 25px;
+		}
+		.tab-pane .row{
+			margin-bottom: 10px;
+		}
+		.progress_img,.progress_place{
+			width: 600px;
+			margin: 0 auto;
+			margin-top: 20px;
+		}
+		.progress_img .col-xs-12,.progress_place .col-xs-12{
+			margin-top: 10px;
+		}
+		.progress_title{
+			width: 170px;text-align: center;
+		}
+		.progress{
+			height: 7px;
+			margin: 7px 15px 10px;
+			width: 300px;
+			float: left;
+		}
+		
+		.main_content .choose_line span{
+			min-width: 57px;
+		}
+		.content_detail{
+			height: 57px;
+			padding: 0;
+			border-top: 1px solid #EEE;
+		}
+		.content_detail img{
+			border-radius: 100px;
+		}
+		.content_detail .product_info{
+			height: auto;
+		}
+		.content_detail .product_title{
+			padding: 15px 0 20px 0;
+		}
+		.product_vip{
+			line-height: 100px;
+		}
+		.content_detail a{
+			padding-top: 4px;
+			margin-right: 20px;
+		}
+		.content_detail .product_tag {
+		    border: 1px solid #3699FF;
+		    color: #3699FF;
+		}
+		.content_detail .product_img{
+			width: 100px;
+		}
+		.product_img img{
+			width: 100px;
+			border-radius: 100px;
+		}
+
+		.right_content .title{
+			margin-bottom: 10px;
+		}
+		.right_content .hot_part{
+			padding: 13px 0 10px 14px;border-bottom:1px solid #eee;
+			margin:0;
+		}
+		.right_content .hot_part:last-child{
+			border-bottom: 0;
+		}
+		
+		/*判断有没有用户VIP*/
+		.no_vip{
+			width: 100%;
+		    top: 230px;
+		    text-align: center;
+		    z-index: 23;
+		    position: absolute;
+		    display: none;
+		}
+		.has_wrap{
+			filter: blur(20px);
+		}
+		.open{
+			display: inline-block;
+		    width: 145px;
+		    height: 45px;
+		    background: #3699FF;
+		    color: #fff;
+		    border-radius: 4px;
+		    margin-left: 10px;
+		    margin-top: 20px;
+		    font-size: 20px;
+		    line-height: 45px;
+		}
+
+		/*底部提示栏*/
+		.foot_tip{
+			display: none;
+			position: fixed;
+			bottom: 0;
+			height: 80px;
+			background: rgba(0,0,0,0.7);
+			width:100%;
+			color: #fff;
+		}
+		.foot_tip .foot{
+			position: absolute;
+			top: 22px;
+			width: 100%;
+			left: -58px;
+		}
+		.foot_tip .open{
+			width: 116px;
+			height: 32px;
+			font-size: 14px;
+			margin-top: 0;
+			line-height: 33px;
+			cursor: pointer;
+		}
+    </style>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li><a href="course.html">课程</a></li>
+    				<li class="active"><a href="index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+    	<div class="banner">
+    		<div class="vip_box">
+    			<div class="btn_group fs_23">
+    				<div class="days">距离高考30天</div>
+    				<div class="open_btn hand_enter">开通VIP</div>
+    			</div>
+    		</div>
+    	</div>
+		<!-- 主要内容列表 -->
+		<div class="main_content">
+			<div class="left_content">
+				<!-- 详细介绍 -->
+				<div class="tab_box">
+					<ul id="myTab" class="nav fs_16">
+						<li class="active"><a href="#ios" data-toggle="tab">专业介绍</a></li>
+						<li><a href="#home" data-toggle="tab">就业前景</a></li>
+						<li><a href="#major" data-toggle="tab">开设院校</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade pos_re" id="home">
+							<div class="no_vip">
+								<p class="fs_23">开通<a href="###">志愿大师VIP</a>即可查看就业前景数据，还有更多VIP功能</p>
+								<div class="open">立即开通</div>
+							</div>
+							<div class="has_vip">
+								<div class="row">
+									<em></em>
+									<span class="fs_16">就业方向</span>
+									<p class="work_info jobInfo1">英语专业毕业生可在涉外机构、外资企业、银行、保险、海关、边防、新闻出版、教育、科研、旅游等部门从事翻译、研究、教学和管理等工作.同时也可留学、考研或国外就业...</p>
+								</div>
+								<div class="row">
+									<em></em>
+									<span class="fs_16">就业方向</span>
+									<p class="work_info jobInfo2">该专业就业行业主要为:教育/培训/院校.教育/培训/院校.教育/培训/院校</p>
+									<div class="progress_img jobImg"></div>
+								</div>
+								<div class="row">
+									<em></em>
+									<span class="fs_16">就业地区</span>
+									<div class="progress_place placeImg"></div>
+								</div>
+								<div class="row">
+									<em></em>
+									<span class="fs_16">就业地区</span>
+									<div class="col-xs-12 chart">
+										<div id="chart" style="width:800px;height: 400px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade in active" id="ios">
+							<p class="article text_color"></p>
+							<div class="search_work text-center">
+								<a href="###">查看就业前景</a>
+							</div>
+						</div>
+						<div class="tab-pane fade schoolInfo" id="major"></div>
+					</div>
+				</div>
+			</div>
+			<div class="right_content">
+				<div class="title"><i></i>相关专业</div>
+				<div class="hot_part"><a href="###">动画设计</a></div>
+				<div class="hot_part"><a href="###">平面设计</a></div>
+				<div class="hot_part"><a href="###">雕塑设计</a></div>
+				<div class="hot_part"><a href="###">建筑外观设计</a></div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../img/index/footer.png" alt="" width="100%">
+		</footer>
+		<!-- 底部提示栏 -->
+		<div class="foot_tip text-center">
+			<div class="foot">
+				<span  class="fs_23">开通<a href="###">志愿大师VIP</a>即可查看全部的推荐院校，还有更多VIP功能</span><div class="open pos_ab">立即开通</div>
+			</div>
+		</div>
+
+		<!-- 弹框-激活VIP -->
+		<div class="wrap">
+			<!-- 选择激活或购买 -->
+			<div class="wrap_content wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">开通志愿大师VIP</div>
+    				 <input type="submit" class="submit_btn buy_vip mt_40" value="购买VIP" />
+    				 <input type="submit" class="submit_btn active_vip" value="激活VIP" />
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    			</div>
+    		</div>
+    		<!-- 去激活 -->
+    		<div class="wrap_active wrap_part">
+    			<img src="../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">激活志愿大师VIP</div>
+    				 <div class="input_box">
+    				 	<input type="text" placeholder="输入卡号">
+    				 	<input type="password" placeholder="输入卡密">
+    				 </div>
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    				 <input type="submit" class="submit_btn active_btn" value="激活VIP" />
+    				 <div class="vip_buy"><span>还没有志愿大师VIP?</span><a href="#####">立即购买</a></div>
+    			</div>
+    		</div>
+    		<!-- 激活成功 -->
+			<div class="wrap_success wrap_part">
+				<img src="../img/index/icon_close.png" class="wrap_close" />
+				<div class="success_vip">
+					<img src="../img/index/icon_success.png" alt="">
+					<div class="title">激活成功</div>
+					<div class="info_detail">您的志愿大师VIP有效期至xx年xx月xx日，现在您可以继续在电脑网页上使用，也可以登录高招APP上使用。</div>
+					<div class="vip_buy"><span>还没有下载高招APP ？</span><a href="#####">立即下载</a></div>
+				</div>
+			</div>
+    	</div>
+		<!-- 高考预测 -->
+    	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+		            </div>
+		            <div class="modal-body">点击关闭按钮检查事件功能。</div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary">提交更改</button>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal-dialog -->
+		</div>
+    </body> 
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/echarts.min.js"></script>
+<script>
+	//判断有没有VIP
+	var hasVip=1;
+	if(hasVip==0){
+		// alert(0)
+		// 没有VIP
+		$('.has_vip').addClass('has_wrap');
+		$('.no_vip').show();
+	}
+	var yearNum=[2050, 4500, 9000, 11000, 12900];
+	chartFun(yearNum);
+	function chartFun(yearNum){
+		// 图表
+		// 基于准备好的dom，初始化echarts实例
+	    var myChart = echarts.init(document.getElementById('chart'),'light');
+	    // 指定图表的配置项和数据
+	    var option = {
+	    	noDataLoadingOption:
+	        {
+	            text: '相关数据整理中...',
+	            effect: 'bubble',
+	            effectOption:
+	            {
+	                effect:
+	                {
+	                    n: 0
+	                }
+	            }
+	        },
+		    xAxis: {
+		        type: 'category',
+		        boundaryGap: false,
+		        data: ['1年','2年', '3年', '4年', '5年', '6年' , '7年', '8年' , '9年', '10年'],
+
+		    },
+		    yAxis: {
+		    	axisLabel: {
+	                formatter: function (val) {
+	                    return val /1000 + 'K';
+	                }
+	            },
+	            splitNumber: 4,
+		        type: 'value',
+		        splitLine: {
+	                show: false
+	            }
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    series: [{
+		        data: yearNum,
+		        type: 'line',
+		        areaStyle: {}
+		    }]
+		};
+	    // 使用刚指定的配置项和数据显示图表。
+	    myChart.setOption(option);
+	}
+
+	// 点击激活按钮-弹框
+	var wrap = function(obj1,obj2){
+		obj1.hide();
+		obj2.fadeIn(100);
+	}
+	$(".open_btn").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$(".open").click(function(){
+		$('.wrap').show()
+		$('.wrap_content').animate({top:"50%"},"normal");
+	})
+	$('.wrap_close').click(function(){
+		$('.wrap_part').hide();
+		$('.wrap_content').show();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap').fadeOut(300);
+	})
+	$(".active_vip").click(function(){
+		wrap($('.wrap_part'),$('.wrap_active'));
+	});
+	$('.active_btn').click(function(){
+		wrap($('.wrap_part'),$('.wrap_success'));
+	})
+	//选择地址
+	$('.choose_line li').click(function(){
+		$(this).parents('.choose_line').find('li').removeClass('active');
+		$(this).addClass('active');
+	})
+
+	//下拉图片
+	$('.choose_line img').click(function(){
+		$(this).css('display','none');
+		$(this).siblings().css('display','inline');
+	});
+
+	// 详情
+	//1、获取到的数据，是以?开头的
+	var search=location.search;
+	console.log(search)
+	//2、如果还想要获取确定的数据，可以解析字符串
+	function parse(search){
+	    //从第二个字符开始截取   ，获取到第二个开始后面所有的字符
+	    var str=search.substring(1);
+	    var result={};
+	    //分割字符串  -->产生字符串数组
+	    var strs=str.split("&");
+	    //遍历数组中的每一个元素
+	    strs.forEach(function(v){
+	        //伪代码：v="age=18"
+	        var keyvalue=v.split("=");
+	        var name=keyvalue[0];
+	        var value=keyvalue[1];
+	        result[name]=value;
+	    })
+	    console.log(result)
+	    return result;
+	}
+
+	var r=parse(search);
+	//获取学校详情
+	var url='http://dev-www.imgaozhao.com/index.php?r=api/forecast/major-detail&zyid='+r.id+'&specialname='+r.name+'&prolevel='+r.type;
+	console.log(url)
+	majorInfo()
+	function majorInfo(){
+		$.ajax({
+			url:url,
+			type:"get",
+            dataType: "json",
+            success:function(data){
+            	if(data.errcode==0){
+            		var list = data.res;
+					$('.left_content').prepend('<div class="title majorName">'+list.major[0].specialname+'</div>');
+					$('.article').html(list.specialinfo)
+            		var job = list['job-prospect'];
+            		// JobRecommend
+            		$('.jobInfo1').html(job.JobRecommend);
+            		$('.jobInfo2').html(job.Jobs);
+            		var jobHtml="",placeHtml="";
+            		for(var i=0;i<job.Job.length;i++){
+            			jobHtml+='<div class="col-xs-12">\
+											<div class="progress_title fl_l">'+job.Job[i].job_function_name+'</div>\
+											<div class="progress fl_l">\
+											    <div class="progress-bar progress-bar-info" role="progressbar"\
+											         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"\
+											         style="width: '+job.Job[i].ratio+';">\
+											        <span class="sr-only">'+job.Job[i].ratio+' 完成（信息）</span>\
+											    </div>\
+											</div>\
+											<div class="fl_l">'+job.Job[i].ratio+'</div>\
+										</div>'
+            		}
+            		$('.jobImg').html(jobHtml)
+            		for(var i=0;i<job.City.length;i++){
+            			placeHtml+='<div class="col-xs-12">\
+											<div class="progress_title fl_l">'+job.City[i].locName+'</div>\
+											<div class="progress fl_l">\
+											    <div class="progress-bar progress-bar-info" role="progressbar"\
+											         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"\
+											         style="width: '+job.City[i].ratio+'%;">\
+											        <span class="sr-only">'+job.City[i].ratio+'% 完成（信息）</span>\
+											    </div>\
+											</div>\
+											<div class="fl_l">'+job.City[i].ratio+'%</div>\
+										</div>'
+            		}
+            		$('.placeImg').html(placeHtml);
+            		var num=[job.years.year1,job.years.year2,job.years.year3,job.years.year4,job.years.year5,job.years.year6,job.years.year7,job.years.year8,job.years.year9,job.years.year10];
+            		chartFun(num)
+            		//开设院校
+            		var schoolHtml='',schoolA=list.school;
+            		for(var i=0;i<schoolA.length;i++){
+            			schoolHtml+='<div class="content_detail">\
+								<div class="product_info pos_re">\
+									<div class="product_title fs_16"><a href="schoolInfo.html?id='+schoolA[i].schoolid+'">'+schoolA[i].schoolname+'</a>'
+						if(schoolA[i].f211 == 1){
+							schoolHtml+='<span class="product_tag">211</span>'
+						}
+						if(schoolA[i].f985 == 1){
+							schoolHtml+='<span class="product_tag">985</span>'
+						}
+						schoolHtml+='</div></div></div>'
+            		}
+            		$('.schoolInfo').html(schoolHtml)
+            	}
+            }
+    	})
+	}
+
+	//表格数据填充
+</script>
+</html>

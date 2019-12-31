@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index/index.css">
+    <link rel="stylesheet" href="../css/index/forecastSchool.css">
+    <title>预测结果院校</title>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li><a href="course.html">课程</a></li>
+    				<li class="active"><a href="index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+		<!-- 主要内容列表 -->
+		<div class="main_box">
+			<div class="main_content">
+				<div class="title">预测结果院校</div>
+				<div class="mt_20 pos_re school_box">
+					<img src="../img/index/exp.png" alt="" class="school_img pos_ab" width="520px" height="320px">
+					<div class="school_info pos_ab"></div>
+					<div class="download pos_ab">
+						<img src="../img/index/exp.png" alt="" width="28px" height="28px" class="pos_ab">
+						<div class="pos_ab downinfo">请到高招APP中进行具体操作如购买课程，评价等</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main_content tab_box">
+			<ul id="myTab" class="nav fs_16">
+				<li class="active"><a href="#home" data-toggle="tab">简介</a></li>
+				<li><a href="#ios" data-toggle="tab">预测</a></li>
+				<li><a href="#major" data-toggle="tab">自招</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane tab_home fade in active" id="home">
+					<h3 class="fs_16">学校概况</h3>
+					<div class="tab_info article schoolArticle"></div>
+					<a href="###"><div class="look_more text-center">查看更多</div></a>
+					<h3 class="fs_16">开设专业</h3>
+					<table class="table text-center mt_20 majorOpen"></table>
+					<div class="text-center majorpage">
+						<nav aria-label="Page navigation">
+							<span style="font-size:14px;"><ul class="pagination" id="pageUl"></ul></span> 
+						</nav>
+					</div>
+				</div>
+				<div class="tab-pane tab_condition fade" id="ios">
+					<h3 class="fs_16">预测条件</h3>
+					<div class="condition_box"></div>
+
+					<h3 class="fs_16">学校优先</h3>
+					<div id="chart"></div>
+					<div class="chart_num">
+						<p class="fs_23 color percent">暂无数据</p>
+						<p class="color6">学校录取概率</p>
+					</div>
+					<div class="clear"></div>
+					<h3 class="fs_16">专业优先</h3>
+					<div class="major_better mt_20">
+						<table  class="table text-center majorfirst">
+							<thead>
+								<tr>
+									<td>所选专业</td>
+									<td>预测专业分数线</td>
+									<td>录取概率</td>
+								</tr>
+							</thead>		
+							<tbody>
+								<tr>
+									<td>自动化</td>
+									<td class="color">602</td>
+									<td class="color">50%</td>
+								</tr>
+								<tr>
+									<td>电气工程及其自动化</td>
+									<td class="color">590</td>
+									<td class="color">60%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- <h3 class="fs_16">资格录取</h3>
+					<div class="major_better mt_20 fl_l">
+						<table  class="table text-center">
+							<thead>
+								<tr>
+									<td>自招条件</td>
+									<td>获奖记录</td>
+								</tr>
+							</thead>		
+							<tbody>
+								<tr>
+									<td>国家级比赛一等奖</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>省级比赛一等奖</td>
+									<td>1</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="mt_20" style="float:left;height: auto;width: 170px;text-align: center;padding-top: 50px;">
+						<p class="fs_23 color">暂无数据</p>
+						<span class="color6">学校录取概率</span>
+					</div>
+					<div class="clear"></div>
+					<h3 class="fs_16">自主招生优惠政策</h3>
+					<div class="tab_info article policy">
+							1.初评”优秀”的学生和初试通过的学生，将根据其复试成绩由高到低排序确定自主招生降分录取优惠及认定专业或专业类。 <br>
+							2.对于可以获得自主认定优惠的学生，体质测试成续优秀者，将给予额外的5分降分（但获得一本线认定优惠分值的学生除外）。<br>
+							3.获得认定的学生在各省自主招生批次填报的专业志愿需与被认定的专业（专业类）保持一致。<br>
+							4.自主招生认定的优惠降分一般为20/30/40/50/60分，部分特别优秀。<br>
+					</div> 
+					<a href="###"><div class="look_more text-center">查看更多</div></a>-->
+					<h3 class="fs_16">分数线</h3>
+					<div class="wenSub">
+						<p class="mt_20">文科分数线</p>
+						<table  class="table color6 text-center score_line">
+							<thead>
+								<tr>
+									<td>专业</td>
+									<td>2015</td>
+									<td>2016</td>
+									<td>2017</td>
+								</tr>
+							</thead>		
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div class="liSub">
+						<p class="mt_20">理科分数线</p>
+						<table  class="table color6 text-center score_line">
+							<thead>
+								<tr>
+									<td>专业</td>
+									<td>2015</td>
+									<td>2016</td>
+									<td>2017</td>
+								</tr>
+							</thead>		
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="tab-pane fade majorMore" id="major">
+					<div class="major_intro mt_20 row schoolSet">
+						
+					</div>
+					<div class="line_title pos_re mt_20">
+						<div class="line pos_ab"></div>
+						<span class="fs_16">具有的报名条件</span>
+					</div>
+					<div class="major_list mt_20 claim">
+						<!-- <p>（请选择专业查看不同的报名条件）</p>
+						<p>1.可能是最适合零基础练手的一篇教程。虽然简单，不过用到了很多基础工具，临摹时也可以学到云朵、山脉、道路、树木等物品的绘制方法，一起试试。</p>
+						<p>2.可能是最适合零基础练手的一篇教程。</p>
+						<p>3.可能是最适合零基础练手的一篇教程。虽然简单，不过用到了很多基础工具，临摹时也可以学。</p> -->
+					</div>
+					<div class="line_title pos_re mt_20">
+						<div class="line pos_ab"></div>
+						<span class="fs_16">优惠政策</span>
+					</div>
+					<div class="major_list mt_20 policyShow"></div>
+					<div class="line_title pos_re mt_20">
+						<div class="line pos_ab"></div>
+						<span class="fs_16">考试科目</span>
+					</div>
+					<div class="major_list mt_20 examShow">
+						<!-- <p>数学、复试（专业测试）、复试（体质测试）、语文（阅读与表达）</p> -->
+					</div>
+					<div class="line_title pos_re mt_20">
+						<div class="line pos_ab"></div>
+						<span class="fs_16">时间</span>
+					</div>
+					<div class="major_intro mt_20 row testTime"></div>
+					<div class="line_title pos_re mt_20">
+						<div class="line pos_ab"></div>
+						<span class="fs_16">简章</span>
+					</div>
+					<div class="mt_20 jianzhang"></div>
+				</div>
+			</div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../img/index/footer.png" alt="" width="100%">
+		</footer>
+    </body> 
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-paginator.js"></script>
+<script type="text/javascript" src="../js/echarts.min.js"></script>
+
+<script>
+	var reg = new RegExp("(^|&)id=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg); 
+	var id=r[2]; 
+	//获取学校详情
+	schoolInfo(id)
+	function schoolInfo(id){
+		$.ajax({
+			url:'http://dev-www.imgaozhao.com/index.php?r=api/forecast/school-detail&id='+id,
+			type:"get",
+            dataType: "json",
+            success:function(data){
+            	console.log(data)
+            	if(data.errcode==0){
+            		$('.school_img').attr('src',data.res.list.school_info.landscape_image);
+            		var schoolInfo = data.res.list.school_info;
+            		var html='<img src='+schoolInfo.image+' alt="" width="70px" height="70px" class="fl_l">\
+            					<div class="fl_l">\
+									<p class="fs_23">'+schoolInfo.name+'</p>';
+					for(var i=0;i<schoolInfo.tag.length;i++){
+						html+='<span class="product_tag">'+schoolInfo.tag[i]+'</span>'
+					}
+					html+='</div>\
+						<div class="clear"></div>\
+						<div class="mt_30 info_text">\
+							<p class="fs_16">基本信息</p>'
+					for(var i=0;i<schoolInfo.basic.split("\n").length;i++){
+						html+='<p class="fs_16">'+schoolInfo.basic.split("\n")[i]+'</p>'
+					}
+					html+='</div>';
+						console.log(schoolInfo.basic.split("\n"))
+            		$('.school_info').html(html);
+            		//学校概况
+            		$('.schoolArticle').html(schoolInfo.desc);
+            		//预测信息
+            		var list = data.res.list;
+            		var yuceInfo = data.res.list.yuce_info;
+            		if(list.yuce_info_empty==0){
+            			// 有数据
+            			$('.condition_box').html('<div class="condition_list">文理科：<span>'+yuceInfo.subject+'</span>预测分数：<span>'+yuceInfo.score+'</span></div>\
+						<div class="condition_list">报考地区：<span>'+yuceInfo.province+'</span>参加自招：<span>'+yuceInfo.is_zizhao+'</span></div>\
+						<div class="condition_list">专业：<span>'+yuceInfo.major+'</span></div>');
+            		}
+            		
+            		//学校有先
+            		var schoolfirst=data.res.list.schoolfirst;
+            		if(list.schoolfirst_empty==0){
+            			//有数据
+						chartShow(schoolfirst.score,schoolfirst.score_avg,schoolfirst.batch);
+            		}
+					$('.percent').html(schoolfirst.my_rate);
+					//专业有先
+					var majorfirst = data.res.list.majorfirst;
+					console.log(majorfirst)
+					if(data.res.list.majorfirst_empty==1){
+						//数据为空
+						$('.majorfirst tbody').html('<tr><td colspan="3">暂无数据信息...</td></tr>')
+					}else if(data.res.list.majorfirst_empty==0){
+						//数据不为空
+					}
+					//分数线--文科
+					var wenHtml='<tr>'
+					for(var i=0;i<list.wenlist.length;i++){
+						list.wenlist[i].scores.score2015 = list.wenlist[i].scores.score2015==undefined?'-':list.wenlist[i].scores.score2015
+						list.wenlist[i].scores.score2016 = list.wenlist[i].scores.score2016==undefined?'-':list.wenlist[i].scores.score2016
+						list.wenlist[i].scores.score2017 = list.wenlist[i].scores.score2017==undefined?'-':list.wenlist[i].scores.score2017
+						$('.wenSub tbody').append('<tr>\
+								<td>'+list.wenlist[i].name+'</td>\
+								<td>'+list.wenlist[i].scores.score2015+'</td>\
+								<td>'+list.wenlist[i].scores.score2016+'</td>\
+								<td>'+list.wenlist[i].scores.score2017+'</td>\
+							</tr>')
+					}
+					var liHtml='<tr>'
+					for(var i=0;i<list.lilist.length;i++){
+						list.lilist[i].scores.score2015 = list.lilist[i].scores.score2015==undefined?'-':list.lilist[i].scores.score2015
+						list.lilist[i].scores.score2016 = list.lilist[i].scores.score2016==undefined?'-':list.lilist[i].scores.score2016
+						list.lilist[i].scores.score2017 = list.lilist[i].scores.score2017==undefined?'-':list.lilist[i].scores.score2017
+						$('.liSub tbody').append('<tr>\
+								<td>'+list.lilist[i].name+'</td>\
+								<td>'+list.lilist[i].scores.score2015+'</td>\
+								<td>'+list.lilist[i].scores.score2016+'</td>\
+								<td>'+list.lilist[i].scores.score2017+'</td>\
+							</tr>')
+					}
+
+            	}
+            },
+            error:function(e){
+        	}
+		})
+	}
+	//自招部分详细信息
+	zizhao(id)
+	function zizhao(id){
+		$.ajax({
+			url:'http://dev-www.imgaozhao.com/index.php?r=api/forecast/jianzhang-detail&school='+id,
+			type:"get",
+            dataType: "json",
+            success:function(data){
+            	if(data.errcode == 0){
+	            	var list=data.res;
+	            	console.log(list)
+	            	//学校信息
+	            	var school = list.school;
+	            	$('.schoolSet').html('<div class="col-xs-5">高校:<span>'+school.name+'</span></div>\
+						<div class="col-xs-5">省市:<span>'+school.provinceCity+'</span></div>\
+						<div class="col-xs-5">招生范围:<span>'+school.scope+'</span></div>\
+						<div class="col-xs-5">应往届:<span>'+school.graduate+'</span></div>\
+						<div class="col-xs-5">学院:<span>'+school.college+'</span></div>\
+						<div class="col-xs-5">文理科:<span>'+school.subject+'</span></div>\
+						<div class="col-xs-5">专业大类:<span>'+school.professional_class+'</span></div>\
+						<div class="col-xs-5">专业大类招生人数:<span>'+school.professionalClassNumber+'</span></div>\
+						<div class="col-xs-5">专业:<span>'+school.professional+'</span></div>\
+						<div class="col-xs-5">总招生人数:<span>'+school.all_number+'</span></div>\
+						<div class="col-xs-12">考试地点:<span>'+school.city+'</span></div>');
+
+	            	$('.testTime').html('<div class="col-xs-5">网报时间:<span>'+school.applyStart+'</span></div>\
+						<div class="col-xs-5">截止时间:<span>'+school.applyEnd+'</span></div>\
+						<div class="col-xs-5">考试时间:<span>'+school.exam_time+'</span></div>\
+						<div class="col-xs-5">材料邮寄截止时间:<span>'+school.materialSend+'</span></div>\
+						<div class="col-xs-5">资格时间:<span>'+school.qualificationPublic+'</span></div>\
+						<div class="col-xs-5">加分公布:<span>'+school.publishTime+'</span></div>');
+
+	            	$('.policyShow').html('<p>'+school.preferential_policy+'</p>');
+	            	$('.examShow').html('<p>'+school.examSubject+'</p>')
+	            	 console.log(school.claim)
+					// for(var i=0;i<school.claim.split('↵').length;i++){
+						$('.claim').html('<p>'+school.claim+'</p>')
+					// }
+					
+	            	
+            		//招生简章
+            		var jianzhang = list.jianzhang;
+            		for(var i=0;i<list.jianzhang.length;i++){
+            			$('.jianzhang').append('<div class="icon_list"><img src="../img/index/icon_rectangle.png" alt="" width="8px"><a url='+jianzhang[i].url+' label='+jianzhang[i].id+'>'+jianzhang[i].title+'</a></div>')
+            		}
+            	}
+            }
+        })
+	}
+
+	// 开设专业
+	var skip = 0;
+	filterClass(1,0)
+	function filterClass(page,ss){
+		var skip = (page-1)*30;
+		$.ajax({
+			url:'http://dev-www.imgaozhao.com/index.php?r=api/forecast/get-all-majors&id='+id+'&skip='+skip+'&psize=30',
+			type:"get",
+            dataType: "json",
+            success:function(data){
+            	console.log(data)
+            	var list = data.res.list;
+            	var allPage=data.res.total_count;
+            	var element = $('#pageUl');
+            	var options = {  
+                    bootstrapMajorVersion:3,  
+                    currentPage: page,//当前页面  
+                    numberOfPages: 5,//一页显示几个按钮（在ul里面生成5个li）  
+                    totalPages:data.res.total_count/30+1, //总页数 
+                    itemTexts: function (type, page, current) {
+				     switch (type) {
+				      case "first": return "首页";
+				      case "prev": return "上一页";
+				      case "next": return "下一页";
+				      case "last": return "末页";
+				      case "page": return page;
+				     }
+				    },
+                    onPageChanged:function (event, originalEvent, typePage, currentPage) {
+		                console.log(typePage);
+		            }
+                }  
+                element.bootstrapPaginator(options);  
+            	var html="";
+            	if(list.length>0){
+            		for(var i=0;i<list.length;i++){
+            			if(i%3==0){
+            				html+='<tr><td>'+list[i]+'</td>'
+            			}else if(i%3==2){
+            				html+='<td>'+list[i]+'</td></tr>'
+            			}else if(i%3 == 1){
+            				html+='<td>'+list[i]+'</td>'
+            			}
+	            	}
+	            	$('.majorOpen').html(html)
+            	}
+            },error:function(e){
+        	}
+        });
+	}
+	function chartShow(score,score_avg,batch){
+		// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'),'light');
+        // 指定图表的配置项和数据
+		var option = {
+		    color: ['#3398DB'],
+		    tooltip : {
+		        trigger: 'axis',
+		        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        }
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            data : ['我的分数', '学校分数线('+batch+')'],
+		            axisTick: {
+		                alignWithLabel: true,
+		                show: false
+		            },
+			        axisLine: {
+			            show: false
+			        },
+			        axisLabel: {
+			            textStyle: {
+			                color: '#666'
+			            }
+			        },
+		        }
+		    ],
+		    yAxis : [{
+			    axisLine: {
+		            show: false
+		        },
+		        axisTick: {
+            		show: false
+        		},
+        		axisLabel: {
+		            textStyle: {
+		                color: '#666'
+		            }
+		        },
+                splitNumber:2
+		    }],
+		    series : [
+		        {
+		            type:'bar',
+		            barWidth: '60%',
+		            data:[score, score_avg]
+		        }
+		    ]
+		};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+	}
+
+	$('.look_more').click(function(){
+		if($(this).html()=="查看更多"){
+			$(this).html("收起");
+			$('.tab_info').css('height','auto');
+		}else{
+			$(this).html("查看更多");
+			$('.tab_info').css('height','260px');
+			$('.policy').css('height','104px');
+		}
+	})
+</script>
+</html>

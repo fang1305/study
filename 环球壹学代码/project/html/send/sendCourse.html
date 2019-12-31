@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-switch.css">
+    <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/fileinput.min.css">
+    <link rel="stylesheet" href="../../css/index/wraps.css">
+    <title>首页</title>
+    <style>
+		a:hover{
+			text-decoration: none;
+		}
+    	body{
+			min-width: 300px;
+    	}
+    	.header{
+    		min-width: auto;
+    	}
+    	.header img{
+    		height: 50px;
+    	}
+    	.navigation,.mainContent{
+    		width: 80%;
+    		margin: 0px auto;
+    		margin-top: 20px;
+    	}
+		/*主要内容*/
+    	.mainContent{
+    		min-height: 300px;
+    		background: #FFF;
+    		margin-bottom: 20px;
+    		margin-top: 0px;
+    	}
+    	.mainContent .line {
+    		display: flex;
+    		margin-bottom: 20px;
+    	}
+		.mainContent .line label{
+			width: auto;
+			min-width: 70px;
+			line-height: 31px;
+			padding-right: 10px;
+			display: inline-block;
+		}
+		.mainContent .line label.checkTitle{
+			min-width: auto;
+			width: 200px;
+			/*padding: 0 15px;*/
+		}
+		.mainContent .line .placeEdit{
+			margin-left: 20px;
+		    padding: 0px 12px;
+		    height: 33px;
+		    line-height: 33px;
+		}
+		.mainContent .line #checkbox{
+			margin: 10px 10px 0 30px;
+		}
+		.mainContent .line .checkOpen{
+			width: 300px;
+		}
+		.mainContent .line select{
+			margin-right: 15px
+		}
+		.mainContent .infoList{
+			padding: 20px;
+		}
+.courseBox .title em {
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background: #2099EE;
+    border-radius: 100px;
+}
+.courseBox .title h3 {
+    padding: 9px 0 0 14px;
+}
+		@media (max-width: 768px) {
+			header{
+				height: 40px;
+			}
+			.header {
+    			padding: 10px;
+    			width: 90%;
+    		}
+    		.header img{
+    			height : 20px;
+    		}
+			.header ul li{
+				height: 40px;
+				padding: 0 15px;
+				line-height: 40px;
+				font-size: 14px;
+			}
+			.userShow ul{
+				top: 40px;
+				left: 0px;
+			}
+			.userShow ul,.userShow ul li{
+				width: auto;
+				padding: 0;
+				height: auto;
+				text-align: center;
+			}
+		}
+		@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
+		@media (min-width: @screen-lg-min) { ... }
+    </style>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../../img/index/logo.png" alt="">
+    			<ul>
+    				<!-- <li><a href="course.html">课程</a></li>
+    				<li class="active">志愿大师</li>
+    				<li>关于我们</li> -->
+    				<!-- <li>下载APP</li> -->
+    				<!-- <li class="userNo"><a href="##" class="login">登录</a>/<a href="register.html" class="register">注册</a></li> -->
+    				<li class="dropdown userShow">
+    					<img src="../img/index/icon_head.png" alt="" width="28px"><span class="dropdown-toggle" data-toggle="dropdown">用户名</span>
+			            <ul class="dropdown-menu">
+			              <li><a href="identityChoose.html" class="fs_12 text-center">切换身份</a></li>
+			              <!-- <li><a href="#" class="fs_12 text-center">退出登录</a></li> -->
+			            </ul>
+    				</li>
+    			</ul>
+    		</div>
+    	</header>
+    	<div class="navigation">
+    		<ol class="breadcrumb">
+			  <li><a href="###" onclick="javascript:history.back(-1);"><img src="../../img/icon_head.png">返回</a></li>
+			  <li class="active">设置视频课程</li>
+			</ol>
+    	</div>
+		<div class="mainContent courseBox">
+			<div class="title pos_re" style="width: 100%;height: 44px;">
+				<em></em>
+				<h3>基础信息</h3>
+			</div>
+			<form class="row infoList">
+				<div class="line col-sm-7">
+					<label>标题</label>
+			    	<input type="text" class="form-control" placeholder="请输入课程标题">
+				</div>
+				<div class="line col-sm-7">
+					<label>主讲老师</label>
+			    	<input type="text" class="form-control" placeholder="选择主讲老师">
+				</div>
+			  	<div class="line col-sm-12">
+				    <label for="exampleInputEmail1">科目</label>
+				    <select name="object" id="" class="form-control" >
+							<option value="">请选择</option>
+							<option value="1">请选择老师</option>
+							<option value="2">请选择老师</option>
+							<option value="3">请选择老师</option>
+					</select>
+					<select name="object" id="" class="form-control" >
+							<option value="">请选择</option>
+							<option value="1">请选择老师</option>
+							<option value="2">请选择老师</option>
+							<option value="3">请选择老师</option>
+					</select>
+					<select name="object" id="" class="form-control" >
+							<option value="">请选择</option>
+							<option value="1">请选择老师</option>
+							<option value="2">请选择老师</option>
+							<option value="3">请选择老师</option>
+					</select>
+					<label class="text-right">分类</label>
+				    <select name="object" id="" class="form-control" >
+							<option value="">请选择</option>
+							<option value="1">请选择老师</option>
+							<option value="2">请选择老师</option>
+							<option value="3">请选择老师</option>
+					</select>
+			  	</div>
+			  	<div class="line col-sm-7">
+					<label>价格</label>
+			    	<input type="number" class="form-control" placeholder="输入课程价格">
+			    	<input type="checkbox" id= 'checkbox' />
+			    	<label class="checkTitle">设置优惠价格</label>
+				</div>
+				<div class="clear" style="clear: both;"></div>
+				<div class="line col-sm-4">
+				    <label for="exampleInputEmail1">语言</label>
+				    <select name="object" id="" class="form-control" >
+							<option value="普通话">普通话</option>
+							<option value="方言">方言</option>
+							<option value="英语">英语</option>
+							<option value="日语">日语</option>
+							<option value="法语">法语</option>
+							<option value="韩语">韩语</option>
+							<option value="德语">德语</option>
+							<option value="西班牙语">西班牙语</option>
+							<option value="俄语">俄语</option>
+							<option value="意大利语">意大利语</option>
+							<option value="葡萄牙语">葡萄牙语</option>
+					</select>
+			  	</div>
+			  	<div class="line col-sm-10">
+				    <label>地址</label>
+			    	<input type="text" class="form-control" placeholder="请选择课程地址">
+			  		<input type="button" class="btn btn-default placeEdit" value="编辑">
+			  	</div>
+			  	<div class="line col-sm-12">
+				    <label>标签</label>
+			    	<input type="text" class="form-control" placeholder="请输入课程标签">
+			  	</div>
+			  	<div class="line col-sm-12">
+				    <label></label>
+			  		<span>每个标签最多八个字，用英文逗号分割（不能包含其它标点符号，且最多输入8个标签哦！）</span>
+			  	</div>
+			</form>
+		</div>
+		<div class="mainContent courseBox">
+			<div class="title pos_re" style="width: 100%;height: 44px;">
+				<em></em>
+				<h3>课程封面</h3>
+			</div>
+			<form class="row infoList">
+				<div class="line col-sm-7">
+			        <div class="form-group">
+			            <div class="file-loading">
+			                <input id="file-4" type="file"  data-upload-url="#">
+			            </div>
+			        </div>
+				</div>
+			</form>
+		</div>
+		<div class="mainContent courseBox">
+			<div class="title pos_re" style="width: 100%;height: 44px;">
+				<em></em>
+				<h3>课程图文详情</h3>
+			</div>
+			<div class="courseInfo" >
+				<script id="container" name="content" type="text/plain">
+			        这里写你的初始化内容
+			    </script>
+			</div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../../img/index/footer.png" alt="" width="100%">
+		</footer>
+		  <!-- <div class="container kv-main">
+		  <form enctype="multipart/form-data">
+		        <div class="form-group">
+		            <div class="file-loading">
+		                <input id="file-4" type="file" class="file" data-upload-url="#">
+		            </div>
+		        </div>
+		    </form> 
+		</div>-->
+
+    </body> 
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="../../js/type.js"></script>
+<script type="text/javascript" src="../../js/searchparams1.js"></script>
+<script type="text/javascript" src="../../js/bootstrap-paginator.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.5/js/locales/zh.min.js"></script>
+<script type="text/javascript" src="../../js/ueditor.config.js"></script>
+<script type="text/javascript" src="../../js/ueditor.all.js"></script>
+<script>
+   // 图片上传
+    $("#file-4").fileinput({
+        language:'zh'
+    });
+    $(".btn-warning").on('click', function () {
+        var $el = $("#file-4");
+        if ($el.attr('disabled')) {
+            $el.fileinput('enable');
+        } else {
+            $el.fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function () {
+        $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
+    });
+    /*
+     $('#file-4').on('fileselectnone', function() {
+     alert('Huh! You selected no files.');
+     });
+     $('#file-4').on('filebrowse', function() {
+     alert('File browse clicked for #file-4');
+     });
+     */
+
+     //富文本编辑器
+     var ue = UE.getEditor('container');
+
+// $("#checkbox").bootstrapSwitch({  
+//     onText : "开",      // 设置ON文本  
+//     offText : "关",    // 设置OFF文本  
+//     onColor : "primary",// 设置ON文本颜色     (info/success/warning/danger/primary)  
+//     offColor : "info",  // 设置OFF文本颜色        (info/success/warning/danger/primary)  
+//     size : "mini",    // 设置控件大小,从小到大  (mini/small/normal/large)  
+//     onSwitchChange : function(event, state) {  
+//         if (state == true) {  
+//             // alert("ON");  
+//         } else {  
+//             // alert("OFF");  
+//         }  
+//     }  
+// });  
+ 
+</script>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index/index.css">
+    <link rel="stylesheet" href="../../css/index/wrap.css">
+    <link rel="stylesheet" href="../../css/index/findSchool.css">
+    <title>高考预测</title>
+    <style>
+
+    	.content_detail{
+    		height: auto;
+    	}
+    	.content_detail .product_title{
+    		padding-top: 0px;
+    		padding-bottom: 11px;
+    	}
+    	.content_detail .product_info{
+			min-width: 635px;
+    	}
+    	.left_content{
+    		background: #f0f0f0!important;
+    		padding: 0!important;
+    	}
+    	.left_content .part{
+    		background: #fff;width: 100%;padding: 24px 20px;
+    	}
+
+    	.clear{
+			clear: both;
+    	}
+    	.content_detail .school{
+			padding: 3px 0!important;
+    	}
+    	.content_detail .school_text{
+    		width: 110px;
+    		display: inline-block;
+    	}
+    	.content_detail span{
+    		font-size: 18px;color: #FF6F00;
+    		padding-left: 5px;
+    	}
+    	.row,.col-xs-4,.col-md-3{
+    		margin: 0px;
+    		padding: 0px;
+    	}
+    	.right_tag{
+    		right: 0;top: 0px;width: 72px;height: 30px;line-height: 30px;color: #fff;background:  #3699FF;
+    	}
+    	.percent{
+    		top: 10px;right: 0px;
+    	}
+
+    	/*新信息*/
+		.main_content .choose_line{
+		    min-height: 47px;
+		    height: 47px;overflow: hidden;
+		}
+		.main_content .choose_line span{
+		    display: inline-block;
+		    width: 58px;
+		}
+		.main_content .choose_line span p{
+		    top: 0;
+		}
+		.main_content .choose_line ul{
+		    padding-left: 30px;
+		}
+		.choose_line ul{
+		    width: 90%;
+		}
+		.choose_line img{
+		    position: absolute;
+		    right: 20px;
+		    top: 15px;
+		}
+		.choose_line img:nth-child(2){
+		    display: none;
+		}
+
+		.optionMajor{
+		    z-index: 9999;
+		    width: 100%;
+		    border: 1px solid #EEE;
+		    margin-top: -20px;
+		    background: #fff;
+		    max-height: 400px;
+		    overflow-y:auto; 
+		}
+		.optionMajor ul{
+		    margin: 0;    
+		    padding-left: 0;
+		}
+		.optionMajor ul li{
+		    font-size: 14px;
+		    display: block;border-bottom: 1px solid #f0f0f0;
+		    color: #333;
+		    padding: 10px 20px;
+		}
+		.optionMajor ul li:hover{
+		    background: #eee;
+		}
+		.addMajor{
+		    width: 21px;top: 10px;right: 8px;
+		}
+		.text_left{
+		    text-align: left;
+		}
+		.wrap_edit .input_box input{
+		    margin: 30px auto 20px auto;
+		    padding-right: 30px;
+		}
+
+		.forecast_part span{
+			display: inline-block;
+		}
+		.forecast_part .major_list{
+			font-size: 16px;
+		}
+		.forecast_part .edit_img{
+			color: #507DAF;
+			top: 30px;
+			right: 40px;
+		}
+    </style>
+    </head> 
+    <body>
+    	<header>
+    		<div class="header pos_re">
+    			<img src="../../img/index/logo.png" alt="" height="50px">
+    			<ul>
+    				<li><a href="../course.html">课程</a></li>
+    				<li class="active"><a href="../index.html">志愿大师</a></li>
+    				<li>关于我们</li>
+    				<li>下载APP</li>
+    				<li>登录|注册</li>
+    			</ul>
+    		</div>
+    	</header>
+    	<div class="banner">
+    		<div class="vip_box">
+    			<div class="btn_group fs_23">
+    				<div class="days">距离高考30天</div>
+    				<div class="open_btn hand_enter">开通VIP</div>
+    			</div>
+    		</div>
+    	</div>
+ <!--    	<div class="condition_box">
+    		<div class="text-center condition">北京，理科，699分，569名，口腔医学</div>
+    		<img src="../../img/index/icon_editor.png" class="edit_img" height="35px" alt="">
+    	</div> -->
+    	
+		<!-- 主要内容列表 -->
+		<div class="main_content">
+			<div class="left_content">
+				<div class="forecast_part part mb_20 pos_re">
+					<div class="title">预测条件</div>
+					<a href="##" class="edit_img pos_ab">编辑修改</a>
+					<div class="col-xs-3 mt_20 major_list">文理科:<span></span></div>
+					<div class="col-xs-3 mt_20 major_list">预测分数:<span></span></div>
+					<div class="col-xs-3 mt_20 major_list">预测排名:<span></span></div>
+					<div class="col-xs-3 mt_20 major_list">报考地区:<span></span></div>
+					<div class="col-xs-12 major_list mt_20">专业:<span></span></div>
+					<div class="clear"></div>
+				</div>
+				<div class="mainSearch_part part">
+					<div class="title">找学校</div>  
+					<div class="choose_part">
+						<div class="choose_line science_all pos_re">
+							<span><p class="pos_ab">学校省份:</p></span>
+							<ul class="less_place">
+								<li value='' label="location" class="active">全部</li>
+							</ul>
+							<a >
+					   			<img src="../../img/index/icon_down.png" alt="" width="18px" >
+					   			<img src="../../img/index/icon_up.png" alt="" width="18px" >
+							</a>
+						</div>
+						<div class="choose_line">
+							<span>批次:</span>
+							<ul>
+								<!-- <li class="active">全部</li> -->
+								<!-- <li value="" label="batch">全部</li> -->
+								<li value="1" label="batch">本科一批</li>
+								<li value="2" label="batch">本科二批</li>
+								<li value="3" label="batch">本科三批</li>
+								<li value="4" label="batch">专科</li>
+							</ul>
+						</div>
+						<div class="choose_line">
+							<span>优先考虑:</span>
+							<ul>
+								<!-- <li class="active">全部</li> -->
+								<li value="2" class="active" label="cate">学校</li>
+								<li value="1" label="cate">专业</li>
+							</ul>
+						</div>
+					<!-- 	<div class="choose_line">
+							<span>类型:</span>
+							<ul>
+								<li value="">冲刺</li>
+								<li value="">求稳</li>
+								<li value="">保底</li>
+							</ul>
+						</div> -->
+						<div class="choose_line">
+							<span>浮动比例:</span>
+							<ul>
+								<!-- <li class="active">全部</li> -->
+								<li value="1">+-5</li>
+								<li value="2">+-10</li>
+								<li value="3">+-15</li>
+							</ul>
+						</div>
+					</div>
+					<!-- 详细介绍 -->
+					<div class="mainSchool">
+					</div>
+				</div>
+			</div>
+			<div class="right_content">
+				<div class="title"><i></i>热门推荐</div>
+				<div class="hotList"></div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<footer style="width: 100%;">
+			<img src="../../img/index/footer.png" alt="" width="100%">
+		</footer>
+
+		<!-- 弹框-激活VIP -->
+		<div class="wrap">
+			<!-- 选择激活或购买 -->
+			<div class="wrap_content wrap_part">
+    			<img src="../../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">开通志愿大师VIP</div>
+    				 <input type="submit" class="submit_btn buy_vip mt_40" value="购买VIP" />
+    				 <input type="submit" class="submit_btn active_vip" value="激活VIP" />
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    			</div>
+    		</div>
+    		<!-- 去激活 -->
+    		<div class="wrap_active wrap_part">
+    			<img src="../../img/index/icon_close.png" width="100%" class="wrap_close" alt="">
+    			<div class="container_box">
+    				 <div class="title">激活志愿大师VIP</div>
+    				 <div class="input_box">
+    				 	<input type="text" placeholder="输入卡号">
+    				 	<input type="password" placeholder="输入卡密">
+    				 </div>
+    				 <div class="info_more">VIP的有效期从激活之日起至当届高考的8月31日，若是8月31日后激活的则到次年的8月31日过期。</div>
+    				 <input type="submit" class="submit_btn active_btn" value="激活VIP" />
+    				 <div class="vip_buy"><span>还没有志愿大师VIP?</span><a href="#####">立即购买</a></div>
+    			</div>
+    		</div>
+    		<!-- 激活成功 -->
+			<div class="wrap_success wrap_part">
+				<img src="../../img/index/icon_close.png" class="wrap_close" />
+				<div class="success_vip">
+					<img src="../../img/index/icon_success.png" alt="">
+					<div class="title">激活成功</div>
+					<div class="info_detail">您的志愿大师VIP有效期至xx年xx月xx日，现在您可以继续在电脑网页上使用，也可以登录高招APP上使用。</div>
+					<div class="vip_buy"><span>还没有下载高招APP ？</span><a href="#####">立即下载</a></div>
+				</div>
+			</div>
+			<!-- 编辑预测条件 -->
+			<div class="wrap_edit wrap_part" style="width: 500px;height: 525px;display: block;z-index: 9000;background: #fff">
+				<img src="../../img/index/icon_close.png" class="wrap_close" />
+				<div class="container_box oneSteps">
+    				<div class="title">编辑预测条件</div>
+    				<div class="mt_40 choose_type subject active text-center" value="2">理科</div>
+    				<div class="choose_type mt_40 subject text-center ml_20" value="1">文科</div>
+    				<div class="clear"></div>
+    				<div class="edit_list pos_re">
+    					<div class="edit_title text-center">所在省份</div>
+						<div class="edit_input pos_ab">
+							<select class="form-control fs_12 selectLocation">
+							</select>
+						</div>
+    				</div>
+    				<div class="edit_list pos_re mt_20">
+    					<div class="edit_title text-center">高考成绩</div>
+						<div class="edit_input pos_ab">
+							<input class="form-control fs_12 scoreS" type="text" />
+						</div>
+						<div class="pos_ab edit_score">分</div>
+    				</div>
+    				<div class="edit_list pos_re mt_20">
+    					<div class="edit_title text-center">全省排名</div>
+						<div class="edit_input pos_ab">
+							<input class="form-control fs_12 orderS" type="text" />
+						</div>
+						<div class="pos_ab edit_score">名</div>
+    				</div>
+    				<div>
+    					<input type="submit" class="submit_btn mt_40" onclick="nextStep()" value="选择专业" />
+    				</div>
+    				<div class="info_more">请确保填写的成绩、排名准确，否则预测结果会不准确。</div>
+    			</div>
+    			<div class="nextSteps" style="display: none">
+					<div class="container_box">
+	    				<div class="title">选择专业</div>
+	    				<div class="majorListSearch">
+	    					
+	    				</div>
+	    				<div>
+	    					<input type="submit" class="submit_btn submitBtnChange mt_40" onclick="submitChange()" value="完成" />
+	    				</div>
+	    				<div class="info_more">请确保填写的成绩、排名准确，否则预测结果会不准确。</div>
+	    			</div>
+    			</div>
+			</div>
+			<!-- <div class="wrap_edit wrap_part" style="width: 500px;height: 525px;display: block;z-index: 9000;background: #fff">
+				<img src="../../img/index/icon_close.png" class="wrap_close" />
+				<div class="container_box">
+    				<div class="title">选择专业</div>
+    				 <div class="input_box pos_re">
+						<input type="text" class="form-control text-left majorName" placeholder="请选择专业" style="text-align: left;" onkeyup="majorSelect(this.value,0)">
+    					<img src="../../img/index/icon_add.png" alt="" class="pos_ab addMajor">
+    					<div class="pos_ab optionMajor"> 
+    					 	<ul></ul>
+    					</div>
+    				 </div>
+    				<div>
+    					<input type="submit" class="submit_btn submitBtnChange mt_40" onclick="submitChange()" value="完成" />
+    				</div>
+    				<div class="info_more">请确保填写的成绩、排名准确，否则预测结果会不准确。</div>
+    			</div>
+			</div> -->
+    	</div>
+		<!-- 底部提示栏 -->
+		<div class="foot_tip text-center">
+			<div class="foot">
+				<span  class="fs_23">开通<a href="###">志愿大师VIP</a>即可查看全部的推荐院校，还有更多VIP功能</span><div class="open pos_ab">立即开通</div>
+			</div>
+		</div>
+    </body> 
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script>
+	var place = [{"id":"12","name":"安徽省"},{"id":"34","name":"澳门"},{"id":"1","name":"北京市"},{"id":"22","name":"重庆市"},{"id":"13","name":"福建省"},{"id":"28","name":"甘肃省"},{"id":"19","name":"广东省"},{"id":"20","name":"广西省"},{"id":"24","name":"贵州省"},{"id":"21","name":"海南省"},{"id":"3","name":"河北省"},{"id":"8","name":"黑龙江"},{"id":"16","name":"河南省"},{"id":"17","name":"湖北省"},{"id":"18","name":"湖南省"},{"id":"10","name":"江苏省"},{"id":"14","name":"江西省"},{"id":"7","name":"吉林省"},{"id":"6","name":"辽宁省"},{"id":"5","name":"内蒙古"},{"id":"30","name":"宁夏"},{"id":"29","name":"青海省"},{"id":"15","name":"山东省"},{"id":"9","name":"上海市"},{"id":"4","name":"山西省"},{"id":"27","name":"陕西省"},{"id":"23","name":"四川省"},{"id":"32","name":"台湾"},{"id":"2","name":"天津市"},{"id":"33","name":"香港"},{"id":"31","name":"新疆"},{"id":"26","name":"西藏"},{"id":"25","name":"云南省"},{"id":"11","name":"浙江省"}];
+	for(var i=0;i<place.length;i++){
+		$('.selectLocation').append('<option value='+place[i].id+'>'+place[i].name+'</option>')
+		$('.less_place').append("<li value="+place[i].id+" label='location'>"+place[i].name+"</div>");
+	}
+	$('.choose_part').on('click','.choose_line img',function(){
+		if($(this).index()==0){
+			$(this).parents('.choose_line').css('height','auto');
+			$(this).parents('.choose_line').siblings('.choose_line').css('height','47px');
+			$('.science_all img').eq(0).css('display','block').siblings('img').css('display',"none");
+		}else{
+			$(this).parents('.choose_line').css('height','47px');
+		}
+		$(this).css('display','none');
+		$(this).siblings().css('display','inline');
+	});
+	//预测结果
+	var forecast = $.parseJSON(localStorage.getItem('forecastArr'));
+	var majorNow = $.parseJSON(localStorage.getItem('majorNameArr'));
+	var obj = $.parseJSON(localStorage.getItem("majorSearch")),majorAll='';
+	obj["cate"] = 2;
+	var url="http://dev-www.imgaozhao.com/index.php?r=api/forecast/gaokao-list";
+	searchSchool(forecast,majorNow,obj);
+	function searchSchool(forecast,majorNow,obj){
+		majorAll="";
+		for(var i=0;i<majorNow.length;i++){
+			if(majorNow[i]!=''&&i!=0){
+				majorAll +='、'+majorNow[i]
+			}else if(majorNow[i]!=''&&i==0){
+				majorAll +=majorNow[i]
+			}
+			
+		}
+		console.log(obj)
+		$('.forecast_part .major_list').eq(0).find('span').html(forecast.subjectName);
+		$('.forecast_part .major_list').eq(1).find('span').html(obj.score);
+		$('.forecast_part .major_list').eq(2).find('span').html(obj.order);
+		$('.forecast_part .major_list').eq(3).find('span').html(forecast.provinceName);
+		$('.forecast_part .major_list').eq(4).find('span').html(majorAll);
+		// $('.condition').html(forecast.provinceName+','+forecast.subjectName+','+obj.score+"分,"+obj.order+'名<br>'+majorAll);
+		// var url="http://dev-www.imgaozhao.com/index.php?r=api/forecast/gaokao-list&province="+obj.province+"&subject="+obj.subject+"&score="+obj.score+"&order="+obj.order+"&major="+obj.major;
+		$.ajax({
+			url:url,
+            type:"get",
+            data:obj,
+            dataType: "json",
+            success:function(dataA){
+            	console.log(dataA);
+            	dataA = {
+    "errcode": 0,
+    "errmsg": "success",
+    "res": {
+        "need_buy": '1没有购买vip 0已经购买vip',
+        "list": [
+            {
+                "id": "28",
+                "name": "南京大学",
+                "image": "http://api.51zzzs.cn/images/school/28.png",
+                "is_zizhao": "1",
+                "batch": 1,
+                "batch_name": "本科一科",
+                "policy": "",
+                "policy_empty": "1",
+                "score_avg": "669",
+                "policy_score": "669",
+                "my_rate": "52%",
+                "major": [
+                    "理科试验班类",
+                    "天文学类",
+                    "工业工程类",
+                    "建筑学",
+                    "数学类",
+                    "物理学类"
+                ]
+            },
+            {
+                "id": "9",
+                "name": "北京航空航天大学",
+                "image": "http://api.51zzzs.cn/images/school/9.png",
+                "is_zizhao": "1",
+                "batch": 1,
+                "batch_name": "本科一科",
+                "policy": "",
+                "policy_empty": "1",
+                "score_avg": "665",
+                "policy_score": "665",
+                "my_rate": "62%",
+                "major": [
+                    "理科试验班类",
+                    "工科试验班类",
+                    "电子信息类",
+                    "计算机科学与技术",
+                    "电气类",
+                    "飞行器设计与工程"
+                ]
+            },
+            {
+                "id": "41",
+                "name": "上海财经大学",
+                "image": "http://api.51zzzs.cn/images/school/41.png",
+                "is_zizhao": "1",
+                "batch": 1,
+                "batch_name": "本科一科",
+                "policy": "",
+                "policy_empty": "1",
+                "score_avg": "664",
+                "policy_score": "664",
+                "my_rate": "64%",
+                "major": [
+                    "金融学类",
+                    "财务管理",
+                    "公共管理类",
+                    "经济学类",
+                    "会计学",
+                    "统计学类"
+                ]
+            }
+        ]
+    }
+}
+            	console.log(obj);
+            	if(dataA.errcode==0){
+            		var data = dataA.res;
+	    			console.log(dataA)
+	    			var dataList=dataA.res.list;
+	    			var length = dataList.length;
+	    			var html='';
+	    			var VIPhtml=""
+	    			$('.foot_tip').hide();
+	    			if(data.need_buy == 1){
+	    				//没有购买VIP
+	    				// length = 2;
+	    				$('.foot_tip').show();
+	    	// 			VIPhtml='<div class="content_detail pos_re VIPCan">\
+						// 	<div class="product_img">\
+						// 		<a href="schoolInfo.html"><img src="../../img/index/vipno.png" alt="" width="100px" height="100px"></a>\
+						// 	</div>\
+						// 	<div class="product_info pos_re">\
+						// 		<div class="product_title fs_23"><a href="##">学校名称、专业信息（仅VIP可见）</a></div>\
+						// 		<div class="school"><div class="school_text">预测学校分数线:</div><span>VIP可见</span></div>\
+						// 		<div class="school"><div class="school_text">优惠幅度:</div><span></span></div>\
+						// 		<div class="school"><div class="school_text">优惠后分数:</div><span>581</span></div>\
+						// 		<div class="mt_30">\
+						// 			<div class="school col-xs-4">1.理科试验班类</div>\
+						// 			<div class="school col-xs-4">2.计算机科学与技术</div>\
+						// 			<div class="school col-xs-4">3.电子信息类</div>\
+						// 			<div class="school col-xs-4">4.飞行器动力工程</div>\
+						// 			<div class="school col-xs-4">5.材料类</div>\
+						// 			<div class="school col-xs-4">6.理科试验班类（高等工程学院）</div>\
+						// 		</div>\
+						// 		<div class="percent text-center pos_ab">\
+						// 			<div class="fs_23" style="color: #FF6F00">VIP可见</div>\
+						// 			录取概率\
+						// 		</div>\
+						// 	</div>\
+						// 	<div class="pos_ab text-center right_tag">\
+						// 		自招\
+						// 	</div>\
+						// 	<div class="clear"></div>\
+						// </div>';
+	    			}
+					for(var i=0;i<length;i++){
+						html+='<div class="content_detail pos_re">\
+							<div class="product_img">\
+								<a href="../forecastSchool.html?id='+dataList[i].id+'"><img src='+dataList[i].image+' alt="" width="100px" height="100px"></a>\
+							</div>\
+							<div class="product_info pos_re">\
+								<div class="product_title fs_23"><a href="../forecastSchool.html?id='+dataList[i].id+'">'+dataList[i].name+'</a></div>\
+								<div class="school"><div class="school_text">预测学校分数线:</div><span>'+dataList[i].score_avg+'</span></div>\
+								<div class="mt_30">';
+								// <div class="school"><div class="school_text">优惠幅度:</div><span>'+dataList[i].policy+'</span></div>
+								// <div class="school"><div class="school_text">优惠后分数:</div><span>'+dataList[i].policy_score+'</span></div>
+						for(var j=0;j<dataList[i].major.length;j++){
+							html+='<div class="school col-xs-4">'+j+1+'.'+dataList[i].major[j]+'</div>';
+						}
+						html+='</div><div class="percent text-center pos_ab">\
+							<div class="fs_23" style="color: #FF6F00">'+dataList[i].my_rate+'</div>\
+							录取概率\
+						</div></div>';
+						if(dataList[i].is_zizhao==1){
+							html+='<div class="pos_ab text-center right_tag">自招</div>'
+						}
+						html+='<div class="clear"></div></div>'
+					}
+					$('.mainSchool').html(html+VIPhtml)
+            	}
+            }
+		})
+	}
+	// 点击激活按钮-弹框
+	var wrap = function(obj1,obj2){
+		obj1.hide();
+		obj2.fadeIn(100);
+	}
+	$(".open_btn").click(function(){
+		openVIPWrap($('.wrap_edit'),$('.wrap_content'));
+	}) 
+
+	//预测高考
+	$('.wrap_edit .choose_type').click(function(){
+		$(this).addClass('active');
+		$(this).siblings('.choose_type').removeClass('active');
+	})
+	$(".open").click(function(){
+		openVIPWrap($('.wrap_edit'),$('.wrap_content'));
+	})
+	$('.wrap_close').click(function(){
+		$('.wrap_part').hide();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap_content').show();
+		$('.wrap').fadeOut(300);
+	})
+	$(".active_vip").click(function(){
+		wrap($('.wrap_part'),$('.wrap_active'));
+	});
+	$('.active_btn').click(function(){
+		wrap($('.wrap_part'),$('.wrap_success'));
+	})
+	//显示开通志愿大师VIP'
+	var openVIPWrap = function(obj1,obj2){
+		obj1.hide();
+		$('.wrap').show()
+		obj2.show();
+		$('.oneSteps').show();
+		$('.nextSteps').hide();
+		obj2.animate({top:"50%"},"normal");
+	}
+	//选择地址
+	var  place=function(num,data){
+		data.addClass('active');
+		data.siblings().removeClass('active');
+		obj[data.attr('label')] = data.attr('value');
+		searchSchool(forecast,majorNow,obj)
+		// console.log(searchArr)
+	}
+	$('.choose_line li').click(function(){
+		place(2,$(this));
+	})
+
+	//选择专业---添加
+	$('.wrap_edit').on('click','.input_box .addMajor',function(){
+		var index = $('.wrap_edit').find('.input_box').length;
+		var html=' <div class="input_box pos_re">\
+						<input type="text" class="form-control text-left majorName" placeholder="请选择专业" style="text-align: left;" onkeyup="majorSelect(this.value,'+index+')">\
+    					<img src="../../img/index/icon_add.png" alt="" class="pos_ab addMajor">\
+    					<div class="pos_ab optionMajor">\
+    					 	<ul></ul>\
+    					</div>\
+    				 </div>';
+    	if($('.wrap_edit').find('.input_box').length<3){
+			$('.wrap_edit .input_box').last().after(html);
+    	}else{
+    		alert("最多能添加三个专业");
+    	}
+	})
+	//查找专业
+	function majorSelect(check,index){
+		$.ajax({
+			url:"http://dev-www.imgaozhao.com/index.php?r=api/course/search-major&key_words="+check,
+            type:"get",
+            dataType: "json",
+            success:function(data){
+            	console.log(data)
+            	var html="";
+            	for(var i=0;i<data.res.length;i++){
+					html+='<li value='+data.res[i].id+'>'+data.res[i].name+'</li>'
+            	}
+            	$('.wrap_edit .input_box').eq(index).find('.optionMajor').show();
+            	$('.wrap_edit .input_box').eq(index).find('.optionMajor ul').html(html);
+            	$('.wrap_edit .input_box').eq(index).find('.majorName').attr('label','');
+            },
+            error:function(e){
+        	}
+    	});
+	}
+	var majorNameArr=majorNow,majorArr=$.parseJSON(obj.major),forecastArr=forecast;
+	$('.wrap_edit').on('click','.optionMajor ul li',function(){
+		console.log(majorNameArr);
+		console.log(majorArr);
+		$('.optionMajor').hide();
+		var indexM=$(this).parents('.input_box').index();
+		majorArr[indexM] = $(this).attr('value');
+		majorNameArr[indexM] = $(this).html();
+		console.log(indexM+'=='+$(this).attr('value'))
+		console.log(majorNameArr);
+		console.log(majorArr);
+		$(this).parents('.input_box').find('.majorName').val($(this).html());
+		$(this).parents('.input_box').find('.majorName').attr('label',$(this).attr('value'));
+	});
+	//下一步---选择专业
+	function submitChange(){
+		obj.major = JSON.stringify(majorArr);
+		console.log(majorArr)
+		console.log(majorNameArr)
+		localStorage.setItem('major',JSON.stringify(majorArr));
+		localStorage.setItem('forecastArr',JSON.stringify(forecastArr));
+		localStorage.setItem('majorNameArr',JSON.stringify(majorNameArr));
+		localStorage.setItem("majorSearch",JSON.stringify(obj));
+		forecast = $.parseJSON(localStorage.getItem('forecastArr'));
+		majorNow = $.parseJSON(localStorage.getItem('majorNameArr'));
+		obj = $.parseJSON(localStorage.getItem("majorSearch"))
+		searchSchool(forecast,majorNow,obj)
+		$('.wrap_part').hide();
+		$('.wrap_content').animate({top:"0"},"normal");
+		$('.wrap_content').show();
+		$('.wrap').fadeOut(300);
+	}
+	function nextStep(){
+		forecastArr={"province":$('.selectLocation').val(),"subject":$('.subject.active').attr('value'),"provinceName":$('.selectLocation').find("option:selected").text(),'subjectName':$('.subject.active').html()}
+		obj.score = $('.scoreS').val();
+		obj.order = $('.orderS').val();
+		obj.province = $('.selectLocation').val();
+		obj.subject = $('.subject.active').attr('value');
+		$('.oneSteps').hide();
+		$('.nextSteps').show();
+		var html=''
+		for(var i=0;i<majorNameArr.length;i++){
+			html+=' <div class="input_box pos_re">\
+						<input type="text" class="form-control text-left majorName" placeholder="请选择专业" value='+majorNameArr[i]+' style="text-align: left;" onkeyup="majorSelect(this.value,'+i+')">\
+    					<img src="../../img/index/icon_add.png" alt="" class="pos_ab addMajor">\
+    					<div class="pos_ab optionMajor">\
+    					 	<ul></ul>\
+    					</div>\
+    				 </div>';
+    	}
+    	if(majorNameArr.length == 0){
+    		html=' <div class="input_box pos_re">\
+						<input type="text" class="form-control text-left majorName" placeholder="请选择专业"  style="text-align: left;" onkeyup="majorSelect(this.value,0)">\
+    					<img src="../../img/index/icon_add.png" alt="" class="pos_ab addMajor">\
+    					<div class="pos_ab optionMajor">\
+    					 	<ul></ul>\
+    					</div>\
+    				 </div>';
+    	}
+    	if($('.wrap_edit').find('.input_box').length<3){
+    		$('.wrap_edit .majorListSearch').html(html)
+			// $('.wrap_edit .input_box').last().after(html);
+    	}else{
+    		alert("最多能添加三个专业");
+    	}
+
+		console.log(forecastArr)
+		console.log(obj)
+	}
+	$('.edit_img').click(function(){
+		var index = 0
+		if(forecastArr.subject==1){
+			index=1;
+		}
+		$('.subject').eq(index).addClass('active').siblings('.subject').removeClass('active');
+		$('.selectLocation').val(forecastArr.province);
+		$('.scoreS').attr('value',obj.score);
+		$('.orderS').attr('value',obj.order);
+
+		openVIPWrap($('.wrap_content'),$('.wrap_edit'));
+	})
+
+	//热门推荐
+	popular();
+</script>
+</html>
