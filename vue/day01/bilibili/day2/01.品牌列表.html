@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+    <style>
+        [v-clock]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg | msgFormt}}</p>
+        <table class="app">
+            <tr v-for="item in list" :key="item.id">
+                <td v-clock :style="{color:color,'font-size': '12px'}">{{item.name}}</td>
+                <td v-clock>{{item.cname}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+    Vue.filter('msgFormt',function (msg) {
+        // 只能替换一个
+        // return msg.replace('单纯','呵呵'); 
+        // 正则
+        return msg.replace(/单纯/g, '呵呵');
+    })
+    var vm = new Vue({
+        el: '#app',
+        data(){
+            return {
+                color: 'red',
+                size: '12px',
+                list: [{
+                    id: 1,
+                    name: '品牌1',
+                    cname: ''
+                }],
+                msg: '曾经你也是个单纯的人儿,到底生活对单纯的你做了什么,让单纯的你不再单纯'
+            }
+        },
+        methods: {
+
+        },
+
+    })
+</script>
+</html>

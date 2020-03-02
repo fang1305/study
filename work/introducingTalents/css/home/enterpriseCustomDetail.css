@@ -7,12 +7,12 @@
 .list .item.act { background-color: #00468C; color: #fff;}
 
 .news-detail { width: 100%;}
-.news-detail .name { font-size: .32rem; line-height: 1.7; color: #333333; padding-top: .28rem; font-weight: bolder;}
-.news-detail .time-view { font-size: .18rem; line-height: 1; color: #666666; padding-top: .24rem;}
+.news-detail .name { font-size: .33rem; line-height: 1.7; color: #333333; padding-top: .28rem; font-weight: bolder;}
+.news-detail .time-view { font-size: .25rem; line-height: 1; color: #666666; padding-top: .18rem;}
 .news-detail .time-view .time { padding-right: .2rem;}
-.news-detail .time-view .from { color: #333333; padding-right: .2rem;}
+.news-detail .time-view .from { color: #00468C; padding-right: .2rem;}
 .news-detail .time-view .view { float: right;}
-.news-detail .time-view .view .iconfont { font-size: .2rem;} 
+.news-detail .time-view .view .iconfont { font-size: .26rem;} 
 .news-detail .newsCont { font-size: .27rem; line-height: 1.8; color: #666666; padding-top: .28rem;}
 .news-detail .newsCont p { font-size: .27rem !important; padding: .26rem 0;}
 .news-detail .newsCont span { font-size: .27rem !important;}

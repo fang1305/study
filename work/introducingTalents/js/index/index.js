@@ -1,6 +1,6 @@
 var vm = new Vue({
 	el: '#app',
-	data: {
+	data: { 
 		indexText: "首页",
 		lang: "cn",
 		languageText: "English",
@@ -37,22 +37,43 @@ var vm = new Vue({
 			limit:"",
 		},
 		experts:"",            // 首页专家人才
-		relatedLinks: ""       //相关链接
+		relatedLinks: "",       //相关链接
+		userId: "",
+		userName: ""
 	},  
-	created() {
-        if(sessionStorage.lang == 'en'){
-            this.lang = 'en';
-		    this.languageText = "中文";
-		    this.indexText = "Index";
-		    this.typeid = 47;
-		}else{
-			this.typeid = 3;
-			sessionStorage.lang == 'cn';
-		}
-		this.requireData();
+	created(){  
+		var that = this;
+		if(sessionStorage.getItem('lang') == 'en'){
+            that.lang = 'en';
+		    that.languageText = "中文";
+		    that.indexText = "Index";
+		    that.typeid = 60;
+        }else{
+			that.typeid = 59; 
+		} 
+		console.log(sessionStorage.getItem('lang'));
+		sessionStorage.getItem('userId')?that.userId=sessionStorage.getItem('userId'):'';
+		sessionStorage.getItem('userName')?that.userName=sessionStorage.getItem('userName'):'';
+		window.addEventListener('message', function (e) { 
+//			if(e.origin !== 'http://ku.hbafea.com') return; 
+		    if(e.data.lang=="en"){
+		    	that.lang='en';
+		    	that.languageText = "中文";
+		    	that.indexText = "Index";
+		    	sessionStorage.setItem('lang','en'); 
+		    	that.requireData();
+		    }else{
+		    	that.lang = 'cn';
+                sessionStorage.setItem('lang','en');
+                that.languageText = 'English'; 
+                that.indexText = "首页";
+                that.requireData();
+		    }
+		}, false);
+		that.requireData();
     },
 	methods: {
-		requireData(){
+		requireData: function(){
 			// 导航栏
 			this.getList('navBar','home/arctypeList');
 			this.getList('dynamicBar','home/arctypeList');
@@ -63,18 +84,18 @@ var vm = new Vue({
             this.getBanner('teacherBanner','home/advertList');
             this.getBanner('trainbg','home/advertList');
             // 首页文章列表
-            this.getList('newsList','home/articleHomeList'); 
-            this.getList('dynamic','home/articleHomeList'); 
-            this.getList('resource','home/articleHomeList'); 
-            this.getList('training','home/articleHomeList'); 
+            this.getList('newsList','home/articHeadLines'); 
+//          this.getList('dynamic','home/articleHomeList'); 
+            this.getList('resource','home/resourceShar'); 
+//          this.getList('resource','home/articleHomeList'); 
             this.getList('policy','home/articleHomeList'); 
             // 首页专家人才列表
             this.getExperts('experts','experts/expertsHomeList'); 
             // 相关链接
             this.getList('relatedLinks','home/linksList');
         },
-        getBanner(type,url,typeid){ 
-        	let that = this; 
+        getBanner: function(type,url,typeid){ 
+        	var that = this; 
         	if(type=="banner"){
             	that.lang=="en"?that.searchBannerObj.type = 2 : that.searchBannerObj.type = 1; 
             }
@@ -98,7 +119,7 @@ var vm = new Vue({
 					if(ret.status == 'ok'){ 
 //						console.log(ret);
 						if(type=="banner"){
-							setTimeout(() => { 
+							setTimeout(function(){ 
 								var mySwiper = new Swiper('.swiper-container', {
 									autoplay: true,
 									scrollbar: {
@@ -112,7 +133,7 @@ var vm = new Vue({
 						else{
 							that[type] = ret.data[0];
 						}  
-						console.log(that.trainbg);
+//						console.log(that.trainbg);
 					}
 					else{
 						that[type] = "";
@@ -126,28 +147,28 @@ var vm = new Vue({
 				},
 			})
         },
-        getList(type,url,typeid){ 
-            let that = this;
+        getList: function(type,url,typeid){ 
+        	var submitMethod = "GET";
+            var that = this; 
             if(type=="newsList"){
             	that.searchObj.arctype_id = "";
             	that.searchObj.typeid = "";
-        		that.searchObj.limit = 7;
+        		that.searchObj.limit = 7; 
             }
             if(type=="dynamic"){
-            	that.searchObj.arctype_id = "";
-            	that.lang=="en"?that.searchObj.typeid = 47 : that.searchObj.typeid = 3;
+            	that.searchObj.arctype_id = ""; 
             	typeid?that.searchObj.typeid=typeid:'';
         		that.searchObj.limit = 12;
             }
             if(type=="resource"){
-            	that.searchObj.arctype_id = "";
-            	that.lang=="en"?that.searchObj.typeid = 56 : that.searchObj.typeid = 55;
-            	typeid?that.searchObj.typeid=typeid:'';
+            	that.searchObj.arctype_id = ""; 
+            	that.searchObj.typeid='';
         		that.searchObj.limit = 12;
+        		submitMethod = "POST";
             }
             if(type=="training"){
-            	that.searchObj.arctype_id = "";
-            	that.lang=="en"?that.searchObj.typeid = 20 : that.searchObj.typeid = 19;
+            	that.searchObj.arctype_id = ""; 
+            	typeid?that.searchObj.typeid=typeid:'';
         		that.searchObj.limit = 20;
             }
             if(type=="policy"){
@@ -178,7 +199,7 @@ var vm = new Vue({
             that.searchObj.lang = that.lang;
 			$.ajax({
 				url: config.apiHost+url,
-				type: 'GET',  
+				type: submitMethod,  
                 async: true,  
                 data:that.searchObj,
 				dataType: 'json', 
@@ -188,10 +209,16 @@ var vm = new Vue({
 					if(ret.status == 'ok'){
 						var list = ret.data;
 //						console.log(ret);
-						if(type=="dynamicBar" || type=="trainingBar" || type=="resourceBar"){
-							that[type] = ret.data[0].childList;
+						if(type=="dynamicBar"){
+							that[type] = ret.data[0].childList; 
+							that.getList('dynamic','home/articleHomeList',ret.data[0].childList[0].id); 
 //							console.log(ret.data[0].childList);
 //							console.log(that[type]);
+						}else if(type=="resourceBar"){
+							that[type] = ret.data[0].childList;  
+						}else if(type=="trainingBar"){
+							that[type] = ret.data[0].childList; 
+							that.getList('training','home/articleHomeList',ret.data[0].childList[0].id); 
 						}else{
 							that[type] = list;
 						} 
@@ -208,8 +235,8 @@ var vm = new Vue({
 				},
 			})
 		},
-		getExperts(type,url){ 
-            let that = this;  
+		getExperts: function(type,url){ 
+            var that = this;  
 			$.ajax({
 				url: config.apiHost+url,
 				type: 'POST', //GET
@@ -238,7 +265,7 @@ var vm = new Vue({
 		},
 		articleList: function(typeid, parentid,level) { 
 			if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
-			    var url = "http://ku.hbafea.com";
+			    var url = "http://ku.hbafea.com";  
 			}else if( typeid==11 || typeid == 50){           //专家人才
 			    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
 			}else if( typeid==13 || typeid == 51){           //项目技术
@@ -253,12 +280,28 @@ var vm = new Vue({
 			    var url = "html/index/exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==23 || typeid == 24){           //名师讲堂
 			    var url = "html/index/teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "html/index/expertsElegantDetail.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==39 || typeid == 40 || typeid == 41 || typeid == 42 || typeid == 43 || typeid == 44){           //企业定制
+			    var url = "html/index/enterpriseCustomDetail.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "html/index/newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}
-			window.open(url);
+//			fnOpenWin(url);
+			var win = null;
+			win = window.open(url); 
+			setTimeout(function(){  
+				var message = {
+//					userId: sessionStorage.getItem('userId'),
+//					userName: sessionStorage.getItem('userName'),
+//					userType: sessionStorage.getItem('userType'),
+					lang: sessionStorage.getItem('lang'),
+				}; 
+			    console.log(message);
+			    win.postMessage(message,url);
+			},1000);
         },
-        searchFun() {
+        searchFun: function() {
             if(this.lang == 'en'){
     			var url = "html/index/search.html?keywords=" + this.keyword+'&typeid=47&parentid=1';
             }else{
@@ -266,18 +309,43 @@ var vm = new Vue({
             }
 			window.open(url);
         },
-		articleDetail(aid, typeid, parentid) { 
+		articleDetail: function(aid, typeid, parentid) { 
 			if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "html/index/expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
+			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==29 || typeid == 30 || typeid==31 || typeid == 32 ||typeid==33 || typeid == 34 || typeid==35 || typeid == 36){           
+				//卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
 			    var url = "html/index/planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "html/index/newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			} 
 			window.open(url);
 		},
-		language: function() {
-			let that = this;
+		resourceDetail: function(id, type) { 
+			if(type == 1){          
+			    var url = "http://ku.hbafea.com/html/index/talentDetail.html?id=" + id;
+			}else if(type == 2){           
+				var url = "http://ku.hbafea.com/html/index/projectDetail.html?id=" + id;
+			}else if(type == 3){           
+				var url = "http://ku.hbafea.com/html/index/jobDetail.html?id=" + id;
+			}else if(type == 4){           
+				var url = "http://ku.hbafea.com/html/index/projectDemandDetail.html?id=" + id;
+			}else{} 
+//			window.open(url);
+			var win = null;
+			win = window.open(url); 
+			setTimeout(function(){  
+				var message = {
+//					userId: sessionStorage.getItem('userId'),
+//					userName: sessionStorage.getItem('userName'),
+//					userType: sessionStorage.getItem('userType'),
+					lang: sessionStorage.getItem('lang'),
+				}; 
+			    console.log(message);
+			    win.postMessage(message,url);
+			},1000);
+		},
+		changeLang: function() {
+			var that = this;
 			that.dynamicBarAct = 0;
 			that.resourceBarAct = 0;
 			that.trainingBarAct = 0;
@@ -288,14 +356,14 @@ var vm = new Vue({
                 that.languageText = "中文";
 				that.indexText = "Index";
 				that.typeid = 47;
-                sessionStorage.lang = "en";
+                sessionStorage.setItem('lang','en')
                 // 重新请求数据
                 that.requireData();
             }else{
                 that.lang = 'cn'; 
 				that.languageText = "English";
 				that.indexText = "首页";
-				sessionStorage.lang = "cn";
+				sessionStorage.setItem('lang','cn')
 				that.typeid = 3;   
                 // 重新请求数据
                 that.requireData();
@@ -346,9 +414,45 @@ var vm = new Vue({
 		},
 		resourceBarSelect: function(typeid, index) {
 			this.resourceBarAct = index; 
-			this.getList('resource','home/articleHomeList',typeid); 
+			if(typeid==55 || typeid==56){
+				this.getList('resource','home/resourceShar');
+			}
+			if(typeid==57 || typeid==58){
+				this.getList('resource','home/requirements');
+			}
+			 
 		},
-
+		//退出登录
+		exitLogin: function(id){
+			var that = this;
+			$.ajax({
+				url: config.apiHost+"login/loginout",
+				type: 'POST', //GET
+                async: true, //或false,是否异步
+                data:{
+                	user_id:id
+                },
+				dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success: function (ret){
+					typeof ret == "object"?'':ret=JSON.parse(ret); 
+					// 发送成功
+					if(ret.status == 'ok'){ 
+						console.log(ret);
+						sessionStorage.removeItem('userId');
+						sessionStorage.removeItem('userName');
+						sessionStorage.removeItem('userType');
+						that.userId = "";
+						that.userName = "";
+					}
+				},
+				error: function (xhr, textStatus){
+					// 发送失败
+					console.log('错误')
+					console.log(xhr)
+					console.log(textStatus)
+				},
+			})
+		}
 	},
 	filters: {
 		getDate: function(str) {
@@ -368,7 +472,7 @@ var vm = new Vue({
 $(function() {
 	$(".gtop").on("click", function() {
 		window.scrollTo(0, 0);
-	}) 
+	})  
 }) 
 
 function trainingCallBack(ret) {

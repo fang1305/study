@@ -21,20 +21,22 @@ var vm = new Vue({
 			arctype_id:"",
 			lang: 'cn', 
 			aid: "",
-		}
+		},
+		userId: "",
+		userName: ""
 	}, 
 	created() {  
 		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 			location.href = "../home/newsDetail.html?aid="+ parseUrl().aid + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
 		} else {}
-        if(sessionStorage.lang == 'en'){
+        if(sessionStorage.getItem('lang') == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";
 	 		this.yourposition = "Your position";
 	 		this.lang = "en";
-		}else{
-			sessionStorage.lang == 'cn';
-		}  
+		} 
+		sessionStorage.getItem('userId')?this.userId=sessionStorage.getItem('userId'):'';
+		sessionStorage.getItem('userName')?this.userName=sessionStorage.getItem('userName'):'';
         if(parseUrl()){
             this.parentid = parseUrl().parentid?parseUrl().parentid:''; 
             this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
@@ -70,7 +72,7 @@ var vm = new Vue({
 					// 发送成功 
 					if(ret.status == 'ok'){
 						var list = ret.data;
-//			                        console.log(ret);
+			            console.log(ret);
                         if(type=="smallNav"){
                         	that[type] = list[0].childList;
 							for(var i = 0; i< that.smallNav.length; i++){
@@ -85,15 +87,18 @@ var vm = new Vue({
 								that.after = ret.data.after;
 								that.front = ret.data.front; 
 								that.recomList = ret.data.recomList; 
-								that.specialList = ret.data.specialList;
-								if(ret.data.seo_title){
-									document.title = ret.data.seo_title;
+								that.specialList = ret.data.specialList;  
+//								console.log(ret.data.detail.seo_title);
+//			                    console.log(ret.data.detail.seo_description);
+//			                    console.log(ret.data.detail.seo_keywords);
+								if(ret.data.detail.seo_title){
+									document.title = ret.data.detail.seo_title;
 								}
-								if(ret.data.seo_description){ 
-									$("meta[name='description']").attr('content',ret.data.seo_description); 
+								if(ret.data.detail.seo_description){ 
+									$("meta[name='description']").attr('content',ret.data.detail.seo_description); 
 								}
-								if(ret.data.seo_keywords){
-									$('meta[name="keywords"]').attr('content',ret.data.seo_keywords);
+								if(ret.data.detail.seo_keywords){
+									$('meta[name="keywords"]').attr('content',ret.data.detail.seo_keywords);
 								}
                         }else{ 
                         	that[type] = list;
@@ -112,8 +117,8 @@ var vm = new Vue({
 			})
 		},
 		// 中英文切换
-        changeLang(){
-            this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
+        changeLang(){ 
+            this.lang == "en"?sessionStorage.setItem('lang','cn'):sessionStorage.setItem('lang','en');  
 			location.href = "../../index.html";
         },
         searchFun() {
@@ -137,15 +142,65 @@ var vm = new Vue({
 			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==23 || typeid == 24){           //名师讲堂
 			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "expertsElegantDetail.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==39 || typeid == 40 || typeid == 41 || typeid == 42 || typeid == 43 || typeid == 44){           //企业定制
+			    var url = "enterpriseCustomDetail.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}   
-		 	location.href = url;
-//          window.open(url);
+		 	let win = null;
+			win = window.open(url); 
+			setTimeout(function(){  
+				var message = {
+//					userId: sessionStorage.getItem('userId'),
+//					userName: sessionStorage.getItem('userName'),
+//					userType: sessionStorage.getItem('userType'),
+					lang: sessionStorage.getItem('lang'),
+				}; 
+			    console.log(message);
+			    win.postMessage(message,url);
+			},1000);
 		},
-        articleDetail: function(aid){ 
-		 	var url = "newsDetail.html?aid="+ aid+ "&typeid="+ this.typeid + "&parentid="+ this.parentid;
+        articleDetail: function(aid,typeid,parentid){ 
+        	if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 29 || typeid == 30 || typeid == 31 || typeid == 32 || typeid == 33 || typeid == 34 || typeid == 35 || typeid == 36){           //卓越人才计划、国际交流培训、创业扶持
+			    var url = "planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}else{
+				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
+			}  
 		 	window.open(url);
+		},
+		exitLogin(id){
+			var that = this;
+			$.ajax({
+				url: config.apiHost+"login/loginout",
+				type: 'POST', //GET
+                async: true, //或false,是否异步
+                data:{
+                	user_id:id
+                },
+				dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success: function (ret){
+					typeof ret == "object"?'':ret=JSON.parse(ret); 
+					// 发送成功
+					if(ret.status == 'ok'){ 
+						console.log(ret);
+						sessionStorage.removeItem('userId');
+						sessionStorage.removeItem('userName');
+						sessionStorage.removeItem('userType');
+						that.userId = "";
+						that.userName = "";
+					}
+				},
+				error: function (xhr, textStatus){
+					// 发送失败
+					console.log('错误')
+					console.log(xhr)
+					console.log(textStatus)
+				},
+			})
 		}
 	},
 	filters: {

@@ -2,8 +2,8 @@
 <html>
 
 	<head>
-		<meta charset="utf-8">
-		<meta name="divport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta charset="utf-8">  
+		<meta name="divport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" /> 
 		<title>河北省引才引智网</title>
 		<meta name="description" property="seo_description" content="2019年河北省外国专家局认定了50个国（境）外引智工作站和11个省内引智工作站，该网站作为河北省外国专家局引才引智的官方线上平台将担负起整合资源、统一宣传、统筹管理的智能" />
 		<meta name="keywords" property="seo_keywords" content="河北省引才引智网、引才引智、外国专家局、人才引进、引智政策、引智项目、海外人才归国创业就业" /> 
@@ -22,6 +22,8 @@
 						<img src="img/icon/logo.png" />
 					</div>
 					<p>支持单位：河北省外国专家局</p>
+					<p>主办单位：河北省国际人才交流协会、河北省国际信息技术交流协会</p> 
+					<p>协办单位：硅谷（石家庄）创新中心 、河北坤展博宏科技有限公司</p>
 				</div>
 				<div class="right">
 					<div class="htel">
@@ -30,8 +32,7 @@
 						<span class="tel">0311-85111217</span>
 					</div>
 					<div class="email">service@hbafea.com</div>
-				</div>
-
+				</div> 
 				<div class="search-group">
 					<div class="search">
 						<input type="text" v-model="keyword" name="keywords" id="keywords" value="" placeholder="搜索" />
@@ -52,11 +53,18 @@
 							</ul>
 						</li>
 					</ul> 
-					<div class="chinese" v-on:click="language()">
+					<!--<div class="name-avatar">
+						<span>{{userName}}</span>
+						<img class="avatar" onclick="indexLogin()" src="img/icon/icon_avatar.png"/>
+						<ul v-if="userId" class="exitLogin"> 
+							<li></li> 
+							<li v-on:click="exitLogin(userId)">退出登陆</li> 
+						</ul>
+					</div> -->
+					<div class="chinese" v-on:click="changeLang()">
 						<span>{{languageText}}</span>
 						<i class="iconfont icon-sanjiao_xia"></i>
 					</div>
-					<img class="avatar" src="img/icon/icon_avatar.png" /> 
 				</div>
 			</div>
 
@@ -120,9 +128,7 @@
 								<span class="stitle">Expert talents</span>
 							</div>
 							<div class="cont"> 
-								<div class="item" v-for="item in experts">
-									<!--<a :href="'http://www.hbafea.com/html/index/talentDetail.html?id='+item.id">-->
-									<a :href="'http://ku.hbafea.com/html/index/talentDetail.html?id='+item.id">
+								<div class="item" v-for="item in experts" v-on:click="resourceDetail(item.id,1)">  
 									<div class="itop">
 										<div class="avatar">
 											<img :src="item.photo" />
@@ -133,8 +139,7 @@
 											<div class="domain" v-if="item.industry_name">{{item.industry_name}}</div>
 										</div>
 									</div>
-									<div class="look">点击查看</div>
-									</a> 
+									<div class="look">点击查看</div> 
 								</div> 
 							</div>
 						</div>
@@ -142,10 +147,10 @@
 					<div class="right">
 						<div class="resource-demand">
 							<div class="list"> 
-								<div :class="[resourceBarAct==index? 'item act' : 'item']" v-for="(item,index) in resourceBar" v-on:click="articleList(item.id,item.parent_id)" @mouseover="resourceBarSelect(item.id,index)">{{item.typename}}</div>
+								<div :class="[resourceBarAct==index? 'item act' : 'item']" v-for="(item,index) in resourceBar" @mouseover="resourceBarSelect(item.id,index)">{{item.typename}}</div>
 							</div>
 							<div class="cont">
-								<div class="item" v-for="item in resource" v-on:click="articleDetail(item.item,item.type_id,item.parent_id)">{{item.title}}</div>
+								<div class="item" v-for="(item,index) in resource" v-if="index<12" v-on:click="resourceDetail(item.id,item.type)">{{item.title}}</div>
 							</div>
 						</div>
 					</div>
@@ -338,8 +343,8 @@
 			<div class="footer">
 				<div class="wrap">
 					<div class="left">
-						<p>支持单位: 河北省外国专家局</p>
-						<p>主办单位: 河北省国际人才交流协会、河北省国际信息技术交流协会</p>
+						<p>支持单位：河北省外国专家局</p>
+						<p>主办单位：河北省国际人才交流协会、河北省国际信息技术交流协会</p>
 						<p>协办单位：硅谷（石家庄）创新中心 、河北坤展博宏科技有限公司</p>
 					</div>
 					<div class="right">
@@ -360,7 +365,7 @@
 			</div>
 			<div class="bottom">
 				<div class="wrap">
-					<a href=""><span>关于我们</span></a> <span>|</span> <a href="http://www.beian.miit.gov.cn"><span>备案号：冀ICP备19031285号-1</span></a>
+					<a href="html/index/aboutUs.html"><span>关于我们</span></a> <span>|</span> <a href="http://www.beian.miit.gov.cn"><span>备案号：冀ICP备19031285号-1</span></a>
 				</div>
 			</div>
 			<div class="contact-gotop">
@@ -371,13 +376,12 @@
 					<img src="img/icon/index/icon_gotop.png" alt="" />
 				</div>
 			</div>
-		</div>
-
+		</div> 
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/swiper.min.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
 		<script type="text/javascript" src="js/rest.js"></script>
-		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script> 
 		<script type="text/javascript" src="js/index/index.js"></script>
 		<script>
 			if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) { 

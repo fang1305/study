@@ -19,7 +19,7 @@
 
 .pages { text-align: center; margin-top: .4rem;}
 #pagination { display: inline-block;}
-.paginationjs.paginationjs-theme-blue .paginationjs-pages li.active>a { background-color: #206BD1;}
+.paginationjs.paginationjs-theme-blue .paginationjs-pages li.active>a { background-color: #00468C;}
 .paginationjs .paginationjs-pages li>a { width: .54rem; height: .54rem; font-size: .27rem; line-height: .54rem;}
 .paginationjs .paginationjs-pages li.active>a { height: .54rem; line-height: .54rem; }  
 .paginationjs-prev a { width: 1rem !important; padding: 0 .1rem;}

@@ -51,3 +51,28 @@ function phoneTest(tel) {
     }
     return false;
 }
+
+//登录
+function login(){ 
+    var userId = sessionStorage.getItem('userId');
+//  console.log(userId);
+    if(userId){
+    	alert("您已登录"); 
+    	return false;
+    }
+	location.href = "login.html";
+}
+//登录
+function indexLogin(){ 
+    var userId = sessionStorage.getItem('userId'); 
+    if(userId){
+    	alert("您已登录");
+    	return false;
+    }
+	location.href = "html/index/login.html";
+}
+
+//置顶
+function goTop(){
+	window.scrollTo(0, 0);
+}

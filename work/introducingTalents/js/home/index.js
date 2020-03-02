@@ -39,31 +39,46 @@ var vm = new Vue({
 		experts:"",            // 首页专家人才
 		relatedLinks: ""       //相关链接
 	},
-	created() {
-        if(sessionStorage.lang == 'en'){
-            this.lang = 'en';
-		    this.languageText = "中文";
-		    this.indexText = "Index";
-		    this.typeid = 47;
-		}else{
-			this.typeid = 3;
-			sessionStorage.lang == 'cn';
-		}
-		this.requireData();
+	created() { 
+		let that = this;
+		if(sessionStorage.getItem('lang') == 'en'){
+            that.lang = 'en';
+		    that.languageText = "中文";
+		    that.indexText = "Index"; 
+       	} 
+		sessionStorage.getItem('userId')?that.userId=sessionStorage.getItem('userId'):'';
+		sessionStorage.getItem('userName')?that.userName=sessionStorage.getItem('userName'):'';
+		that.requireData();
+		window.addEventListener('message', function (e) { 
+			if(e.origin !== 'http://ku.hbafea.com') return; 
+		    if(e.data.lang=="en"){
+		    	that.lang='en';
+		    	that.languageText = "中文";
+		    	that.indexText = "Index";
+		    	sessionStorage.setItem('lang','en'); 
+		    	that.requireData();
+		    }else{
+		    	that.lang = 'cn';
+                sessionStorage.setItem('lang','en');
+                that.languageText = 'English'; 
+                that.indexText = "首页";
+                that.requireData();
+		    }
+		}, false);
     },
 	methods: {
 		requireData(){
 			// 导航栏
-//			this.getList('navBar','home/arctypeList');
+			this.getList('navBar','home/arctypeList');
 			this.getList('dynamicBar','home/arctypeList');
 			this.getList('resourceBar','home/arctypeList');
 			this.getList('trainingBar','home/arctypeList');  
 			// 活动图
             this.getBanner('banner','home/advertList'); 
             // 首页文章列表 
-            this.getList('dynamic','home/articleHomeList'); 
-            this.getList('resource','home/articleHomeList'); 
-            this.getList('training','home/articleHomeList'); 
+//          this.getList('dynamic','home/articleHomeList'); 
+            this.getList('resource','home/resourceShar'); 
+//          this.getList('training','home/articleHomeList'); 
             this.getList('policy','home/articleHomeList'); 
             // 首页专家人才列表
             this.getExperts('experts','experts/expertsHomeList');  
@@ -104,22 +119,21 @@ var vm = new Vue({
 			})
         },
         getList(type,url,typeid){ 
+        	var submitMethod = "GET";
             let that = this; 
             if(type=="dynamic"){
-            	that.searchObj.arctype_id = "";
-            	that.lang=="en"?that.searchObj.typeid = 47 : that.searchObj.typeid = 3;
+            	that.searchObj.arctype_id = ""; 
             	typeid?that.searchObj.typeid=typeid:'';
         		that.searchObj.limit = 5;
             }
             if(type=="resource"){
-            	that.searchObj.arctype_id = "";
-            	that.lang=="en"?that.searchObj.typeid = 56 : that.searchObj.typeid = 55;
-            	typeid?that.searchObj.typeid=typeid:'';
+            	that.searchObj.arctype_id = ""; 
+            	that.searchObj.typeid=''; 
         		that.searchObj.limit = 5;
+        		submitMethod = "POST";
             }
             if(type=="training"){
-            	that.searchObj.arctype_id = "";
-            	that.lang=="en"?that.searchObj.typeid = 20 : that.searchObj.typeid = 19;
+            	that.searchObj.arctype_id = ""; 
         		that.searchObj.limit = 5;
             }
             if(type=="policy"){
@@ -150,7 +164,7 @@ var vm = new Vue({
             that.searchObj.lang = that.lang;
 			$.ajax({
 				url: config.apiHost+url,
-				type: 'GET',  
+				type: submitMethod,  
                 async: true,  
                 data:that.searchObj,
 				dataType: 'json', 
@@ -160,12 +174,19 @@ var vm = new Vue({
 					if(ret.status == 'ok'){
 						var list = ret.data;
 //						console.log(ret); 
-						if(type=="dynamicBar" || type=="trainingBar" || type=="resourceBar"){
-							that[type] = ret.data[0].childList;
+						if(type=="dynamicBar"){
+							that[type] = ret.data[0].childList; 
+							that.getList('dynamic','home/articleHomeList',ret.data[0].childList[0].id); 
 //							console.log(ret.data[0].childList);
+//							console.log(that[type]);
+						}else if(type=="resourceBar"){
+							that[type] = ret.data[0].childList;  
+						}else if(type=="trainingBar"){
+							that[type] = ret.data[0].childList; 
+							that.getList('training','home/articleHomeList',ret.data[0].childList[0].id); 
 						}else{
 							that[type] = list;
-						} 
+						}  
 					}
 					else{
 						that[type] = "";
@@ -218,17 +239,76 @@ var vm = new Vue({
 				},
 			})
 		}, 
+		articleList(typeid,parentid,level){
+		 	if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
+			    var url = "http://ku.hbafea.com";
+			}else if( typeid==11 || typeid == 50){           //专家人才
+			    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
+			}else if( typeid==13 || typeid == 51){           //项目技术
+			    var url = "http://ku.hbafea.com/html/index/technology.html";
+			}else if( typeid==15 || typeid == 52){           //合作机构
+			    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
+			}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
+				// 卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
+		      var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==23 || typeid == 24){           //名师讲堂
+			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "expertsElegantDetail.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==39 || typeid == 40 || typeid == 41 || typeid == 42 || typeid == 43 || typeid == 44){           //企业定制
+			    var url = "enterpriseCustomDetail.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else{
+				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}   
+//		 	location.href = url;
+		 	let win = null;
+			win = window.open(url); 
+			setTimeout(function(){  
+				var message = {
+//					userId: sessionStorage.getItem('userId'),
+//					userName: sessionStorage.getItem('userName'),
+//					userType: sessionStorage.getItem('userType'),
+					lang: sessionStorage.getItem('lang'),
+				}; 
+			    console.log(message);
+			    win.postMessage(message,url);
+			},1000);
+		},
 		articleDetail(aid, typeid, parentid) {
 			if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==31 || typeid == 32){           //卓越人才计划、国际交流培训、创业扶持
+			}else if( typeid==19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid==29 || typeid == 30 || typeid==31 || typeid == 32 ||typeid==33 || typeid == 34 || typeid==35 || typeid == 36){           //卓越人才计划、国际交流培训、创业扶持
 			    var url = "planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			} 
 			location.href = url; 
 		},
-		language() { 
+		resourceDetail(id, type) { 
+			if(type == 1){          
+			    var url = "http://ku.hbafea.com/html/index/talentDetail.html?id=" + id;
+			}else if(type == 2){           
+				var url = "http://ku.hbafea.com/html/index/projectDetail.html?id=" + id;
+			}else if(type == 3){           
+				var url = "http://ku.hbafea.com/html/index/jobDetail.html?id=" + id;
+			}else if(type == 4){           
+				var url = "http://ku.hbafea.com/html/index/projectDemandDetail.html?id=" + id;
+			}else{} 
+//			window.open(url);
+			let win = null;
+			win = window.open(url); 
+			setTimeout(function(){  
+				var message = {
+//					userId: sessionStorage.getItem('userId'),
+//					userName: sessionStorage.getItem('userName'),
+//					userType: sessionStorage.getItem('userType'),
+					lang: sessionStorage.getItem('lang'),
+				}; 
+			    console.log(message);
+			    win.postMessage(message,url);
+			},1000);
+		},
+		changeLang() { 
 			let that = this;
 			that.dynamicBarAct = 0;
 			that.resourceBarAct = 0;
@@ -240,30 +320,18 @@ var vm = new Vue({
                 that.languageText = "中文";
 				that.indexText = "Index";
 				that.typeid = 47;
-                sessionStorage.lang = "en"; 
-                var param = {
-					lang: that.lang,
-				}
-				apiAjax("home", param, "GET", home);
+                sessionStorage.setItem('lang','en')  
                 // 重新请求数据
                 that.requireData();
             }else{
                 that.lang = 'cn'; 
 				that.languageText = "English";
 				that.indexText = "首页";
-				sessionStorage.lang = "cn";
-				that.typeid = 3;    
-				var param = {
-					lang: that.lang,
-				}
-				apiAjax("home", param, "GET", home);
+				sessionStorage.setItem('lang','cn')
+				that.typeid = 3;     
                 // 重新请求数据
                 that.requireData();
-            }    
-            var param = {
-				lang: that.lang,
-			}
-			apiAjax("home", param, "GET", home);
+            }     
 		}, 
 		dynamicBarSelect(typeid, index) { 
 			this.dynamicBarAct = index;
@@ -289,8 +357,13 @@ var vm = new Vue({
 			}
 		},
 		resourceBarSelect(typeid, index) {
-			this.resourceBarAct = index; 
-			this.getList('resource','home/articleHomeList',typeid); 
+			this.resourceBarAct = index;  
+			if(typeid==55 || typeid==56){
+				this.getList('resource','home/resourceShar');
+			}
+			if(typeid==57 || typeid==58){
+				this.getList('resource','home/requirements');
+			} 
 		},
 		searchBoxShow(){
 			this.searchBox = true;
@@ -321,59 +394,15 @@ var vm = new Vue({
 }); 
 
 $(function(){ 
-	var param = {
-		lang: vm.lang,
-	}
-	apiAjax("home", param, "GET", home); 
-})
-
-function home(ret) {
-	if(ret.data) {
-		console.log(ret); 
-		var list = "";
-		console.log(vm.lang);
-		if(vm.lang=="en"){
-			list += '<li class="indexPage"><a href="">Index</a></li>';
-		}else{
-			list += '<li class="indexPage"><a href="">首页</a></li>';
-		} 
-		for(var i=0;i<ret.data.length;i++){ 
-			list += '<li>'+
-			   '<a>'+ ret.data[i].typename +'</a>' +
-			   '<ul class="dl-submenu">'+
-			   '<li class="dl-back"><a href="#">返回上一级</a></li> ';
-			for(var j=0;j<ret.data[i].childList.length;j++){ 
-				list += '<li onclick="articleList('+ ret.data[i].childList[j].id +','+ ret.data[i].id +')"><a>'+ ret.data[i].childList[j].typename +'</a></li>'; 
-			}
-			list += '</ul>'+
-			   '</li>';
-		}  
-		$(".dl-menu").html(list);  
-		$('#dl-menu').dlmenu(); 
-	}
-} 
-function articleList(typeid,parentid){
- 	if( parentid==9 && level==0 || parentid == 10 && level==0 ){  
-	    var url = "http://ku.hbafea.com";
-	}else if( typeid==11 || typeid == 50){           //专家人才
-	    var url = "http://ku.hbafea.com/html/index/expertTalents.html";
-	}else if( typeid==13 || typeid == 51){           //项目技术
-	    var url = "http://ku.hbafea.com/html/index/technology.html";
-	}else if( typeid==15 || typeid == 52){           //合作机构
-	    var url = "http://ku.hbafea.com/html/index/cooperativeAgency.html";
-	}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 33 || typeid == 34 || typeid == 29 || typeid == 30 || typeid == 35 || typeid == 36 || typeid == 31 || typeid == 32){ 
-		// 卓越人才计划、国际交流培训、温馨手拉手、创业扶持、行业许可、引智政策
-        var url = "newsLine.html?typeid=" + typeid + "&parentid=" + parentid;
-	}else if( typeid==23 || typeid == 24){           //名师讲堂
-	    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
-	}else{
-		var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
-	}   
- 	location.href = url;
-} 
+	$('.menu').on('click', function() {
+        slideout.toggle();
+    }); 
+    $('.navList').on('click', function(eve) {
+        if (eve.target.nodeName === 'P') { slideout.close(); }
+    }); 
+}) 
  
-function trainingCallBack(ret) {
-	console.log(ret.data);
+function trainingCallBack(ret) { 
 	vm.training = ret.data;
 	vm.trainingShow = true;
 }

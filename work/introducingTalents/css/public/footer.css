@@ -3,7 +3,7 @@
 .bottom span { font-size: 12px; line-height: 42px; color: #EEEEEE; text-align: center;}
 .footer { background-color: #00468D; padding-bottom: 60px;}  
 .footer .left { width: 600px; padding-top: 40px; float: left;} 
-.footer .left p { font-size: 14px; line-height: 1; color: #FFF; margin-top: 20px;} 
+.footer .left p { font-size: 14px; line-height: 1; color: #FFF; margin-top: 15px;} 
 .footer .right { padding-top: 46px; display: flex; display: -webkit-flex; line-height: 0; float: right;} 
 .footer .right .code { width: 81px; height: 81px; margin-right: 21px; } 
 .footer .right .contact-us p { font-size: 18px; line-height: 1; color: #EEEEEE;} 

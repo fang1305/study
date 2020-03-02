@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跑马灯效果</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="beginFun">开始</button>
+        <button @click="endFun">结束</button>
+        <h4>{{ msg }}</h4 >
+    </div>
+</body>
+<script>
+    var inter;
+    var vm = new Vue({
+        el: '#app',
+        data: function (params) {
+            return {
+                msg: '稳住,我们能赢;开心点,人间很值得!',
+                interval: '' 
+            }
+        },
+        methods: {
+            beginFun(){
+                clearInterval(this.interval);
+                if(this.interval == null) return;
+                this.interval = setInterval(() => {
+                    this.msg = this.msg.substring(1) + this.msg.substring(0,1);
+                }, 400);
+            },
+            endFun(){
+                clearInterval(this.interval);
+                this.interval = null;
+            }
+        },
+    })
+</script>
+</html>

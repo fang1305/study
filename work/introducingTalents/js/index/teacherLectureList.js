@@ -20,21 +20,22 @@ var vm = new Vue({
 			typeid: "",
 			page: 1,
 			keywords: "",
-		}
+		},
+		userId: "",
+		userName: ""
 	},
 	created() {  
 		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			location.href = "../home/planDetail.html?typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
+			location.href = "../home/teacherLectureList.html?typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
 		} else {}
-        if(sessionStorage.lang == 'en'){
+		sessionStorage.getItem('userId')?this.userId=sessionStorage.getItem('userId'):'';
+		sessionStorage.getItem('userName')?this.userName=sessionStorage.getItem('userName'):'';
+        if(sessionStorage.getItem('lang') == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";
 	 		this.yourposition = "Your position";
 	 		this.lang = "en";
-		}else{
-			sessionStorage.lang == 'cn';
 		} 
-//					console.log(parseUrl());
         if(parseUrl()){
             this.parentid = parseUrl().parentid?parseUrl().parentid:''; 
             this.typeid = parseUrl().typeid?parseUrl().typeid:''; 
@@ -128,11 +129,25 @@ var vm = new Vue({
 			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==23 || typeid == 24){           //名师讲堂
 			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "expertsElegantDetail.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==39 || typeid == 40 || typeid == 41 || typeid == 42 || typeid == 43 || typeid == 44){           //企业定制
+			    var url = "enterpriseCustomDetail.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}   
-		 	location.href = url;
-		 	//window.open(url);
+		 	let win = null;
+			win = window.open(url); 
+			setTimeout(function(){  
+				var message = {
+//					userId: sessionStorage.getItem('userId'),
+//					userName: sessionStorage.getItem('userName'),
+//					userType: sessionStorage.getItem('userType'),
+					lang: sessionStorage.getItem('lang'),
+				}; 
+			    console.log(message);
+			    win.postMessage(message,url);
+			},1000);
 		},
 		articleDetail(aid){ 
 		 	var url = "newsDetail.html?aid="+ aid+ "&typeid="+ this.typeid + "&parentid="+ this.parentid;
@@ -140,7 +155,7 @@ var vm = new Vue({
 		},
 		// 中英文切换
         changeLang(){
-            this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
+            this.lang == "en"?sessionStorage.setItem('lang','cn'):sessionStorage.setItem('lang','en');
 			location.href = "../../index.html";
         },
         searchFun() {
@@ -152,7 +167,7 @@ var vm = new Vue({
 			var container = $('#pagination');
 			var sources = function() {
 				var result = [];
-				for(var i = 1; i <= num; i++) {
+				for(var i = 0; i < num; i++) {
 					result.push(i);
 				}
 				return result;
@@ -183,6 +198,36 @@ var vm = new Vue({
 				window.console && console.log('beforePageOnClick...');
 			});
 			return container;
+		},
+		exitLogin(id){
+			var that = this;
+			$.ajax({
+				url: config.apiHost+"login/loginout",
+				type: 'POST', //GET
+                async: true, //或false,是否异步
+                data:{
+                	user_id:id
+                },
+				dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success: function (ret){
+					typeof ret == "object"?'':ret=JSON.parse(ret); 
+					// 发送成功
+					if(ret.status == 'ok'){ 
+						console.log(ret);
+						sessionStorage.removeItem('userId');
+						sessionStorage.removeItem('userName');
+						sessionStorage.removeItem('userType');
+						that.userId = "";
+						that.userName = "";
+					}
+				},
+				error: function (xhr, textStatus){
+					// 发送失败
+					console.log('错误')
+					console.log(xhr)
+					console.log(textStatus)
+				},
+			})
 		}
 	},
 	filters: {
@@ -200,6 +245,7 @@ var vm = new Vue({
 		},
 		getDesp: function(cont) { 
 			if(cont){
+				var cont = cont.replace(/&nbsp;/g,' ');
 				cont.length > 35?cont = cont.slice(0,35) + '...':'';
 			}
 			return cont;

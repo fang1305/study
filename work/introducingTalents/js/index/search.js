@@ -21,19 +21,21 @@ var vm = new Vue({
 			typeid: "",
 			page: 1,
 			keywords: "",
-		}
+		},
+		userId: "",
+		userName: ""
 	},
 	created() {  
 		if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 			location.href = "../home/search.html?keywords="+ parseUrl().keywords + "&typeid="+ parseUrl().typeid + "&parentid="+ parseUrl().parentid;
 		} else {}
-        if(sessionStorage.lang == 'en'){
+		sessionStorage.getItem('userId')?this.userId=sessionStorage.getItem('userId'):'';
+		sessionStorage.getItem('userName')?this.userName=sessionStorage.getItem('userName'):'';
+        if(sessionStorage.getItem('lang') == 'en'){
             this.languageText = "中文";
 	 		this.indexText = "Index";
 	 		this.yourposition = "Your position";
 	 		this.lang = "en";
-		}else{
-			sessionStorage.lang == 'cn';
 		} 
 		if(parseUrl()){
             this.searchObj.keywords = parseUrl().keywords ? parseUrl().keywords : '';
@@ -48,7 +50,7 @@ var vm = new Vue({
 			this.getList('navBar','home/arctypeList'); 
 			this.getList('smallNav','home/arctypeList'); 
             // 其他新闻, 引智头条的内容
-			this.getList('headerNews', 'home/articleList');
+//			this.getList('headerNews', 'home/articleList');
             // 文章列表
 			this.getList('newsList','home/searchList'); 
         },
@@ -61,6 +63,7 @@ var vm = new Vue({
         },
 		getList(type,url,typeid){ 
             let that = this; 
+            var submitMethod = "GET";
             if(type=="navBar"){  
            		that.searchObj.arctype_id = "";
            	} 
@@ -80,9 +83,12 @@ var vm = new Vue({
                 }
             }
             let sendObj = type == 'headerNews' ? headerObj : that.searchObj;
+            if(type=="newsList"){
+            	submitMethod = "POST";
+            }
             $.ajax({
 				url: config.apiHost+url,
-				type: 'GET',  
+				type: submitMethod,  
                 async: true,  
                 data:sendObj,
                 // data:that.searchObj,
@@ -103,19 +109,11 @@ var vm = new Vue({
 								}
 							}
                         }else if(type=="newsList"){
-                        	var count = ret.data.count; 
+                        	var count = ret.data.count;
+//                      	console.log(count);
 							that.searchObj.page == 1 && count > 0?that.createPagination(count):'';
-							that[type]  = ret.data.list; 
-							if(ret.data.seo_title){
-								document.title = ret.data.seo_title;
-							}
-							if(ret.data.seo_description){ 
-								$("meta[name='description']").attr('content',ret.data.seo_description);
-//												console.log($("meta[name='description']").attr('content')); 
-							}
-							if(ret.data.seo_keywords){
-								$('meta[name="keywords"]').attr('content',ret.data.seo_keywords);
-							}
+							that[type]  = ret.data.list;  
+							that.headerNews = ret.data.recomList;
                         }else if(type=="headerNews"){
                             that.headerNews = list.list;
                         }else{ 
@@ -136,7 +134,7 @@ var vm = new Vue({
 		},
 		// 中英文切换
         changeLang(){
-            this.lang == "en"?sessionStorage.lang = "cn":sessionStorage.lang = "en";  
+            this.lang == "en"?sessionStorage.setItem('lang','cn'):sessionStorage.setItem('lang','en');
 			location.href = "../../index.html";
         },
         createPagination(num) {
@@ -144,7 +142,7 @@ var vm = new Vue({
 			var container = $('#pagination');
 			var sources = function() {
 				var result = [];
-				for(var i = 1; i <= num; i++) {
+				for(var i = 0; i < num; i++) {
 					result.push(i);
 				}
 				return result;
@@ -195,22 +193,66 @@ var vm = new Vue({
 			    var url = "exchangeTrainingList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else if( typeid==23 || typeid == 24){           //名师讲堂
 			    var url = "teacherLectureList.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==27 || typeid == 28){           //专家风采
+			    var url = "expertsElegantDetail.html?typeid=" + typeid + "&parentid=" + parentid;
+			}else if( typeid==39 || typeid == 40 || typeid == 41 || typeid == 42 || typeid == 43 || typeid == 44){           //企业定制
+			    var url = "enterpriseCustomDetail.html?typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsList.html?typeid=" + typeid + "&parentid=" + parentid;
 			}   
-		 	location.href = url;
-		 	//window.open(url);
+		 	let win = null;
+			win = window.open(url); 
+			setTimeout(function(){  
+				var message = {
+//					userId: sessionStorage.getItem('userId'),
+//					userName: sessionStorage.getItem('userName'),
+//					userType: sessionStorage.getItem('userType'),
+					lang: sessionStorage.getItem('lang'),
+				}; 
+			    console.log(message);
+			    win.postMessage(message,url);
+			},1000);
 		},
 		articleDetail: function(aid, typeid, parentid) { 
 			if( typeid==27 || typeid == 28){           //专家风采
 			    var url = "expertsElegantDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
-			}else if( typeid==31 || typeid == 32){           //卓越人才计划、创业扶持
+			}else if( typeid == 19 || typeid == 20 ||  typeid==21 || typeid == 22 || typeid == 29 || typeid == 30 || typeid == 31 || typeid == 32 || typeid == 33 || typeid == 34 || typeid == 35 || typeid == 36){           //卓越人才计划、国际交流培训、创业扶持
 			    var url = "planDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			}else{
 				var url = "newsDetail.html?aid=" + aid + "&typeid=" + typeid + "&parentid=" + parentid;
 			} 
 			window.open(url);
 		},
+		exitLogin(id){
+			var that = this;
+			$.ajax({
+				url: config.apiHost+"login/loginout",
+				type: 'POST', //GET
+                async: true, //或false,是否异步
+                data:{
+                	user_id:id
+                },
+				dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success: function (ret){
+					typeof ret == "object"?'':ret=JSON.parse(ret); 
+					// 发送成功
+					if(ret.status == 'ok'){ 
+						console.log(ret);
+						sessionStorage.removeItem('userId');
+						sessionStorage.removeItem('userName');
+						sessionStorage.removeItem('userType');
+						that.userId = "";
+						that.userName = "";
+					}
+				},
+				error: function (xhr, textStatus){
+					// 发送失败
+					console.log('错误')
+					console.log(xhr)
+					console.log(textStatus)
+				},
+			})
+		}
 	},
 	filters: {
 		getDate: function(str) {

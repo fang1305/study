@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件修饰符</title>
+    <script src="./lib/vue.min.js"></script>
+    <style>
+        .inner{ height: 150px;background-color: aquamarine;margin-bottom: 10px; }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="inner" @click="divHandler">
+            <input type='button' value='点一下' @click.stop="btnHandler" />
+        </div>
+
+        <a href="www.baidu.com" @click.prevent="aHandler">有问题找百度</a>
+
+        <!-- .capture 用来实现捕获触发事件的机制, 从外到里 -->
+        <div class="inner" @click.capture="divHandler">
+            <input type='button' value='点一下' @click="btnHandler" />
+        </div>
+        <!-- .self 用来实现,只有点击本div时才触发事件处理函数, 冒泡触发无作用 -->
+        <div class="inner" @click.self="divHandler">
+            <input type='button' value='点一下' @click="btnHandler" />
+        </div>
+        <!-- .once 事件只触发一次 -->
+        <a href="http://www.baidu.com" @click.prevent.once="aHandler">有问题找百度</a>
+
+    </div>
+</body>
+<script>
+    var inter;
+    var vm = new Vue({
+        el: '#app',
+        data: function (params) {
+            return {
+            }
+        },
+        methods: {
+            divHandler(){
+                console.log('111');
+            },
+            btnHandler(){
+                console.log('222');
+            },
+            aHandler(){
+                console.log('阻止a标签跳转默认行为,使用.prevent')
+            }
+        },
+    })
+</script>
+
+</html>

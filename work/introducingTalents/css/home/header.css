@@ -1,13 +1,15 @@
-﻿html,body { width: 100%; height: 100%; padding: 0; margin: 0; font-family: "微软雅黑"; font-size: 100px;}
+﻿html,body { width: 100%; height: 100%; padding: 0; margin: 0; font-family: "PingFang Regular" !important; font-size: 100px;}
+p,span { font-family: "PingFang Regular" !important;}
 p { margin: 0; padding: 0;} 
 a { text-decoration: none; margin: 0; padding: 0;}
+#app { width: 100%; height: 100%; }
 .hide { display: none;}
 .header { width: 100%; height: 1rem; position: relative; }
 .header .menu { width: .4rem; line-height: 0; position: absolute; top: .33rem; left: .27rem;}
 .header .menu img { width: 100%; height: auto;}
-.header .logo { text-align: center; padding-top: .34rem; line-height: 0;}
-.header .logo img { width: auto; height: .42rem;}
-.header .search { width: .4rem; line-height: 0; position: absolute; top: .33rem; right: .27rem;}
+.header .logo { text-align: center; padding-top: .18rem; line-height: 0;}
+.header .logo img { width: auto; height: .71rem;}
+.header .search { width: .45rem; line-height: 0; position: absolute; top: .27rem; right: .24rem;}
 .header .search img { width: 100%; height: auto;}
 
 .search-group { width: 6.96rem; height: .4rem; padding: .09rem 0; background-color: #FFF; display: flex; display: -webkit-flex; display: -ms-flexbox; border-bottom: 1px solid #00468C; position: absolute; left: .27rem; top: .2rem; z-index: 1000;}
@@ -21,11 +23,36 @@ a { text-decoration: none; margin: 0; padding: 0;}
 .bottom a { font-size: .18rem; line-height: .48rem; color: #999999; float: left;}
 .footer { padding: .27rem; position: relative;}  
 .footer .left { width: 100%;} 
-.footer .left p { font-size: .18rem; line-height: 1; color: #999999; margin-top: .18rem;} 
-.footer .left p.title { font-size: .22rem; line-height: 1; color: #666666; margin-top: .2rem;} 
+.footer .left p { font-size: .22rem; line-height: 1; color: #999999; margin-top: .18rem;} 
+.footer .left p.title { font-size: .33rem; line-height: 1; color: #666666; margin-top: .2rem;} 
 .footer .right { padding-top: .36rem; display: flex; display: -webkit-flex; line-height: 0;} 
-.footer .right .code { width: .95rem; height: .95rem; margin-right: 21px; } 
-.footer .right .contact-us p { font-size: .22rem; line-height: 1; color: #999999;} 
-.footer .right .contact-us .email { margin-top: .15rem; font-size: 0;}   
-.footer .right .contact-us .email span { font-size: .18rem; line-height: 1; color: #999999;} 
+.footer .right .code { width: 1.11rem; height: 1.11rem; margin-right: .27rem; } 
+.footer .right .contact-us p { font-size: .31rem; line-height: 1; color: #999999; margin-top: .08rem;} 
+.footer .right .contact-us .email { margin-top: .1rem; font-size: 0;}   
+.footer .right .contact-us .email span { font-size: .22rem; line-height: 1; color: #999999;} 
 .footer:after { width: 6.96rem; height: 1px; content: ''; background-color: #999999; position: absolute; bottom: 0; left: .27rem;} 
+
+@font-face {
+  font-family: "PingFang Regular";
+  src: url("../fonts/PingFang Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+} 
+
+.navList { width: 6.77rem; height: 100%; background: #F3F3F3; position: fixed; top: 0; left: 0; z-index: 11; overflow-y: scroll;}
+.navList { padding-top: .63rem;}
+.navList p { height: .84rem; padding-left: .28rem; border-bottom: 1px solid #DADADA; font-size: .33rem; color: #999999; line-height: .84rem;}
+.navList p.act { color: #00468D;}
+.navList .dl-submenu { width: 100%;}
+.navList .dl-submenu p { padding-left: .56rem;}  
+
+.container { width: 100%; height: 100%; background: #FFF; position: relative; top: 0; left: 0; z-index: 1;}  
+ 
+.cpMask { width: 5.3rem; height: .9rem; font-size: 0; background:rgba(255,255,255,1); box-shadow:0px 0px 18px 0px rgba(0,70,141,0.3); opacity:0.8; border-radius:.45rem; position: fixed; bottom: .2rem; left: 1.1rem; z-index: 10; line-height: 0; display: flex; display: -webkit-flex; display: -ms-flexbox;}
+/*.cpMask { width: 6.8rem; height: .9rem; font-size: 0; background:rgba(255,255,255,1); box-shadow:0px 0px 18px 0px rgba(0,70,141,0.3); opacity:0.8; border-radius:.45rem; position: fixed; bottom: .2rem; left: 0.35rem; z-index: 10; line-height: 0; display: flex; display: -webkit-flex; display: -ms-flexbox;}*/
+.cpMask .kefu { width: .4rem; height: .41rem; margin-top: .25rem; margin-left: .72rem;}
+.cpMask .person { width: .35rem; height: .4rem; margin-top: .25rem; margin-left: 1.18rem;}
+.cpMask .language { display: inline-block; line-height: 0; margin-left: 1rem;}
+.cpMask .language span { font-size: .24rem; line-height: .9rem; color: #00468D; font-weight: bold;}
+.cpMask .arrow { width: .24rem; height: .12rem; margin-left: .1rem; margin-top: .25rem;}
+.cpMask .gotop { width: .44rem; height: .44rem; margin-left: 1rem; margin-top: .25rem;}
