@@ -1,17 +1,32 @@
 <template>
   <div class="hello">
-      {{msg}}
+      <Header></Header>
+      <Footer></Footer>
+      <button  @click="btn" ref="btns">{{msg}}</button>
   </div>
 </template>
 
 <script>
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  }
+  },
+  components:{
+      Header,Footer
+  },
+  methods: {
+      btn(){
+          this.msg = '000';
+          this.$nextTick(()=>{
+              console.log(this.$refs.btns.innerHTML);
+          })
+      }
+  },
 }
 </script>
 

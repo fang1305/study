@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
