@@ -27,6 +27,23 @@ export default {
           })
       }
   },
+  created() {
+        this.$axios({
+            method: 'POST',
+            withCredentials: false,
+            url: '/api/api/login',
+            data: {
+                mobile: '15369859680',
+                password: '111111'
+            }
+        })
+        .then(function (res) {
+            // 查询
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+  },
 }
 </script>
 
