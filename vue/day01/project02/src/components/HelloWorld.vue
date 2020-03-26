@@ -1,14 +1,18 @@
 <template>
   <div class="hello">
+      <button @click="increase" ref="increase">增加</button>
+      <button @click="decrease" ref="decrease">减少</button>
       <Header></Header>
       <Footer></Footer>
-      <button  @click="btn" ref="btns">{{msg}}</button>
+      <button @click="btn" ref="btns">{{msg}}</button><br>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { mapMutations, mapActions } from 'vuex';
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -19,7 +23,21 @@ export default {
   components:{
       Header,Footer
   },
+  computed: {
+    //   ...mapState(['count'])
+  },
   methods: {
+      ...mapMutations(['increment','descrement']),
+      ...mapActions(['myIncrease','myDecrease']),
+      async increase(){
+        //   this.increment();
+          this.$store.commit('increment',3);
+        // this.$store.state.count += 1;
+        // await this.myIncrease();
+      },
+      decrease(){
+          this.$store.commit('descrement');
+      },
       btn(){
           this.msg = '000';
           this.$nextTick(()=>{

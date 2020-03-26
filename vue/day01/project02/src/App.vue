@@ -1,14 +1,22 @@
 <template>
   <div id="app">
+      {{count}}
+      {{myCount}}
     <router-view />
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 export default {
   name: 'App',
   created:function (params) {
       this.postFun();
+  },
+  computed: {
+      ...mapState(['count']),
+      ...mapGetters(['myCount'])
   },
   methods: {
       postFun(){
